@@ -13,7 +13,6 @@ For university and college students applying for internships or part-time jobs, 
 ## Core Functionality
 
 ### Must Have (MVP)
-#### Phase 1
 - Create update, delete for CV only one (plain text)
   - Sub-part of CV is a profile.
   - A textbox where the user can put instructions (here option for style and tone).
@@ -165,8 +164,8 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 ## Technical Constraints
 - Support English language.
 - Frontend: Next.js with simple user authentication, with Tailwind.css.
-- Backend: Node.js JavaScript runtime for the server, and Express.js framework for API endpoints.
-- AI engine: Use of NLP models (GPT-5).
+- Backend: Fast API (Python)
+- AI engine: Use of NLP models (GEMINI 2.5 Pro/Flash).
 - Database and user management: Supabase.
 - Platform Type: web application.
 
@@ -178,34 +177,31 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 - **Styling**: Tailwind CSS for rapid, responsive UI development
 - **State Management**: Zustand for lightweight, scalable global state management
 - **Shadcn UI**: Shadcn UI for rapid, responsive UI development
-- **Forms**: React Hook Form with Zod validation for robust form handling
 - **Authentication UI**: Supabase Auth UI components + custom styling
 - **API Communication**: Axios with interceptors for authenticated requests
 - **Deployment**: Vercel for frontend hosting with automatic CI/CD
 
 **Architecture Pattern**: Component-based architecture with clear separation between presentation components, container components, and business logic hooks.
 
-### Backend Specification (KOMMENTAR TIL MICHEAL: dette er det Bård kommer til å bruke, kan du se over om det er noe vi kan bruke?)
+### Backend Specification
 - **Framework**: FastAPI (Python) for high-performance RESTful API development
 - **Language**: Python for AI integration compatibility and rapid development
 - **Database**: Supabase (PostgreSQL) for managed database and real-time capabilities
 - **Authentication**: Supabase Auth for built-in user management, JWT tokens, and email verification
-- **Authorization**: Row Level Security (RLS) policies in Supabase + role-based middleware (student/teacher/admin roles)
+- **Authorization**: Row Level Security (RLS) policies in Supabase + role-based middleware (student)
 - **ORM**: SQLAlchemy for database operations and type safety
 - **Database Migrations**: Alembic for version-controlled schema changes
 - **AI Integration**:
-  - OpenAI GPT-4 API for AI player decisions and question generation
+  - GEMINI 2.5 Pro/Flash for AI player decisions and question generation
   - Custom prompt engineering for consistent AI behavior
   - Fallback logic for API failures
-- **Payment Processing**: Stripe API for subscription management and payment processing
 - **Email Service**: Supabase Auth for authentication emails + SendGrid for custom transactional emails
-- **Real-time Communication**: Supabase Realtime for live game monitoring and updates
 - **API Documentation**: FastAPI automatic OpenAPI/Swagger documentation
 - **Testing**: Pytest for unit and integration tests
 - **Build Tool**: UV for fast Python package management
 - **Deployment**: Vercel (FastAPI supports Vercel deployment)
 
-**API Architecture**: RESTful API design with versioning (/api/v1/) and clear resource-oriented endpoints. Supabase Realtime for live game updates instead of WebSockets.
+**API Architecture**: RESTful API design with versioning (/api/v1/) and clear resource-oriented endpoints.
 
 
 ### Database Specification
@@ -217,16 +213,67 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 **Schema Design**:
 - **Normalized relational schema** with proper foreign key constraints
 - **Row Level Security (RLS)**: Supabase RLS policies to ensure users only access their own data
-- **Indexes** on frequently queried fields (user_id, game_id, session_id, class_id)
-- **JSON/JSONB columns** for flexible configuration storage (game_config, questions, metrics)
-- **Partitioning** for game_rounds table if data volume grows (future optimization)
+- **Indexes** on frequently queried fields (user_id, user_job)
+- **JSON/JSONB columns** for flexible configuration storage (instructions)
 - **Soft deletes** for user data (GDPR compliance)
 - **Supabase Auth integration**: Users table managed by Supabase Auth with extended profile data
 
 **Supabase-Specific Features**:
-- **Real-time subscriptions**: Frontend can subscribe to game_rounds and player_states changes for live updates
-- **RLS Policies**: Students can only view their own games; teachers can view their class games
+- **RLS Policies**: Students can only view their own cover letters
 
+
+### Platform Type
+**Primary Platform**: Web application (browser-based)
+
+**Target Devices**:
+- Desktop computers (primary): Windows, macOS, Linux
+- Laptops (primary): All operating systems
+
+**Browser Compatibility**:
+- Chrome 90+ (primary testing target)
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+**Responsive Breakpoints**:
+- Desktop: 1280px+ (optimal experience)
+- Laptop: 1024px-1279px (full features)
+
+
+### User Authentication Specification
+**Authentication Method**: Supabase Auth with JWT-based authentication
+
+**Features**:
+- Email/password registration with built-in validation
+- Automatic email verification via Supabase Auth email templates
+- Secure password reset flow with magic links
+- Session management with automatic refresh token rotation
+- "Remember me" functionality via Supabase persistent sessions
+- Account lockout and rate limiting built into Supabase Auth
+- User metadata storage for roles (student)
+
+**Implementation Details**:
+- Passwords automatically hashed by Supabase (bcrypt)
+- JWT access tokens managed by Supabase (automatic expiry and refresh)
+- Refresh tokens securely stored by Supabase (httpOnly cookies)
+- Role-based access control via Supabase user metadata + RLS policies
+- OAuth 2.0 support built-in (Google, Microsoft, GitHub) - can enable with configuration
+
+**Supabase Auth Benefits**:
+- Built-in security best practices (password hashing, token management)
+- Automatic rate limiting on authentication endpoints
+- CAPTCHA support for bot prevention
+- Multi-factor authentication (MFA) support available
+- Email templates customizable for branding
+- User management dashboard in Supabase console
+
+**Security Measures**:
+- HTTPS enforced by Supabase and Vercel
+- CSRF protection on authentication forms
+- Email verification required before full account access
+- Password strength requirements configurable in Supabase
+- Row Level Security (RLS) policies enforce data access control
+- Supabase API keys separated (public anon key vs. service role key)
 
 ## Success Criteria
 - A working prototype that create and generation functionality:
@@ -243,7 +290,14 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 - Visual Studio Code.
 - Docker (running application - frontend, backend and database).
 
-### Timeline with milestone
-- Sprint 1 (weeks 1-2): Basic frontend + backend + AI integration
-- Sprint 2 (weeks 3-4): Document processing + cover letter generation
-- Sprint 3 (weeks 5-6): Testing, bug fixes, polish, documentation
+## Timeline and Milestones
+
+**Total Duration**: 5 weeks following BMAD-methodology (4-phase model)
+
+This timeline follows the 4-phase model of the BMAD-methodology, where phases 1 and 2 are done in 1 week, phase 3 is done in 2 weeks, and phase 4 is done in 2 weeks.
+
+| Phase | Duration | Week | Focus |
+|-------|----------|------|-------|
+| Phase 1 & 2: Analyze and Planning | 1 week | Week 44 | Requirements analysis, project planning, stakeholder alignment |
+| Phase 3: Solution Architecture and UI/UX Design | 2 weeks | Week 45-46 | Technical architecture, database design, UI/UX mockups, API design |
+| Phase 4: Development and Deployment | 2 weeks | Week 47-48 | Implementation, testing, deployment |
