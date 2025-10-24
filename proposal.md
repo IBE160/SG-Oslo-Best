@@ -34,18 +34,18 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **New user**
-   (The students fills in the information in free-text box corresponding to each variable "")
+   (The students fills in the information in free-text box corresponding to each variable {})
    - Create profile 
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
    - Create a CV using the information from the profile, along with the following additional details:
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
     - A button "Save the information" - if clicked then go to step 4 (flow 1).
     - If required fields are left empty, they’re highlighted with inline warnings, a banner prompts completion, and the “Save” button remains disabled until all fields are filled.
 4. **Home page**
@@ -79,17 +79,17 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **Update profile**
-   (The students fills in the information in free-text box corresponding to each variable "")
+   (The students fills in the information in free-text box corresponding to each variable {})
    - Display pop-up with saved profile and CV information, and generate both button for "Update" and "Dismiss":
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
     - The student has two options:
       - **Option A - Update**: If user has modified information button "Update information" becomes available and user can click on it.
         - Saves the new information on profile.
@@ -127,17 +127,17 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **Update profile**
-   (The students fills in the information in free-text box corresponding to each variable "")
+   (The students fills in the information in free-text box corresponding to each variable {})
    - Display pop-up with saved profile and CV information, and generate both button for "Update" and "Dismiss":
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
     - The student has two options:
       - **Option A - Update**: If user has modified information button "Update information" becomes available and user can click on it.
         - Saves the new information on profile.
