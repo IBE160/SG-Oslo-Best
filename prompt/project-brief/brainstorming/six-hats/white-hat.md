@@ -1,0 +1,1 @@
+Many students find it challenging to adapt their CVs and cover letters to specific job applications. Doing so requires strong writing skills and the ability to emphasize the most relevant experiences. They usually have to have a job to finance their studies or have an internship in a company to get graduated.
