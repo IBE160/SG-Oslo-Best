@@ -245,7 +245,7 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 - **Supabase Auth integration**: Users table managed by Supabase Auth with extended profile data
 
 **Supabase-Specific Features**:
-- **RLS Policies**: Students can only view their own cover letters
+- **RLS Policies**: Students can only view their own cover letter
 
 
 ### Platform Type
