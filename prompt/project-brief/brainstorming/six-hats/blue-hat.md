@@ -10,4 +10,3 @@ This timeline follows the 4-phase model of the BMAD-methodology, where phases 1 
 | Phase 3: Solution Architecture and UI/UX Design | 2 weeks | Week 45-46 | Technical architecture, database design, UI/UX mockups, API design |
 | Phase 4: Development and Deployment | 2 weeks | Week 47-48 | Implementation, testing, deployment |
 
-Next step now: next brainstorming method
