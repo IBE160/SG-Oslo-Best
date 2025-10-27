@@ -5,7 +5,7 @@ CVAI Turbo
 Many students find it challenging to adapt their CVs and cover letters to specific job applications. Doing so requires strong writing skills and the ability to emphasize the most relevant experiences. An AI-powered tool can help students by creating customized cover letter.
 
 ## Purpose
-This project is to develop a prototype of an AI-based tool that assists students, by taking their CV, job application and instructions as input. The tool will then generate customized cover letter.
+This project is to develop a prototype of a tool that assists students, by taking their CV, job application and instructions as input. The tool will then generate customized cover letter.
 
 ## Target Users
 For university and college students applying for internships or part-time jobs, as well as for adademic institutions seeking to better support students in their career.
