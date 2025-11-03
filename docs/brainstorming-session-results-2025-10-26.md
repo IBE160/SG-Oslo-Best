@@ -28,6 +28,7 @@
 _A detailed summary of the points raised under each hat is included below._
 
 ## Idea Categorization
+hei 
 
 ### Immediate Opportunities
 
