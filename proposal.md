@@ -5,7 +5,7 @@ CVAI Turbo
 Many students find it challenging to adapt their CVs and cover letters to specific job applications. Doing so requires strong writing skills and the ability to emphasize the most relevant experiences. An AI-powered tool can help students by creating customized cover letter.
 
 ## Purpose
-This project is to develop a prototype of an AI-based tool that assists students, by taking their CV, job application and instructions as input. The tool will then generate customized cover letter.
+This project is to develop a prototype of a tool that assists students, by taking their CV, job application and instructions as input. The tool will then generate customized cover letter.
 
 ## Target Users
 For university and college students applying for internships or part-time jobs, as well as for adademic institutions seeking to better support students in their career.
@@ -26,7 +26,7 @@ For university and college students applying for internships or part-time jobs, 
 **Entry Point**: Student lands on home page
 
 1. **Landing Page**
-   - Student views an explaining of how to create cover letter.
+   - Student views a static text that explains how to create cover letter.
    - Clicks "Register" CTA button
 2. **Authentication**
    - If not registered: Redirects to registration/login page
@@ -34,22 +34,28 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **New user**
-   - Create profile/CV
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
-    - A button "Save the information" - if clicked then go to step 4 (flow 1). 
+   (The students fills in the information in free-text box corresponding to each variable {})
+   - Create profile 
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
+   - Create a CV using the information from the profile, along with the following additional details:
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
+    - A button "Save the information" - if clicked then go to step 4 (flow 1).
+    - If required fields are left empty, they’re highlighted with inline warnings, a banner prompts completion, and the “Save” button remains disabled until all fields are filled.
 4. **Home page**
    - View profile
    - A button "New job application" - redirect to step 5 (flow 1).
 5. **Create new job applications**
-   - **Input**: instructions, CV and job application
+   - **Input**: 
+     - Instructions - a large free-text box to write optional style and tone.
+     - CV - When clicked the "New job application" button, the CV automatically is pulled from the saved profile.
+     - Job application - a large free-text box to paste in the job application in plain text.
    - **Output**: Optional cover letter and create button "save" and "regenerate".
 6. **Output optinos**
      - If the student is satisfied with the cover letter, then the student can click on "save".
@@ -73,30 +79,35 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **Update profile**
-   - Display pop-up with saved profile information, and generate both button for "Update" and "Dismiss":
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
+   (The students fills in the information in free-text box corresponding to each variable {})
+   - Display pop-up with saved profile and CV information, and generate both button for "Update" and "Dismiss":
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
     - The student has two options:
       - **Option A - Update**: If user has modified information button "Update information" becomes available and user can click on it.
         - Saves the new information on profile.
       - **Option B - Dismiss**: Clicks "Dismiss" button
         - Go to step 4 (flow 2).
+  - If required fields are left empty, they’re highlighted with inline warnings, a banner prompts completion, and the “Save” button remains disabled until all fields are filled.
 4. **Home page**
    - View profile and saved cover letters.
    - A button "New job application" - redirect to step 5 (flow 2).
 5. **Create new job application**
-   - **Input**: instructions, CV and job application 
+   **Input**: 
+     - Instructions - a large free-text box to write optional style and tone.
+     - CV - When clicked the "New job application" button, the CV automatically is pulled from the saved profile.
+     - Job application - a large free-text box to paste in the job application in plain text.
    - **Output**: Optional cover letter and create button "save" and "regenerate".
 6. **Output options**
      - If the student is satisfied with the cover letter, then the student can click on "save".
-     - If the student is NOT satisfied, then the student can click on "regenerate" and be redirected to instructions on step 5 (flow 1).
+     - If the student is NOT satisfied, then the student can click on "regenerate" and be redirected to instructions on step 5 (flow 2).
 7. **Clicks the "save" button**
     - Save and download the cover letter as plain text.
     - "Exit to home page" - returns to user home page.
@@ -116,21 +127,23 @@ For university and college students applying for internships or part-time jobs, 
    - Receives verification email and clicks verification link
    - Redirected back to platform and automatically logged in
 3. **Update profile**
-   - Display pop-up with saved profile information, and generate both button for "Update" and "Dismiss":
-      - Name: "name"
-      - Date of birth: "mm/dd/yy"
-      - Gender: "female/male/other"
-      - Phone number: "phone number"
-      - Address: "address"
-      - Education: "education"
-      - Work experience: "work experience"
-      - Qualifications: "qualification"
-      - Language: "language"
+   (The students fills in the information in free-text box corresponding to each variable {})
+   - Display pop-up with saved profile and CV information, and generate both button for "Update" and "Dismiss":
+      - Name: {name}
+      - Date of birth: {mm/dd/yy}
+      - Gender: {female/male/other}
+      - Phone number: {phone number}
+      - Address: {address}
+      - Education: {education}
+      - Work experience: {work experience}
+      - Qualifications: {qualification}
+      - Language: {language}
     - The student has two options:
       - **Option A - Update**: If user has modified information button "Update information" becomes available and user can click on it.
         - Saves the new information on profile.
       - **Option B - Dismiss**: Clicks "Dismiss" button
         - Go to step 4 (flow 3).
+  - If required fields are left empty, they’re highlighted with inline warnings, a banner prompts completion, and the “Save” button remains disabled until all fields are filled.
 4. **Home page**
    - View profile and saved cover letters.
    - A button "New job application".
@@ -138,10 +151,23 @@ For university and college students applying for internships or part-time jobs, 
     - Display saved profile information.
     - Horizontal list of cover letters.
       - Saved after creation-date.
-    - User can click on desired cover letter and it's displayed as a pop-up, then user can click on "Download" button.
-6. **Download**
+    - User can click on desired cover letter and it's displayed as a pop-up. User can then click on a "Download" button, a "Editing" button or a "Delete" button.
+6. **If clicked on "Download" button**
     - When clicks "Download" button: download the cover letter as plain text on lokal computer.
     - Button "Exit" to saved cover letters.
+7. **If clicked on "Editing" button**
+   - **Input**: 
+     - Instructions - a large free-text box to write optional style and tone.
+     - CV - When clicked the "Editing" button, the CV automatically is pulled from the saved profile.
+     - Cover letter text - a large free-text box with the cover letter the student want to edit in it. 
+   - **Output**: Optional cover letter and create button "save" and "regenerate".
+   - The student has to options:
+     - **Option A - save**: If the student is satisfied with the cover letter, then the student can click on "save".
+        - Save and download the new cover letter as plain text.
+        - "Exit to home page" - returns to user home page.
+     - **Option B - regenerate**: If the student is NOT satisfied, then the student can click on "regenerate" and be redirected to instructions on step 7 (flow 3).
+8. **If clicked on "Delete" button**
+   - Deletes the cover letter from the student profile.
 
 **Exit Point**: Student returns to home page or logs out.
 
@@ -219,7 +245,7 @@ As a student, I want to upload my CV and a job advertisement to get a customized
 - **Supabase Auth integration**: Users table managed by Supabase Auth with extended profile data
 
 **Supabase-Specific Features**:
-- **RLS Policies**: Students can only view their own cover letters
+- **RLS Policies**: Students can only view their own cover letter
 
 
 ### Platform Type

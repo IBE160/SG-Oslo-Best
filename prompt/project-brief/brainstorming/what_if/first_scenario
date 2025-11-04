@@ -1,0 +1,11 @@
+**What if the "CVAI Turbo" tool could analyze a student's CV and a job ad, and then create a "translation report" that explicitly shows how the student's academic projects and experiences are relevant to the job requirements?**
+- That sounds nice, but it is has to be a future feature.
+- Our main goal is to keep the solution easy to manage for the students.
+- It is also importent for us to follow the KISS principle (Keep It Simple, Stupid!)
+- We want to make sure that there is few steps from entering the home page to generate a customized cover letter.
+
+**What if the LLM could do more than just write a cover letter? What other valuable outputs could it create for a student applying for a job?**
+- Feedback on how to write cover letter.
+- Give other examples on other job application, that are relevant for the same cover letter.
+- Suggestions on style and tone on the cover letter.
+- Transcription on other languages.
