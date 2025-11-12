@@ -193,7 +193,7 @@ The system shall provide the following functional capabilities:
         *   *Dependency: FR-2.1.*
     *   `FR-3.2 [MVP]` The system shall automatically retrieve the user's saved CV information for use in cover letter generation.
         *   *Dependency: FR-1.4.*
-    *   `FR-3.3 [MVP]` The system shall generate a customized cover letter using a third-party Large Language Model (LLM) based on the user's CV, job advertisement, and instructions.
+    *   `FR-3.3 [MVP]` The system shall generate a customized cover letter based on the user's CV, job advertisement, and instructions.
         *   *Dependency: FR-3.1, FR-3.2.*
     *   `FR-3.4 [MVP]` The system shall display the generated cover letter to the user in plain text.
     *   `FR-3.5 [MVP]` The system shall provide an option for the user to regenerate the cover letter.
@@ -242,11 +242,23 @@ The system shall provide the following functional capabilities:
 
 <h2>Implementation Planning</h2>
 
-<h3>Epic Breakdown Required</h3>
+<h3>Epic Summary</h3>
 
-Requirements must be decomposed into epics and bite-sized stories (200k context limit).
+This document breaks down the requirements from the PRD into actionable epics and stories for the development team.
 
-**Next Step:** Run `*create-epics-and-stories` to create the implementation breakdown.
+*   **Epic 1: Foundation & Setup**
+    *   **Value:** Establish the core technical foundation, including project structure, CI/CD pipeline, and essential configurations, to enable all future development.
+    *   **Scope:** Set up the frontend (Next.js) and backend (FastAPI) projects, configure the Supabase database and authentication, and establish a basic deployment pipeline on Vercel.
+
+*   **Epic 2: User Onboarding & Profile Management**
+    *   **Value:** Allow students to create an account, log in, and manage their personal and CV information, which is the foundation for generating cover letters.
+    *   **Scope:** Implement user registration, login, and the UI/API for creating and updating user profiles and CV data.
+
+*   **Epic 3: Core Cover Letter Generation**
+    *   **Value:** Deliver the primary value of the application by enabling students to generate a customized cover letter based on their CV and a job description.
+    *   **Scope:** Implement the UI for inputting a job ad and instructions, the backend logic to integrate with the Gemini API, and the display of the generated cover letter.
+
+**Next Step:** For a detailed breakdown of epics into stories, see the `epics.md` document.
 
 ---
 
