@@ -166,7 +166,7 @@ The core user interactions will revolve around the following flows:
 
 ---
 
-<h2>Functional Requirements</h2>
+## Functional Requirements
 
 The system shall provide the following functional capabilities:
 
@@ -174,18 +174,27 @@ The system shall provide the following functional capabilities:
     *   `FR-1.1 [MVP]` The system shall allow new users to register with an email and password.
     *   `FR-1.2 [MVP]` The system shall allow existing users to log in with their credentials.
     *   `FR-1.3 [MVP]` The system shall allow users to create and manage their personal profile information (e.g., name, date of birth, gender, phone number, address).
+        *   *Dependency: FR-1.2 (User must be logged in).*
     *   `FR-1.4 [MVP]` The system shall allow users to create and manage their CV details (e.g., education, work experience, qualifications, language).
+        *   *Dependency: FR-1.2 (User must be logged in).*
     *   `FR-1.5 [MVP]` The system shall validate required fields during profile and CV creation/update, preventing saving until all mandatory information is provided.
+        *   *Dependency: FR-1.3, FR-1.4.*
 
 2.  **Job Application Management:**
     *   `FR-2.1 [MVP]` The system shall allow users to create a new job application by pasting a job advertisement in plain text.
+        *   *Dependency: FR-1.2 (User must be logged in).*
     *   `FR-2.2 [MVP]` The system shall allow users to update an existing job application.
+        *   *Dependency: FR-2.1 (An application must exist).*
     *   `FR-2.3 [MVP]` The system shall allow users to delete a job application.
+        *   *Dependency: FR-2.1 (An application must exist).*
 
 3.  **Cover Letter Generation:**
     *   `FR-3.1 [MVP]` The system shall allow users to provide optional instructions (e.g., desired style and tone) for cover letter generation.
+        *   *Dependency: FR-2.1.*
     *   `FR-3.2 [MVP]` The system shall automatically retrieve the user's saved CV information for use in cover letter generation.
+        *   *Dependency: FR-1.4.*
     *   `FR-3.3 [MVP]` The system shall generate a customized cover letter using a third-party Large Language Model (LLM) based on the user's CV, job advertisement, and instructions.
+        *   *Dependency: FR-3.1, FR-3.2.*
     *   `FR-3.4 [MVP]` The system shall display the generated cover letter to the user in plain text.
     *   `FR-3.5 [MVP]` The system shall provide an option for the user to regenerate the cover letter.
     *   `FR-3.6 [MVP]` The system shall provide an option for the user to save the generated cover letter.

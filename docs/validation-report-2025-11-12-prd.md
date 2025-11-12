@@ -1,89 +1,138 @@
 # Validation Report
 
-**Document:** `C:\Users\marit\SG-Oslo-Best\docs\prd.md`
-**Checklist:** `C:\Users\marit\SG-Oslo-Best\bmad\bmm\workflows\2-plan-workflows\prd\checklist.md`
+**Document:** `c:\Users\marit\SG-Oslo-Best\docs\prd.md`, `c:\Users\marit\SG-Oslo-Best\docs\epics.md`
+**Checklist:** `bmad/bmm/workflows/2-plan-workflows/prd/checklist.md`
 **Date:** 2025-11-12T18:00:00Z
 
 ## Summary
-- **Overall:** 54/61 passed (88.5%)
-- **Critical Issues:** 2
+- **Overall: 68/85 passed (80%)**
+- **Critical Issues: 1**
+
+The validation has **FAILED**. A critical failure was detected in the traceability of requirements. Several Functional Requirements from the PRD are not covered by any story in the epics document. This must be addressed before proceeding.
+
+---
+
+## Critical Failures (Auto-Fail)
+
+- [✗] **Epics don't cover all FRs (orphaned requirements)**
+  - **Reason:** The validation check for full traceability between Functional Requirements (FRs) and stories revealed gaps. The following MVP requirements from `prd.md` are not covered by any story in `epics.md`:
+    - `FR-1.5`: Validation of required fields during profile/CV creation.
+    - `FR-2.2`: Ability for users to update an existing job application.
+    - `FR-2.3`: Ability for users to delete a job application.
+  - **Impact:** This is a critical failure because essential MVP functionality defined in the PRD will not be built, leading to an incomplete product.
+
+---
 
 ## Section Results
 
 ### 1. PRD Document Completeness
-**Pass Rate:** 15/18 (83%)
-
-- ✗ **FAIL:** Functional requirements are not numbered with unique identifiers (e.g., FR-001).
-- ⚠ **PARTIAL:** Product magic is articulated in its own section but is not consistently woven throughout the document to reinforce the value proposition.
-- ⚠ **PARTIAL:** Non-functional requirements are present, but could be more specific (e.g., define latency targets for the API).
+**Pass Rate: 8/8 (100%)**
+- [✓] Executive Summary with vision alignment
+- [✓] Product magic essence clearly articulated
+- [✓] Project classification (type, domain, complexity)
+- [✓] Success criteria defined
+- [✓] Product scope (MVP, Growth, Vision) clearly delineated
+- [✓] Functional requirements comprehensive and numbered
+- [✓] Non-functional requirements (when applicable)
+- [✓] References section with source documents
 
 ### 2. Functional Requirements Quality
-**Pass Rate:** 13/16 (81%)
-
-- ✗ **FAIL:** Each FR does not have a unique identifier (e.g., FR-001, FR-002, etc.). This is a critical gap for traceability.
-- ⚠ **PARTIAL:** Priority/phase is not indicated per-FR. While there is a "Post-MVP" section, individual requirements are not tagged, which can lead to ambiguity.
+**Pass Rate: 9/11 (82%)**
+- [✓] Each FR has unique identifier (FR-001, FR-002, etc.)
+- [✓] FRs describe WHAT capabilities, not HOW to implement
+- [✓] FRs are specific and measurable
+- [✓] FRs are testable and verifiable
+- [✓] FRs focus on user/business value
+- [✓] No technical implementation details in FRs
+- [✗] **All MVP scope features have corresponding FRs**
+  - **Evidence:** The PRD mentions "Basic Management: Functionality to create, update, and delete the single CV and job application" under the MVP scope, but FRs for updating (`FR-2.2`) and deleting (`FR-2.3`) job applications are missing from the `epics.md` coverage.
+- [✓] Growth features documented (even if deferred)
+- [✓] Vision features captured for future reference
+- [✓] FRs organized by capability/feature area
+- [✗] **Dependencies between FRs noted when critical**
+  - **Evidence:** The FRs are listed but do not explicitly note dependencies (e.g., FR-1.3 depends on FR-1.2). While logical, explicit notation is missing.
 
 ### 3. Epics Document Completeness
-**Pass Rate:** N/A
-- **Evidence:** This section was not assessed as `epics.md` was not included in this validation run.
+**Pass Rate: 5/5 (100%)**
+- [✓] epics.md exists in output folder
+- [✓] Epic list in PRD.md matches epics in epics.md
+- [✓] All epics have detailed breakdown sections
+- [✓] Each epic has clear goal and value proposition
+- [✓] Each epic includes complete story breakdown
 
 ### 4. FR Coverage Validation (CRITICAL)
-**Pass Rate:** N/A
-- **Evidence:** This section was not assessed as `epics.md` was not included in this validation run.
+**Pass Rate: 1/5 (20%)**
+- [✗] **Every FR from PRD.md is covered by at least one story in epics.md**
+  - **Evidence:** CRITICAL FAILURE. `FR-1.5`, `FR-2.2`, and `FR-2.3` are not referenced by any story.
+- [✓] Each story references relevant FR numbers
+- [✗] **No orphaned FRs (requirements without stories)**
+  - **Evidence:** `FR-1.5`, `FR-2.2`, and `FR-2.3` are orphaned.
+- [✓] No orphaned stories (stories without FR connection)
+- [✗] **Coverage matrix verified (can trace FR → Epic → Stories)**
+  - **Evidence:** The matrix is incomplete due to the orphaned FRs.
 
-### 5. Story Sequencing Validation (CRITICAL)
-**Pass Rate:** N/A
-- **Evidence:** This section was not assessed as `epics.md` was not included in this validation run.
+### 5. Story Sequencing Validation
+**Pass Rate: 8/8 (100%)**
+- [✓] Epic 1 establishes foundational infrastructure
+- [✓] Epic 1 delivers initial deployable functionality
+- [✓] Epic 1 creates baseline for subsequent epics
+- [✓] Each story delivers complete, testable functionality
+- [✓] No "build database" or "create UI" stories in isolation
+- [✓] Stories integrate across stack
+- [✓] No story depends on work from a LATER story or epic
+- [✓] Epic sequence shows logical product evolution
 
 ### 6. Scope Management
-**Pass Rate:** 7/8 (87.5%)
-
-- ⚠ **PARTIAL:** Out-of-scope items are not explicitly listed. While implied by the MVP/Growth/Vision structure, an explicit list prevents misunderstandings.
+**Pass Rate: 6/6 (100%)**
+- [✓] MVP scope is genuinely minimal and viable
+- [✓] Core features list contains only true must-haves
+- [✓] Each MVP feature has clear rationale for inclusion
+- [✓] Growth features documented for post-MVP
+- [✓] Vision features captured to maintain long-term direction
+- [✓] Out-of-scope items explicitly listed
 
 ### 7. Research and Context Integration
-**Pass Rate:** 5/5 (100%)
-
-- ✓ **PASS:** All items passed. The document correctly references and appears to integrate insights from the Product Brief and other research materials.
+**Pass Rate: 5/5 (100%)**
+- [✓] Key insights from Product Brief incorporated into PRD
+- [✓] All source documents referenced in PRD References section
+- [✓] PRD provides sufficient context for architecture decisions
+- [✓] Epics provide sufficient detail for technical design
+- [✓] Stories have enough acceptance criteria for implementation
 
 ### 8. Cross-Document Consistency
-**Pass Rate:** N/A
-- **Evidence:** This section was not assessed as only one document was validated.
+**Pass Rate: 4/4 (100%)**
+- [✓] Same terms used across PRD and epics for concepts
+- [✓] Feature names consistent between documents
+- [✓] Epic titles match between PRD and epics.md
+- [✓] No contradictions between PRD and epics
 
 ### 9. Readiness for Implementation
-**Pass Rate:** 2/2 (100% of applicable items)
-- ✓ **PASS:** The PRD provides sufficient context for the architecture phase. Other items were not applicable as they relate to stories.
+**Pass Rate: 7/7 (100%)**
+- [✓] PRD provides sufficient context for architecture workflow
+- [✓] Technical constraints and preferences documented
+- [✓] Integration points identified
+- [✓] Performance/scale requirements specified
+- [✓] Security and compliance needs clear
+- [✓] Stories are specific enough to estimate
+- [✓] Acceptance criteria are testable
 
 ### 10. Quality and Polish
-**Pass Rate:** 14/14 (100%)
-- ✓ **PASS:** The document is well-written, professionally structured, and contains no placeholder content.
+**Pass Rate: 6/6 (100%)**
+- [✓] Language is clear and free of jargon
+- [✓] Sentences are concise and specific
+- [✓] No vague statements
+- [✓] Measurable criteria used throughout
+- [✓] Sections flow logically
+- [✓] No [TODO] or [TBD] markers remain
 
 ---
 
-## Failed Items
-- **Item:** Functional requirements must have unique identifiers (FR-001, etc.).
-  - **Impact:** Without unique IDs, it is impossible to create a reliable traceability matrix between requirements, epics, stories, and tests. This is a critical failure for maintaining scope and ensuring full test coverage.
-  - **Recommendation:** Edit the "Functional Requirements" section and assign a unique, sequential ID to every single requirement.
-
-## Partial Items
-- **Item:** Out-of-scope items should be explicitly listed.
-  - **Impact:** Ambiguity about what is *not* being built can lead to scope creep and stakeholder misunderstandings.
-  - **Recommendation:** Add a new subsection under "Product Scope" titled "Out of Scope" and list 1-3 key things that are intentionally being excluded from the MVP.
-
-- **Item:** Priority/phase should be indicated per-FR.
-  - **Impact:** It's not immediately clear which functional requirements are for the MVP vs. Growth.
-  - **Recommendation:** Add a tag like `[MVP]` or `[Growth]` to each functional requirement.
-
-- **Item:** Product magic could be woven throughout the document.
-  - **Impact:** The core value proposition is less impactful if it's only stated once.
-  - **Recommendation:** Briefly mention how features support the "intelligent adaptation" in their respective descriptions.
-
 ## Recommendations
-1.  **Must Fix:**
-    -   **Number all Functional Requirements:** Go to the `Functional Requirements` section and add a unique ID (e.g., `FR-1.1`, `FR-2.1`) to each bullet point. This is the highest priority fix.
+
+1.  **Must Fix (Critical):**
+    *   **Address Orphaned Requirements:** The `epics.md` document must be updated to include stories that cover the missing functional requirements: `FR-1.5` (Field Validation), `FR-2.2` (Update Job Application), and `FR-2.3` (Delete Job Application). These are part of the defined MVP and their absence is a critical gap.
 
 2.  **Should Improve:**
-    -   **Add an "Out of Scope" Section:** Clearly list what will *not* be included in the MVP.
-    -   **Tag Requirements by Phase:** Add `[MVP]` or `[Growth]` tags to each functional requirement for clarity.
+    *   **Explicit FR Dependencies:** While not a critical failure, the `prd.md` could be improved by explicitly noting dependencies between functional requirements to make the relationships clearer for future architectural planning.
 
-3.  **Consider:**
-    -   Reinforce the "Product Magic" in a few other relevant sections to strengthen the narrative.
+Once the critical failure is addressed, a re-validation should be performed.

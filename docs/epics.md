@@ -105,7 +105,10 @@ This document breaks down the requirements from the PRD into actionable epics an
     - Given I am logged in and have not yet created a profile,
     - When I navigate to the profile creation page,
     - Then I see fields for personal details (name, DOB, gender, phone, address) and a large text area for CV content.
-    - When I fill in the required fields and save,
+    - And the system indicates which fields are mandatory.
+    - When I attempt to save with a mandatory field empty,
+    - Then the system displays an error and prevents saving.
+    - When I fill in all required fields and save,
     - Then my profile and CV data are stored in Supabase, linked to my user ID.
     - And I am redirected to the home page.
 
@@ -185,6 +188,29 @@ This document breaks down the requirements from the PRD into actionable epics an
     - When I click the "Save" button,
     - Then the cover letter text is saved to the Supabase database, associated with my user ID and the job application.
     - And I receive a confirmation that the letter has been saved.
+
+**Story 3.6: Update Job Application**
+- **As a** logged-in student user,
+- **I want** to update the text of a job application I previously created,
+- **so that** I can correct mistakes or add new information.
+- **Covers:** FR-2.2
+- **Acceptance Criteria:**
+    - Given I have an existing job application,
+    - When I navigate to the application's edit page,
+    - Then I see the current job advertisement text pre-filled in a text area.
+    - When I modify the text and save,
+    - Then the updated text is persisted in the database for that application.
+
+**Story 3.7: Delete Job Application**
+- **As a** logged-in student user,
+- **I want** to delete a job application I no longer need,
+- **so that** I can keep my workspace clean.
+- **Covers:** FR-2.3
+- **Acceptance Criteria:**
+    - Given I have an existing job application,
+    - When I choose the delete option for that application,
+    - And I confirm the deletion,
+    - Then the job application and any associated saved cover letters are removed from the database.
 
 ---
 
