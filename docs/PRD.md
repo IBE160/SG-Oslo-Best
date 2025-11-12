@@ -79,6 +79,13 @@ The long-term vision for CVAI Turbo is to evolve into a comprehensive, AI-powere
 -   **Job Board Integration:** Direct integration with major job boards (e.g., LinkedIn, Finn.no) for one-click cover letter generation from job postings.
 -   **Job Recommendation Engine:** Development of an AI-powered engine to analyze a user's CV and proactively suggest relevant job openings.
 
+### Out of Scope
+
+To ensure focus on the core MVP, the following features are explicitly out of scope for the initial 5-week project:
+-   **Direct Document Upload:** Users will copy and paste CV content; direct `.pdf` or `.docx` parsing will not be supported.
+-   **In-App Editing:** The initial version will display plain text output; a rich text editor for in-app modifications is a post-MVP feature.
+-   **Multiple CV Versions:** Users will manage a single CV profile in the MVP. Support for multiple CV versions will be considered for future growth.
+
 ---
 
 
@@ -164,31 +171,31 @@ The core user interactions will revolve around the following flows:
 The system shall provide the following functional capabilities:
 
 1.  **User Authentication & Profile Management:**
-    *   The system shall allow new users to register with an email and password.
-    *   The system shall allow existing users to log in with their credentials.
-    *   The system shall allow users to create and manage their personal profile information (e.g., name, date of birth, gender, phone number, address).
-    *   The system shall allow users to create and manage their CV details (e.g., education, work experience, qualifications, language).
-    *   The system shall validate required fields during profile and CV creation/update, preventing saving until all mandatory information is provided.
+    *   `FR-1.1 [MVP]` The system shall allow new users to register with an email and password.
+    *   `FR-1.2 [MVP]` The system shall allow existing users to log in with their credentials.
+    *   `FR-1.3 [MVP]` The system shall allow users to create and manage their personal profile information (e.g., name, date of birth, gender, phone number, address).
+    *   `FR-1.4 [MVP]` The system shall allow users to create and manage their CV details (e.g., education, work experience, qualifications, language).
+    *   `FR-1.5 [MVP]` The system shall validate required fields during profile and CV creation/update, preventing saving until all mandatory information is provided.
 
 2.  **Job Application Management:**
-    *   The system shall allow users to create a new job application by pasting a job advertisement in plain text.
-    *   The system shall allow users to update an existing job application.
-    *   The system shall allow users to delete a job application.
+    *   `FR-2.1 [MVP]` The system shall allow users to create a new job application by pasting a job advertisement in plain text.
+    *   `FR-2.2 [MVP]` The system shall allow users to update an existing job application.
+    *   `FR-2.3 [MVP]` The system shall allow users to delete a job application.
 
 3.  **Cover Letter Generation:**
-    *   The system shall allow users to provide optional instructions (e.g., desired style and tone) for cover letter generation.
-    *   The system shall automatically retrieve the user's saved CV information for use in cover letter generation.
-    *   The system shall generate a customized cover letter using a third-party Large Language Model (LLM) based on the user's CV, job advertisement, and instructions.
-    *   The system shall display the generated cover letter to the user in plain text.
-    *   The system shall provide an option for the user to regenerate the cover letter.
-    *   The system shall provide an option for the user to save the generated cover letter.
+    *   `FR-3.1 [MVP]` The system shall allow users to provide optional instructions (e.g., desired style and tone) for cover letter generation.
+    *   `FR-3.2 [MVP]` The system shall automatically retrieve the user's saved CV information for use in cover letter generation.
+    *   `FR-3.3 [MVP]` The system shall generate a customized cover letter using a third-party Large Language Model (LLM) based on the user's CV, job advertisement, and instructions.
+    *   `FR-3.4 [MVP]` The system shall display the generated cover letter to the user in plain text.
+    *   `FR-3.5 [MVP]` The system shall provide an option for the user to regenerate the cover letter.
+    *   `FR-3.6 [MVP]` The system shall provide an option for the user to save the generated cover letter.
 
 4.  **Cover Letter Viewing & Management (Post-MVP):**
-    *   The system shall allow users to view a list of their previously saved cover letters.
-    *   The system shall allow users to view the content of a specific saved cover letter.
-    *   The system shall allow users to download a saved cover letter as plain text.
-    *   The system shall allow users to edit a saved cover letter and regenerate it.
-    *   The system shall allow users to delete a saved cover letter.
+    *   `FR-4.1 [Growth]` The system shall allow users to view a list of their previously saved cover letters.
+    *   `FR-4.2 [Growth]` The system shall allow users to view the content of a specific saved cover letter.
+    *   `FR-4.3 [Growth]` The system shall allow users to download a saved cover letter as plain text.
+    *   `FR-4.4 [Growth]` The system shall allow users to edit a saved cover letter and regenerate it.
+    *   `FR-4.5 [Growth]` The system shall allow users to delete a saved cover letter.
 
 ---
 

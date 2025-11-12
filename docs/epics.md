@@ -76,6 +76,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** new student user,
 - **I want** to register for an account with my email and password,
 - **so that** I can access the CVAI Turbo platform.
+- **Covers:** FR-1.1
 - **Acceptance Criteria:**
     - Given I am on the registration page,
     - When I enter a valid email and password and submit the form,
@@ -87,6 +88,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** registered student user,
 - **I want** to log in to my account,
 - **so that** I can access my profile and application features.
+- **Covers:** FR-1.2
 - **Acceptance Criteria:**
     - Given I have a verified account,
     - When I enter my email and password on the login page,
@@ -98,6 +100,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to create my initial profile and input my CV information into a single text area,
 - **so that** the system has my basic data for cover letter generation.
+- **Covers:** FR-1.3, FR-1.4, FR-1.5
 - **Acceptance Criteria:**
     - Given I am logged in and have not yet created a profile,
     - When I navigate to the profile creation page,
@@ -110,6 +113,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to update my personal profile and CV information,
 - **so that** my cover letters are generated with the most current details.
+- **Covers:** FR-1.3, FR-1.4
 - **Acceptance Criteria:**
     - Given I am logged in and have an existing profile,
     - When I navigate to my profile editing page,
@@ -130,6 +134,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to input a job advertisement and provide optional instructions,
 - **so that** I can prepare the context for generating a tailored cover letter.
+- **Covers:** FR-2.1, FR-3.1
 - **Acceptance Criteria:**
     - Given I am on the "New Job Application" page,
     - When I paste a job advertisement into the designated text area,
@@ -140,6 +145,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to click a "Generate" button to create a cover letter,
 - **so that** I can receive an AI-drafted letter tailored to the job.
+- **Covers:** FR-3.2, FR-3.3
 - **Acceptance Criteria:**
     - Given I have provided a job advertisement,
     - When I click the "Generate" button,
@@ -151,6 +157,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** the generated cover letter to be displayed clearly on the screen,
 - **so that** I can review its content and decide on the next action.
+- **Covers:** FR-3.4
 - **Acceptance Criteria:**
     - Given the cover letter has been generated successfully,
     - When the frontend receives the letter text,
@@ -161,6 +168,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to be able to regenerate a cover letter if I'm not satisfied,
 - **so that** I can get a different version or provide new instructions.
+- **Covers:** FR-3.5
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
     - When I click the "Regenerate" button,
@@ -171,6 +179,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **As a** logged-in student user,
 - **I want** to save a generated cover letter that I am satisfied with,
 - **so that** I can access it later.
+- **Covers:** FR-3.6
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
     - When I click the "Save" button,
