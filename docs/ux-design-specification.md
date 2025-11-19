@@ -59,11 +59,55 @@ For the MVP, the core user interactions (inputting text, triggering generation, 
 
 ---
 
+## 2.5 Core Experience Principles
+
+*   **Responsive Feedback & Quality Generation:** The UI will provide immediate feedback for user actions. However, the core AI generation will prioritize producing a high-quality, relevant cover letter. The user will be kept informed during the generation process, but the emphasis is on the quality of the output, not just the speed of generation.
+*   **Intuitive Guidance & Progressive Disclosure:** Provide just enough information at the right time, guiding users effortlessly without overwhelming them with choices.
+*   **Empowering Simplicity:** Offer a streamlined experience that empowers users to achieve their goal with minimal complexity, while allowing for optional customization (e.g., through instructions for the AI).
+*   **Clear & Affirming Feedback:** Provide immediate, understandable feedback for every action, celebrating success and clearly guiding through any issues.
+
+---
+
 ## 3. Visual Foundation
 
 ### 3.1 Color System
 
-{{visual_foundation}}
+The chosen color theme is **"The Innovator"**. This dark mode theme feels modern, engaging, and tech-forward, aligning with the AI-powered nature of CVAI Turbo and the desired emotional response of "connected and engaged."
+
+**Palette:**
+*   **Primary:** `#6A44E5` (Vibrant Purple) - For main actions, key interactive elements.
+*   **Secondary:** `#4B5563` (Dark Grey) - For supporting elements, subtle backgrounds.
+*   **Accent:** `#EC4899` (Pink) - For highlights, notifications, or secondary calls to action.
+*   **Success:** `#10B981` (Green) - For positive feedback, successful operations.
+*   **Error:** `#EF4444` (Red) - For critical alerts, error states.
+*   **Background:** `#111827` (Dark Blue/Black) - Main background color.
+*   **Text:** `#F9FAFB` (Off-White) - Primary text color for readability on dark backgrounds.
+
+### 3.2 Typography System
+
+To maintain a clean, modern, and professional aesthetic, a sans-serif font system will be used.
+
+*   **Font Families:**
+    *   Headings & Body: Inter (or a similar modern, highly legible sans-serif font like system-ui)
+    *   Monospace: Fira Code (or a similar legible monospace font for code snippets or data display)
+*   **Type Scale (Example):**
+    *   H1: 2.5rem (40px)
+    *   H2: 2rem (32px)
+    *   H3: 1.75rem (28px)
+    *   H4: 1.5rem (24px)
+    *   Body: 1rem (16px)
+    *   Small: 0.875rem (14px)
+*   **Font Weights:** Regular (400), Medium (500), Semibold (600), Bold (700) - used judiciously to establish hierarchy.
+*   **Line Heights:** 1.5 for body text to ensure optimal readability.
+
+### 3.3 Spacing and Layout Foundation
+
+A consistent, modular spacing system will be implemented to ensure visual harmony and responsiveness.
+
+*   **Base Unit:** 4px (all spacing values will be multiples of this unit).
+*   **Spacing Scale (Examples):** 4px, 8px, 12px, 16px, 20px, 24px, 32px, 48px, 64px.
+*   **Layout Grid:** A standard 12-column grid system will be used for responsive layouts, providing flexibility across different screen sizes.
+*   **Container Widths:** Content will be constrained within `max-width` containers to enhance readability on larger displays, with fluid adjustments for smaller viewports.
 
 **Interactive Visualizations:**
 
@@ -75,7 +119,7 @@ For the MVP, the core user interactions (inputting text, triggering generation, 
 
 ### 4.1 Chosen Design Approach
 
-{{design_direction_decision}}
+The chosen design direction is a refined version of **Minimalist Preview (Direction #3)**, now designated as **Refined Minimalist (Direction #5)**. This direction emphasizes a clean, uncluttered interface, where the cover letter preview appears only after generation. A key refinement, based on user feedback, is the removal of the CV input field from this screen. Instead, the system will automatically utilize the user's single saved CV information from their profile. A clear indicator, 'Using your saved CV information. (Change/Edit CV)', will be present, with a link to the user's profile page for any modifications to their CV.
 
 **Interactive Mockups:**
 
