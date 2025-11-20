@@ -131,9 +131,159 @@ The chosen design direction is a refined version of **Minimalist Preview (Direct
 
 ### 5.1 Critical User Paths
 
-{{user_journey_flows}}
+#### 5.1.1 User Onboarding (Registration & Login)
+
+*   **User Goal:** To securely access the application.
+*   **Entry Point:** Landing page.
+*   **Chosen Approach:** Dynamic Toggle. A single page presents the login form by default, with a link to expand the form for registration. This provides a clean, modern, and seamless experience that prioritizes returning users while making registration easily accessible without a page reload.
+
+**Flow Diagram:**
+
+```mermaid
+graph TD
+    A[Start: Unauthenticated User on Landing Page] --> B[Login Form with 'Sign Up' link];
+    B -- Fills form --> C{Clicks 'Login'};
+    C -- Valid --> D[Success: Logged In];
+    D --> E[Show 'Update CV' Pop-up];
+    E --> F[Main App];
+    C -- Invalid --> G[Show Inline Error];
+    G --> B;
+
+    B -- Clicks 'Sign Up' --> H[Registration form expands, 'Login' link appears];
+    H -- Fills form --> I{Clicks 'Create Account'};
+    I -- Valid --> J[Success: Account Created];
+    J --> K[Redirect to CV Creation Page];
+    I -- Invalid --> L[Show Inline Error];
+    L --> H;
+
+    H -- Clicks 'Login' --> B;
+```
+
+**Step-by-Step Flow:**
+
+1.  **Initial View (Login):**
+    *   **User Sees:** The landing page displays a clean form with fields for "Email" and "Password", a primary "Login" button, and a small text link below: "Don't have an account? **Sign Up**."
+    *   **Interaction (Returning User):** The user enters their credentials and clicks "Login".
+        *   *On Success:* The system authenticates the user and redirects them to the main application dashboard. A pop-up appears with the message "Welcome back! Would you like to update your CV information?" with "Update CV" and "Later" options.
+        *   *On Failure:* An inline error message appears (e.g., "The email or password you entered is incorrect.") without a page reload. The form fields remain filled.
+
+2.  **Toggle to Registration:**
+    *   **Interaction (New User):** The user clicks the "**Sign Up**" link.
+    *   **System Response:** The form container animates smoothly to reveal additional fields required for registration: "Name", "Date of Birth", "Gender", and "Phone Number". The primary button's text changes from "Login" to "Create Account", and the link below now reads: "Already have an account? **Login**."
+
+3.  **Registration Submission:**
+    *   **Interaction:** The user fills out the newly appeared fields. The system provides real-time inline validation where appropriate (e.g., checking for a valid email format).
+    *   **Submission:** After filling the form, the user clicks "Create Account".
+        *   *On Success:* The system creates the new user account, logs them in, and redirects them directly to a dedicated page to input their CV information for the first time.
+        *   *On Failure (e.g., email already taken):* An inline error message appears explaining the issue. The user can correct the information and resubmit.
 
 ---
+
+#### 5.1.2 CV Management
+
+*   **User Goal:** To create, update, or view their CV information.
+*   **Entry Point:**
+    *   New users: Automatic redirect after registration.
+    *   Returning users: From the post-login pop-up or a "Change/Edit CV" link.
+*   **Chosen Approach:** Hybrid Save Model on a Single Scrolling Form. The system automatically saves changes when a user moves from one field to another, providing immediate feedback. A manual "Save" button is also present to give users a sense of finality and control.
+
+**Flow Diagram:**
+
+```mermaid
+graph TD
+    subgraph "CV Management Flow (Hybrid Save)"
+        A[Start: User on CV Page] --> B[Form with 'Save' button (disabled)];
+        B --> C[User clicks into a field];
+        C --> D{Typing...};
+        D --> E[Field border turns yellow, 'Save' enabled];
+        E --> F{User leaves field (onBlur)};
+        F --> G[Auto-save triggered];
+        G -- Success --> H[Field border turns green];
+        H --> I{All changes saved?};
+        I -- Yes --> J['Save' button disabled, status 'All changes saved'];
+        J --> B;
+        I -- No --> B;
+
+        E --> K[User clicks 'Save' button];
+        K --> L[Manual save triggered];
+        L -- Success --> M[All modified borders turn green, status 'All changes saved'];
+        M --> J;
+    end
+```
+
+**Step-by-Step Flow:**
+
+1.  **Initial View:**
+    *   **User Sees:** A single, scrolling form with dedicated text boxes for "Address", "Education", "Work Experience", "Qualifications", "Skills", and "Language". A status indicator at the top says "All changes saved". A "Save" button at the bottom is initially disabled.
+
+2.  **Editing a Field:**
+    *   **Interaction:** The user clicks into a text box and starts typing.
+    *   **System Response:** The border of the active text box turns yellow. The status indicator at the top changes to "Unsaved changes...". The "Save" button at the bottom becomes enabled.
+
+3.  **Auto-Saving:**
+    *   **Interaction:** The user finishes editing a field and clicks or tabs to another part of the page.
+    *   **System Response:** The system saves the change in the background. The yellow border of the just-edited field turns green. After a moment, the status indicator at the top updates to "All changes saved", and the "Save" button becomes disabled again.
+
+4.  **Manual Saving:**
+    *   **Interaction:** The user makes one or more changes (multiple yellow borders may be visible) and clicks the now-enabled "Save" button.
+    *   **System Response:** All pending changes are saved. All yellow borders turn green. A confirmation message "Saved!" appears briefly, the main status indicator shows "All changes saved," and the "Save" button becomes disabled.
+
+---
+#### 5.1.3 Cover Letter Generation
+
+*   **User Goal:** To generate a tailored cover letter for a specific job.
+*   **Entry Point:** The main application screen after logging in and dismissing the optional "Update CV" pop-up.
+*   **Chosen Approach:** A "Refined Minimalist" two-column layout with interactive inputs and a dedicated output panel. The flow incorporates guiding button states, versioned regeneration for comparison, and clear, multi-layered feedback on save actions.
+
+**Flow Diagram:**
+
+```mermaid
+graph TD
+    subgraph "Cover Letter Generation Flow"
+        A[Start: Main Page] --> B{Job Description empty, 'Generate' disabled};
+        B --> C[User pastes job description];
+        C --> D['Generate' button enabled];
+        D --> E{Clicks 'Generate'};
+        E --> F[Right column shows loading spinner & message];
+        F --> G{Generation complete};
+        G --> H[Cover letter appears. 'Regenerate' & 'Save' buttons appear];
+        H --> I{Clicks 'Save'};
+        I --> J[Button becomes 'Saved ✓' & disabled. Toast notification appears];
+
+        H --> K{Edits instructions};
+        K --> L{Clicks 'Regenerate'};
+        L --> M[Right column shows loading state];
+        M --> N{New version generated};
+        N --> O[Right column becomes tabbed: 'Version 2' (active), 'Version 1'];
+        O --> H;
+    end
+```
+
+**Step-by-Step Flow:**
+
+1.  **Initial View:**
+    *   **User Sees:** A two-column layout.
+        *   **Left Column:** An indicator stating "Using your saved CV information. (Change/Edit CV)", a text area for "Job Description", a text area for "Optional instructions...", and a **disabled** "Generate Cover Letter" button.
+        *   **Right Column:** A placeholder message, e.g., "Your generated cover letter will appear here."
+
+2.  **Providing Input:**
+    *   **Interaction:** User pastes text into the "Job Description" text area.
+    *   **System Response:** The "Generate Cover Letter" button instantly becomes enabled.
+
+3.  **Generation Process:**
+    *   **Interaction:** User clicks the "Generate Cover Letter" button.
+    *   **System Response:** The right column is replaced by a loading indicator. A spinner is displayed with the message "Please give us an A" periodically appearing below it. The input fields on the left are temporarily disabled to prevent changes during generation.
+
+4.  **Reviewing Output:**
+    *   **User Sees:** The loading indicator vanishes and is replaced by the generated cover letter text in the right column. In the left column, a "Regenerate" button appears. A "Save" button also appears, positioned logically near the output it controls.
+
+5.  **Saving the Cover Letter:**
+    *   **Interaction:** User clicks the "Save" button.
+    *   **System Response:** The button's text immediately changes to "Saved ✓" and it becomes disabled. Simultaneously, a temporary notification ("toast") appears at the top of the screen stating, "Cover letter saved to your collection."
+
+6.  **Regenerating for a Better Version:**
+    *   **Interaction:** User adds or modifies text in the "Optional instructions..." area and clicks the "Regenerate" button.
+    *   **System Response:** The generation process (Step 3) repeats. When the new letter is ready, the right column transforms into a tabbed interface. "Version 2" is the active tab, showing the new content. A "Version 1" tab is also present, allowing the user to easily compare the two. The "Save" button becomes enabled again for the new version.
 
 ## 6. Component Library
 
@@ -163,7 +313,29 @@ The chosen design direction is a refined version of **Minimalist Preview (Direct
 
 ### 9.1 Completion Summary
 
-{{completion_summary}}
+**Completion Summary:**
+Excellent work! Your UX Design Specification is substantially complete.
+
+**What we created together:**
+
+-   **Design System:** Shadcn/UI chosen, with a plan for custom components.
+-   **Visual Foundation:** "The Innovator" color theme with Inter/Fira Code typography and a 4px spacing system.
+-   **Design Direction:** "Refined Minimalist" chosen for core application layout and interaction.
+-   **User Journeys:** 3 critical flows designed with clear navigation paths:
+    1.  User Onboarding (Registration & Login)
+    2.  CV Management
+    3.  Cover Letter Generation
+-   **Component Strategy:** Initial strategy defined, identifying Shadcn/UI components and planning for custom "Stateful Textbox" and "Generation Status Indicator".
+-   **Responsive Strategy:** (To be defined in future session)
+-   **Accessibility:** (To be defined in future session)
+
+**Your Deliverables:**
+-   UX Design Document: `docs/ux-design-specification.md`
+-   Interactive Color Themes: `docs/ux-color-themes.html`
+-   Design Direction Mockups: `docs/ux-design-directions.html`
+
+**What happens next:**
+We have made significant progress. The next step would be to define the UX Pattern Decisions (Step 7) and then Responsive Design & Accessibility Strategy (Step 8).
 
 ---
 

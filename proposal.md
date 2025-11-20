@@ -25,9 +25,9 @@ For university and college students applying for internships or part-time jobs, 
 ### Flow 1: Create new student user
 **Entry Point**: Student lands on home page
 
-1. **Landing Page**
+1. **Welcome Page/Registration & Login**
    - Student views a static text that explains how to create cover letter.
-   - Clicks "Register" CTA button
+   - Clicks "Sign in" CTA button
 2. **Authentication**
    - If not registered: Redirects to registration/login page
    - Student registers with email and password
@@ -45,6 +45,7 @@ For university and college students applying for internships or part-time jobs, 
       - Education: {education}
       - Work experience: {work experience}
       - Qualifications: {qualification}
+      - Skills: {skills}
       - Language: {language}
     - A button "Save the information" - if clicked then go to step 4 (flow 1).
     - If required fields are left empty, they’re highlighted with inline warnings, a banner prompts completion, and the “Save” button remains disabled until all fields are filled.
