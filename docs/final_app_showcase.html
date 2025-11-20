@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVAI Turbo - Key Screens Showcase</title>
+    <style>
+        :root {
+            --primary: #6A44E5;
+            --secondary: #4B5563;
+            --accent: #EC4899;
+            --success: #10B981;
+            --error: #EF4444;
+            --background: #111827;
+            --text: #F9FAFB;
+            --card-bg: #1F2937;
+            --border-color: #374151;
+            --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+
+        .screen-container {
+            width: 100%;
+            max-width: 1200px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .screen-header {
+            background-color: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .screen-content {
+            padding: 1.5rem;
+            background-color: var(--background);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background-color: #5a37d1;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3a4350;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+        
+        .btn-destructive {
+            background-color: var(--error);
+            color: var(--text);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text);
+            font-family: var(--font-sans);
+        }
+        
+        .input-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 300px;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            color: var(--secondary);
+        }
+        
+        .spinner {
+            border: 4px solid var(--secondary);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>CVAI Turbo - Key Screens Showcase</h1>
+
+    <!-- Screen 1: Login -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>1. Login Screen</h2>
+        </div>
+        <div class="screen-content" style="max-width: 400px; margin: auto;">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="student@university.com">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" value="••••••••">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Login</button>
+            <p style="text-align: center; margin-top: 1rem;">Don't have an account? <a href="#" style="color: var(--primary);">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Screen 2: Registration -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>2. Registration Screen</h2>
+        </div>
+        <div class="screen-content" style="max-width: 400px; margin: auto;">
+            <div class="input-group">
+                <label for="reg-name">Name</label>
+                <input type="text" id="reg-name" value="BIP">
+            </div>
+            <div class="input-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" value="new.student@university.com">
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" value="••••••••">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Create Account</button>
+            <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="#" style="color: var(--primary);">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Screen 3: Main App (Initial) -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>3. Main App Screen (Initial State)</h2>
+        </div>
+        <div class="screen-content">
+            <div class="two-column-layout">
+                <div>
+                    <p>Using your saved CV information. <a href="#" style="color: var(--primary);">(Change/Edit CV)</a></p>
+                    <div class="input-group">
+                        <label for="job-desc">Job Description</label>
+                        <textarea id="job-desc"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="instructions">Optional instructions...</label>
+                        <textarea id="instructions"></textarea>
+                    </div>
+                    <button class="btn btn-primary" disabled>Generate Cover Letter</button>
+                </div>
+                <div>
+                    <div class="placeholder">
+                        <p>Your generated cover letter will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 4: Main App (Generating) -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>4. Main App Screen (Generating State)</h2>
+        </div>
+        <div class="screen-content">
+            <div class="two-column-layout">
+                <div>
+                    <p>Using your saved CV information. <a href="#" style="color: var(--primary);">(Change/Edit CV)</a></p>
+                    <div class="input-group">
+                        <label for="job-desc-gen">Job Description</label>
+                        <textarea id="job-desc-gen" disabled>Pasting job description here...</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="instructions-gen">Optional instructions...</label>
+                        <textarea id="instructions-gen" disabled></textarea>
+                    </div>
+                    <button class="btn btn-primary" disabled>Generating...</button>
+                </div>
+                <div>
+                    <div class="placeholder">
+                        <div style="text-align: center;">
+                            <div class="spinner"></div>
+                            <p style="margin-top: 1rem;">Please give us an A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 5: Main App (Results) -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>5. Main App Screen (Results State)</h2>
+        </div>
+        <div class="screen-content">
+            <div class="two-column-layout">
+                <div>
+                    <p>Using your saved CV information. <a href="#" style="color: var(--primary);">(Change/Edit CV)</a></p>
+                    <div class="input-group">
+                        <label for="job-desc-res">Job Description</label>
+                        <textarea id="job-desc-res">Pasted job description...</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="instructions-res">Optional instructions...</label>
+                        <textarea id="instructions-res">Make it more formal.</textarea>
+                    </div>
+                    <button class="btn btn-outline">Regenerate</button>
+                    <button class="btn btn-primary" style="margin-left: 1rem;">Save</button>
+                </div>
+                <div>
+                    <div class="tabs">
+                        <div class="tab active">Version 2</div>
+                        <div class="tab">Version 1</div>
+                    </div>
+                    <div class="tab-content">
+                        <h3>Dear Hiring Manager,</h3>
+                        <p>Following my review of the job description, I am writing to express my keen interest in the Software Engineer position at your esteemed company...</p>
+                        <p>...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 6: CV Management -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>6. CV Management Screen</h2>
+        </div>
+        <div class="screen-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3>Your CV Information</h3>
+                <span style="color: var(--success);">All changes saved</span>
+            </div>
+            <div class="input-group">
+                <label for="cv-address">Address</label>
+                <input type="text" id="cv-address" value="123 University Lane, Oslo, Norway" style="border-color: var(--success);">
+            </div>
+            <div class="input-group">
+                <label for="cv-education">Education</label>
+                <textarea id="cv-education" style="border-color: #facc15;">Master of Science in Computer Science, University of Oslo...</textarea>
+            </div>
+            <div class="input-group">
+                <label for="cv-experience">Work Experience</label>
+                <textarea id="cv-experience"></textarea>
+            </div>
+            <button class="btn btn-primary" disabled>Save</button>
+        </div>
+    </div>
+
+    <!-- Screen 7: My Cover Letters (Empty) -->
+    <div class="screen-container">
+        <div class="screen-header">
+            <h2>7. My Cover Letters (Empty State)</h2>
+        </div>
+        <div class="screen-content" style="text-align: center; padding: 4rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--secondary);"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+            <h3 style="margin-top: 1.5rem;">Your Cover Letter Collection is Empty</h3>
+            <p style="color: var(--secondary);">Start by generating a new cover letter for your next job application.</p>
+            <button class="btn btn-primary" style="margin-top: 1rem;">Generate New Cover Letter</button>
+        </div>
+    </div>
+
+    <!-- Screen 8: My Cover Letters (With Content) -->
+    <div class="screen-container">
+        <div class="screen-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>8. My Cover Letters (With Content)</h2>
+            <div style="display: flex; gap: 1rem;">
+                <input type="search" placeholder="Search letters..." style="background-color: var(--background); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 6px; color: var(--text);">
+                <button class="btn btn-primary">New Letter</button>
+            </div>
+        </div>
+        <div class="screen-content">
+            <div style="border: 1px solid var(--border-color); border-radius: 8px;">
+                <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600;">
+                    <div>Title / Company</div>
+                    <div>Date Created</div>
+                    <div>Status</div>
+                    <div>Actions</div>
+                </div>
+                <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; padding: 1rem; border-bottom: 1px solid var(--border-color); align-items: center;">
+                    <div>Software Engineer at Google</div>
+                    <div>November 20, 2025</div>
+                    <div><span style="background-color: var(--success); color: #064e3b; padding: 0.25rem 0.5rem; border-radius: 99px; font-size: 0.75rem;">Saved</span></div>
+                    <div>
+                        <a href="#" style="color: var(--primary); margin-right: 1rem;">View</a>
+                        <a href="#" style="color: var(--error);">Delete</a>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; padding: 1rem; align-items: center;">
+                    <div>Product Manager at Microsoft</div>
+                    <div>November 18, 2025</div>
+                    <div><span style="background-color: var(--success); color: #064e3b; padding: 0.25rem 0.5rem; border-radius: 99px; font-size: 0.75rem;">Saved</span></div>
+                    <div>
+                        <a href="#" style="color: var(--primary); margin-right: 1rem;">View</a>
+                        <a href="#" style="color: var(--error);">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

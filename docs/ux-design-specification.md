@@ -289,7 +289,46 @@ graph TD
 
 ### 6.1 Component Strategy
 
-{{component_library_strategy}}
+The component strategy for CVAI Turbo is to primarily leverage the comprehensive and accessible components provided by **Shadcn/UI**, while creating a few key custom components to support the application's unique interactive features. This approach maximizes development speed and ensures a consistent, high-quality foundation, while allowing for bespoke elements that enhance the core user experience.
+
+#### 6.1.1 Standard Components (from Shadcn/UI)
+
+The following standard components from the Shadcn/UI library will be utilized for building the interface:
+
+*   **Button:** For all primary, secondary, and tertiary actions (e.g., "Login", "Generate", "Save").
+*   **Input:** For standard text entry fields in forms (e.g., Email, Password).
+*   **Textarea:** For larger, multi-line text entry (e.g., "Job Description", "Optional instructions...").
+*   **Card:** To structure and contain distinct sections of the UI.
+*   **Tabs:** For switching between different versions of the generated cover letter.
+*   **Toast:** For displaying non-intrusive notifications (e.g., "Cover letter saved").
+*   **Link:** For navigation and informational links (e.g., "Sign Up", "Change/Edit CV").
+*   **Form:** To manage form state and validation for login and registration.
+
+#### 6.1.2 Custom Components
+
+Two custom components will be developed to provide specific feedback and enhance the user experience in key flows.
+
+**1. Stateful Textbox**
+
+*   **Purpose:** To provide clear, immediate feedback on the auto-save status of a field within the CV Management form, ensuring the user always feels confident that their work is being saved.
+*   **Content:** It will display the user-inputted CV information.
+*   **User Actions:** Users can type, edit, and paste text into the component.
+*   **States & Appearance:**
+    *   **Default:** The component has a standard, neutral appearance, indicating no unsaved changes.
+    *   **Typing/Unsaved:** When the user types or modifies text, the component's border will turn **yellow**. This visually communicates that changes have been made but are not yet persisted.
+    *   **Saved:** After the user clicks the manual "Save" button, the border of all modified textboxes will turn **green**, confirming that the changes have been successfully saved.
+*   **Variants:** A single, consistent style will be used for all instances of this component.
+
+**2. Generation Status Indicator**
+
+*   **Purpose:** To act as a responsive progress indicator during the AI generation process. It informs the user that the system is working on their request while injecting a moment of brand personality.
+*   **Content:** The component will display a loading spinner. Periodically, the text message "Please give us an A" will appear alongside it for comedic effect.
+*   **User Actions:** This is a non-interactive, display-only component. The user observes it while waiting for the generation to complete.
+*   **States:**
+    *   **Idle:** The component is not visible.
+    *   **Generating:** The component is displayed, showing the active loading spinner and the intermittent message.
+    *   **Complete:** The component is hidden, and the generated content is displayed in its place.
+*   **Variants:** A single, consistent style will be used.
 
 ---
 
@@ -297,7 +336,193 @@ graph TD
 
 ### 7.1 Consistency Rules
 
-{{ux_pattern_decisions}}
+### 7.1 Consistency Rules
+
+To ensure a cohesive, intuitive, and predictable user experience across CVAI Turbo, the following UX pattern decisions will guide implementation:
+
+#### 7.1.1 Button Hierarchy
+
+*   **Primary Action:**
+    *   **Usage:** The single most important action on a screen, guiding the user towards the main goal (e.g., "Generate Cover Letter", "Login", "Save").
+    *   **Style:** Prominent, solid fill using the **Primary color (`#6A44E5`)**, with clear, contrasting text.
+
+*   **Secondary Action:**
+    *   **Usage:** Important but not primary actions, or alternative paths (e.g., "Regenerate", "Sign Up", "Cancel").
+    *   **Style:** Less visually dominant than primary. An **outline button** using the Primary color, or a solid fill with a more subdued color like the **Secondary color (`#4B5563`)**.
+
+*   **Tertiary Action:**
+    *   **Usage:** Less critical actions, often supplementary or navigational (e.g., "Change/Edit CV" link, "Forgot Password").
+    *   **Style:** Minimal visual weight, typically a **text-only link** or a subtle icon button.
+
+*   **Destructive Action:**
+    *   **Usage:** Actions that are irreversible or lead to data loss (e.g., "Delete Account", "Remove Item").
+    *   **Style:** Clearly indicates danger, using the **Error color (`#EF4444`)**. This could be a solid fill or an outline.
+
+#### 7.1.2 Feedback Patterns
+
+*   **Success Feedback:**
+    *   **Pattern:** **Toast notification.**
+    *   **Usage:** For non-critical, temporary confirmations that an action was successful (e.g., "Cover letter saved"). Appears briefly and auto-dismisses.
+    *   **Style:** Green background (Success color: `#10B981`), clear success icon, concise message.
+
+*   **Error Feedback:**
+    *   **Pattern:** **Inline error messages** for form validation, **Toast notifications** for general, non-blocking errors, and **Page-level error messages** for critical, blocking issues.
+    *   **Usage:** Inline for field-specific validation; Toast for non-critical errors; Page-level for severe, blocking issues.
+    *   **Style:** Red text (Error color: `#EF4444`) for inline. Red background for toast/page-level, with clear error icon and actionable message.
+
+*   **Warning Feedback:**
+    *   **Pattern:** **Toast notification** or **Inline warning message.**
+    *   **Usage:** For non-critical alerts requiring user awareness but not immediate action.
+    *   **Style:** Orange/Yellow background (Accent color: `#EC4899` or similar), with a warning icon and a clear message.
+
+*   **Info Feedback:**
+    *   **Pattern:** **Toast notification** or **Inline info message.**
+    *   **Usage:** For general informational messages.
+    *   **Style:** Neutral background (Secondary color: `#4B5563`), with an info icon and a concise message.
+
+*   **Loading Feedback:**
+    *   **Pattern:** **Spinner** for short waits, and **Skeleton loaders** for longer waits or content areas.
+    *   **Usage:** Spinner for actions like "Generate Cover Letter" (using custom "Generation Status Indicator") or form submissions. Skeleton for fetching data for sections/pages.
+
+#### 7.1.3 Form Patterns
+
+*   **Label Position:**
+    *   **Pattern:** **Above input field.**
+    *   **Rationale:** Accessible and scannable, providing clear association between label and input.
+
+*   **Required Field Indicator:**
+    *   **Pattern:** **Asterisk (`*`) next to the label.**
+    *   **Rationale:** Widely understood convention, supplemented by a note "Fields marked with * are required."
+
+*   **Validation Timing:**
+    *   **Pattern:** **On blur** for individual field validation, and **On submit** for overall form validation.
+    *   **Rationale:** Provides immediate feedback proactively and catches remaining errors on submission.
+
+*   **Error Display:**
+    *   **Pattern:** **Inline error messages** below the field, and a **Form summary** at the top for multiple errors.
+    *   **Rationale:** Directly points to problematic fields and provides an overview of all errors.
+
+*   **Help Text:**
+    *   **Pattern:** **Caption text** below the input field for persistent help, and **Tooltip** for contextual, on-demand help.
+    *   **Rationale:** Caption for essential instructions, Tooltip for supplementary information.
+
+#### 7.1.4 Modal Patterns
+
+*   **Size Variants:**
+    *   **Pattern:** **Small, Medium, and Large.**
+    *   **Usage:** Small for simple confirmations; Medium for standard forms; Large for complex forms or content requiring more space.
+    *   **Rationale:** Provides appropriate sizing for various use cases within the web application context (mobile development is post-MVP).
+
+*   **Dismiss Behavior:**
+    *   **Pattern:** **Click outside, Escape key, and Explicit close button (X icon).**
+    *   **Rationale:** Multiple intuitive ways for users to dismiss, enhancing accessibility and user preference.
+
+*   **Focus Management:**
+    *   **Pattern:** **Auto-focus on the first interactive element within the modal.**
+    *   **Rationale:** Improves accessibility and usability by immediately placing focus on the most likely interactive element, and traps focus within the modal.
+
+*   **Stacking:**
+    *   **Pattern:** **Avoid stacking multiple modals.** If a secondary action requires a modal, it should replace the current modal or be handled within the existing modal context. If a modal *must* trigger another, the new modal appears on top, temporarily obscuring the previous one, and returns to the previous modal upon its dismissal.
+    *   **Rationale:** Prevents confusing and frustrating user experiences.
+
+#### 7.1.5 Navigation Patterns
+
+*   **Active State Indication:**
+    *   **Pattern:** **Highlighting the active navigation item with a distinct background color and/or a bold text style.**
+    *   **Rationale:** Provides clear visual feedback about the user's current location.
+
+*   **Breadcrumb Usage:**
+    *   **Pattern:** **Used for multi-level hierarchical content or complex workflows.**
+    *   **Rationale:** Helps users understand their location in deep navigation structures and navigate back up.
+
+*   **Back Button Behavior:**
+    *   **Pattern:** **Primarily rely on the browser's back button.** An in-app "Back" button will only be used for specific, multi-step workflows where the browser back button might lead to unexpected behavior.
+    *   **Rationale:** Leverages user familiarity with browser functionality, reserving in-app buttons for flow integrity.
+
+*   **Deep Linking:**
+    *   **Pattern:** **Support deep linking to all major application views and specific content where appropriate.**
+    *   **Rationale:** Enhances shareability, bookmarking, and direct access to content, crucial for a web application.
+
+#### 7.1.6 Empty State Patterns
+
+*   **First Use:**
+    *   **Pattern:** **Provide guidance and a clear Call-to-Action (CTA).**
+    *   **Usage:** Guide users on how to populate a feature with no content.
+    *   **Example:** On an empty "My Cover Letters" page, display a friendly illustration, a headline, a helpful message, and a primary button to "Generate New Cover Letter."
+
+*   **No Results:**
+    *   **Pattern:** **Provide a helpful message and suggest next steps.**
+    *   **Usage:** Inform users when a search yields no results and offer ways to correct or broaden their search.
+    *   **Example:** For no search results, display a headline, a helpful message suggesting checking spelling, and a "Clear Search" button.
+
+*   **Cleared Content:**
+    *   **Pattern:** **Confirm the action and provide an "Undo" option where feasible.**
+    *   **Usage:** Confirm actions that result in an empty state and offer a way to reverse it.
+    *   **Example:** After deleting the last cover letter, a Toast notification will pop up saying, "Cover letter deleted. **Undo**."
+
+#### 7.1.7 Confirmation Patterns
+
+*   **Delete Confirmation:**
+    *   **Pattern:** **Always confirm with a modal, offering an "Undo" option via a Toast notification.**
+    *   **Rationale:** Deletion is destructive; a modal ensures explicit confirmation, and "Undo" provides a safety net.
+
+*   **Leave Unsaved Changes:**
+    *   **Pattern:** **Warn with a custom modal if the user attempts to navigate away from a form with unsaved changes.** This modal will offer "Save," "Discard Changes," or "Cancel" options.
+    *   **Rationale:** Prevents accidental data loss, building on the visual cues of the "Stateful Textbox."
+
+*   **Irreversible Actions:**
+    *   **Pattern:** **Require explicit user input (e.g., typing a specific word like "DELETE" to confirm) within a modal, in addition to a clear warning message.**
+    *   **Rationale:** For highly sensitive actions, this higher level of confirmation prevents accidental execution.
+
+#### 7.1.8 Notification Patterns
+
+*   **Placement:**
+    *   **Pattern:** **Top-right corner of the viewport.**
+    *   **Rationale:** Common, unobtrusive, and easily discoverable without blocking critical content.
+
+*   **Duration:**
+    *   **Pattern:** **Auto-dismiss after 5-7 seconds for informational and success messages; manual dismiss for errors and warnings.**
+    *   **Rationale:** Balances user flow with the need for acknowledgment of critical messages.
+
+*   **Stacking:**
+    *   **Pattern:** **New notifications appear above existing ones, pushing older notifications down.**
+    *   **Rationale:** Ensures the most recent information is immediately visible, with a maximum limit to prevent clutter.
+
+*   **Priority Levels:**
+    *   **Pattern:** **Critical (Error), Important (Warning), and Informational (Success/Info).**
+    *   **Rationale:** Differentiates messages by urgency and required user attention, using distinct visual cues.
+
+#### 7.1.9 Search Patterns
+
+*   **Trigger:**
+    *   **Pattern:** **Manual trigger (on 'Enter' key press or explicit search button click).**
+    *   **Rationale:** Simpler to implement for MVP and provides clear user control.
+
+*   **Results Display:**
+    *   **Pattern:** **Display results within the current view after the manual trigger.**
+    *   **Rationale:** Minimizes navigation complexity, showing filtered content directly.
+
+*   **Filters:**
+    *   **Pattern:** **Inline filters, appearing as dropdowns or checkboxes, positioned above or to the side of the search results.**
+    *   **Rationale:** Easily discoverable and allows users to refine search without navigating away.
+
+*   **No Results:**
+    *   **Pattern:** **Provide a helpful message and suggestions for refining the search.**
+    *   **Rationale:** Guides users when a search yields no results, suggesting alternatives.
+
+#### 7.1.10 Date/Time Patterns
+
+*   **Format:**
+    *   **Pattern:** **Primarily use absolute date/time format (e.g., "November 20, 2025, 10:30 AM").**
+    *   **Rationale:** Provides precision and clarity for professional documents and activity tracking.
+
+*   **Timezone Handling:**
+    *   **Pattern:** **Display dates and times in the user's local timezone.**
+    *   **Rationale:** Most user-friendly approach, aligning with immediate user context.
+
+*   **Pickers:**
+    *   **Pattern:** **Text input for date entry, with a simple calendar dropdown for selection if a date picker is required.** For time, a simple dropdown or direct input.
+    *   **Rationale:** Provides flexibility for typing and visual aid for picking, leveraging standard Shadcn/UI components.
 
 ---
 
@@ -305,7 +530,33 @@ graph TD
 
 ### 8.1 Responsive Strategy
 
-{{responsive_accessibility_strategy}}
+### 8.1 Responsive Strategy
+
+For the MVP, the primary focus is on the **desktop/web application**. Mobile and tablet development, along with full screen reader support, are planned for post-MVP.
+
+*   **Target Devices:** Desktop/Web application only for MVP.
+*   **Breakpoints:**
+    *   A single primary breakpoint will be used for the desktop web application. The layout will be designed to be robust and visually appealing across common desktop monitor sizes. Content will be constrained within `max-width` containers to enhance readability on very large displays.
+*   **Adaptation Patterns:**
+    *   **Layout:** The 12-column grid system will be utilized for flexible layouts that scale horizontally on desktop.
+    *   **Navigation:** Primary navigation (e.g., sidebar or top navigation) will be designed specifically for the desktop web experience.
+    *   **Content:** Tables, forms, and other content will be optimized for desktop screen real estate.
+
+### 8.2 Accessibility Strategy
+
+*   **WCAG Compliance Target:** **WCAG 2.1 Level A.**
+    *   **Rationale:** Given the MVP focus and the decision to defer full screen reader support, targeting Level A is a pragmatic starting point. This ensures basic accessibility, addressing fundamental barriers, while allowing us to focus on core functionality. Level AA and full screen reader support will be targeted post-MVP.
+*   **Key Requirements (focused on Level A for MVP):**
+    *   **Color Contrast:** Ensure sufficient contrast for text and essential UI components.
+    *   **Keyboard Navigation:** All interactive elements must be reachable and operable using only the keyboard.
+    *   **Focus Indicators:** Visible focus states on all interactive elements (buttons, links, form fields).
+    *   **Form Labels:** Ensure all form inputs have properly associated labels.
+    *   **Error Identification:** Clear, descriptive error messages.
+    *   **Semantic HTML:** Use appropriate HTML5 semantic elements to convey structure and meaning.
+    *   **Alt Text:** Provide descriptive `alt` text for all meaningful images (where applicable and feasible within MVP scope).
+*   **Testing Strategy (MVP):**
+    *   **Automated Tools:** Integrate tools like Lighthouse (built into Chrome DevTools) and axe DevTools into the development workflow.
+    *   **Manual Testing:** Conduct thorough keyboard-only navigation testing.
 
 ---
 
@@ -314,20 +565,17 @@ graph TD
 ### 9.1 Completion Summary
 
 **Completion Summary:**
-Excellent work! Your UX Design Specification is substantially complete.
+Excellent work! Your UX Design Specification is complete.
 
 **What we created together:**
 
--   **Design System:** Shadcn/UI chosen, with a plan for custom components.
--   **Visual Foundation:** "The Innovator" color theme with Inter/Fira Code typography and a 4px spacing system.
--   **Design Direction:** "Refined Minimalist" chosen for core application layout and interaction.
--   **User Journeys:** 3 critical flows designed with clear navigation paths:
-    1.  User Onboarding (Registration & Login)
-    2.  CV Management
-    3.  Cover Letter Generation
--   **Component Strategy:** Initial strategy defined, identifying Shadcn/UI components and planning for custom "Stateful Textbox" and "Generation Status Indicator".
--   **Responsive Strategy:** (To be defined in future session)
--   **Accessibility:** (To be defined in future session)
+-   **Design System:** We've chosen **Shadcn/UI** as our foundation, complemented by two custom components: the **Stateful Textbox** for intuitive CV management and the **Generation Status Indicator** for engaging feedback during cover letter creation.
+-   **Visual Foundation:** We've established "The Innovator" color theme, paired with **Inter/Fira Code** typography and a precise **4px spacing system**, creating a modern and cohesive look.
+-   **Design Direction:** Our core application layout and interaction will follow the **"Refined Minimalist"** direction, prioritizing clarity and efficiency.
+-   **User Journeys:** We've meticulously designed three critical user flows: **User Onboarding (Registration & Login), CV Management, and Cover Letter Generation**, ensuring a smooth path for users.
+-   **UX Patterns:** We've defined comprehensive consistency rules across **10 categories**, including Button Hierarchy, Feedback, Forms, Modals, Navigation, Empty States, Confirmations, Notifications, Search, and Date/Time, to guarantee a predictable and intuitive experience.
+-   **Responsive Strategy:** For the MVP, our focus is exclusively on the **desktop/web application**, with mobile and tablet development planned for post-MVP.
+-   **Accessibility:** We're targeting **WCAG 2.1 Level A compliance** for the MVP, ensuring basic accessibility while deferring full screen reader support to post-MVP.
 
 **Your Deliverables:**
 -   UX Design Document: `docs/ux-design-specification.md`
@@ -335,7 +583,11 @@ Excellent work! Your UX Design Specification is substantially complete.
 -   Design Direction Mockups: `docs/ux-design-directions.html`
 
 **What happens next:**
-We have made significant progress. The next step would be to define the UX Pattern Decisions (Step 7) and then Responsive Design & Accessibility Strategy (Step 8).
+-   Designers can create high-fidelity mockups from this foundation.
+-   Developers can implement with clear UX guidance and rationale.
+-   All your design decisions are documented with reasoning for future reference.
+
+You've made thoughtful choices through visual collaboration that will create a great user experience. Ready for design refinement and implementation!
 
 ---
 

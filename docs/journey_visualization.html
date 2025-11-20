@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVAI Turbo - User Journey Visualization</title>
+    <style>
+        :root {
+            --primary: #6A44E5;
+            --secondary: #4B5563;
+            --accent: #EC4899;
+            --success: #10B981;
+            --error: #EF4444;
+            --background: #111827;
+            --text: #F9FAFB;
+            --card-bg: #1F2937;
+            --border-color: #374151;
+            --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .journey-container {
+            width: 100%;
+            max-width: 1000px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            background-color: var(--card-bg);
+        }
+
+        .step {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .step.active {
+            display: flex;
+        }
+
+        .step-description {
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            max-width: 600px;
+        }
+
+        .mockup {
+            width: 100%;
+            max-width: 800px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--background);
+            min-height: 400px;
+        }
+
+        .navigation-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+
+        .btn-primary:hover {
+            background-color: #5a37d1;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--text);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text);
+            font-family: var(--font-sans);
+            box-sizing: border-box;
+        }
+        
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .spinner {
+            border: 4px solid var(--secondary);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background-color: var(--success);
+            color: var(--text);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>CVAI Turbo - User Journey Visualizations</h1>
+
+    <!-- Journey 1: User Onboarding -->
+    <div class="journey-container">
+        <h2>1. User Onboarding (Registration & Login)</h2>
+        <div id="onboarding-journey">
+            <!-- Step 1.1 -->
+            <div class="step active">
+                <h3>Step 1: Initial View (Login)</h3>
+                <p class="step-description">The user lands on the page and sees the login form by default, prioritizing returning users.</p>
+                <div class="mockup" style="max-width: 400px;">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="student@university.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Login</button>
+                    <p style="text-align: center; margin-top: 1rem;">Don't have an account? <a href="#" style="color: var(--primary);" onclick="navigate('onboarding-journey', 1)">Sign Up</a></p>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('onboarding-journey', 1)">Next: Click 'Sign Up'</button>
+                </div>
+            </div>
+            <!-- Step 1.2 -->
+            <div class="step">
+                <h3>Step 2: Toggle to Registration</h3>
+                <p class="step-description">The user clicks 'Sign Up', and the form smoothly expands to include registration fields.</p>
+                <div class="mockup" style="max-width: 400px;">
+                    <div class="input-group">
+                        <label for="reg-name">Name</label>
+                        <input type="text" id="reg-name" placeholder="BIP">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="new.student@university.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" placeholder="••••••••">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="#" style="color: var(--primary);" onclick="navigate('onboarding-journey', 0)">Login</a></p>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('onboarding-journey', 0)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('onboarding-journey', 2)">Next: Successful Creation</button>
+                </div>
+            </div>
+            <!-- Step 1.3 -->
+            <div class="step">
+                <h3>Step 3: Registration Success & Redirect</h3>
+                <p class="step-description">Upon successful account creation, the user is redirected to a dedicated page to input their CV information for the first time.</p>
+                <div class="mockup">
+                    <h3>Create Your CV Profile</h3>
+                    <p>Let's get your CV information set up so we can generate perfectly tailored cover letters.</p>
+                    <!-- CV Management form would be here -->
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('onboarding-journey', 1)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('onboarding-journey', 0)">Restart Journey</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journey 2: CV Management -->
+    <div class="journey-container">
+        <h2>2. CV Management (Hybrid Save)</h2>
+        <div id="cv-journey">
+            <!-- Step 2.1 -->
+            <div class="step active">
+                <h3>Step 1: Initial View</h3>
+                <p class="step-description">The user lands on the CV page. All fields are in their default state, and a status indicator shows "All changes saved". The 'Save' button is disabled.</p>
+                <div class="mockup">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3>Your CV Information</h3>
+                        <span style="color: var(--success);">All changes saved</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Education</label>
+                        <textarea>Master of Science in Computer Science, University of Oslo...</textarea>
+                    </div>
+                    <button class="btn btn-primary" disabled>Save</button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('cv-journey', 1)">Next: Start Typing</button>
+                </div>
+            </div>
+            <!-- Step 2.2 -->
+            <div class="step">
+                <h3>Step 2: Editing a Field</h3>
+                <p class="step-description">The user starts typing in a field. The border turns yellow to indicate unsaved changes, the status updates, and the 'Save' button becomes enabled.</p>
+                <div class="mockup">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3>Your CV Information</h3>
+                        <span style="color: #facc15;">Unsaved changes...</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Education</label>
+                        <textarea style="border-color: #facc15;">Master of Science in Computer Science, University of Oslo. Graduated with honors...</textarea>
+                    </div>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('cv-journey', 0)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('cv-journey', 2)">Next: Click 'Save'</button>
+                </div>
+            </div>
+            <!-- Step 2.3 -->
+            <div class="step">
+                <h3>Step 3: Manual Save</h3>
+                <p class="step-description">The user clicks the 'Save' button. All changes are saved, borders turn green, and the status returns to "All changes saved".</p>
+                <div class="mockup">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3>Your CV Information</h3>
+                        <span style="color: var(--success);">All changes saved</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Education</label>
+                        <textarea style="border-color: var(--success);">Master of Science in Computer Science, University of Oslo. Graduated with honors...</textarea>
+                    </div>
+                    <button class="btn btn-primary" disabled>Save</button>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('cv-journey', 1)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('cv-journey', 0)">Restart Journey</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journey 3: Cover Letter Generation -->
+    <div class="journey-container">
+        <h2>3. Cover Letter Generation</h2>
+        <div id="generation-journey">
+            <!-- Step 3.1 -->
+            <div class="step active">
+                <h3>Step 1: Initial View</h3>
+                <p class="step-description">The user sees the main two-column layout. The 'Generate' button is disabled because the job description is empty.</p>
+                <div class="mockup" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="input-group">
+                            <label>Job Description</label>
+                            <textarea></textarea>
+                        </div>
+                        <button class="btn btn-primary" disabled>Generate Cover Letter</button>
+                    </div>
+                    <div style="border: 2px dashed var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--secondary);">
+                        <p>Your generated cover letter will appear here.</p>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 1)">Next: Paste Job Description</button>
+                </div>
+            </div>
+            <!-- Step 3.2 -->
+            <div class="step">
+                <h3>Step 2: Providing Input</h3>
+                <p class="step-description">The user pastes text into the 'Job Description' area, and the 'Generate' button becomes enabled.</p>
+                <div class="mockup" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="input-group">
+                            <label>Job Description</label>
+                            <textarea>Seeking a skilled Software Engineer...</textarea>
+                        </div>
+                        <button class="btn btn-primary">Generate Cover Letter</button>
+                    </div>
+                    <div style="border: 2px dashed var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--secondary);">
+                        <p>Your generated cover letter will appear here.</p>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 0)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 2)">Next: Click 'Generate'</button>
+                </div>
+            </div>
+            <!-- Step 3.3 -->
+            <div class="step">
+                <h3>Step 3: Generation Process</h3>
+                <p class="step-description">The user clicks 'Generate'. The right column shows the custom loading indicator while the AI works.</p>
+                <div class="mockup" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="input-group">
+                            <label>Job Description</label>
+                            <textarea disabled>Seeking a skilled Software Engineer...</textarea>
+                        </div>
+                        <button class="btn btn-primary" disabled>Generating...</button>
+                    </div>
+                    <div style="border: 2px dashed var(--border-color); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--secondary);">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 1rem;">Please give us an A</p>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 1)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 3)">Next: Generation Complete</button>
+                </div>
+            </div>
+            <!-- Step 3.4 -->
+            <div class="step">
+                <h3>Step 4: Reviewing Output</h3>
+                <p class="step-description">The generated cover letter appears. 'Regenerate' and 'Save' buttons are now available.</p>
+                <div class="mockup" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="input-group">
+                            <label>Job Description</label>
+                            <textarea>Seeking a skilled Software Engineer...</textarea>
+                        </div>
+                        <button class="btn btn-outline">Regenerate</button>
+                        <button class="btn btn-primary" style="margin-left: 1rem;" onclick="showToast()">Save</button>
+                    </div>
+                    <div>
+                        <h4>Dear Hiring Manager,</h4>
+                        <p>I am writing to express my interest...</p>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 2)">Back</button>
+                    <button class="btn btn-outline" onclick="navigate('generation-journey', 0)">Restart Journey</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Cover letter saved to your collection.</div>
+
+    <script>
+        function navigate(journeyId, stepIndex) {
+            const journey = document.getElementById(journeyId);
+            const steps = journey.getElementsByClassName('step');
+            for (let i = 0; i < steps.length; i++) {
+                steps[i].classList.remove('active');
+            }
+            steps[stepIndex].classList.add('active');
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
