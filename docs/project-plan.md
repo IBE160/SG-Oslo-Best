@@ -20,12 +20,12 @@
     - [x] File: epics.md
   - [x] /run-agent-task pm *validate-prd
     - [x] File: validation-report-2025-11-12-prd-epics.md
-  - [x] /run-agent-task ux-designer *create-ux-design {prompt / user-input-file}
+  - [x] /run-agent-task ux-designer *create-ux-design
     - [x] File: ux-design-specification.md
     - [x] File: ux-color-themes.html
     - [x] File: ux-design-directions.html
-  - [ ] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
-    - [ ] File: validation-ux-design-date.md
+  - [x] /run-agent-task ux-designer *validate-ux-design 
+    - [x] File: validation-ux-design-date.md
 
 
 ## Fase 2

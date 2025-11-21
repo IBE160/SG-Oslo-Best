@@ -25,7 +25,7 @@ The primary users are university and college students, ranging from first-years 
 
 ### 1.1 Design System Choice
 
-The chosen design system is **Shadcn/UI**. This decision is based on its strong alignment with the project's needs for a clean, modern, and intuitive UI, its high customizability, excellent accessibility features, and seamless integration with Tailwind CSS and Next.js. Shadcn/UI, built on Radix Primitives, allows for full control over the code, enabling a bespoke design while leveraging proven component patterns.
+After a collaborative review of several options, the chosen design system is **Shadcn/UI**. This choice, driven by user feedback, is based on its strong alignment with the project's needs for a clean, modern, and intuitive UI, its high customizability, excellent accessibility features, and seamless integration with Tailwind CSS and Next.js. Shadcn/UI, built on Radix Primitives, allows for full control over the code, enabling a bespoke design while leveraging proven component patterns.
 
 **Version:** The project will standardize on a recent, stable version of Shadcn/UI, which will be documented in the project's `package.json`. For initial planning, assume **v0.8.0**.
 
@@ -74,7 +74,7 @@ For the MVP, the core user interactions (inputting text, triggering generation, 
 
 ### 3.1 Color System
 
-The chosen color theme is **"The Innovator"**. This dark mode theme feels modern, engaging, and tech-forward, aligning with the AI-powered nature of CVAI Turbo and the desired emotional response of "connected and engaged."
+After exploring several options in the `ux-color-themes.html` visualizer, the user selected **"The Innovator"** theme. This dark mode theme was chosen because it feels modern, engaging, and tech-forward, aligning with the AI-powered nature of CVAI Turbo and the desired emotional response of "connected and engaged."
 
 **Palette:**
 *   **Primary:** `#6A44E5` (Vibrant Purple) - For main actions, key interactive elements.
@@ -121,7 +121,9 @@ A consistent, modular spacing system will be implemented to ensure visual harmon
 
 ### 4.1 Chosen Design Approach
 
-The chosen design direction is a refined version of **Minimalist Preview (Direction #3)**, now designated as **Refined Minimalist (Direction #5)**. This direction emphasizes a clean, uncluttered interface, where the cover letter preview appears only after generation. A key refinement, based on user feedback, is the removal of the CV input field from this screen. Instead, the system will automatically utilize the user's single saved CV information from their profile. A clear indicator, 'Using your saved CV information. (Change/Edit CV)', will be present, with a link to the user's profile page for any modifications to their CV.
+After reviewing the mockups in `ux-design-directions.html`, the user selected a refined version of **Minimalist Preview (Direction #3)**, now designated as **Refined Minimalist (Direction #5)**. The user chose this direction for its clarity and focus, which aligns with the core goal of making the cover letter process feel effortless and efficient.
+
+This direction emphasizes a clean, uncluttered interface, where the cover letter preview appears only after generation. A key refinement, based on user feedback, is the removal of the CV input field from this screen. Instead, the system will automatically utilize the user's single saved CV information from their profile. A clear indicator, 'Using your saved CV information. (Change/Edit CV)', will be present, with a link to the user's profile page for any modifications to their CV.
 
 **Interactive Mockups:**
 
@@ -137,7 +139,7 @@ The chosen design direction is a refined version of **Minimalist Preview (Direct
 
 *   **User Goal:** To securely access the application.
 *   **Entry Point:** Landing page.
-*   **Chosen Approach:** Dynamic Toggle. A single page presents the login form by default, with a link to expand the form for registration. This provides a clean, modern, and seamless experience that prioritizes returning users while making registration easily accessible without a page reload.
+*   **Chosen Approach:** Dynamic Toggle. After considering separate pages for login and registration, the user chose the Dynamic Toggle approach. A single page presents the login form by default, with a link to expand the form for registration. This was selected for its clean, modern, and seamless experience that prioritizes returning users while making registration easily accessible without a page reload.
 
 **Flow Diagram:**
 
@@ -187,7 +189,7 @@ graph TD
 *   **Entry Point:**
     *   New users: Automatic redirect after registration.
     *   Returning users: From the post-login pop-up or a "Change/Edit CV" link.
-*   **Chosen Approach:** Hybrid Save Model on a Single Scrolling Form. The system automatically saves changes when a user moves from one field to another, providing immediate feedback. A manual "Save" button is also present to give users a sense of finality and control.
+*   **Chosen Approach:** Hybrid Save Model on a Single Scrolling Form. The user selected this approach to balance the convenience of auto-saving with the confidence of a manual save button. The system automatically saves changes when a user moves from one field to another, providing immediate feedback, while the manual "Save" button gives users a sense of finality and control.
 
 **Flow Diagram:**
 
@@ -561,7 +563,7 @@ Given the MVP's exclusive focus on the desktop/web application, the experience o
 ### 8.2 Accessibility Strategy
 
 *   **WCAG Compliance Target:** **WCAG 2.1 Level A.**
-    *   **Rationale:** Given the MVP focus and the decision to defer full screen reader support, targeting Level A is a pragmatic starting point. This ensures basic accessibility, addressing fundamental barriers, while allowing us to focus on core functionality. Level AA and full screen reader support will be targeted post-MVP.
+    *   **Rationale:** For this school project, the team has agreed to target WCAG 2.1 Level A for the MVP. This is a pragmatic starting point that ensures basic accessibility is addressed, while allowing development to focus on core functionality. The decision to defer full screen reader optimization and a Level AA target to post-MVP has been noted and accepted for the project's current scope.
 *   **Key Requirements (focused on Level A for MVP):**
     *   **Color Contrast:** Ensure sufficient contrast for text and essential UI components.
     *   **Keyboard Navigation:** All interactive elements must be reachable and operable using only the keyboard.
@@ -588,8 +590,11 @@ Given the MVP's exclusive focus on the desktop/web application, the experience o
         *   `aria-selected` must be used to indicate the active tab.
         *   `aria-controls` must link each tab to its corresponding tab panel.
     *   **Testing Strategy (MVP):**
-    *   **Automated Tools:** Integrate tools like Lighthouse (built into Chrome DevTools) and axe DevTools into the development workflow.
-    *   **Manual Testing:** Conduct thorough keyboard-only navigation testing.
+    *   **Automated Tools:** Integrate automated checks into the development workflow using libraries like `axe-core`. Browser extensions like `axe DevTools` and the `Lighthouse` report in Chrome DevTools will be used for periodic audits.
+    *   **Manual Testing:** Conduct thorough keyboard-only navigation testing to ensure all interactive elements are reachable and operable. This includes:
+        - Tabbing through all interactive elements in a logical order.
+        - Ensuring focus is visible and clear on all elements.
+        - Verifying that all custom components (like modals and tabs) can be fully operated with the keyboard.
 
     #### 8.2.2 General Screen Reader and Semantic Structure Guidance
 
