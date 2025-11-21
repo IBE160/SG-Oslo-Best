@@ -1,8 +1,8 @@
 # CVAI Turbo - Epics & Stories
 
 **Author:** BIP
-**Date:** 2025-11-12
-**Version:** 1.0
+**Date:** 2025-11-21
+**Version:** 1.2 (Aligned with UX Spec v1.0)
 
 ---
 
@@ -74,27 +74,33 @@ This document breaks down the requirements from the PRD into actionable epics an
 
 **Story 2.1: User Registration**
 - **As a** new student user,
-- **I want** to register for an account with my email and password,
-- **so that** I can access the CVAI Turbo platform.
+- **I want** to register for an account using a single, dynamic form,
+- **so that** I can access the CVAI Turbo platform seamlessly.
 - **Covers:** FR-1.1
+- **UX Spec:** Section 5.1.1 "Dynamic Toggle"
+- **Complexity:** Slightly Higher
 - **Acceptance Criteria:**
-    - Given I am on the registration page,
-    - When I enter a valid email and password and submit the form,
+    - Given I am on the landing page,
+    - When I click the "Sign Up" link,
+    - Then the form expands to include registration fields without a page reload.
+    - When I enter valid details and submit the form,
     - Then my account is created in Supabase Auth.
     - And I receive a verification email.
-    - And I am redirected to a login or verification pending page.
+    - And I am redirected to the CV creation page.
 
 **Story 2.2: User Login & Session Management**
 - **As a** registered student user,
-- **I want** to log in to my account,
+- **I want** to log in to my account from the same page as registration,
 - **so that** I can access my profile and application features.
 - **Covers:** FR-1.2
+- **UX Spec:** Section 5.1.1 "Dynamic Toggle"
+- **Complexity:** Slightly Higher
 - **Acceptance Criteria:**
-    - Given I have a verified account,
-    - When I enter my email and password on the login page,
+    - Given I have a verified account and am on the landing page,
+    - When I enter my email and password on the login form,
     - Then I am successfully authenticated via Supabase Auth.
     - And a secure session is established.
-    - And I am redirected to my home page.
+    - And I am redirected to my home page, seeing a pop-up to update my CV.
 
 **Story 2.3: Create User Profile & CV (Initial)**
 - **As a** logged-in student user,
@@ -104,7 +110,7 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Acceptance Criteria:**
     - Given I am logged in and have not yet created a profile,
     - When I navigate to the profile creation page,
-    - Then I see fields for personal details (name, DOB, gender, phone, address) and a large text area for CV content.
+    - Then I see fields for personal details and a large text area for CV content.
     - And the system indicates which fields are mandatory.
     - When I attempt to save with a mandatory field empty,
     - Then the system displays an error and prevents saving.
@@ -112,17 +118,34 @@ This document breaks down the requirements from the PRD into actionable epics an
     - Then my profile and CV data are stored in Supabase, linked to my user ID.
     - And I am redirected to the home page.
 
-**Story 2.4: Update User Profile & CV**
+**Story 2.4: Update User Profile & CV with Hybrid Save**
 - **As a** logged-in student user,
-- **I want** to update my personal profile and CV information,
-- **so that** my cover letters are generated with the most current details.
+- **I want** to update my CV information using a form that auto-saves my work,
+- **so that** I feel confident my changes are securely persisted with minimal effort.
 - **Covers:** FR-1.3, FR-1.4
+- **UX Spec:** Section 5.1.2 "Hybrid Save Model"
+- **Complexity:** Higher
 - **Acceptance Criteria:**
-    - Given I am logged in and have an existing profile,
-    - When I navigate to my profile editing page,
-    - Then I see my current profile and CV information pre-filled.
-    - When I modify any field and save,
-    - Then the updated information is persisted in Supabase.
+    - Given I am on my profile editing page,
+    - When I modify a field,
+    - Then the field's border indicates an "unsaved" state (e.g., turns yellow).
+    - And a master "Save" button becomes enabled.
+    - When I move focus away from the modified field (onBlur),
+    - Then the change is automatically saved in the background.
+    - And the field's border indicates a "saved" state (e.g., turns green).
+    - When I click the manual "Save" button,
+    - Then all pending changes are saved, and all modified fields show a "saved" state.
+
+**New Story 2.5: Implement Stateful Textbox Component**
+- **As a** developer,
+- **I want** to create a "Stateful Textbox" component,
+- **so that** users receive immediate visual feedback (e.g., colored borders) on the auto-save status of their CV information.
+- **UX Spec:** Section 6.1.2 "Custom Components"
+- **Acceptance Criteria:**
+    - Given a standard textarea or input field,
+    - When it is wrapped in the Stateful Textbox component,
+    - Then it visually changes its appearance based on its state (default, unsaved, saved).
+    - And it correctly communicates its state to the parent form for the Hybrid Save Model.
 
 ---
 <br>
@@ -139,10 +162,11 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **so that** I can prepare the context for generating a tailored cover letter.
 - **Covers:** FR-2.1, FR-3.1
 - **Acceptance Criteria:**
-    - Given I am on the "New Job Application" page,
+    - Given I am on the main generation page,
     - When I paste a job advertisement into the designated text area,
-    - And I (optionally) write instructions for style and tone,
-    - Then the application captures both inputs, ready for generation.
+    - Then the "Generate" button becomes enabled.
+    - And I can (optionally) write instructions for style and tone.
+    - Then the application captures all inputs, ready for generation.
 
 **Story 3.2: Generate Cover Letter**
 - **As a** logged-in student user,
@@ -152,7 +176,8 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Acceptance Criteria:**
     - Given I have provided a job advertisement,
     - When I click the "Generate" button,
-    - Then the backend receives my CV data, the job ad, and my instructions.
+    - Then the UI shows the "Generation Status Indicator".
+    - And the backend receives my CV data, the job ad, and any instructions.
     - And the backend sends a structured prompt to the Gemini API.
     - And the generated cover letter text is returned to the frontend.
 
@@ -161,22 +186,26 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **I want** the generated cover letter to be displayed clearly on the screen,
 - **so that** I can review its content and decide on the next action.
 - **Covers:** FR-3.4
+- **UX Spec:** Section 5.1.3 "Cover Letter Generation"
 - **Acceptance Criteria:**
     - Given the cover letter has been generated successfully,
     - When the frontend receives the letter text,
-    - Then the text is displayed in a clear, readable format.
-    - And I can see options to "Regenerate" or "Save" the letter.
+    - Then the text is displayed in a clear, readable format in the output panel.
+    - And I can see options to "Regenerate" and "Save" the letter.
 
-**Story 3.4: Regenerate Cover Letter**
+**Story 3.4: Regenerate and Compare Cover Letter Versions**
 - **As a** logged-in student user,
-- **I want** to be able to regenerate a cover letter if I'm not satisfied,
-- **so that** I can get a different version or provide new instructions.
+- **I want** to regenerate a cover letter and easily compare it with previous versions,
+- **so that** I can choose the best output.
 - **Covers:** FR-3.5
+- **UX Spec:** Section 5.1.3, Step 6
+- **Complexity:** Significantly Higher
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
-    - When I click the "Regenerate" button,
-    - Then I am taken back to the input screen with the previous job ad and instructions pre-filled.
-    - And I can modify the instructions before generating a new letter.
+    - When I modify instructions and click "Regenerate",
+    - Then a new version of the cover letter is generated.
+    - And the output panel displays the new version ("Version 2") in an active tab.
+    - And a "Version 1" tab is present, allowing me to switch back and view the original.
 
 **Story 3.5: Save Generated Cover Letter**
 - **As a** logged-in student user,
@@ -186,8 +215,9 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
     - When I click the "Save" button,
-    - Then the cover letter text is saved to the Supabase database, associated with my user ID and the job application.
-    - And I receive a confirmation that the letter has been saved.
+    - Then the button's state changes to "Saved ✓" and becomes disabled.
+    - And a toast notification confirms the save action.
+    - And the cover letter text is saved to the Supabase database, associated with my user ID.
 
 **Story 3.6: Update Job Application**
 - **As a** logged-in student user,
@@ -197,9 +227,9 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Acceptance Criteria:**
     - Given I have an existing job application,
     - When I navigate to the application's edit page,
-    - Then I see the current job advertisement text pre-filled in a text area.
+    - Then I see the current job advertisement text pre-filled.
     - When I modify the text and save,
-    - Then the updated text is persisted in the database for that application.
+    - Then the updated text is persisted in the database.
 
 **Story 3.7: Delete Job Application**
 - **As a** logged-in student user,
@@ -208,9 +238,20 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Covers:** FR-2.3
 - **Acceptance Criteria:**
     - Given I have an existing job application,
-    - When I choose the delete option for that application,
-    - And I confirm the deletion,
+    - When I choose the delete option and confirm the deletion,
     - Then the job application and any associated saved cover letters are removed from the database.
+
+**New Story 3.8: Implement Generation Status Indicator Component**
+- **As a** developer,
+- **I want** to create the "Generation Status Indicator" component,
+- **so that** users are kept engaged and informed during the AI generation process with a loading spinner and specified text.
+- **UX Spec:** Section 6.1.2 "Custom Components"
+- **Acceptance Criteria:**
+    - Given the AI generation process is initiated,
+    - When the component is displayed,
+    - Then it shows a loading spinner.
+    - And it periodically displays the message "Please give us an A".
+    - When generation is complete, the component is hidden.
 
 ---
 

@@ -27,6 +27,8 @@ The primary users are university and college students, ranging from first-years 
 
 The chosen design system is **Shadcn/UI**. This decision is based on its strong alignment with the project's needs for a clean, modern, and intuitive UI, its high customizability, excellent accessibility features, and seamless integration with Tailwind CSS and Next.js. Shadcn/UI, built on Radix Primitives, allows for full control over the code, enabling a bespoke design while leveraging proven component patterns.
 
+**Version:** The project will standardize on a recent, stable version of Shadcn/UI, which will be documented in the project's `package.json`. For initial planning, assume **v0.8.0**.
+
 ---
 
 ## 2. Core User Experience
@@ -330,6 +332,16 @@ Two custom components will be developed to provide specific feedback and enhance
     *   **Complete:** The component is hidden, and the generated content is displayed in its place.
 *   **Variants:** A single, consistent style will be used.
 
+#### 6.1.3 Theming and Customization
+
+To ensure a cohesive look and feel that aligns with the "The Innovator" theme, the standard Shadcn/UI components will be customized based on the project's defined Visual Foundation (Section 3). This will be achieved primarily through theming with CSS variables.
+
+*   **Color Mapping:** The color palette defined in the Color System (Section 3.1) will be mapped to Shadcn/UI's CSS variables for colors (e.g., `--primary`, `--secondary`, `--destructive`). This ensures all components automatically adopt the project's primary, accent, and semantic colors.
+*   **Typography:** The `Inter` font family and the defined type scale (Section 3.2) will be applied to the `body` and heading elements to ensure all components inherit the correct typography.
+*   **Spacing and Sizing:** Component-level spacing, corner radius (`border-radius`), and other layout-related properties will be configured using the project's base unit and spacing scale (Section 3.3) to maintain visual harmony.
+
+This approach allows for systematic and consistent customization of the base Shadcn/UI components, ensuring they align perfectly with our bespoke design direction.
+
 ---
 
 ## 7. UX Pattern Decisions
@@ -338,7 +350,7 @@ Two custom components will be developed to provide specific feedback and enhance
 
 ### 7.1 Consistency Rules
 
-To ensure a cohesive, intuitive, and predictable user experience across CVAI Turbo, the following UX pattern decisions will guide implementation:
+The following patterns were reviewed and agreed upon during our collaborative design session to ensure a consistent and predictable experience. To ensure a cohesive, intuitive, and predictable user experience across CVAI Turbo, the following UX pattern decisions will guide implementation:
 
 #### 7.1.1 Button Hierarchy
 
@@ -542,6 +554,10 @@ For the MVP, the primary focus is on the **desktop/web application**. Mobile and
     *   **Navigation:** Primary navigation (e.g., sidebar or top navigation) will be designed specifically for the desktop web experience.
     *   **Content:** Tables, forms, and other content will be optimized for desktop screen real estate.
 
+#### 8.1.1 Behavior on Non-Targeted Devices
+
+Given the MVP's exclusive focus on the desktop/web application, the experience on mobile and tablet devices is explicitly not supported. Users accessing the site from these devices will be presented with the desktop layout as-is, which may require horizontal scrolling and result in a sub-optimal user experience. No specific mobile adaptations will be made for the MVP. Full responsive support for tablet and mobile is a priority for post-MVP development.
+
 ### 8.2 Accessibility Strategy
 
 *   **WCAG Compliance Target:** **WCAG 2.1 Level A.**
@@ -554,9 +570,85 @@ For the MVP, the primary focus is on the **desktop/web application**. Mobile and
     *   **Error Identification:** Clear, descriptive error messages.
     *   **Semantic HTML:** Use appropriate HTML5 semantic elements to convey structure and meaning.
     *   **Alt Text:** Provide descriptive `alt` text for all meaningful images (where applicable and feasible within MVP scope).
-*   **Testing Strategy (MVP):**
+    
+    #### 8.2.1 ARIA Requirements for Custom Components
+    
+    To meet WCAG Level A, even without full screen reader optimization, specific ARIA attributes are necessary for custom and dynamic components to be understandable to assistive technologies.
+    
+    *   **For the "Generation Status Indicator":**
+        *   The region where the cover letter appears must have `aria-live="polite"`. This tells screen readers to announce the new content (the generated letter) when it appears, without interrupting the user.
+        *   While the loading spinner is active, it should be accompanied by visually hidden text that is read by screen readers, such as `<span class="sr-only">Generating cover letter...</span>`.
+    
+    *   **For the "Stateful Textbox":**
+        *   The textbox itself is a standard `input` or `textarea`, which is already accessible.
+        *   The status changes (unsaved, saved) must be announced. A visually hidden `aria-live` region can be used to announce "Changes saved" or "You have unsaved changes" as the state changes. For example: `<div aria-live="polite" class="sr-only">All changes saved.</div>`.
+    
+    *   **For the Cover Letter Version Tabs:**
+        *   The tab interface must follow the ARIA Tab pattern, using `role="tablist"`, `role="tab"`, and `role="tabpanel"`.
+        *   `aria-selected` must be used to indicate the active tab.
+        *   `aria-controls` must link each tab to its corresponding tab panel.
+    *   **Testing Strategy (MVP):**
     *   **Automated Tools:** Integrate tools like Lighthouse (built into Chrome DevTools) and axe DevTools into the development workflow.
     *   **Manual Testing:** Conduct thorough keyboard-only navigation testing.
+
+    #### 8.2.2 General Screen Reader and Semantic Structure Guidance
+
+    Even while targeting WCAG Level A for the MVP and deferring full screen reader optimization, adhering to the following principles is essential for a baseline of usability:
+
+    *   **Semantic HTML:** Use HTML5 elements correctly to define the structure of pages (e.g., `<main>`, `<nav>`, `<header>`, `<footer>`, `<section>`, `<article>`). This provides a structural map for assistive technologies.
+    *   **Heading Hierarchy:** Ensure a logical and sequential heading structure (one `<h1>` per page, followed by `<h2>`, `<h3>`, etc.). Do not skip heading levels. This is critical for screen reader users to understand the page layout and navigate between sections.
+    *   **Meaningful Labels:** All interactive elements (links, buttons, form controls) must have clear, concise, and descriptive labels. For icons or buttons without visible text, use `aria-label` to provide an accessible name.
+
+---
+
+## 14. Cross-Workflow Alignment (Epics File Update)
+
+This section addresses the critical requirement to align the detailed UX Design with the project's `epics.md` file. The following analysis identifies new stories that have emerged from the design process and reassesses the complexity of existing stories based on the specific interaction patterns defined in this document.
+
+### 14.1 Review of `epics.md`
+
+The `epics.md` file was reviewed against the detailed user journeys and component specifications in this document. The analysis revealed the need for new stories to cover the development of custom components and complexity adjustments for stories whose implementation is now more clearly defined.
+
+### 14.2 New Stories Identified
+
+The detailed UX design necessitates the creation of the following new stories, which should be added to the `epics.md` file.
+
+1.  **New Story (Epic 2): Implement Stateful Textbox for CV Management**
+    *   **As a** developer,
+    *   **I want** to create a "Stateful Textbox" component,
+    *   **so that** users receive immediate visual feedback (yellow for unsaved, green for saved) on the status of their CV information, as defined in the Hybrid Save Model.
+    *   **Rationale:** This component is custom and essential for the CV Management user journey (Section 5.1.2).
+
+2.  **New Story (Epic 3): Implement Generation Status Indicator**
+    *   **As a** developer,
+    *   **I want** to create the "Generation Status Indicator" component,
+    *   **so that** users are kept engaged and informed during the AI generation process with a loading spinner and the specified personality-driven text.
+    *   **Rationale:** This custom component is a key part of the Cover Letter Generation user journey (Section 5.1.3).
+
+### 14.3 Existing Stories Complexity Reassessment
+
+The detailed interaction designs in this specification add complexity and specificity to several existing stories. The descriptions and/or acceptance criteria for these stories in `epics.md` must be updated.
+
+1.  **Story 2.4: Update User Profile & CV**
+    *   **Impact:** Complexity is **higher**.
+    *   **Reason:** The implementation must now account for the "Hybrid Save Model" (Section 5.1.2), which includes an auto-save-on-blur mechanism and a manual save button, rather than a simple form submission. This requires more complex state management on the frontend.
+
+2.  **Story 3.4: Regenerate Cover Letter**
+    *   **Impact:** Complexity is **significantly higher**.
+    *   **Reason:** The feature now includes a **tabbed interface for version comparison** (Section 5.1.3, Step 6). This is more complex than the original story's assumption of simply returning to the input screen. The frontend must manage multiple versions of the cover letter in its state.
+
+3.  **Stories 2.1 & 2.2: User Registration & Login**
+    *   **Impact:** Complexity is **slightly higher**.
+    *   **Reason:** The design specifies a "Dynamic Toggle" UI (Section 5.1.1) where the registration and login forms exist on the same page and toggle dynamically. This is a more refined UI interaction than separate pages and requires specific frontend logic to manage the view state.
+
+4.  **Story 3.3: Display and Review Generated Cover Letter**
+    *   **Impact:** Acceptance criteria needs updating.
+    *   **Reason:** The acceptance criteria should be modified to state that **both** a "Regenerate" and a "Save" button appear after the letter is generated, as specified in the flow (Section 5.1.3, Step 4).
+
+### 14.4 Action Items for `epics.md` Update
+
+- **Add** the two new stories identified in Section 14.2 to the relevant epics.
+- **Update** the descriptions and acceptance criteria for the four existing stories listed in Section 14.3 to reflect the increased complexity and specific UI mechanics defined in this UX Specification.
 
 ---
 
@@ -595,20 +687,20 @@ You've made thoughtful choices through visual collaboration that will create a g
 
 ### Related Documents
 
-- Product Requirements: `{{prd_file}}`
-- Product Brief: `{{brief_file}}`
-- Brainstorming: `{{brainstorm_file}}`
+- Product Requirements: `...\SG-Oslo-Best\docs\PRD.md`
+- Product Brief: `...\SG-Oslo-Best\docs\product-brief-ibe160-2025-11-03.md`
+- Brainstorming: `...\SG-Oslo-Best\docs\Brainstorming`
 
 ### Core Interactive Deliverables
 
 This UX Design Specification was created through visual collaboration:
 
-- **Color Theme Visualizer**: {{color_themes_html}}
+- **Color Theme Visualizer**: [ux-color-themes.html](./ux-color-themes.html)
   - Interactive HTML showing all color theme options explored
   - Live UI component examples in each theme
   - Side-by-side comparison and semantic color usage
 
-- **Design Direction Mockups**: {{design_directions_html}}
+- **Design Direction Mockups**: [ux-design-directions.html](./ux-design-directions.html)
   - Interactive HTML with 6-8 complete design approaches
   - Full-screen mockups of key screens
   - Design philosophy and rationale for each direction
