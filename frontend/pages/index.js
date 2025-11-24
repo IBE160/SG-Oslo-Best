@@ -69,22 +69,25 @@ const ScoreCircle = ({ score }) => {
 };
 
 const Dashboard = () => {
+  // Henter brukerinformasjon og utloggingsfunksjon
   const { user, signOut } = useAuth();
+  // Henter router for navigasjon
   const router = useRouter();
 
   const [formData, setFormData] = useState(initialFormState);
   const [result, setResult] = useState(initialResultState);
   const [savedCvText, setSavedCvText] = useState("");
   const [profileLoading, setProfileLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(false); // State for lagring av følgebrev
 
   // 1. HENTING AV LAGRET CV-DATA VED INNLASTING
   useEffect(() => {
-    if (!user) return; 
+    if (!user) return; // Avbryter hvis bruker ikke er logget inn
 
     const fetchSavedProfile = async () => {
       setProfileLoading(true);
-      const { data, error } = await supabase
+      // Henter brukerens profilinformasjon fra 'user_info'
+      const { data } = await supabase
         .from('user_info')
         .select('*')
         .eq('user_id', user.id)
@@ -99,13 +102,13 @@ const Dashboard = () => {
     };
 
     fetchSavedProfile();
-  }, [user]);
+  }, [user]); // Kjører når 'user' endres
   
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 2. HÅNDTERING AV ANALYSE OG GENERERING
+  // 2. HÅNDTERING AV ANALYSE OG GENERERING (Kaller FastAPI)
   const handleAnalyze = useCallback(async (e) => {
     e.preventDefault();
     if (profileLoading || savedCvText.includes("Ingen lagret CV-data")) {
@@ -113,14 +116,14 @@ const Dashboard = () => {
       return;
     }
 
-    // Beholder eventuelt eksisterende følgebrev under lasting
+    // Beholder eventuelt eksisterende følgebrev under lasting for rask regenerering
     setResult(prev => ({ ...initialResultState, loading: true, generated_cover_letter: prev.generated_cover_letter }));
 
     const dataToSend = {
-      resume_text: savedCvText, // BRUKER LAGRET CV-DATA
+      resume_text: savedCvText, // Sender LAGRET CV-DATA til backend
       job_description: formData.job_description,
       user_id: user.id,
-      instructions: formData.instructions // Instruksjoner inkludert
+      instructions: formData.instructions // Sender instruksjoner
     };
 
     try {
@@ -139,7 +142,7 @@ const Dashboard = () => {
 
       const analysisResult = await response.json();
       
-      // SIMULER GENERERING AV FØLGEBREV BASERT PÅ ANALYSEN:
+      // SIMULERING av Cover Letter generert av AI i backend
       const mockCoverLetter = `
         Kjære [Mottaker Navn],
         
@@ -155,7 +158,7 @@ const Dashboard = () => {
       
       setResult({ 
         ...analysisResult, 
-        generated_cover_letter: mockCoverLetter, // SIMULERT FØLGEBREV
+        generated_cover_letter: mockCoverLetter, // Lagrer det simulerte brevet
         loading: false, 
         error: null 
       });
@@ -170,7 +173,7 @@ const Dashboard = () => {
     }
   }, [formData, user, savedCvText, profileLoading]);
 
-  // 3. HÅNDTERING AV LAGRING AV FØLGEBREV
+  // 3. HÅNDTERING AV LAGRING AV FØLGEBREV TIL SUPABASE
   const handleSaveCoverLetter = async () => {
     if (!result.generated_cover_letter) {
       alert("Generer et følgebrev før du lagrer.");
@@ -192,6 +195,7 @@ const Dashboard = () => {
       },
     };
 
+    // Setter inn ny rad i 'cover_letters' tabellen
     const { error } = await supabase
       .from('cover_letters')
       .insert([coverLetterData]);
@@ -216,20 +220,26 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen p-8">
       
-      {/* TOPP-NAVEGATION */}
+      {/* TOPP-NAVEGATION MED ALLE KNAPPER */}
       <div className="flex justify-between items-center max-w-7xl mx-auto mb-8">
         <h1 className="text-4xl font-extrabold text-highlight">
           CVAI Turbo
         </h1>
         <div className="space-x-4">
           <button
-            onClick={() => router.push('/profile')}
+            onClick={() => router.push('/profile')} // Navigerer til Profil-siden
             className="py-2 px-4 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
           >
             Rediger Profil/CV
           </button>
           <button
-            onClick={signOut}
+            onClick={() => router.push('/history')} // Navigerer til Historikk-siden
+            className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+          >
+            Søknadshistorikk
+          </button>
+          <button
+            onClick={signOut} // Logger ut brukeren via AuthContext
             className="py-2 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition"
           >
             Logg Ut
@@ -243,7 +253,7 @@ const Dashboard = () => {
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold text-white">1. Stillingsdetaljer</h2>
           
-          {/* Lagret CV-visning */}
+          {/* Viser den lagrede CV-en som brukes i analysen */}
           <div className="bg-primary-dark p-4 rounded-lg border border-gray-600">
             <h3 className="text-lg font-medium text-gray-300 mb-2">Din Lagrede CV (Brukes Automatisk):</h3>
             <p className="text-sm text-gray-400 whitespace-pre-wrap max-h-40 overflow-y-auto">
@@ -325,14 +335,14 @@ const Dashboard = () => {
           <div className="flex space-x-4 mt-4">
             <button
               type="button"
-              onClick={handleSaveCoverLetter}
+              onClick={handleSaveCoverLetter} // Kaller funksjonen for å lagre til Supabase
               disabled={!result.generated_cover_letter || saving}
               className="w-1/2 py-3 px-4 text-white font-bold rounded-lg bg-success hover:bg-green-700 transition duration-200 disabled:bg-gray-500 disabled:cursor-not-allowed"
             >
               {saving ? 'Lagrer...' : '💾 Lagre Følgebrev'}
             </button>
             <button
-              type="submit" // Triggerer handleAnalyze på nytt (Regenerer)
+              type="submit" // Kaller handleAnalyze på nytt for å regenerere brevet
               disabled={!result.generated_cover_letter || result.loading}
               className="w-1/2 py-3 px-4 text-white font-bold rounded-lg bg-highlight hover:bg-indigo-600 transition duration-200 disabled:bg-gray-500 disabled:cursor-not-allowed"
             >
