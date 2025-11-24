@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "oslo-best"]
+	url = https://github.com/IBE160/SG-Oslo-Best.git
+	fetch = +refs/heads/*:refs/remotes/oslo-best/*
