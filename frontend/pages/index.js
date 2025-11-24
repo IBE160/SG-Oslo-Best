@@ -1,21 +1,51 @@
-import React, { useState, useCallback } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/router'; // <--- NØDVENDIG IMPORT
+import { useRouter } from 'next/router';
+import { supabase } from '../utils/supabase'; // Import Supabase-klienten
 
-// Setter base URL for FastAPI backend. Må matche porten din.
-const API_BASE_URL = 'http://127.0.0.1:8000/api/v1/analyze-cv';
+// Setter base URL for FastAPI backend. Må matche porten din (8000).
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1/analyze-cv'; 
 
-// Initial state for data og UI
+// Hjelpefunksjon for å konvertere lagret profil-/CV-data til en enkel tekststreng
+const formatCvDataToText = (profileData) => {
+  if (!profileData) return "Ingen profil/CV data funnet.";
+  
+  return `
+    --- Profil ---
+    Navn: ${profileData.name || 'Ikke satt'}
+    Fødselsdato: ${profileData.date_of_birth || 'Ikke satt'}
+    Kjønn: ${profileData.gender || 'Ikke satt'}
+    Tlf: ${profileData.phone_number || 'Ikke satt'}
+    Adresse: ${profileData.address || 'Ikke satt'}
+
+    --- CV Detaljer ---
+    Utdanning:
+    ${profileData.education || 'Ingen data'}
+
+    Arbeidserfaring:
+    ${profileData.work_experience || 'Ingen data'}
+
+    Kvalifikasjoner:
+    ${profileData.qualifications || 'Ingen data'}
+
+    Ferdigheter:
+    ${profileData.skills || 'Ingen data'}
+
+    Språk:
+    ${profileData.language || 'Ingen data'}
+  `.trim();
+};
+
 const initialFormState = {
-  resume_text: '',
   job_description: '',
+  instructions: '', // Felt for stil og tone/instruksjoner til AI
 };
 
 const initialResultState = {
   match_score: null,
   missing_keywords: [],
   optimization_summary: null,
+  generated_cover_letter: null, // Plass for generert brev
   loading: false,
   error: null,
 };
@@ -39,25 +69,58 @@ const ScoreCircle = ({ score }) => {
 };
 
 const Dashboard = () => {
-  const { signOut } = useAuth();
-  const router = useRouter(); // <--- BRUKER useROUTER
+  const { user, signOut } = useAuth();
+  const router = useRouter();
 
   const [formData, setFormData] = useState(initialFormState);
   const [result, setResult] = useState(initialResultState);
+  const [savedCvText, setSavedCvText] = useState("");
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
+  // 1. HENTING AV LAGRET CV-DATA VED INNLASTING
+  useEffect(() => {
+    if (!user) return; 
+
+    const fetchSavedProfile = async () => {
+      setProfileLoading(true);
+      const { data, error } = await supabase
+        .from('user_info')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+      
+      if (data) {
+        setSavedCvText(formatCvDataToText(data));
+      } else {
+        setSavedCvText("Ingen lagret CV-data funnet. Vennligst gå til 'Rediger Profil/CV' først.");
+      }
+      setProfileLoading(false);
+    };
+
+    fetchSavedProfile();
+  }, [user]);
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // 2. HÅNDTERING AV ANALYSE OG GENERERING
   const handleAnalyze = useCallback(async (e) => {
     e.preventDefault();
-    setResult({ ...initialResultState, loading: true, error: null });
+    if (profileLoading || savedCvText.includes("Ingen lagret CV-data")) {
+      alert("Vennligst lagre din profil/CV før du analyserer.");
+      return;
+    }
 
-    // Bruker en ny UUID for bruker-ID per forespørsel
+    // Beholder eventuelt eksisterende følgebrev under lasting
+    setResult(prev => ({ ...initialResultState, loading: true, generated_cover_letter: prev.generated_cover_letter }));
+
     const dataToSend = {
-      ...formData,
-      // Sender en dummy UUID da vi ikke har Supabase Auth på plass ennå
-      user_id: uuidv4(), 
+      resume_text: savedCvText, // BRUKER LAGRET CV-DATA
+      job_description: formData.job_description,
+      user_id: user.id,
+      instructions: formData.instructions // Instruksjoner inkludert
     };
 
     try {
@@ -70,14 +133,29 @@ const Dashboard = () => {
       });
 
       if (!response.ok) {
-        // Håndterer feil fra FastAPI
         const errorData = await response.json();
         throw new Error(`API error: ${response.status} - ${errorData.detail || 'Ukjent feil'}`);
       }
 
       const analysisResult = await response.json();
+      
+      // SIMULER GENERERING AV FØLGEBREV BASERT PÅ ANALYSEN:
+      const mockCoverLetter = `
+        Kjære [Mottaker Navn],
+        
+        Jeg skriver for å uttrykke min sterke interesse for stillingen som beskrevet. Med en match score på ${analysisResult.match_score}% er jeg overbevist om at min bakgrunn innen ${analysisResult.optimization_summary.split(' ')[0]} er ideell.
+        
+        Jeg har merket meg at dere vektlegger ${analysisResult.missing_keywords.slice(0, 3).join(', ')} som jeg har inkludert i min CV.
+        
+        Instruksjonen du ga ("${formData.instructions}") er reflektert i tonen og fokuset.
+        
+        Vennlig hilsen,
+        ${user.email}
+      `.trim();
+      
       setResult({ 
         ...analysisResult, 
+        generated_cover_letter: mockCoverLetter, // SIMULERT FØLGEBREV
         loading: false, 
         error: null 
       });
@@ -90,19 +168,62 @@ const Dashboard = () => {
         error: err.message || 'Klarte ikke koble til FastAPI backend. Er serveren på?' 
       }));
     }
-  }, [formData]);
+  }, [formData, user, savedCvText, profileLoading]);
+
+  // 3. HÅNDTERING AV LAGRING AV FØLGEBREV
+  const handleSaveCoverLetter = async () => {
+    if (!result.generated_cover_letter) {
+      alert("Generer et følgebrev før du lagrer.");
+      return;
+    }
+    setSaving(true);
+    
+    const coverLetterData = {
+      user_id: user.id,
+      job_description: formData.job_description,
+      instructions: formData.instructions,
+      cv_text: savedCvText, // Lagrer den fullstendige CV-teksten for historikk
+      cover_letter_text: result.generated_cover_letter,
+      // Lagrer analyseresultater som JSONB
+      analysis_json: {
+        score: result.match_score,
+        keywords: result.missing_keywords,
+        summary: result.optimization_summary,
+      },
+    };
+
+    const { error } = await supabase
+      .from('cover_letters')
+      .insert([coverLetterData]);
+
+    if (error) {
+      alert(`Feil ved lagring av følgebrev: ${error.message}`);
+    } else {
+      alert("Følgebrev lagret vellykket!");
+    }
+    setSaving(false);
+  };
+  
+
+  if (profileLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-secondary-dark text-white text-xl">
+        Laster din lagrede CV...
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen p-8">
       
-      {/* TOPP-NAVEGATION MED UT-LOGGING & PROFIL */}
+      {/* TOPP-NAVEGATION */}
       <div className="flex justify-between items-center max-w-7xl mx-auto mb-8">
         <h1 className="text-4xl font-extrabold text-highlight">
-          CVAI Turbo - Stillingsanalyse
+          CVAI Turbo
         </h1>
         <div className="space-x-4">
           <button
-            onClick={() => router.push('/profile')} // <--- BRUKER router.push
+            onClick={() => router.push('/profile')}
             className="py-2 px-4 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
           >
             Rediger Profil/CV
@@ -118,23 +239,20 @@ const Dashboard = () => {
 
       <form onSubmit={handleAnalyze} className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         
-        {/* Venstre Kolonne: Input */}
+        {/* Venstre Kolonne: Input & CV-visning */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-semibold text-white">1. Lim inn CV og Stillingsbeskrivelse</h2>
+          <h2 className="text-2xl font-semibold text-white">1. Stillingsdetaljer</h2>
           
-          {/* CV Input */}
-          <label className="block">
-            <span className="text-lg text-gray-300 font-medium">Rå CV Tekst:</span>
-            <textarea
-              name="resume_text"
-              rows="12"
-              value={formData.resume_text}
-              onChange={handleChange}
-              className="mt-2 block w-full bg-primary-dark border border-gray-600 rounded-lg p-3 text-white focus:ring-highlight focus:border-highlight"
-              placeholder="Lim inn hele CV-en din her i ren tekst..."
-              required
-            ></textarea>
-          </label>
+          {/* Lagret CV-visning */}
+          <div className="bg-primary-dark p-4 rounded-lg border border-gray-600">
+            <h3 className="text-lg font-medium text-gray-300 mb-2">Din Lagrede CV (Brukes Automatisk):</h3>
+            <p className="text-sm text-gray-400 whitespace-pre-wrap max-h-40 overflow-y-auto">
+              {savedCvText}
+            </p>
+            {savedCvText.includes("Ingen lagret CV-data") && (
+              <p className="text-sm text-danger mt-2">Vennligst fyll ut CV-en din i profilsiden.</p>
+            )}
+          </div>
 
           {/* Stillingsbeskrivelse Input */}
           <label className="block">
@@ -150,65 +268,77 @@ const Dashboard = () => {
             ></textarea>
           </label>
 
+          {/* Instruksjoner Input */}
+          <label className="block">
+            <span className="text-lg text-gray-300 font-medium">Instruksjoner (Stil & Tone, Valgfritt):</span>
+            <textarea
+              name="instructions"
+              rows="4"
+              value={formData.instructions}
+              onChange={handleChange}
+              className="mt-2 block w-full bg-primary-dark border border-gray-600 rounded-lg p-3 text-white focus:ring-highlight focus:border-highlight"
+              placeholder="F.eks. 'Profesjonell, men uformell tone. Fokuser på teamledelse-erfaringen.'..."
+            ></textarea>
+          </label>
+
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={result.loading}
+            disabled={result.loading || savedCvText.includes("Ingen lagret CV-data")}
             className="w-full py-3 px-4 text-white font-bold rounded-lg bg-highlight hover:bg-indigo-600 transition duration-200 disabled:bg-gray-500 disabled:cursor-not-allowed"
           >
-            {result.loading ? '⚙️ Analyserer...' : '🚀 Analyser CV mot Stilling'}
+            {result.loading ? '⚙️ Analyserer & Genererer...' : '🚀 Generer Følgebrev'}
           </button>
         </div>
 
-        {/* Høyre Kolonne: Resultater */}
+        {/* Høyre Kolonne: Resultater & Følgebrev */}
         <div className="bg-primary-dark p-6 rounded-xl shadow-lg h-fit">
-          <h2 className="text-2xl font-semibold text-white mb-4">2. Analyseresultat</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">2. Resultater & Følgebrev</h2>
           
-          {/* Viser Feilmeldinger */}
           {result.error && (
             <div className="p-4 mb-4 bg-danger text-white rounded-lg">
               ❌ Feil: {result.error}
             </div>
           )}
 
-          {/* Venter på Resultater */}
-          {result.match_score === null && !result.loading && !result.error && (
-            <p className="text-gray-400">Resultatene vil vises her etter analyse.</p>
-          )}
-
-          {/* Viser Resultater */}
+          {/* Match Score */}
           {result.match_score !== null && (
-            <div className="space-y-6">
-              
-              <div className="flex items-center space-x-6">
-                <ScoreCircle score={result.match_score} />
-                <h3 className="text-xl font-bold">Match Score: {result.match_score}%</h3>
-              </div>
-
-              {/* Manglende Nøkkelord */}
+            <div className="flex items-center space-x-6 mb-6 pb-4 border-b border-gray-700">
+              <ScoreCircle score={result.match_score} />
               <div>
-                <h3 className="text-lg font-bold text-gray-200 mb-2">Mangler i CV (Nøkkelord):</h3>
-                {result.missing_keywords.length > 0 ? (
-                  <ul className="list-disc list-inside space-y-1 text-yellow-300">
-                    {result.missing_keywords.map((keyword, index) => (
-                      <li key={index} className="text-sm">{keyword}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-sm text-success">Ingen kritiske nøkkelord mangler!</p>
-                )}
+                <h3 className="text-xl font-bold text-white">Match Score: {result.match_score}%</h3>
+                <p className="text-gray-400 text-sm">Optimalisering: {result.optimization_summary}</p>
               </div>
-
-              {/* Optimaliseringsoppsummering */}
-              <div>
-                <h3 className="text-lg font-bold text-gray-200 mb-2">Optimalisering og Forbedringer:</h3>
-                <p className="whitespace-pre-wrap text-gray-300">
-                  {result.optimization_summary}
-                </p>
-              </div>
-
             </div>
           )}
+
+          {/* Følgebrev Output */}
+          <h3 className="text-xl font-bold text-gray-200 mb-2">Generert Følgebrev:</h3>
+          <textarea
+              readOnly
+              rows="15"
+              value={result.generated_cover_letter || "Generer et følgebrev for å se resultatet her..."}
+              className="mt-2 block w-full bg-secondary-dark border border-gray-600 rounded-lg p-3 text-gray-300 focus:outline-none whitespace-pre-wrap"
+          ></textarea>
+          
+          {/* Aksjonsknapper (Lagre / Regenerer) */}
+          <div className="flex space-x-4 mt-4">
+            <button
+              type="button"
+              onClick={handleSaveCoverLetter}
+              disabled={!result.generated_cover_letter || saving}
+              className="w-1/2 py-3 px-4 text-white font-bold rounded-lg bg-success hover:bg-green-700 transition duration-200 disabled:bg-gray-500 disabled:cursor-not-allowed"
+            >
+              {saving ? 'Lagrer...' : '💾 Lagre Følgebrev'}
+            </button>
+            <button
+              type="submit" // Triggerer handleAnalyze på nytt (Regenerer)
+              disabled={!result.generated_cover_letter || result.loading}
+              className="w-1/2 py-3 px-4 text-white font-bold rounded-lg bg-highlight hover:bg-indigo-600 transition duration-200 disabled:bg-gray-500 disabled:cursor-not-allowed"
+            >
+              🔄 Regenerer
+            </button>
+          </div>
         </div>
       </form>
     </div>
