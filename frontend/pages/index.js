@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router'; // <--- NØDVENDIG IMPORT
 
 // Setter base URL for FastAPI backend. Må matche porten din.
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1/analyze-cv';
@@ -37,6 +39,9 @@ const ScoreCircle = ({ score }) => {
 };
 
 const Dashboard = () => {
+  const { signOut } = useAuth();
+  const router = useRouter(); // <--- BRUKER useROUTER
+
   const [formData, setFormData] = useState(initialFormState);
   const [result, setResult] = useState(initialResultState);
 
@@ -48,6 +53,7 @@ const Dashboard = () => {
     e.preventDefault();
     setResult({ ...initialResultState, loading: true, error: null });
 
+    // Bruker en ny UUID for bruker-ID per forespørsel
     const dataToSend = {
       ...formData,
       // Sender en dummy UUID da vi ikke har Supabase Auth på plass ennå
@@ -88,9 +94,27 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen p-8">
-      <h1 className="text-4xl font-extrabold text-highlight mb-8 text-center">
-        CVAI Turbo - Stillingsanalyse
-      </h1>
+      
+      {/* TOPP-NAVEGATION MED UT-LOGGING & PROFIL */}
+      <div className="flex justify-between items-center max-w-7xl mx-auto mb-8">
+        <h1 className="text-4xl font-extrabold text-highlight">
+          CVAI Turbo - Stillingsanalyse
+        </h1>
+        <div className="space-x-4">
+          <button
+            onClick={() => router.push('/profile')} // <--- BRUKER router.push
+            className="py-2 px-4 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
+          >
+            Rediger Profil/CV
+          </button>
+          <button
+            onClick={signOut}
+            className="py-2 px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition"
+          >
+            Logg Ut
+          </button>
+        </div>
+      </div>
 
       <form onSubmit={handleAnalyze} className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         
