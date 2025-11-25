@@ -2,12 +2,13 @@
 
 ## 1. Gruppeinformasjon
 
-**Gruppenavn:** [Navn på gruppen]
+**Gruppenavn:** SG - Oslo Best
 
 **Gruppemedlemmer:**
-- [Navn 1] - [Student-ID/E-post]
-- [Navn 2] - [Student-ID/E-post]
-- [Navn 3] - [Student-ID/E-post]
+- Marita Nilsen - marita.nilsen@himolde.no
+- Abdullah Michael Moulay - abdullah.m.moulay@himolde.no
+- Fernando Miguel Valle Prado - fernando.m.prado@himolde.no
+- Jenny Løvik Brøyn - jenny.l.broyn@himolde.no
 
 **Dato:** [DD.MM.ÅÅÅÅ]
 
@@ -21,7 +22,10 @@
 ### 2.2 Arbeidsmetodikk
 [Beskriv hvordan dere organiserte arbeidet]
 - Hvordan fordelte dere oppgaver?
+  - Ukentlig møter
+  - 
 - Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte? (f.eks. Git, og Teams)
+Vi brukte teams som kommunikasjonskanal. Dette fungerte bra 
 - Hvordan brukte dere KI-verktøy i prosessen?
 
 ### 2.3 Teknologi og verktøy
@@ -50,10 +54,17 @@
 ### 3.1 Tekniske utfordringer
 [Beskriv 2-3 konkrete tekniske problemer dere møtte]
 
-**Utfordring 1: [Tittel]**
-- Problem: [Beskriv problemet]
+**Utfordring 1: Gratis version av Gemini**
+- Problem: [Beskriv problemet] 
+  - Vansklig å nagivere dialogen. Vanskeligheter med å huske dialogen/pompter/spørmålet.
 - Løsning: [Hvordan løste dere det?]
+  - God tålmodighet
+  - Noen valgt å gå for PRO (betalingverison)
+  - Jeg må understreke at jeg underveis i prosjektet møtte utfordringer med ytelse og kapasitet i dataflyten. Jeg startet med en gratisversjon av KI-tjenesten, men måtte oppgradere til Pro- eller betalt-nivå for å håndtere den nødvendige hastigheten, kompleksiteten og antallet forespørsler som trengtes for en funksjonell applikasjon. Dette var en kritisk teknisk avgjørelse for å sikre at systemet kunne leveres.
 - KI sin rolle: [Hvordan hjalp eller hindret KI dere?]
+  - KI skapte mye rot/problemer, koden samsvarte ikke med andre filer. Så den kjørte feil.
+  - Hadde en lang dialog og tilslutt fisket det
+  - Hjalp KI med å finne feilen og sende det direkte til KI for å rette det.
 
 **Utfordring 2: [Tittel]**
 - Problem: [Beskriv problemet]
@@ -63,6 +74,8 @@
 ### 3.2 Samarbeidsutfordringer
 [Utfordringer knyttet til teamarbeid og kommunikasjon]
 - [Beskriv utfordringer og hvordan dere løste dem]
+- Pro: delt skjerm på teams under ukentlig møter.
+- Utfordrendende tidskjema, noen har fulltids jobb, andre fulltids student med deltids jobbe, og vanskelig å få finne tid som passet alle for å få et møte så alle får med selv fremskritene i prosjektet. Løsning: de som kunne møte møtes for å jobbe videre med prosjektet.
 
 ### 3.3 KI-spesifikke utfordringer
 [Problemer spesifikt knyttet til bruk av KI]
@@ -78,21 +91,55 @@
 
 **Effektivitet og produktivitet:**
 - [Hvordan påvirket KI arbeidshastigheten?]
+  - Men tanke på gratis version og veldig mange forsøk på Ai riktig vei. Mer arbeid enn om man hadde kodet selv.
+  - For oss som ikke er så flinke til å kode, gav AI en lettere sti/veiledning til veien videre på projektet.
+  - Ikke så mye koding og viktig vektøy. Mer effektiv, veldig validering
+  - God veileding.
+  - Gikk god læring i github
 - [Eksempler på oppgaver som gikk raskere]
+  - Lagt selv UX-designet, fordi det hadde tatt mye mer tid å diskutere farge og layout
+  - Den kommer med forslag og alternativer på farge og layout. Lettere for oss som gruppe å ta en avjørelse på hvilken av alternativene vi likte best.
+  - Til tross for disse utfordringene, var selve PDD-prosessen (Prompt Driven Development, utviklingemetode: I stedet for å skrive kode linje for linje (som i tradisjonell utvikling), skriver utvikleren detaljerte, strukturerte instruksjoner (prompter) som gis til en stor språkmodell (LLM, som Gemini eller GPT). LLM-en genererer deretter den faktiske kodebasen basert på disse instruksjonen) utrolig effektiv: Min Rolle: Jeg fungerte som Arkitekt og Prompt Engineer. Jeg fikk KI-en til å generere de mest komplekse integrasjonene, som SQLAlchemy ORM-tilkobling og strukturert JSON-respons (llm_service.py), som er det vanskeligste for en utvikler å skrive manuelt.
 
 **Læring og forståelse:**
 - [Hva lærte dere ved å bruke KI?]
+  - Har lært hvordan integerer gemini og bruke dette til ulike prosjekter fremover
 - [Bidro KI til bedre forståelse av konsepter?]
+  - Ikke alltid, 
 
 **Kvalitet på koden:**
 - [Hvordan påvirket KI kodekvaliteten?]
+  - Pros med Gemini, skrive utdypentende svar og gode scripts.
 - [Eksempler på forbedringer KI foreslo]
+  - Vi hadde et eksamepel fil til backende, gjorde koden mer enkelere og lettere å forslå, hvis andre utviklere skulle lest koden.
+  - "Alright, let's tackle our first Important Decision: How Our Application Deals with Problems (Error Handling Strategy).
+ 
+  No software is perfect, and things will inevitably go wrong—a user enters invalid data, the internet connection drops, the backend server is temporarily       
+  unavailable. An error handling strategy defines how our application reacts to these problems, communicates them to the user, and recovers gracefully. A good   
+  strategy prevents crashes, provides helpful feedback, and makes it easier for developers to fix issues.
+ 
+  Think of it like driving a car. If a tire goes flat, a good car (system) doesn't just stop and leave you stranded. It has a warning light (communication),     
+  maybe even run-flat tires (graceful degradation), and a spare tire (recovery mechanism). A poor system might just break down without warning.
+ 
+  My suggestion is a full-stack consistent approach focusing on the user experience:
+   * Backend (FastAPI): We'll use FastAPI's built-in exception handling to ensure that any errors from the server always return a predictable, standardized      
+     message in JSON format.
+   * Frontend (Next.js/React):
+       * We'll use React Error Boundaries to gracefully catch errors that happen during UI display, preventing the entire app from crashing.
+       * For errors coming from the backend (like invalid input), we'll use a global notification or "toast" system (Shadcn/UI has a great one) to show
+         user-friendly messages.
+       * React Query will also help us manage errors specifically from our API calls.
+   * Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
+ 
+  This consistent strategy across the entire application will ensure a smooth experience for both users and developers.
+  What are your thoughts on this approach? (or 'explain more' for details)"
 
 ### 4.2 Begrensninger og ulemper
 [Reflekter over de negative aspektene]
 
 **Kvalitet og pålitelighet:**
 - [Eksempler på feil eller dårlige løsninger fra KI]
+  - Gitt stadig 
 - [Hvordan oppdaget og håndterte dere disse?]
 
 **Avhengighet og forståelse:**
@@ -101,7 +148,9 @@
 
 **Kreativitet og problemløsning:**
 - [Påvirket KI deres egen kreativitet?]
+  - Cons: at Gemini rote med kodene, skriver ikke en utfyllende kode. Be den gjentakende ganger fylle ut koden.
 - [Eksempler på situasjoner hvor KI begrenset kreativ tenkning]
+  - Ved push til github, laget ikke Backend-mappen, den sende alle filene utordnet. Mer aggresive med KI for å få den til å gjøre det vi ville.
 
 ### 4.3 Sammenligning: Med og uten KI
 [Reflekter over hvordan prosjektet ville vært uten KI]
@@ -113,6 +162,7 @@
 [Konklusjon: Hvordan påvirket KI sluttresultatet totalt sett?]
 - Var KI en netto positiv eller negativ faktor?
 - Hva var den viktigste lærdommen om å bruke KI i utviklingsprosessen?
+  - VELDIG tidskrevende og tidsoptimistist!
 
 ---
 
@@ -120,7 +170,9 @@
 
 ### 5.1 Ansvar og eierskap
 - Hvem er ansvarlig for koden når KI har bidratt?
+  - KI er en verktøy/hjelpemiddel som kan brukes, men ansavret og eieskaper til koden er personen(e) som sitter bak KI.
 - Hvordan sikrer man kvalitet når KI genererer kode?
+  - Sikrer kvalitet 
 - Diskuter spørsmål om opphavsrett og intellektuell eiendom
 
 ### 5.2 Transparens
