@@ -23,6 +23,15 @@
 - [x] Product Brief
   - [x] /run-agent-task analyst *product-brief "Read the two brainstorming sessions the research session and the @proposal.md file, and create a product brief for the project."
     - [x] File: product-brief.md
+- [x] Brainstorming
+  - [x] /analyst *brainstorm
+    - [x] File: brainstorming-session-results-2025-10-26.md
+    - [x] File: brainstorming-session-results-2025-10-27.md
+    - [x] File: brainstorming-session-results-2025-10-29.md
+- [x] Product Brief
+  - [x] /analyst *product-brief
+    - [x] File: product-brief-ibe160-2025-11-03.md
+
 
 ## Fase 1
 
@@ -36,16 +45,26 @@
     - [ ] File: ux-color-themes.html
     - [ ] File: ux-design-directions.html
   - [ ] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
+    - [x] File: epics.md
+  - [x] /run-agent-task pm *validate-prd
+    - [x] File: validation-report-2025-11-12-prd-epics.md
+  - [x] /run-agent-task ux-designer *create-ux-design
+    - [x] File: ux-design-specification.md
+    - [x] File: ux-color-themes.html
+    - [x] File: ux-design-directions.html
+  - [x] /run-agent-task ux-designer *validate-ux-design 
+    - [x] File: validation-ux-design-date.md
+
 
 ## Fase 2
 
 - [ ] Solutioning
-  - [ ] /run-agent-task architect *create-architecture {prompt / user-input-file}
-    - [ ] File: architecture.md
-  - [ ] /run-agent-task pm *create-epics-and-stories {prompt / user-input-file}
-    - [ ] File: epics.md
+  - [ ] /run-agent-task architect *architecture {prompt / user-input-file}
+  - [ ] /run-agent-task architect *validate-architecture {prompt / user-input-file}
+  - [ ] /run-agent-task tea *framework {prompt / user-input-file}
+  - [ ] /run-agent-task tea *ci {prompt / user-input-file}
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
-  - [ ] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
+
 
 ## Fase 3
 

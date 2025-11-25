@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVAI Turbo - Design Direction Showcase</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111827; /* Innovator Theme Background */
+            color: #F9FAFB; /* Innovator Theme Text */
+            overflow-x: hidden;
+        }
+        .header {
+            background-color: #1F2937;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #374151;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #F9FAFB;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-buttons button {
+            background-color: #6A44E5;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        .nav-buttons button:hover {
+            background-color: #5A38C9;
+        }
+        .nav-buttons button:disabled {
+            background-color: #4B5563;
+            cursor: not-allowed;
+        }
+
+        .design-direction-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .design-direction {
+            min-width: 100vw;
+            height: calc(100vh - 70px); /* Adjust for header height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        .mockup-content {
+            background-color: #1F2937;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            max-height: 800px;
+            display: flex;
+            overflow: hidden;
+        }
+        .mockup-left-panel {
+            flex: 1;
+            padding: 2rem;
+            border-right: 1px solid #374151;
+            overflow-y: auto;
+        }
+        .mockup-right-panel {
+            flex: 1;
+            padding: 2rem;
+            background-color: #111827;
+            overflow-y: auto;
+            position: relative;
+        }
+        .mockup-right-panel::before {
+            content: "Live Preview";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            color: #6B7280;
+        }
+
+        .mockup-left-panel h2, .mockup-right-panel h2 {
+            color: #F9FAFB;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .mockup-left-panel h3 {
+            color: #F9FAFB;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #D1D5DB;
+            font-size: 0.9rem;
+        }
+        .form-group textarea, .form-group input {
+            width: calc(100% - 20px);
+            padding: 0.75rem 10px;
+            border: 1px solid #4B5563;
+            border-radius: 6px;
+            background-color: #1F2937;
+            color: #F9FAFB;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group input {
+            min-height: unset;
+            height: 40px;
+        }
+        .form-group textarea:focus, .form-group input:focus {
+            outline: none;
+            border-color: #6A44E5;
+            box-shadow: 0 0 0 2px rgba(106, 68, 229, 0.3);
+        }
+        .btn-generate {
+            background-color: #6A44E5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .btn-generate:hover {
+            background-color: #5A38C9;
+        }
+        .preview-content {
+            background-color: #FFFFFF;
+            color: #333;
+            padding: 2rem;
+            border-radius: 6px;
+            min-height: 100%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .preview-content h3 {
+            color: #111827;
+            margin-top: 0;
+        }
+        .preview-content p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .direction-info {
+            text-align: center;
+            margin-top: 1rem;
+            color: #D1D5DB;
+            font-size: 0.9rem;
+        }
+        .direction-info h3 {
+            color: #F9FAFB;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .direction-info p {
+            margin: 0;
+        }
+
+        /* Specific styles for each direction */
+        /* Direction 1: Balanced & Clear */
+        .direction-1 .mockup-left-panel, .direction-1 .mockup-right-panel { flex: 1; }
+
+        /* Direction 2: Focused Input */
+        .direction-2 .mockup-left-panel { flex: 1.2; }
+        .direction-2 .mockup-right-panel { flex: 0.8; }
+
+        /* Direction 3: Minimalist Preview */
+        .direction-3 .mockup-right-panel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6B7280;
+            font-style: italic;
+        }
+        .direction-3 .mockup-right-panel .preview-content { display: none; } /* Hidden until generated */
+        .direction-3 .mockup-right-panel::before { content: "Preview will appear here after generation"; position: static; }
+
+        /* Direction 4: Guided Flow (Simplified for mockup) */
+        .direction-4 .mockup-content { flex-direction: column; }
+        .direction-4 .mockup-left-panel {
+            border-right: none;
+            border-bottom: 1px solid #374151;
+            flex: unset;
+            height: auto;
+            max-height: 50%;
+        }
+        .direction-4 .mockup-right-panel {
+            flex: unset;
+            height: auto;
+            max-height: 50%;
+        }
+        .direction-4 .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .direction-4 .step-indicator span {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background-color: #374151;
+            color: #9CA3AF;
+            font-size: 0.8rem;
+        }
+        .direction-4 .step-indicator span.active {
+            background-color: #6A44E5;
+            color: white;
+        }
+        .direction-4 .form-group.step-1, .direction-4 .form-group.step-2, .direction-4 .form-group.step-3 { display: none; }
+        .direction-4 .form-group.step-1.active, .direction-4 .form-group.step-2.active, .direction-4 .form-group.step-3.active { display: block; }
+        .direction-4 .btn-next-step {
+            background-color: #6A44E5;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: auto;
+            margin-top: 1rem;
+        }
+        .direction-4 .btn-next-step:hover {
+            background-color: #5A38C9;
+        }
+        .direction-4 .btn-generate { display: none; } /* Only show on final step */
+        .direction-4 .mockup-right-panel::before { content: "Preview will appear here after generation"; position: static; }
+        .direction-4 .mockup-right-panel .preview-content { display: none; }
+
+        /* Direction 5: Refined Minimalist */
+        .direction-5 .mockup-right-panel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6B7280;
+            font-style: italic;
+        }
+        .direction-5 .mockup-right-panel .preview-content { display: none; } /* Hidden until generated */
+        .direction-5 .mockup-right-panel::before { content: "Preview will appear here after generation"; position: static; }
+        .direction-5 .cv-info {
+            background-color: #111827;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #374151;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #D1D5DB;
+        }
+        .direction-5 .cv-info span {
+            font-weight: 600;
+            color: #F9FAFB;
+        }
+        .direction-5 .cv-info a {
+            color: #6A44E5;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+        .direction-5 .cv-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CVAI Turbo - Design Directions</h1>
+        <div class="nav-buttons">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+        </div>
+    </div>
+
+    <div class="design-direction-container" id="designDirectionContainer">
+        <!-- Direction 1: Balanced & Clear -->
+        <div class="design-direction direction-1" data-name="Balanced & Clear" data-personality="Professional & Efficient" data-best-for="Users who want a clear, direct experience with immediate feedback.">
+            <div class="mockup-content">
+                <div class="mockup-left-panel">
+                    <h2>Generate Cover Letter</h2>
+                    <div class="form-group">
+                        <label for="cv-input-1">Your CV Information (Plain Text)</label>
+                        <textarea id="cv-input-1" placeholder="Paste your CV content here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-desc-input-1">Job Description (Plain Text)</label>
+                        <textarea id="job-desc-input-1" placeholder="Paste the job description here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions-input-1">Optional Instructions (Style, Tone, Keywords)</label>
+                        <textarea id="instructions-input-1" placeholder="e.g., 'Formal tone, highlight leadership skills', 'Keep it concise.'"></textarea>
+                    </div>
+                    <button class="btn-generate">Generate Cover Letter</button>
+                </div>
+                <div class="mockup-right-panel">
+                    <div class="preview-content">
+                        <h3>Generated Cover Letter Preview</h3>
+                        <p>Dear [Hiring Manager Name],</p>
+                        <p>I am writing to express my enthusiastic interest in the [Job Title] position at [Company Name], as advertised on [Platform where you saw the advertisement]. With a proven track record in [mention 1-2 key skills/experiences from CV relevant to job], I am confident in my ability to contribute significantly to your team's success.</p>
+                        <p>During my tenure at [Previous Company/University Project], I was responsible for [mention a key achievement or responsibility that aligns with the job description]. This experience allowed me to develop strong [relevant skill 1] and [relevant skill 2] abilities, which I believe are directly applicable to the requirements of this role.</p>
+                        <p>I am particularly drawn to [Company Name]'s commitment to [mention something specific about the company, e.g., innovation, sustainability, team culture] and believe my [personal quality/skill] would make me a valuable asset. My resume, attached for your review, provides further detail on my qualifications and accomplishments.</p>
+                        <p>Thank you for your time and consideration. I look forward to the opportunity to discuss how my skills and enthusiasm can benefit [Company Name].</p>
+                        <p>Sincerely,<br>[Your Name]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="direction-info">
+                <h3>Balanced & Clear</h3>
+                <p>Layout: Two-column, equal width | Density: Moderate | Navigation: Direct | Primary action prominence: High</p>
+                <p>Best for: Users who want a clear, direct experience with immediate feedback.</p>
+            </div>
+        </div>
+
+        <!-- Direction 2: Focused Input -->
+        <div class="design-direction direction-2" data-name="Focused Input" data-personality="Efficient & Streamlined" data-best-for="Users who prioritize data entry and want a slightly larger input area.">
+            <div class="mockup-content">
+                <div class="mockup-left-panel">
+                    <h2>Generate Cover Letter</h2>
+                    <div class="form-group">
+                        <label for="cv-input-2">Your CV Information (Plain Text)</label>
+                        <textarea id="cv-input-2" placeholder="Paste your CV content here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-desc-input-2">Job Description (Plain Text)</label>
+                        <textarea id="job-desc-input-2" placeholder="Paste the job description here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions-input-2">Optional Instructions (Style, Tone, Keywords)</label>
+                        <textarea id="instructions-input-2" placeholder="e.g., 'Formal tone, highlight leadership skills', 'Keep it concise.'"></textarea>
+                    </div>
+                    <button class="btn-generate">Generate Cover Letter</button>
+                </div>
+                <div class="mockup-right-panel">
+                    <div class="preview-content">
+                        <h3>Generated Cover Letter Preview</h3>
+                        <p>Dear [Hiring Manager Name],</p>
+                        <p>I am writing to express my enthusiastic interest in the [Job Title] position at [Company Name], as advertised on [Platform where you saw the advertisement]. With a proven track record in [mention 1-2 key skills/experiences from CV relevant to job], I am confident in my ability to contribute significantly to your team's success.</p>
+                        <p>During my tenure at [Previous Company/University Project], I was responsible for [mention a key achievement or responsibility that aligns with the job description]. This experience allowed me to develop strong [relevant skill 1] and [relevant skill 2] abilities, which I believe are directly applicable to the requirements of this role.</p>
+                        <p>I am particularly drawn to [Company Name]'s commitment to [mention something specific about the company, e.g., innovation, sustainability, team culture] and believe my [personal quality/skill] would make me a valuable asset. My resume, attached for your review, provides further detail on my qualifications and accomplishments.</p>
+                        <p>Thank you for your time and consideration. I look forward to the opportunity to discuss how my skills and enthusiasm can benefit [Company Name].</p>
+                        <p>Sincerely,<br>[Your Name]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="direction-info">
+                <h3>Focused Input</h3>
+                <p>Layout: Two-column, input-dominant | Density: Slightly denser input | Navigation: Direct | Primary action prominence: High</p>
+                <p>Best for: Users who prioritize data entry and want a slightly larger input area.</p>
+            </div>
+        </div>
+
+        <!-- Direction 3: Minimalist Preview -->
+        <div class="design-direction direction-3" data-name="Minimalist Preview" data-personality="Clean & Uncluttered" data-best-for="Users who prefer a clean interface and only want to see the preview after generation.">
+            <div class="mockup-content">
+                <div class="mockup-left-panel">
+                    <h2>Generate Cover Letter</h2>
+                    <div class="form-group">
+                        <label for="cv-input-3">Your CV Information (Plain Text)</label>
+                        <textarea id="cv-input-3" placeholder="Paste your CV content here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-desc-input-3">Job Description (Plain Text)</label>
+                        <textarea id="job-desc-input-3" placeholder="Paste the job description here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions-input-3">Optional Instructions (Style, Tone, Keywords)</label>
+                        <textarea id="instructions-input-3" placeholder="e.g., 'Formal tone, highlight leadership skills', 'Keep it concise.'"></textarea>
+                    </div>
+                    <button class="btn-generate">Generate Cover Letter</button>
+                </div>
+                <div class="mockup-right-panel">
+                    <!-- Preview content is hidden until generated -->
+                </div>
+            </div>
+            <div class="direction-info">
+                <h3>Minimalist Preview</h3>
+                <p>Layout: Two-column, preview placeholder | Density: Very clean | Navigation: Direct | Primary action prominence: High</p>
+                <p>Best for: Users who prefer a clean interface and only want to see the preview after generation.</p>
+            </div>
+        </div>
+
+        <!-- Direction 4: Guided Flow (Simplified for mockup) -->
+        <div class="design-direction direction-4" data-name="Guided Flow" data-personality="Supportive & Step-by-Step" data-best-for="Users who need more guidance and prefer a structured, step-by-step process.">
+            <div class="mockup-content">
+                <div class="mockup-left-panel">
+                    <h2>Generate Cover Letter</h2>
+                    <div class="step-indicator">
+                        <span class="active">1. CV</span>
+                        <span>2. Job Desc</span>
+                        <span>3. Instructions</span>
+                        <span>4. Generate</span>
+                    </div>
+                    <div class="form-group step-1 active">
+                        <label for="cv-input-4">Your CV Information (Plain Text)</label>
+                        <textarea id="cv-input-4" placeholder="Paste your CV content here..."></textarea>
+                        <button class="btn-next-step" data-next-step="2">Next: Job Description</button>
+                    </div>
+                    <div class="form-group step-2">
+                        <label for="job-desc-input-4">Job Description (Plain Text)</label>
+                        <textarea id="job-desc-input-4" placeholder="Paste the job description here..."></textarea>
+                        <button class="btn-next-step" data-next-step="3">Next: Instructions</button>
+                    </div>
+                    <div class="form-group step-3">
+                        <label for="instructions-input-4">Optional Instructions (Style, Tone, Keywords)</label>
+                        <textarea id="instructions-input-4" placeholder="e.g., 'Formal tone, highlight leadership skills', 'Keep it concise.'"></textarea>
+                        <button class="btn-generate">Generate Cover Letter</button>
+                    </div>
+                </div>
+                <div class="mockup-right-panel">
+                    <!-- Preview content is hidden until generated -->
+                </div>
+            </div>
+            <div class="direction-info">
+                <h3>Guided Flow</h3>
+                <p>Layout: Single-column, multi-step | Density: Low per step | Navigation: Step-by-step | Primary action prominence: Contextual</p>
+                <p>Best for: Users who need more guidance and prefer a structured, step-by-step process.</p>
+            </div>
+        </div>
+
+        <!-- Direction 5: Refined Minimalist -->
+        <div class="design-direction direction-5" data-name="Refined Minimalist" data-personality="Efficient & Context-Aware" data-best-for="Users who have already set up their profile and want the fastest path to generation.">
+            <div class="mockup-content">
+                <div class="mockup-left-panel">
+                    <h2>Generate Cover Letter</h2>
+                    <div class="cv-info">
+                        <p>Using your saved CV information. <a href="#">(Change/Edit CV)</a></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-desc-input-5">Job Description (Plain Text)</label>
+                        <textarea id="job-desc-input-5" placeholder="Paste the job description here..." style="min-height: 200px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions-input-5">Optional Instructions (Style, Tone, Keywords)</label>
+                        <textarea id="instructions-input-5" placeholder="e.g., 'Formal tone, highlight leadership skills', 'Keep it concise.'"></textarea>
+                    </div>
+                    <button class="btn-generate">Generate Cover Letter</button>
+                </div>
+                <div class="mockup-right-panel">
+                    <!-- Preview content is hidden until generated -->
+                </div>
+            </div>
+            <div class="direction-info">
+                <h3>Refined Minimalist</h3>
+                <p>Layout: Two-column, simplified input | Density: Very clean | Navigation: Direct | Primary action prominence: High</p>
+                <p>Best for: Users who have already set up their profile and want the fastest path to generation.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('designDirectionContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const directions = document.querySelectorAll('.design-direction');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            container.style.transform = `translateX(-${currentIndex * 100}vw)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === directions.length - 1;
+
+            // Update info text
+            const currentDirection = directions[currentIndex];
+            const info = currentDirection.querySelector('.direction-info');
+            document.querySelector('.header h1').textContent = `CVAI Turbo - Design Directions (${currentIndex + 1}/${directions.length})`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < directions.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        // Guided Flow specific logic (simplified for mockup)
+        directions.forEach(direction => {
+            if (direction.classList.contains('direction-4')) {
+                const nextStepBtns = direction.querySelectorAll('.btn-next-step');
+                nextStepBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const currentStep = e.target.closest('.form-group');
+                        const nextStepNum = parseInt(e.target.dataset.nextStep);
+                        
+                        currentStep.classList.remove('active');
+                        direction.querySelector(`.step-indicator span:nth-child(${nextStepNum})`).classList.add('active');
+                        direction.querySelector(`.step-indicator span:nth-child(${nextStepNum - 1})`).classList.remove('active');
+
+                        const nextStepElement = direction.querySelector(`.form-group.step-${nextStepNum}`);
+                        if (nextStepElement) {
+                            nextStepElement.classList.add('active');
+                        }
+                        
+                        if (nextStepNum === 3) { // Last step before generate
+                            direction.querySelector('.btn-generate').style.display = 'block';
+                            btn.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+
+        updateCarousel(); // Initialize carousel
+    </script>
+</body>
+</html>
