@@ -41,7 +41,10 @@ Vi brukte teams som kommunikasjonskanal. Dette fungerte bra
 
 **Fase 1: Planlegging**
 - [Hva gjorde dere i denne fasen?]
+    - I denne fasen startet vi med å bruke agenten «analyse» til å brainstorming, og gjennomførte tre separate brainstorming-sesjoner. Da vi var fornøyde med resultatene, brukte vi både idéene fra brainstormingen og proposal-dokumentet for å få analyse-agenten til å produsere product-brief.md dokumentet. Deretter, i planleggingsfasen, tok vi i bruk agenten «product master» for å utvikle et Product Requirement Document (PRD.md).
+    - UX-design her eller ved utvikling nedenfor?
 - [Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
+    - Til å brainstorming brukte vi KI for å avdekke om det var aspekter ved proposalen vår vi hadde oversett, og erfarte raskt at det var veldig enkelt å diskutere og utvide prosjektet til noe langt større enn opprinnelig planlagt. I brainstroming-prosessen benyttet vi de tekniske og strategiske metodene «five whys», «six hats» og «what if». Alle promptene som ble brukt i sesjonene her, er lagret i mappen `SG-Oslo-Best\prompt\project-brief\brainstorming`.
 
 **Fase 2: Utvikling**
 - [Hva gjorde dere i denne fasen?]
@@ -56,15 +59,11 @@ Vi brukte teams som kommunikasjonskanal. Dette fungerte bra
 
 **Utfordring 1: Gratis version av Gemini**
 - Problem: [Beskriv problemet] 
-  - Vansklig å nagivere dialogen. Vanskeligheter med å huske dialogen/pompter/spørmålet.
+    - I prosjektarbeidet vårt oppstod det utfordringer ved å bruke gratisversjon av Gemini CLI. Spesielt knyttet til det å navigere i dialogen og manglende evne for Gemini å huske tidligere samtaler, prompt-strukturer og spørsmål. Dette førte til at kommunikasjonen med KI til tider ble tungvint og tidkrevende. Det ble også tydelig at gratisversjonen av Gemini CLI ikke alltid klarte å håndtere den nødvendige kompleksiteten og mengden forespørsler. 
 - Løsning: [Hvordan løste dere det?]
-  - God tålmodighet
-  - Noen valgt å gå for PRO (betalingverison)
-  - Jeg må understreke at jeg underveis i prosjektet møtte utfordringer med ytelse og kapasitet i dataflyten. Jeg startet med en gratisversjon av KI-tjenesten, men måtte oppgradere til Pro- eller betalt-nivå for å håndtere den nødvendige hastigheten, kompleksiteten og antallet forespørsler som trengtes for en funksjonell applikasjon. Dette var en kritisk teknisk avgjørelse for å sikre at systemet kunne leveres.
+    - Løsningen ble en kombinasjon av å «smøre seg» med god tålmodighet og at enkelte i gruppen valgte å oppgradere til den betalte versjonen av Gemini CLI, som tilbyr bedre kapasitet. Denne oppgraderingen ble en sentral teknisk beslutning for å sikre en stabil og funksjonell dataflyt, særlig i fullstack- og utviklingsfasen av prosjektet. 
 - KI sin rolle: [Hvordan hjalp eller hindret KI dere?]
-  - KI skapte mye rot/problemer, koden samsvarte ikke med andre filer. Så den kjørte feil.
-  - Hadde en lang dialog og tilslutt fisket det
-  - Hjalp KI med å finne feilen og sende det direkte til KI for å rette det.
+    - KI spilte både en problemløsende og en utfordrende rolle. Den kunne skape rot i prosjektet ved å genere kode som ikke samsvarte med øvrige filer, noe som resulterte i feil. Samtidig gjorde den omfattende dialogen det mulig å identifisere årsaken til problemene, og ved å sende detaljerte feilmeldinger tilbake til KI, kunne den rette feilene på en effektiv måte.
 
 **Utfordring 2: [Tittel]**
 - Problem: [Beskriv problemet]
