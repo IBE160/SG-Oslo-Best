@@ -17,16 +17,18 @@
 ## 2. Utviklingsprosessen
 
 ### 2.1 Oversikt over prosjektet
-[Kort beskrivelse av hva dere har utviklet. Hva var hovedmålet med applikasjonen?]
+[Kort beskrivelse av hva dere har utviklet. Hva var hovedmålet med applikasjonen? ]
 
 ### 2.2 Arbeidsmetodikk
 [Beskriv hvordan dere organiserte arbeidet]
 - Hvordan fordelte dere oppgaver?
-  - Ukentlig møter
-  - 
-- Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte? (f.eks. Git, og Teams)
-Vi brukte teams som kommunikasjonskanal. Dette fungerte bra 
+  - Ukentlig møter 
+  - Vi i gruppa på 4 personer tok en tidlig vurdering på å holde tett samarbeid, selv om vi er plassert ulike steder i Norge. 2 personer i Molde og 2 personer i Oslo. Vi to hensyn til hva gruppemedlemmer er god og glad i å jobbbe med, og siden vi har vært så heldige å ha en utvikler i gruppa, fikk han som ønsket ansvar for backend-delen. 
+  - Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte? (f.eks. Git, og Teams)
+- Vi bestemte oss tidlig i prosjektet for å ha ukentlige møter og benyttet oss av kommunikasjonskanalen Teams. Vi var innom Discord også, men Teams hadde flere kjennskap til, så derfor gikk vi for det.
 - Hvordan brukte dere KI-verktøy i prosessen?
+- Gemini integrert i VS Code
+- ChatGPT
 
 ### 2.3 Teknologi og verktøy
 [Liste over de viktigste teknologiene og verktøyene dere brukte]
