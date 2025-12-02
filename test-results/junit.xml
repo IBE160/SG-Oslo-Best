@@ -1,0 +1,182 @@
+<testsuites id="" name="" tests="6" failures="6" skipped="0" errors="0" time="12.300252">
+<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="chromium" tests="2" failures="2" skipped="0" time="0.034" errors="0">
+<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.017">
+<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
+<![CDATA[  [chromium] › example.spec.ts:4:7 › Example Test Suite › should load homepage ─────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\chromium_headless_shell-1200\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.017">
+<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
+<![CDATA[  [chromium] › example.spec.ts:9:7 › Example Test Suite › should create user and login ─────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\chromium_headless_shell-1200\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="firefox" tests="2" failures="2" skipped="0" time="0.038" errors="0">
+<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.018">
+<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
+<![CDATA[  [firefox] › example.spec.ts:4:7 › Example Test Suite › should load homepage ──────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\firefox-1497\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.02">
+<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
+<![CDATA[  [firefox] › example.spec.ts:9:7 › Example Test Suite › should create user and login ──────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\firefox-1497\firefox\firefox.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="webkit" tests="2" failures="2" skipped="0" time="0.035" errors="0">
+<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.016">
+<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
+<![CDATA[  [webkit] › example.spec.ts:4:7 › Example Test Suite › should load homepage ───────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\webkit-2227\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.019">
+<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
+<![CDATA[  [webkit] › example.spec.ts:9:7 › Example Test Suite › should create user and login ───────────────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\webkit-2227\Playwright.exe
+    ╔═════════════════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
+    ║ Please run the following command to download new browsers:              ║
+    ║                                                                         ║
+    ║     npx playwright install                                              ║
+    ║                                                                         ║
+    ║ <3 Playwright Team                                                      ║
+    ╚═════════════════════════════════════════════════════════════════════════╝
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
