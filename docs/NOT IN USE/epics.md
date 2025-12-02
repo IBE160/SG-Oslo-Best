@@ -33,45 +33,35 @@ This document breaks down the requirements from the PRD into actionable epics an
 
 **Story 1.1: Initialize Project Repositories & Structure**
 - **As a** developer,
-- **I want** to set up a monorepo with initialized frontend and backend projects using specific toolchains,
-- **so that** development can begin on a clean, standardized, and well-organized codebase.
-- **Technical Notes:**
-    - The monorepo will be managed using NPM/PNPM Workspaces as defined in the Architecture Spec.
-    - The project structure should follow the diagram outlined in the Architecture Spec.
+- **I want** to have separate, initialized frontend and backend project structures within a single monorepo,
+- **so that** I can begin development with a clean, organized codebase.
 - **Acceptance Criteria:**
-    - Given a new project folder configured with pnpm workspaces,
+    - Given a new project folder,
     - When the initialization script is run,
-    - Then a `frontend` folder is created and initialized as a Next.js application using `npx create-next-app@latest`.
-    - And Shadcn/UI is initialized within the frontend project using `npx shadcn-ui@latest init`.
-    - And a `backend` folder is created and initialized with a standard FastAPI project structure.
-    - And a `packages/shared-types` folder is created for shared TypeScript interfaces.
+    - Then a `frontend` folder with a new Next.js app is created.
+    - And a `backend` folder with a new FastAPI app is created.
+    - And both projects are committed to the Git repository.
 
 **Story 1.2: Configure Supabase Integration**
 - **As a** developer,
-- **I want** to configure the Supabase project and securely integrate it with both the frontend and backend,
-- **so that** the application can utilize Supabase for database and authentication services.
-- **Technical Notes:**
-    - Database tables, functions, and Row Level Security (RLS) policies will be defined directly within the Supabase project dashboard or via SQL migrations.
+- **I want** to configure the Supabase project and integrate it with the backend,
+- **so that** the application can interact with the database and authentication services.
 - **Acceptance Criteria:**
     - Given a new Supabase project,
-    - When the backend environment is configured,
-    - Then it securely stores and uses the Supabase URL and `service_role` key for administrative database access.
-    - When the frontend environment is configured,
-    - Then it uses the Supabase URL and `anon` key for client-side authentication and data fetching.
-    - And the backend can establish a validated connection to the Supabase database.
+    - When the backend is configured with the Supabase URL and service key,
+    - Then the backend can successfully connect to the Supabase database.
+    - And the frontend is configured with the Supabase URL and anon key for client-side auth.
 
 **Story 1.3: Implement Basic CI/CD Pipeline**
 - **As a** developer,
-- **I want** a basic CI/CD pipeline that automatically builds and deploys the entire monorepo to Vercel,
-- **so that** changes pushed to the main branch are always reflected in a live, integrated environment.
-- **Technical Notes:**
-    - This pipeline implements the strategy outlined in the Deployment Architecture section of the architecture document.
+- **I want** a basic CI/CD pipeline that automatically deploys the frontend and backend to Vercel,
+- **so that** changes pushed to the main branch are always reflected in a live environment.
 - **Acceptance Criteria:**
-    - Given a Vercel project connected to the Git monorepo,
+    - Given a Vercel project connected to the Git repository,
     - When changes are pushed to the `main` branch,
     - Then the Vercel pipeline automatically builds and deploys the Next.js frontend.
-    - And the Vercel pipeline automatically builds and deploys the FastAPI backend as serverless functions.
-    - And the deployed application is accessible and functional via a public Vercel URL.
+    - And the Vercel pipeline automatically builds and deploys the FastAPI backend.
+    - And the deployed application is accessible via a Vercel URL.
 
 ---
 <br>
@@ -89,11 +79,6 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Covers:** FR-1.1
 - **UX Spec:** Section 5.1.1 "Dynamic Toggle"
 - **Complexity:** Slightly Higher
-- **Technical Notes:**
-    - The frontend form will be managed by React Hook Form.
-    - The backend will expose a `POST /api/v1/auth/register` endpoint using FastAPI.
-    - User creation will be handled by Supabase Auth.
-    - The verification email will be sent via the Resend service.
 - **Acceptance Criteria:**
     - Given I am on the landing page,
     - When I click the "Sign Up" link,
@@ -110,36 +95,28 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Covers:** FR-1.2
 - **UX Spec:** Section 5.1.1 "Dynamic Toggle"
 - **Complexity:** Slightly Higher
-- **Technical Notes:**
-    - The backend will expose a `POST /api/v1/auth/login` endpoint.
-    - Supabase Auth will validate credentials and issue a JWT.
-    - The JWT and session state will be managed on the frontend using React Context.
 - **Acceptance Criteria:**
     - Given I have a verified account and am on the landing page,
-    - When I enter my email and password on the login form and submit,
+    - When I enter my email and password on the login form,
     - Then I am successfully authenticated via Supabase Auth.
-    - And a secure session is established on the client.
-    - And I am redirected to my main application page.
-    - And a pop-up appears asking if I would like to update my CV information.
+    - And a secure session is established.
+    - And I am redirected to my home page, seeing a pop-up to update my CV.
 
 **Story 2.3: Create User Profile & CV (Initial)**
 - **As a** logged-in student user,
 - **I want** to create my initial profile and input my CV information into a single text area,
 - **so that** the system has my basic data for cover letter generation.
 - **Covers:** FR-1.3, FR-1.4, FR-1.5
-- **Technical Notes:**
-    - The frontend form will be managed using React Hook Form.
-    - On submission, data is sent to a `POST /api/v1/users/me/cv` endpoint.
-    - The backend service will store the profile and CV data in the corresponding Supabase tables, linked to the authenticated user's ID.
 - **Acceptance Criteria:**
-    - Given I am logged in for the first time,
-    - When I am redirected to the profile creation page,
+    - Given I am logged in and have not yet created a profile,
+    - When I navigate to the profile creation page,
     - Then I see fields for personal details and a large text area for CV content.
+    - And the system indicates which fields are mandatory.
     - When I attempt to save with a mandatory field empty,
-    - Then the system displays an inline error and prevents saving.
+    - Then the system displays an error and prevents saving.
     - When I fill in all required fields and save,
-    - Then my profile and CV data are successfully stored.
-    - And I am redirected to the main application dashboard.
+    - Then my profile and CV data are stored in Supabase, linked to my user ID.
+    - And I am redirected to the home page.
 
 **Story 2.4: Update User Profile & CV with Hybrid Save**
 - **As a** logged-in student user,
@@ -148,35 +125,27 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Covers:** FR-1.3, FR-1.4
 - **UX Spec:** Section 5.1.2 "Hybrid Save Model"
 - **Complexity:** Higher
-- **Technical Notes:**
-    - The form will be managed by React Hook Form.
-    - The visual state of each field will be handled by the `Stateful Textbox` component (Story 2.5).
-    - Field-level auto-saves (onBlur) will trigger a `PATCH /api/v1/users/me/cv` request with the specific field's data.
-    - The overall UI state (e.g., "Unsaved changes...") will be managed via React Context.
 - **Acceptance Criteria:**
     - Given I am on my profile editing page,
     - When I modify a field,
     - Then the field's border indicates an "unsaved" state (e.g., turns yellow).
     - And a master "Save" button becomes enabled.
     - When I move focus away from the modified field (onBlur),
-    - Then the change is automatically saved in the background via a PATCH request.
+    - Then the change is automatically saved in the background.
     - And the field's border indicates a "saved" state (e.g., turns green).
     - When I click the manual "Save" button,
-    - Then all pending changes are sent in a single PATCH request, and all modified fields show a "saved" state.
+    - Then all pending changes are saved, and all modified fields show a "saved" state.
 
 **New Story 2.5: Implement Stateful Textbox Component**
 - **As a** developer,
 - **I want** to create a "Stateful Textbox" component,
 - **so that** users receive immediate visual feedback (e.g., colored borders) on the auto-save status of their CV information.
 - **UX Spec:** Section 6.1.2 "Custom Components"
-- **Technical Notes:**
-    - This is a reusable UI component to be built with React/TypeScript and styled with Tailwind CSS.
-    - It will manage its own visual state (e.g., border color) based on props passed down from the parent form (e.g., `isDirty`, `isSaved`).
 - **Acceptance Criteria:**
     - Given a standard textarea or input field,
     - When it is wrapped in the Stateful Textbox component,
     - Then it visually changes its appearance based on its state (default, unsaved, saved).
-    - And it correctly reflects the field's state as managed by the parent form (React Hook Form).
+    - And it correctly communicates its state to the parent form for the Hybrid Save Model.
 
 ---
 <br>
@@ -192,9 +161,6 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **I want** to input a job advertisement and provide optional instructions,
 - **so that** I can prepare the context for generating a tailored cover letter.
 - **Covers:** FR-2.1, FR-3.1
-- **Technical Notes:**
-    - The input form will be managed using React Hook Form.
-    - Submitting or saving the job application will interact with a `POST /api/v1/job-applications` endpoint.
 - **Acceptance Criteria:**
     - Given I am on the main generation page,
     - When I paste a job advertisement into the designated text area,
@@ -207,17 +173,13 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **I want** to click a "Generate" button to create a cover letter,
 - **so that** I can receive an AI-drafted letter tailored to the job.
 - **Covers:** FR-3.2, FR-3.3
-- **Technical Notes:**
-    - The frontend will send the user's CV data (retrieved from profile), job advertisement, and optional instructions to a `POST /api/v1/generation` endpoint.
-    - The backend service will then interact with the Gemini API to generate the cover letter.
-    - React Query will be used on the frontend to manage the loading, error, and success states of this API call.
 - **Acceptance Criteria:**
-    - Given I have provided a job advertisement and clicked "Generate",
-    - When the generation process begins,
-    - Then all input fields are temporarily disabled.
-    - And the UI shows the "Generation Status Indicator" (Story 3.8).
-    - And the backend receives the necessary data, integrates with the Gemini API, and returns the generated text.
-    - When the generation is complete, the generated cover letter text is returned to the frontend.
+    - Given I have provided a job advertisement,
+    - When I click the "Generate" button,
+    - Then the UI shows the "Generation Status Indicator".
+    - And the backend receives my CV data, the job ad, and any instructions.
+    - And the backend sends a structured prompt to the Gemini API.
+    - And the generated cover letter text is returned to the frontend.
 
 **Story 3.3: Display and Review Generated Cover Letter**
 - **As a** logged-in student user,
@@ -225,15 +187,11 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **so that** I can review its content and decide on the next action.
 - **Covers:** FR-3.4
 - **UX Spec:** Section 5.1.3 "Cover Letter Generation"
-- **Technical Notes:**
-    - The generated text will be presented in a readable, non-editable area, likely a `Textarea` from Shadcn/UI.
-    - React Query will manage the state of the fetched cover letter data.
-    - The "Regenerate" and "Save" buttons will be conditionally rendered once the cover letter is successfully displayed.
 - **Acceptance Criteria:**
     - Given the cover letter has been generated successfully,
     - When the frontend receives the letter text,
-    - Then the text is displayed in a clear, readable format within the output panel.
-    - And the "Regenerate" and "Save" buttons become visible and enabled.
+    - Then the text is displayed in a clear, readable format in the output panel.
+    - And I can see options to "Regenerate" and "Save" the letter.
 
 **Story 3.4: Regenerate and Compare Cover Letter Versions**
 - **As a** logged-in student user,
@@ -242,43 +200,30 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **Covers:** FR-3.5
 - **UX Spec:** Section 5.1.3, Step 6
 - **Complexity:** Significantly Higher
-- **Technical Notes:**
-    - The frontend will use React Context to manage the state of multiple generated cover letter versions.
-    - The tabbed interface for comparing versions will be implemented using Shadcn/UI Tabs.
-    - Each "Regenerate" action will trigger a new `POST /api/v1/generation` request.
-    - React Query will manage the data fetching and caching for these versions.
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
     - When I modify instructions and click "Regenerate",
-    - Then a new version of the cover letter is generated via the API.
-    - And the output panel displays the new version as the active tab (e.g., "Version 2").
-    - And a tab for the previous version (e.g., "Version 1") is present, allowing for easy switching and comparison.
+    - Then a new version of the cover letter is generated.
+    - And the output panel displays the new version ("Version 2") in an active tab.
+    - And a "Version 1" tab is present, allowing me to switch back and view the original.
 
 **Story 3.5: Save Generated Cover Letter**
 - **As a** logged-in student user,
 - **I want** to save a generated cover letter that I am satisfied with,
 - **so that** I can access it later.
 - **Covers:** FR-3.6
-- **Technical Notes:**
-    - The frontend will send a `POST` request to `/api/v1/cover-letters` containing the selected cover letter content, linked to the current job application.
-    - The backend will store this data in the Supabase database, associated with the user's ID.
-    - A success notification will be displayed using a Shadcn/UI Toast component.
 - **Acceptance Criteria:**
     - Given a cover letter is displayed,
     - When I click the "Save" button,
     - Then the button's state changes to "Saved ✓" and becomes disabled.
     - And a toast notification confirms the save action.
-    - And the cover letter text is successfully saved to the Supabase database, associated with my user ID and the job application.
+    - And the cover letter text is saved to the Supabase database, associated with my user ID.
 
 **Story 3.6: Update Job Application**
 - **As a** logged-in student user,
 - **I want** to update the text of a job application I previously created,
 - **so that** I can correct mistakes or add new information.
 - **Covers:** FR-2.2
-- **Technical Notes:**
-    - The frontend form for editing will be managed by React Hook Form.
-    - Updates will be sent via a `PATCH` request to `/api/v1/job-applications/{job_application_id}`.
-    - The backend will update the corresponding job application entry in Supabase.
 - **Acceptance Criteria:**
     - Given I have an existing job application,
     - When I navigate to the application's edit page,
@@ -291,29 +236,21 @@ This document breaks down the requirements from the PRD into actionable epics an
 - **I want** to delete a job application I no longer need,
 - **so that** I can keep my workspace clean.
 - **Covers:** FR-2.3
-- **Technical Notes:**
-    - The frontend will issue a `DELETE` request to `/api/v1/job-applications/{job_application_id}`.
-    - The backend must ensure that associated cover letters are also deleted (e.g., via database cascading delete or explicit service logic).
-    - Frontend implementation should include a confirmation step (e.g., a modal) as per UX Spec Section 7.1.7 "Confirmation Patterns" to prevent accidental deletion.
 - **Acceptance Criteria:**
     - Given I have an existing job application,
     - When I choose the delete option and confirm the deletion,
-    - Then the job application and all associated saved cover letters are permanently removed from the database.
+    - Then the job application and any associated saved cover letters are removed from the database.
 
 **New Story 3.8: Implement Generation Status Indicator Component**
 - **As a** developer,
 - **I want** to create the "Generation Status Indicator" component,
 - **so that** users are kept engaged and informed during the AI generation process with a loading spinner and specified text.
 - **UX Spec:** Section 6.1.2 "Custom Components"
-- **Technical Notes:**
-    - This is a reusable UI component to be built with React/TypeScript and styled with Tailwind CSS.
-    - Accessibility considerations, as per UX Spec Section 8.2.1, must be included (e.g., `aria-live="polite"` for the content area, visually hidden text for screen readers).
 - **Acceptance Criteria:**
     - Given the AI generation process is initiated,
     - When the component is displayed,
-    - Then it shows an active loading spinner.
+    - Then it shows a loading spinner.
     - And it periodically displays the message "Please give us an A".
-    - And user input fields are disabled while it is active.
     - When generation is complete, the component is hidden.
 
 ---

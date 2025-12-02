@@ -44,7 +44,7 @@
     - [ ] File: ux-design-specification.md
     - [ ] File: ux-color-themes.html
     - [ ] File: ux-design-directions.html
-  - [ ] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
+  - [x] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
     - [x] File: epics.md
   - [x] /run-agent-task pm *validate-prd
     - [x] File: validation-report-2025-11-12-prd-epics.md
@@ -59,8 +59,8 @@
 ## Fase 2
 
 - [ ] Solutioning
-  - [ ] /run-agent-task architect *architecture {prompt / user-input-file}
-  - [ ] /run-agent-task architect *validate-architecture {prompt / user-input-file}
+  - [x] /run-agent-task architect *architecture {prompt / user-input-file}
+  - [x] /run-agent-task architect *validate-architecture {prompt / user-input-file}
   - [ ] /run-agent-task tea *framework {prompt / user-input-file}
   - [ ] /run-agent-task tea *ci {prompt / user-input-file}
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
