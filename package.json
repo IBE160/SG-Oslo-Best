@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node backend/app/index.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lint": "echo \"No lint rules yet\""
   },
   "repository": {
     "type": "git",
@@ -27,8 +28,5 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.0",
     "@playwright/test": "^1.40.0"
-  },
-  "scripts": {
-    "lint": "echo \"No lint rules yet\""
   }
 }
