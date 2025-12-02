@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node backend/app/index.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lint": "echo \"No lint rules yet\""
   },
   "repository": {
     "type": "git",
