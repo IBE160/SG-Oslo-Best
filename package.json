@@ -1,0 +1,26 @@
+{
+  "name": "sg-oslo-best",
+  "version": "1.0.0",
+  "description": "Repository for SG-Oslo-Best - IBE160 Programmering med KI.",
+  "main": "backend/app/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node backend/app/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IBE160/SG-Oslo-Best.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IBE160/SG-Oslo-Best/issues"
+  },
+  "homepage": "https://github.com/IBE160/SG-Oslo-Best#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
