@@ -46,7 +46,7 @@ I fase 2, planleggingsfasen, utviklet vi PRD.md (Product Requirement Document), 
 I fase 3, solutioningfasen, ble prosjektets arkitektur utarbeidet ved å definere hvilke kjerneteknologier applikasjonen skulle bygges på. Valideringen av dette tekniske oppsettet gikk overraskende bra, med 95% godkjenning på første forsøk. Dette valgte vi å beholde, selv om enkelte feilmeldinger antydet behov for ytterligere justeringer. I denne fasen utviklet vi epics og user stories og etablerte et oppsett for tesing ved hjelp av Playwright-rammeverket, GitHub Actions og et tilhørende CI-oppsett. Målet er å sikre at kodeendringer kan integreres regelmessig og testes automatisk for å avdekke feil tidlig. Arbeidet inkluderte også utforming av testscenarier, dokumentert i `SG-Oslo-Best\docs\test-design-high-value-stories.md`. Til slutt gjennomførte vi en «implementation readiness»-vurdering, der dokumentene PRD, UX-design, arkitektur og epics ble validert som klare for neste fase. Hele solutioningfasen ble gjennomført med aktiv bruk av Gemini CLI og agentene «architect», «product master» og «tea», og alle tilhørende KI-dialoger og prompter ble loggført i mappen`SG-Oslo-Best\.logging\requests`.
 
 **Fase 4: implementation, utvikling**
-I fase 4, implementasjonsfasen, bruker vi agenten «scrum master» (sm) for å lage til sprint plan. 
+I fase 4, implementasjonsfasen, bruker vi agenten «scrum master» (sm) for å lage til sprint plan. Vi fikk melding fra faglærer om at TEA agenten var ikke nødvendig, men vi hadde allerede implementer testene, vi bestemte oss da for å deaktivere alle testene før utvikling startet.
 
 **(MICHEAL) Fase 2: Utvikling**
 - [Hva gjorde dere i denne fasen?]

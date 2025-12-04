@@ -1,6 +1,6 @@
 # Story 1.1: Initialize Project Repositories & Structure
 
-Status: drafted
+Status: ready-for-dev
 
 ## Story
 
@@ -58,38 +58,41 @@ No `unified-project-structure.md` found. Alignment will be based on the Architec
 
 ## Acceptance Criteria
 
-1.  Given a new project folder configured with pnpm workspaces,
-2.  When the initialization script is run,
-3.  Then a `frontend` folder is created and initialized as a Next.js application using `npx create-next-app@latest`.
-4.  And Shadcn/UI is initialized within the frontend project using `npx shadcn-ui@latest init`.
-5.  And a `backend` folder is created and initialized with a standard FastAPI project structure.
-6.  And a `packages/shared-types` folder is created for shared TypeScript interfaces.
+*Note: The following are the authoritative Acceptance Criteria for the initial project setup, sourced from the Epic 1 Technical Specification.*
+
+1.  A monorepo exists with `frontend`, `backend`, and `packages/shared-types` directories.
+2.  The `frontend` directory contains a functional, default Next.js application.
+3.  Shadcn/UI is initialized in the frontend project.
+4.  The `backend` directory contains a functional, default FastAPI application.
+5.  The frontend and backend applications have separate `.env.example` files documenting the required Supabase environment variables.
+6.  A push to the `main` branch successfully triggers a deployment on Vercel.
+7.  The deployed Vercel application is accessible via its URL and both the frontend and backend default pages load correctly.
 
 ## Tasks / Subtasks
 
-- [ ] **Initialize Monorepo with PNPM Workspaces**
-  - [ ] Set up `package.json` at root to define workspaces for `frontend`, `backend`, and `packages/shared-types`.
+- [ ] **Initialize Monorepo Structure (AC: #1)**
+  - [ ] Set up `package.json` at the root to define workspaces for `frontend`, `backend`, and `packages/shared-types`.
   - [ ] Create `frontend/`, `backend/`, and `packages/shared-types/` directories.
-- [ ] **Initialize Frontend Project (Next.js)**
-  - [ ] Execute `npx create-next-app@latest frontend --typescript --eslint --app --tailwind --src-dir --import-alias "@/*"` within the `frontend` directory.
-  - [ ] Verify Next.js application is runnable.
-- [ ] **Initialize Shadcn/UI**
-  - [ ] Navigate to the `frontend` directory.
-  - [ ] Run `npx shadcn-ui@latest init` and configure with Tailwind CSS, global CSS, etc.
-  - [ ] Verify Shadcn/UI components can be added.
-- [ ] **Initialize Backend Project (FastAPI)**
-  - [ ] Create a Python virtual environment in the `backend` directory: `python -m venv .venv`.
-  - [ ] Activate the virtual environment.
-  - [ ] Install FastAPI and Uvicorn: `pip install fastapi uvicorn`.
-  - [ ] Create a basic `main.py` and `requirements.txt`.
-  - [ ] Verify FastAPI application is runnable.
-- [ ] **Create Shared Types Package**
-  - [ ] Create `packages/shared-types/package.json` and `packages/shared-types/index.ts`.
-  - [ ] Add basic TypeScript interfaces (e.g., for API contract example).
-  - [ ] Configure `tsconfig.json` in `frontend` to reference `packages/shared-types`.
-- [ ] **Basic Verification**
-  - [ ] Ensure all project structures match the Architecture Spec's diagram.
-  - [ ] Run `pnpm install` at the root to ensure all workspace dependencies are linked correctly.
+- [ ] **Initialize Frontend Project (AC: #2, #3)**
+  - [ ] Execute `npx create-next-app@latest frontend --typescript --eslint --app --tailwind --src-dir --import-alias "@/*"`.
+  - [ ] Navigate to the `frontend` directory and run `npx shadcn-ui@latest init`.
+- [ ] **Initialize Backend Project (AC: #4)**
+  - [ ] Create a Python virtual environment in the `backend` directory.
+  - [ ] Install FastAPI and Uvicorn.
+  - [ ] Create a basic `main.py` with a health check endpoint and a `requirements.txt` file.
+- [ ] **Create Shared Types Package (AC: #1)**
+  - [ ] Create `packages/shared-types/package.json` and a placeholder `index.ts`.
+- [ ] **Configure Environment Variables (AC: #5)**
+  - [ ] Create a `.env.example` file in the `frontend` directory with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+  - [ ] Create a `.env.example` file in the `backend` directory with `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`.
+- [ ] **Set up Vercel Deployment (AC: #6, #7)**
+  - [ ] Configure the Vercel project to correctly build the monorepo, identifying the frontend and backend components.
+  - [ ] Add the Supabase environment variables to the Vercel project settings for both Production and Preview deployments.
+- [ ] **Verification and Testing (AC: #1, #2, #3, #4, #7)**
+  - [ ] [Test] Run `pnpm install` at the root and verify that all workspace dependencies are linked without errors.
+  - [ ] [Test] Run the Next.js development server and confirm the default application page loads correctly in a browser.
+  - [ ] [Test] Run the FastAPI development server and confirm the health check endpoint is accessible and returns a success status.
+  - [ ] [Test] After merging to the `main` branch, verify that the Vercel deployment completes successfully and the live application URL loads the default frontend and is accessible.
 
 ## Dev Notes
 
@@ -104,15 +107,15 @@ No `unified-project-structure.md` found. Alignment will be based on the Architec
 
 ### References
 
-- [Source: docs/architecture.md]
-- [Source: docs/epics.md]
-- [Source: .bmad/bmm/workflows/4-implementation/create-story/workflow.yaml]
+- [Source: docs/sprint-artifacts/tech-spec-epic-1.md#Acceptance-Criteria-Authoritative]
+- [Source: docs/architecture.md#System-Architecture-Alignment]
+- [Source: docs/epics.md#epic-1-foundation--setup]
 
 ## Dev Agent Record
 
 ### Context Reference
 
-<!-- Path(s) to story context XML will be added here by context workflow -->
+- docs/sprint-artifacts/1-1-initialize-project-repositories-structure.context.xml
 
 ### Agent Model Used
 
@@ -124,22 +127,11 @@ gemini-1.5-flash
 
 ### File List
 
+
 ## Change Log
-- tirsdag 2. desember 2025: Story drafted by BIP.
 
-## Dev Notes
+<!-- 
+- YYYY-MM-DD: (User) Description of change.
+-->
 
-- Relevant architecture patterns and constraints: Monorepo structure, Next.js, FastAPI, Shadcn/UI for frontend/backend setup. Use PNPM Workspaces.
-- Source tree components to touch: Root `package.json`, `frontend/`, `backend/`, `packages/shared-types/` directories.
-- Testing standards summary: Not directly applicable for initial setup, but ensure basic project initialization leads to runnable projects.
 
-### Project Structure Notes
-
-- Alignment with unified project structure (paths, modules, naming): Project structure should align with `architecture.md` diagram and use `packages/shared-types` for shared types.
-- Detected conflicts or variances (with rationale): None detected at this initialization stage.
-
-### References
-
-- [Source: docs/architecture.md]
-- [Source: docs/epics.md]
-- [Source: .bmad/bmm/workflows/4-implementation/create-story/workflow.yaml]
