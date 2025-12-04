@@ -86,12 +86,12 @@ I prosjektet oppstod flere KI-spesifikke utfordringer, knyttet til feil kodegene
 
 ### (JENNY) 4.1 Fordeler med KI-assistanse
 
-**Effektivitet og produktivitet:**
+**[v] Effektivitet og produktivitet:**
 KI hadde en tydelig, men todelt innvirkning på arbeidshastigheten i prosjektet. På den ene siden førte utfordringene beskrevet i «3.1 Tekniske utfordringer» til at enkelte oppgaver tok lengre tid enn om de hadde blitt løst manuelt. På den andre siden ga KI en betydelig fordel, spesielt for gruppemedlemmer med mindre erfaring innen prosjektarbeid og utvikling. KI bidro med veiledning, forslag til løsninger og tydelig fremgangsmåte som gjorde det enklere å komme videre i prosjektet. Den økte også effektiviteten ved å håndtere validering av dokumenter, genererte alternativer og løste oppgaver som vanligvis krever mer tid og teknisk innsikt. I tillegg førte samarbeidet med KI til økt læring rundt bruken av GitHub, noe som igjen ga en bedre forståelse i en ryddig og effektiv arbeidsflyt gjennom prosjektet.
 
 Flere oppgaver ble betydelig mer effektive med KI, som for eksempel utarbeidelsen av UX-design. Her kom KI med forslag til farger, layout og alternative visuelle løsninger, som gjorde det langt enklere for gruppen å ta beslutninger uten lange diskusjoner. I tillegg viste PDD-prosessen (Prompt Driven Development) seg å være svært effektiv. Ved å formulere presise og detaljerte prompter kunne KI generere avanserte komponenter som ellers ville krevd omfattende og tidkrevende manuelt arbeid. Dette inkluderte blant annet komplekse integrasjoner som SQLAlchemy ORM-tilkobling og strukturert JSON-resons. Dette viste hvordan KI kunne akselerere den tekniske utviklingen når promptene var tydelige og godt utformet.
 
-**Læring og forståelse:**
+**[v] Læring og forståelse:**
 Gjennom prosjektet lærte vi hvordan man integrerer Gemini i Visual Studio Code lokalt på egen pc, og erfarte hvor viktig det er å formulere tydelige og presise prompter for å få KI til å levere ønskede resultater. En arbeidsform som ofte omtales som «vibe coding». Vi fikk også god innsikt i hvordan ulike KI-agenter innenfor rammeverket BMAD-metoden fungerer, hvordan de kan brukes i ulike deler og faser av prosjektet, hvilke oppgaver de behersker, og når de er mest hensiktsmessige å bruke. Samlet ga dette oss en praktisk erfaring med BMAD-metoden og bedre forståelse av hvordan den kan brukes i fremtidige prosjekter.
 
 KI bidro til økt forståelse av sentrale konsepter gjennom prosjektet. Valideringen av de ulike filene gjorde at vi måtte reflektere grundigere over egne valg og tenke flere steg frem i utviklingen. Innen UX-design ble dette veldig tydelig, der KI kom med visuelle forslag og strukturelle løsninger, noe som gjorde at vi måtte klargjøre hvordan applikasjonen faktisk skulle se ut og hvilke funksjonelle elementer den skulle inneholde. Ved å presentere ulike design hjalp KI oss med å se for oss applikasjonen i praksis, noe som både motivert gruppen og ga en klarere forståelse av hvordan sluttproduktet burde utformes.
@@ -107,31 +107,21 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 * Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
 
 ### (MARITA) 4.2 Begrensninger og ulemper
-[Reflekter over de negative aspektene]
 
-**(MARITA) Kvalitet og pålitelighet:**
-- [Eksempler på feil eller dårlige løsninger fra KI]
-  Vanskelig å vurdere hva som er en dårlig løsning siden 3 av 4 på gruppen ikke har så mye kunnskap om utvikling fra før av. Vi synes det har vært vanskelig å avgjøre hva som er en dårlig eller mindre dårlig kode og løsning siden erfaringen ikke strekker til. Dermed har flesteparten av oss stolt på KIen for hva som er best for prosjektet. Vanligvis ville kanskje lærdommen vært å funnet kode ut ifra hva som finnes i  ulike kanaler, kommentarer og erfaring knyttet koden som er tilgjengelig. Gjentattte ganger fortalte vi KIen at vi kun skal implementere CVAI som en nettside designet for pc. KIen spurte derimot ofte om applikasjonen også skal utvikler til mobil og tablet.
-- [Hvordan oppdaget og håndterte dere disse?]
-  Vi hadde en utvikler på gruppen som kvalitetssikret koden. Når koden ikke gikk i "riktig retning" var det en på gruppen som har tidligere kunnskap om utvikling og kunne se feil med koden.
-  - Og hva av valideringen av PRD, epics, UX-design og arkitetur.
+**[v] Kvalitet og pålitelighet:**
+Det er vanskelig å vurdere hva som er en dårlig løsning siden 3 av 4 på gruppen ikke har så mye kunnskap om utvikling fra før av. Vi synes det har vært vanskelig å avgjøre hva som er en dårlig eller mindre dårlig kode og løsning siden erfaringen ikke strekker til. Dermed har flesteparten av oss stolt på KIen for hva som er best for prosjektet. Vanligvis ville kanskje lærdommen vært å funnet kode ut ifra hva som finnes i  ulike kanaler, kommentarer og erfaring knyttet koden som er tilgjengelig. Gjentattte ganger fortalte vi KIen at vi kun skal implementere CVAI som en nettside designet for pc. KIen spurte derimot ofte om applikasjonen også skal utvikles til mobil og tablet.
+
+Vi hadde en utvikler på gruppen som kvalitetssikret koden. Når koden ikke gikk i "riktig retning" var det en på gruppen som har tidligere kunnskap om utvikling og kunne se feil med koden. I tillegg har vi også validert alle de etablerte dokumentene for å kvalitetssikre filene i prosjektet, eksempelvis valideringen av PRD, epics, UX-design og arkitetur.
  
-**(Marita) Avhengighet og forståelse:**
-- [Ble dere for avhengige av KI?]
-  Ja, fordi det er det som blir forespeilet av faglærer og faget, samt tidspress. Det er også mangel på kunnskap, så derfor blir man avhengig av KI når utvikleren vår ikke er tilstede.
-  Hele faget er i tillegg lagt opp til å skulle bruke KI for å generere applikasjonen, så vi har vært avhengig.
-- [Var det tilfeller hvor KI hindret læring?]
-  Vi vet ikke om KI har hindret læring fordi vi har som regel fulgt KI's anbefalinger i dialog, samt BIP sine anbefalinger fra forelesningene.
-  Reperer; at vi skal bruke KI til å lage dokumenter og koden, så det er ikke så mye læring fra den siden. Vi har kun spesifisert for KI hva vi vil ha.
+**[v] Avhengighet og forståelse:**
+Hele emnet er lagt opp til å skulle bruke KI for å generere applikasjonen. Vi har derfor vært avhengig av KIen fordi det er det som blir forespeilet av faglærer, samt at det har vært et tidsperspektiv for utvikling av prosjektet. I tillegg har KI vært viktig når det har manglet tidligere faglig kompetanse. 
+
+Vi har ikke lært å kode manuelt, noe vi mener KIen har hindret oss i å lære, "learning by doing". Prosjektgruppa har som regel fulgt KIens anbefalinger i dialogene, samt faglæreren sine anbefalinger fra forelesningene. Som nevnt har vi benyttet oss av BMAD-metoden, slik at læringen har hatt større fokus på å bruke BMAD-rammeverket. 
  
-**(Marita) Kreativitet og problemløsning:**
-- [Påvirket KI deres egen kreativitet?]
-  Cons: at Gemini rote med kodene, skriver ikke en utfyllende kode. Be den gjentakende ganger fylle ut koden.
-  Ja, fordi den gav oss valg og muligheter som vi ikke hadde tenkt på. Og igjen den stimulerer kreativitet, med at det gir forslag og ser at det er mulig, som igjen åpner døren for noe mer.
-  KI forespeilet en stor applikasjon med mange muligheter og funksjoner, men vi så oss nødt holdt oss til scopet for at prosjektet ikke skulle bli for stort og omfattende.
-- [Eksempler på situasjoner hvor KI begrenset kreativ tenkning]
-  Ved push til github, laget ikke Backend-mappen, den sende alle filene utordnet. Mer aggresive med KI for å få den til å gjøre det vi ville.
-  Pga. lite erfaring ingen forventninger til applikasjonen og for oss når det kom KI som et nyttig verktøy og møter ikke på så mange begrensninger.
+**[v] Kreativitet og problemløsning:**
+KIen påvirket egen kreativitet, fordi den gav oss valg og muligheter som vi ikke hadde tenkt på. KIen stimulerer til kreativitet ved at den gir forslag og ser muligheter, som kan åpne dørene for funksjoner. KI forespeilet en stor applikasjon med mange muligheter og funksjoner, men vi så oss nødt til å holde oss til scopet for at prosjektet ikke skulle bli for stort og omfattende. 
+
+Prosjektgruppa hadde en visjon om hvordan applikasjonen skulle se ut. Et konkret eksempel er UX-design-fasen, der designet ble annerledes fordi KIen anbefalte sine egne forslag, og dermed ble prosjektgruppa enig om å gå for ett av de fire forslagene KIen kom med. Vi har i tilfelle hatt en mer aggresiv dialog med KI for å få den til å gjøre det vi har hatt ønske om.
 
 ### (FERNANDO) 4.3 Sammenligning: Med og uten KI
 [Reflekter over hvordan prosjektet ville vært uten KI]
