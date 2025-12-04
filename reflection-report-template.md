@@ -119,7 +119,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 * React Query will also help us manage errors specifically from our API calls.
 * Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
 
-### 4.2 Begrensninger og ulemper
+### (MARITA) 4.2 Begrensninger og ulemper
 [Reflekter over de negative aspektene]
 
 **Kvalitet og pålitelighet:**
@@ -148,7 +148,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
   - Ved push til github, laget ikke Backend-mappen, den sende alle filene utordnet. Mer aggresive med KI for å få den til å gjøre det vi ville.
   - Pga. lite erfaring ingen forventninger til applikasjonen og for oss når det kom KI som et nyttig verktøy og møter ikke på så mange begrensninger.
 
-### 4.3 Sammenligning: Med og uten KI
+### (FERNANDO) 4.3 Sammenligning: Med og uten KI
 [Reflekter over hvordan prosjektet ville vært uten KI]
 - Hva ville vært annerledes?
   - Kodingen ville vært annerledes, og blitt mer manuell, ikke gått på automatikk.
@@ -161,7 +161,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
   - Uten KI ville vi kjent mer på tidspresset og med tanke på kun 6 uker til å utviklie prosjektet hadde sluttresultatet blitt dårligere. Med kun 6 uker er det ingen tvil på at KI har gjort det enklere.
   - Pga. manglende kunnskap/erfaring var det ingen garanti for at vi kunne blitt ferdig med prosjektet uten KI innen 6 uker.
 
-### 4.4 Samlet vurdering
+### (SAMMEN) 4.4 Samlet vurdering
 [Konklusjon: Hvordan påvirket KI sluttresultatet totalt sett?]
 - Var KI en netto positiv eller negativ faktor?
   - KI var en netto poritiv faktor pga. tidspresset og manglende tidligere erfaring/kunnskap.
@@ -269,7 +269,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 
 ## 7. Konklusjon og læring
 
-### 7.1 Viktigste lærdommer
+### (SAMMEN) 7.1 Viktigste lærdommer
 [Liste de 3-5 viktigste tingene dere lærte gjennom prosjektet]
 1. Lærdom 1: Hvordan samarbeide om kode i Github
 2. Lærdom 2: At det er mulig å snakke med Gemini i egen VS code
@@ -277,7 +277,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 4. Lærdom 4: Hvilke verktøy som finnes som er mulig å bruke, eks. Stitch with goggle
 5. Lærdom 5:
 
-### 7.2 Hva ville dere gjort annerledes?
+### (SAMMEN) 7.2 Hva ville dere gjort annerledes?
 [Reflekter over hva dere ville endret hvis dere skulle startet på nytt]
 - [Tekniske valg]
   - 
@@ -286,7 +286,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 - [Samarbeid og organisering]
   - Ingenting vi kunne gjort annerledes mtp. tidskapasitet og forskjellig tilnærming til hverdagen.
 
-### 7.3 Anbefalinger
+### (SAMMEN) 7.3 Anbefalinger
 [Deres anbefalinger til andre studenter som skal bruke KI i utvikling]
 - [Råd om effektiv bruk av KI]
   - Viktig å få KI integrert til egen pc.
