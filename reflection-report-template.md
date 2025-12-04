@@ -124,17 +124,12 @@ KIen påvirket egen kreativitet, fordi den gav oss valg og muligheter som vi ikk
 Prosjektgruppa hadde en visjon om hvordan applikasjonen skulle se ut. Et konkret eksempel er UX-design-fasen, der designet ble annerledes fordi KIen anbefalte sine egne forslag, og dermed ble prosjektgruppa enig om å gå for ett av de fire forslagene KIen kom med. Vi har i tilfelle hatt en mer aggresiv dialog med KI for å få den til å gjøre det vi har hatt ønske om.
 
 ### (FERNANDO) 4.3 Sammenligning: Med og uten KI
-[Reflekter over hvordan prosjektet ville vært uten KI]
-- Hva ville vært annerledes?
-  - Kodingen ville vært annerledes, og blitt mer manuell, ikke gått på automatikk.
-  - Satsen (tiden) hadde vært større.
-  - Applikasjonen hadde vært mye "enklere", flere features.
-- Hvilke deler av prosjektet ville vært vanskeligere/lettere?
-  - Hele prosjektet hadde vært vanskligere og mye mer tidkrevende.
-  - Lettere: Fikset feilene for "hånd".
-- Ville sluttresultatet vært bedre eller dårligere?
-  - Uten KI ville vi kjent mer på tidspresset og med tanke på kun 6 uker til å utviklie prosjektet hadde sluttresultatet blitt dårligere. Med kun 6 uker er det ingen tvil på at KI har gjort det enklere.
-  - Pga. manglende kunnskap/erfaring var det ingen garanti for at vi kunne blitt ferdig med prosjektet uten KI innen 6 uker.
+Hvordan ville prosjektet vært annerledes uten KI?
+Uten KI ville planleggingen gått betydelig saktere, fordi vi måtte da har gjort mye mer arbeid på forhånd før vi kunne i det hele tatt kunne begynne å utvikle. Applikasjonen ville sannsynligvis blitt mye enklere og mer begrenset i funksjonalitet, ettersom vi måtte ha forstått hver enkelt del av teknologien før vi kunne anvende den. Dette innebærer alt fra database oppsett til frontend-struktur og backend-logikk. Uten KI som støtte ville vi som gruppe kjent mye sterkere på tidspresset. Prosjektet foregikk gjennom en periode av 6 uker, og med vår erfaring ville det ha vært utfordrende å få på plass en funksjonell løsning uten å bli betydelig mer stresset i prosessen.
+Hvilke deler av prosjektet ville vært vanskeligere/lettere?
+Mange deler av prosjektet vært betydelig vanskeligere for oss uten hjelp av KI. Backend-utvikling, arkitekturforståelse, feilsøking og dokumentasjonsarbeid ville krevd langt mer tid og opplæring før vi kunne i det hele tatt implementere noe funksjonelt. KI hjalp oss med å få et overblikk over strukturen, generer store deler av koden og ga oss forklaringer som gjorde utviklingsprosessen raskere. Samtidig må vi anerkjenne at enkelte ting kunne har vært lettere uten KI. Hvis vi hadde skrevet koden selv så hadde vi hatt bedre oversikt og eventuelt forståelse av applikasjonen. Vi hadde utviklet enn mye enklere applikasjon, uten risiko for over-engineering eller komplekse løsninger vi ikke helt forsto.
+Ville sluttresultatet vært bedre eller dårligere?
+Sluttresultatet hadde sannsynligvis blitt mindre omfattende og betydelig mindre funksjonelt enn det vi endte opp med. Det er også lite realistisk at vi hadde klart å ferdigstille en komplett applikasjon innen seks uker, gitt vår erfaring og prosjektets kompleksitet. Selv om resultatet kanskje kunne fått en mer «Ren» kvalitet gjennom manuelt arbeid, ville det gå ha gått på bekostning av funksjonalitet og fremdrift siden manuell koding hadde innført en drastisk økning i arbeidsmengde og stressnivå, som kunne ha påvirket gruppens læringsutbytte og samarbeid.
 
 ### (SAMMEN) 4.4 Samlet vurdering
 [Konklusjon: Hvordan påvirket KI sluttresultatet totalt sett?]
@@ -155,14 +150,10 @@ Når KI generer kode sikrer man kvalitet ved god research av hva som har blitt g
 
 Når det gjelder opphavsrett og intellektuell eiendom er det vanskelig å vite hvor KIen har hentet informasjonen fra. Det er derfor vanskelig å referere til eller gi kreditt til den eller de det gjelder.
  
-### (MARITA) 5.2 Transparens
-- Bør det være transparent at KI er brukt?
-   Vårt skole-prosjekt har gått ut på å bruke KI til å produsere applikasjonen, og av den grunn har vi valgt å ikke referere til Gemini, men ved eventuell publiseringen hadde det gått ant å legge til et vannmerke/informasjon ("om oss") nederst i applikasjonen med beskjed om at "KI er brukt i produksjonen".
-  Generelt: ja, det skal referes til KI for å kunne kvalitetsikre hvor informasjonen er hentet fra.
-- Hvordan dokumenterer man KI sin bidrag?
-  Å dokumentere KI sitt bidrag er ved kilde henvisning og loggføring av promptingen og dialogen med KI.
-- Hva er konsekvensene av å ikke være åpen om KI-bruk?
-  Konsekvens av å ikke være åpen om KI-bruk kan føre til plagiat. Det er mye som er lov, men det skal ikke være samme kode. En kode er som regel patent til eieren: https://appitventures.com/blog/software-copyrights-vs-software-patents-protecting-the-intellectual-property-of-your-software?utm_source=chatgpt.com
+### [v] 5.2 Transparens
+Prosjektet vårt har gått ut på å bruke KI til å produsere applikasjonen. I denne sammenheng kunne det vært en ide å referere til at det er benyttet KI, eventuelt merke med "KI er brukt i produksjonen" ved dashboardet. Vi synes det er viktig at det kommer fram at det er brukt KI i produksjonen, men siden dette er et prosjekt i regi av skolen har vi valgt å ikke merke applikasjonen med Gemini.
+ 
+Å dokumentere KI sitt bidrag kan være ved bruk av kildehenvisning og loggføring av promptingen, samt dialogene vi har hatt med KI. En av konsekvensene om ikke å være åpen om at KI er benyttet kan være at brukerne hos CVAI blir feilinformert, noe som i utgangspunktet bør opplyses om.
 
 ### [v] 5.3 Påvirkning på læring og kompetanse
 KI-avhengighet trosser mulighet til å lære og forstå kodens oppbygging. Det er veldig lett å stole blindt på KI, uten å gjøre egen research. Det kan derfor være lurt å alltid ha et kritisk blikk til svarene KIen gir. Det er også lett å miste kontekst til koden ved å bruke KI, samt at det er større sannsynlighet for å få feil i koden. Eksempelvis ved en feil så er man usikker på hvordan feilen skal løses eller hvor den finnes. I tillegg risikerer brukeren å utvikle dårlig logisk tenkning, fordi man blir vant med at KIen tenker for deg. Brukeren blir bortskjemt med å få koden ferdig generert og servert. Det kan føre til dårlig kodekvalitet.
@@ -172,8 +163,7 @@ Man risikerer ikke å utvikle logisk tenkning, samt at det blir lite av kreativ 
 Vår lærer benyttet seg mye av yolo-modus ved Gemini. Vi har derimot valgt under hele prosessen å unngå yolo-modus for å verifisere alle endringene, ved å lese igjennom, samt ha bedre oversikt over hva som skjer i de ulike prosessene. I de aller fleste tilfeller har vi valgt "yes, allow once", evt. "allow always".
  
 ### [v] 5.4 Arbeidsmarkedet
-Primært kan KI påvikre kunnskapen til folk innen IT-bransjen for at terskelen blir mindre. Særlig jobber som går ut på automtisering og generell drift blir påvirket av KI-bruk Artikkelen Kunstig intelligens: hvordan vil det påvirke oss? publisert av Ipsos (2023) viser til statistikk på hvilke bransjer og jobber som ugir seg for å være mest utsatt ved at KI kan ta over. 
-Hentet fra: https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss.
+Primært kan KI påvikre kunnskapen til folk innen IT-bransjen for at terskelen blir mindre. Særlig jobber som går ut på automtisering og generell drift blir påvirket av KI-bruk Artikkelen Kunstig intelligens: hvordan vil det påvirke oss? publisert av Ipsos (2023) viser til statistikk på hvilke bransjer og jobber som ugir seg for å være mest utsatt ved at KI kan ta over. Hentet fra: https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss.
 
 Roller som i dette prosjektet er mindre viktig befinner seg, mener vi, i jobbene innenfor språk og oversettelse, samt alle roller som kan automatiseres som nevnt tidligere. I tillegg lister vi opp roller som innenfor grafisk design, filmskaping, logistikk, transport og lager, som også Ipsos sin artikkel referer til. Viktigere roller som direkte kan berøre prosjektet er rollen som data scientist. De validerer og sikrer koder, og tester ut hvilke modeller som passer best til hvilke bruk. I tillegg er det KI-utviklere og selskaper som utvikler KI-modeller vi bruker pr dags dato som for eksempel OpenAI.
 
