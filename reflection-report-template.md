@@ -53,12 +53,28 @@ Se proposal
     - UX-design og arkitektur sesjonene ble logget under mappen .logging
 
 **(MICHEAL) Fase 2: Utvikling**
-- [Hva gjorde dere i denne fasen?]
-  - 
-- [Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
-  - 
+(MICHEAL) Fase 2: Utvikling
 
----
+[Hva gjorde dere i denne fasen?]
+
+Vi realiserte planene fra fase 1 ved å utvikle en fullstack-løsning med FastAPI (Backend) og Next.js (Frontend). En av de viktigste tekniske beslutningene vi tok underveis, var å restrukturere prosjektet fra en flat filstruktur til en streng Monorepo-struktur med separate mapper for backend/ og frontend/. Dette var helt nødvendig for å holde orden på avhengighetene og unngå konflikter mellom Python- og Node-miljøene.
+
+Vi implementerte kjernefunksjonaliteten gjennom tre hovedflyter: 1) Brukerautentisering og profil-lagring mot Supabase, 2) Selve AI-analysen der backend kommuniserer med Gemini for å generere strukturerte data, og 3) En historikk-modul for å vise tidligere søknader. En betydelig del av denne fasen gikk med til å løse lokale miljøproblemer på Windows (som path-feil, uvicorn not found og import-problemer i Python), noe som krevde at vi måtte konfigurere virtuelle miljøer og systemstier manuelt.
+
+[Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
+
+Vi brukte Prompt-Driven Development (PDD) som hovedmetode. I stedet for å skrive koden manuelt, fungerte jeg som en teknisk arkitekt som skrev detaljerte instruksjonsfiler til KI-en.
+
+Konkret fremgangsmåte:
+
+Vi opprettet dedikerte markdown-filer for hver komponent, som for eksempel backend_guidelines.md for arkitekturen, main_api_prompt.md for API-logikken, og frontend_history_prompt.md for historikkvisningen.
+
+Disse promptene inneholdt spesifikke tekniske krav (f.eks. "Bruk Pydantic for validering", "Implementer RLS i Supabase").
+
+KI-en genererte den ferdige koden basert på disse instruksene, som vi deretter validerte og implementerte.
+
+Alle prompt-filene vi brukte er lagret i prosjektets mappestruktur (under prompts/ eller roten) som dokumentasjon på utviklingsprosessen. Vi brukte også KI aktivt til feilsøking, men lærte at vi måtte være kritiske til svarene når KI-en manglet kontekst om vårt lokale filsystem.
+
 
 ## 3. Utfordringer og løsninger
 
