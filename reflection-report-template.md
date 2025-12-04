@@ -74,21 +74,11 @@ Løsningen bestod i å starte Gemini på nytt, formulere promptene mer presist o
 
 KI hadde både en positiv og negativ innvirkning når denne utfordringen oppsto. Den skapte tidvis utfordringer ved å gå inn i «loops», men på den andre siden sparte den gruppen for betydelig tid ved å forslå ulike løsninger. Uten KI ville vi vært nødt til å hente tilsvarende informasjon gjennom omfattende research på plattformer som Reddit, GitHub og Stack Overflow.
 
-### (MARITA) 3.2 Samarbeidsutfordringer
-[Utfordringer knyttet til teamarbeid og kommunikasjon]
-- [Beskriv utfordringer og hvordan dere løste dem]
-- Pro: delt skjerm på teams under ukentlig møter.
-- Utfordrendende tidskjema, noen har fulltids jobb, andre fulltids student med deltids jobbe, og vanskelig å få finne tid som passet alle for å få et møte så alle får med selv fremskritene i prosjektet. Løsning: de som kunne møte møtes for å jobbe videre med prosjektet.
-- Alle har ulike tilnærminger til hverdagen, men har alltid klart å legge til rette
-- Jo nærmere tidfristen, jo flere møter har vi planlagt. 
-- Utfordernde å skape en rutine
-- Alle på gruppen hadde forskjellig erfaringer og kunnskap fra før. Noen har hatt mer behov for stegvis prosess, mens andre har ønsket å kjøre en raskere vei mot mål, da de har vært igjennom dette før.
-
-### (JENNY) 3.3 KI-spesifikke utfordringer
-I prosjektet oppstod flere KI-spesifikke utfordringer, knyttet til feil kodegenerering, misforståelser i dialogen og varierende kvalitet på svarene. Mange av disse problemene var de samme som tidligere beskrevet i utfordring 1 og 2, der både gratisversjonen av Gemini og «loops» i dialogen skapte hindringer for en effektiv arbeidsflyt. Disse utfordringene ble håndtert på samme måte som beskrevet under punktet «Løsning» over. 
-
-- [Hvordan håndterte dere disse?]
-Det innebar å starte KI-sesjoner på nytt, forbedre og presisere promptene, samt bytte bruker når kontekstvinduet var for belastet. I noen tilfeller var det også nødvendig å oppgradere til en betalt versjon av Gemini for å oppnå mer stabil ytelse. Disse tiltakene var avgjørende for å sikre fremdrift i arbeidet når KI enten låste seg i repetisjoner eller leverte inkonsistente resultater.
+### [v] 3.2 Samarbeidsutfordringer
+Prosjektgruppen har under hele prosessen delt skjerm på Teams under ukentlig møter. Derimot har vi hatt et utfordrendende tidskjema hvorav noen har fulltidsjobb mens andre er fulltidsstudenter med deltidsjobb. Derfor har det til tider vært vanskelig å få finne tidspunkt for møte som passet for alle. Måten vi har løst det på, er at vi har satt opp tidspunkter langt fran i tid, så har de som har hatt mulighet for å stille, vært med i møte. Vi har som gruppe lagt til rette for hverandre tilnærminger til hverdagen, samt tatt hensyn til hveradres jobb og studie. Jo nærmere tidfristen, jo flere møter har vi planlagt. Alle på gruppen hadde forskjellig erfaringer og kunnskap fra før av før emnet ble inntatt, og noen har hatt mer behov for stegvis prosess, mens andre har ønsket å kjøre en raskere vei mot mål, da de har vært igjennom dette før.
+ 
+### [v] 3.3 KI-spesifikke utfordringer
+I prosjektet oppstod flere KI-spesifikke utfordringer, knyttet til feil kodegenerering, misforståelser i dialogen og varierende kvalitet på svarene. Mange av disse problemene var de samme som tidligere beskrevet i utfordring 1 og 2, der både gratisversjonen av Gemini og «loops» i dialogen skapte hindringer for en effektiv arbeidsflyt. Disse utfordringene ble håndtert på samme måte som beskrevet under «Løsningen...» over.
 
 ---
 
@@ -99,7 +89,7 @@ Det innebar å starte KI-sesjoner på nytt, forbedre og presisere promptene, sam
 **Effektivitet og produktivitet:**
 KI hadde en tydelig, men todelt innvirkning på arbeidshastigheten i prosjektet. På den ene siden førte utfordringene beskrevet i «3.1 Tekniske utfordringer» til at enkelte oppgaver tok lengre tid enn om de hadde blitt løst manuelt. På den andre siden ga KI en betydelig fordel, spesielt for gruppemedlemmer med mindre erfaring innen prosjektarbeid og utvikling. KI bidro med veiledning, forslag til løsninger og tydelig fremgangsmåte som gjorde det enklere å komme videre i prosjektet. Den økte også effektiviteten ved å håndtere validering av dokumenter, genererte alternativer og løste oppgaver som vanligvis krever mer tid og teknisk innsikt. I tillegg førte samarbeidet med KI til økt læring rundt bruken av GitHub, noe som igjen ga en bedre forståelse i en ryddig og effektiv arbeidsflyt gjennom prosjektet.
 
-Flere oppgaver ble betydelig mer effektive med KI, som for eksempel utarbeidelsen av UX-design. Her kom KI med forslag til farge, layout og alternative visuelle løsninger, som gjorde det langt enklere for gruppen å ta beslutninger uten lange diskusjoner. I tillegg viste PDD-prosessen (Prompt Driven Development) seg å være svært effektiv. Ved å formulere presise og detaljerte prompter kunne KI generere avanserte komponenter som ellers ville krevd omfattende og tidkrevende manuelt arbeid. Dette inkluderte blant annet komplekse integrasjoner som SQLAlchemy ORM-tilkobling og strukturert JSON-resons (llm_service.py). Dette viste hvordan KI kunne akselerere tekniske utviklingen når promptene var tydelige og godt utformet.
+Flere oppgaver ble betydelig mer effektive med KI, som for eksempel utarbeidelsen av UX-design. Her kom KI med forslag til farger, layout og alternative visuelle løsninger, som gjorde det langt enklere for gruppen å ta beslutninger uten lange diskusjoner. I tillegg viste PDD-prosessen (Prompt Driven Development) seg å være svært effektiv. Ved å formulere presise og detaljerte prompter kunne KI generere avanserte komponenter som ellers ville krevd omfattende og tidkrevende manuelt arbeid. Dette inkluderte blant annet komplekse integrasjoner som SQLAlchemy ORM-tilkobling og strukturert JSON-resons. Dette viste hvordan KI kunne akselerere den tekniske utviklingen når promptene var tydelige og godt utformet.
 
 **Læring og forståelse:**
 Gjennom prosjektet lærte vi hvordan man integrerer Gemini i Visual Studio Code lokalt på egen pc, og erfarte hvor viktig det er å formulere tydelige og presise prompter for å få KI til å levere ønskede resultater. En arbeidsform som ofte omtales som «vibe coding». Vi fikk også god innsikt i hvordan ulike KI-agenter innenfor rammeverket BMAD-metoden fungerer, hvordan de kan brukes i ulike deler og faser av prosjektet, hvilke oppgaver de behersker, og når de er mest hensiktsmessige å bruke. Samlet ga dette oss en praktisk erfaring med BMAD-metoden og bedre forståelse av hvordan den kan brukes i fremtidige prosjekter.
