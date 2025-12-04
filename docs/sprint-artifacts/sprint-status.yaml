@@ -35,7 +35,7 @@ story_location: "{project-root}/docs/sprint-artifacts"
 
 development_status:
   epic-1: contexted
-  1-1-initialize-project-repositories-structure: ready-for-dev
+  1-1-initialize-project-repositories-structure: ready-for-review
   1-2-configure-supabase-integration: drafted
   1-3-implement-basic-ci-cd-pipeline: backlog
   epic-1-retrospective: optional

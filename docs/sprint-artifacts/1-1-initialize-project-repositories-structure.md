@@ -1,6 +1,6 @@
 # Story 1.1: Initialize Project Repositories & Structure
 
-Status: ready-for-dev
+Status: ready-for-review
 
 ## Story
 

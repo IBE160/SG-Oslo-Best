@@ -10,7 +10,7 @@
 - Fernando Miguel Valle Prado - fernando.m.prado@himolde.no
 - Jenny Løvik Brøyn - jenny.l.broyn@himolde.no
 
-**Dato:** [DD.MM.2025]
+**Dato:** 05.12.2025
 
 ---
 
@@ -163,7 +163,7 @@ Når det gjelder opphavsrett og intellektuell eiendom er det vanskelig å vite h
   Å dokumentere KI sitt bidrag er ved kilde henvisning og loggføring av promptingen og dialogen med KI.
 - Hva er konsekvensene av å ikke være åpen om KI-bruk?
   Konsekvens av å ikke være åpen om KI-bruk kan føre til plagiat. Det er mye som er lov, men det skal ikke være samme kode. En kode er som regel patent til eieren: https://appitventures.com/blog/software-copyrights-vs-software-patents-protecting-the-intellectual-property-of-your-software?utm_source=chatgpt.com
- 
+
 ### [v] 5.3 Påvirkning på læring og kompetanse
 KI-avhengighet trosser mulighet til å lære og forstå kodens oppbygging. Det er veldig lett å stole blindt på KI, uten å gjøre egen research. Det kan derfor være lurt å alltid ha et kritisk blikk til svarene KIen gir. Det er også lett å miste kontekst til koden ved å bruke KI, samt at det er større sannsynlighet for å få feil i koden. Eksempelvis ved en feil så er man usikker på hvordan feilen skal løses eller hvor den finnes. I tillegg risikerer brukeren å utvikle dårlig logisk tenkning, fordi man blir vant med at KIen tenker for deg. Brukeren blir bortskjemt med å få koden ferdig generert og servert. Det kan føre til dårlig kodekvalitet.
 
