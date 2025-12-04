@@ -16,29 +16,28 @@
 
 ## 2. Utviklingsprosessen
 
-### (JENNY) 2.1 Oversikt over prosjektet
+### [v] 2.1 Oversikt over prosjektet
 Dette prosjektet handler om å utvikle en applikasjon som skal bistå studenter ved Høgskoler og Universiteter. Applikasjonen tar inn CV, stillingsannonse og eventuelle instruksjoner som input, og genererer deretter et tilpasset søknadsbrev basert på denne informasjonen.
 
-### (JENNY) 2.2 Arbeidsmetodikk
-- Hvordan fordelte dere oppgaver?
+### [v] 2.2 Arbeidsmetodikk
 Arbeidet i prosjektet ble organisert gjennom ansvarsområder og faste rutiner. Gruppen på fire personer, med to medlemmer i Molde og to i Oslo, bestemte tidlig at det å holde jevnlige ukentlige møter ville sikre tett samarbeid til tross for geografisk avstand. Siden gruppen har en erfaren utvikler, fikk vedkommende hovedansvaret for utviklings-delen av prosjektet, mens øvrige oppgaver ble fordelt slik at alle kunne bidra der de hadde mest kompetanse og engasjement.
-- Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte?
+
 For samarbeid og kommunikasjon i de ukentlige møtene benyttet vi oss av Teams som primær kommunikasjonsplattform. Discord ble vurdert, men Teams ble valgt fordi flere hadde kjennskap til det. Gjennom Teams kunne vi enkelt dele dataskjerm, noe som gjorde det mulig for alle å følge arbeidet i sanntid og komme med innspill underveis. I tillegg ble Git brukt til versjonskontroll og koordinert utvikling, noe som sikret god oversikt og kontroll på endringer gjennom hele prosjektet.
-- Hvordan brukte dere KI-verktøy i prosessen?
+
 KI-verktøy hadde en viktig funksjon i prosessen, blant annet gjennom bruk av Gemini integrert i VS Code og Chat GPT som støtte til idéutvikling, feilsøking og gjennomføring av utviklingsoppgaver gjennom hele prosjektet.
 
-### (JENNY) 2.3 Teknologi og verktøy
+### [v] 2.3 Teknologi og verktøy
+De viktigste teknologiene og verktøyene vi brukte i prosjektet:
 - Frontend: Next.js, React, Tailwind CSS
 - Backend: Python, FastAPI
 - Database: Supabase (PostgreSQL)
-- KI-verktøy: Gemini CLI, GPT-5 Codex
+- KI-verktøy: Gemini CLI, GPT-5 Codex, Chat GPT
 - Andre verktøy: VS Code, BMAD, Teams
 
-
-### (JENNY) 2.4 Utviklingsfaser
+### 2.4 Utviklingsfaser
 
 **Fase 1: Analyse**
-I fase 1, analysefasen, begynte arbeidet med å utforme prosjektets proposal, der rammene og målene for prosjektet ble definert. Etter å ha lastet ned VS Code og integrert Gemini CLI og fått tilgang til BMAD-rammeverket, benyttet vi KI-agenten «analyse» ved brainstorming-øktene. Da resultatene fra disse øktene var gode nok, ble ideene kombinert med proposal-dokumentet, og analyse-agenten genererte deretter dokumentet product-brief.md. KI-verktøyet Gemini CLI, ble brukt til å identifisere aspekter ved proposalen som ellers kunne ha blitt oversett, og vi erfarte raskt at det var veldig enkelt å diskutere og utvide prosjektet til noe langt større enn opprinnelig planlagt. Brainstorming-delen ble strukturert ved hjelp av metodene «five whys», «six hats» og «what if». Alle promptene som ble brukt i disse sesjonene, er lagret i mappen `SG-Oslo-Best\prompt\project-brief\brainstorming`.
+I fase 1, analysefasen, begynte arbeidet med å utforme prosjektets proposal, der rammene og målene for prosjektet ble definert. Etter å ha lastet ned VS Code, integrert Gemini CLI og fått tilgang til BMAD-rammeverket, benyttet vi KI-agenten «analyse» ved brainstorming-øktene. Da resultatene fra disse øktene var gode nok, ble ideene kombinert med proposal-dokumentet, og deretter genererte vi dokumentet product-brief.md. KI-verktøyet Gemini CLI, ble brukt til å identifisere aspekter ved proposalen som ellers kunne ha blitt oversett, og vi erfarte raskt at det var veldig enkelt å diskutere og utvide prosjektet til noe langt større enn opprinnelig planlagt. Brainstorming-delen ble strukturert ved hjelp av metodene «five whys», «six hats» og «what if». Alle promptene som ble brukt i disse sesjonene, er lagret i mappen `SG-Oslo-Best\prompt\project-brief\brainstorming`.
 
 **Fase 2: Planlegging**
 I fase 2, planleggingsfasen, utviklet vi PRD.md (Product Requirement Document), som deretter fungerte som grunnlag for arbeidet med UX-design. I denne delen av prosessen ble struktur, visuell stil og ønsket brukeropplevelse definert, og det ble laget mockups for å konkretisere konseptet og teste hvordan applikasjonen skulle se ut i praksis. Arbeidet ble gjennomført ved bruk av Gemini og med agentene «product master» og «ux-designer». Alle tilhørende prompter og KI-dialoger ble loggført i mappen `SG-Oslo-Best\.logging\requests`.
@@ -62,20 +61,18 @@ I fase 4, implementasjonsfasen, bruker vi agenten «scrum master» (sm) for å l
 ### 3.1 Tekniske utfordringer
 
 **[v] Utfordring 1: Gratis version av Gemini**
-- Problem:
-  I prosjektarbeidet vårt oppstod det utfordringer ved å bruke gratisversjon av Gemini CLI. Spesielt knyttet til det å navigere i dialogen og manglende evne for Gemini å huske tidligere samtaler, prompt-strukturer og spørsmål. Dette førte til at kommunikasjonen med KI til tider ble tungvint og tidkrevende. Det ble også tydelig at gratisversjonen av Gemini CLI ikke alltid klarte å håndtere den nødvendige kompleksiteten og mengden forespørsler. 
-- Løsning:
-  Løsningen ble en kombinasjon av å «smøre seg» med god tålmodighet og at enkelte i gruppen valgte å oppgradere til den betalte versjonen av Gemini CLI, som tilbyr bedre kapasitet. Denne oppgraderingen ble en sentral teknisk beslutning for å sikre en stabil og funksjonell dataflyt, særlig i fullstack- og utviklingsfasen av prosjektet. 
-- KI sin rolle:
-  KI spilte både en problemløsende og en utfordrende rolle. Den kunne skape rot i prosjektet ved å genere kode som ikke samsvarte med øvrige filer, noe som resulterte i feil. Samtidig gjorde den omfattende dialogen det mulig å identifisere årsaken til problemene, og ved å sende detaljerte feilmeldinger tilbake til KI, kunne den rette feilene på en effektiv måte.
+I prosjektarbeidet vårt oppstod det utfordringer ved å bruke gratisversjon av Gemini CLI. Spesielt knyttet til det å navigere i dialogen og manglende evne for Gemini å huske tidligere samtaler, prompt-strukturer og spørsmål. Dette førte til at kommunikasjonen med KI til tider ble tungvint og tidkrevende. Det ble også tydelig at gratisversjonen av Gemini CLI ikke alltid klarte å håndtere den nødvendige kompleksiteten og mengden forespørsler. 
 
-**(JENNY) Utfordring 2: Loop med Gemini**
-- Problem:
-  I arbeidet med prosjektet oppstod det flere situasjoner der Gemini CLI havnet i såkalt «loops», der KI gjentok de samme tilbakemeldingene og feilene uten å føre prosessen videre. Dette skjedde oftest i lengre dialoger der kontekstvinduet allerede var tungt belastet og førte til at KI mistet oversikt og begynte å repetere fremfor å bygge videre.
-- Løsning:
-  Løsningen bestod i å starte Gemini på nytt, formulere promptene mer presist og være tålmodige for å bryte «loops». I tillegg viste det seg effektivt å bytte på hvem som jobbet med Gemini, ettersom et mindre belastet kontekstvindu og mindre bruk av «free tier» ga bedre resultater. Et eksempel, vi opplevde under valideringen av UX-design at Gemini gjentok de samme feilene, selv etter at vi hadde rettet dem og restartet systemet. Problemet viste seg å være at Gemini genererte en helt ny valideringsprosess for hver forespørsel. Da vi byttet til en annen bruker med et mindre belastet kontekstvindu, gjennomførte Gemini valideringen uten problemer. 
-- KI sin rolle:
-  KI hadde både en positiv og negativ innvirkning når denne utfordringen oppsto. Den skapte tidvis utfordringer ved å gå inn i «loops», men på den andre siden sparte den gruppen for betydelig tid ved å forslå ulike løsninger. Uten KI ville vi vært nødt til å hente tilsvarende informasjon gjennom omfattende research på plattformer som Reddit, GitHub og Stack Overflow.
+Løsningen ble en kombinasjon av å «smøre seg» med god tålmodighet og at enkelte i gruppen valgte å oppgradere til den betalte versjonen av Gemini CLI, som tilbyr bedre kapasitet. Denne oppgraderingen ble en sentral teknisk beslutning for å sikre en stabil og funksjonell dataflyt, særlig i fullstack- og utviklingsfasen av prosjektet. 
+
+KI spilte både en problemløsende og en utfordrende rolle. Den kunne skape rot i prosjektet ved å genere kode som ikke samsvarte med øvrige filer, noe som resulterte i feil. Samtidig gjorde den omfattende dialogen det mulig å identifisere årsaken til problemene, og ved å sende detaljerte feilmeldinger tilbake til KI, kunne den rette feilene på en effektiv måte.
+
+**[v] Utfordring 2: Loop med Gemini**
+I arbeidet med prosjektet oppstod det flere situasjoner der Gemini CLI havnet i såkalt «loops», der KI gjentok de samme tilbakemeldingene og feilene uten å føre prosessen videre. Dette skjedde oftest i lengre dialoger der kontekstvinduet allerede var tungt belastet og førte til at KI mistet oversikt og begynte å repetere fremfor å bygge videre.
+
+Løsningen bestod i å starte Gemini på nytt, formulere promptene mer presist og være tålmodige for å bryte «loops». I tillegg viste det seg effektivt å bytte på hvem som jobbet med Gemini, ettersom et mindre belastet kontekstvindu og mindre bruk av «free tier» ga bedre resultater. Et eksempel, vi opplevde under valideringen av UX-design at Gemini gjentok de samme feilene, selv etter at vi hadde rettet dem og restartet systemet. Problemet viste seg å være at Gemini genererte en helt ny valideringsprosess for hver forespørsel. Da vi byttet til en annen bruker med et mindre belastet kontekstvindu, gjennomførte Gemini valideringen uten problemer. 
+
+KI hadde både en positiv og negativ innvirkning når denne utfordringen oppsto. Den skapte tidvis utfordringer ved å gå inn i «loops», men på den andre siden sparte den gruppen for betydelig tid ved å forslå ulike løsninger. Uten KI ville vi vært nødt til å hente tilsvarende informasjon gjennom omfattende research på plattformer som Reddit, GitHub og Stack Overflow.
 
 ### (MARITA) 3.2 Samarbeidsutfordringer
 [Utfordringer knyttet til teamarbeid og kommunikasjon]
@@ -122,31 +119,29 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 ### (MARITA) 4.2 Begrensninger og ulemper
 [Reflekter over de negative aspektene]
 
-**Kvalitet og pålitelighet:**
+**(MARITA) Kvalitet og pålitelighet:**
 - [Eksempler på feil eller dårlige løsninger fra KI]
-  - Vanskelig å vurdere hva som er en dårlig løsning siden 3 av 4 på gruppen ikke har så mye kunnskap om utviklingen fra før. 
-  - Synes det har vært vanskelig å avgjøre hva som er en dårlig eller mindre dårlig kode/løsning siden erfaringen ikke strekker til. Dermed har flesteparten av oss stolt bl.a. på KIen for hva som er best for prosjektet. Vanligvis ville kanskje lærdommen vært å funnet kode ut ifra hva som finnes i  ulike kanaler, kommentarer og erfaring knyttet koden som er tilgjengelig.
+  Vanskelig å vurdere hva som er en dårlig løsning siden 3 av 4 på gruppen ikke har så mye kunnskap om utvikling fra før av. Vi synes det har vært vanskelig å avgjøre hva som er en dårlig eller mindre dårlig kode og løsning siden erfaringen ikke strekker til. Dermed har flesteparten av oss stolt på KIen for hva som er best for prosjektet. Vanligvis ville kanskje lærdommen vært å funnet kode ut ifra hva som finnes i  ulike kanaler, kommentarer og erfaring knyttet koden som er tilgjengelig. Gjentattte ganger fortalte vi KIen at vi kun skal implementere CVAI som en nettside designet for pc. KIen spurte derimot ofte om applikasjonen også skal utvikler til mobil og tablet.
 - [Hvordan oppdaget og håndterte dere disse?]
-  - Vi hadde en utvikler på gruppen som kvalitetssikret koden. Når koden ikke gikk i "riktig retning" var det en på gruppen som har tidligere kunnskap om utviklingen og kunne se feil med koden.
-  - Og vha av valideringen av PRD, epics, UX-design og arkitetur.
-
-**Avhengighet og forståelse:**
+  Vi hadde en utvikler på gruppen som kvalitetssikret koden. Når koden ikke gikk i "riktig retning" var det en på gruppen som har tidligere kunnskap om utvikling og kunne se feil med koden.
+  - Og hva av valideringen av PRD, epics, UX-design og arkitetur.
+ 
+**(Marita) Avhengighet og forståelse:**
 - [Ble dere for avhengige av KI?]
-  - Ja, fordi det er det som er blir forspeilet av faglærer og faget, og pga. tidspress.
-  - Mangel av kunnskap, avhengig av KI når utvikler vår ikke er tilstede.
-  - Pga. hele faget er lagt opp til å bruke KI for å generere applikasjonen, så har vi vært avhengig.
+  Ja, fordi det er det som blir forespeilet av faglærer og faget, samt tidspress. Det er også mangel på kunnskap, så derfor blir man avhengig av KI når utvikleren vår ikke er tilstede.
+  Hele faget er i tillegg lagt opp til å skulle bruke KI for å generere applikasjonen, så vi har vært avhengig.
 - [Var det tilfeller hvor KI hindret læring?]
-  - Vi vet ikke om KI har hindret læring fordi vi har som regel fulgt KI's anbefalinger i dialog, samt BIP sine anbefalinger fra forelesningene.
-  - Reperer; at vi skal bruke KI til å lage dokumenter og koden, så det er ikke så mye læring fra den siden. Vi har kun spesifisert for KI hva vi vil ha.
-
-**Kreativitet og problemløsning:**
+  Vi vet ikke om KI har hindret læring fordi vi har som regel fulgt KI's anbefalinger i dialog, samt BIP sine anbefalinger fra forelesningene.
+  Reperer; at vi skal bruke KI til å lage dokumenter og koden, så det er ikke så mye læring fra den siden. Vi har kun spesifisert for KI hva vi vil ha.
+ 
+**(Marita) Kreativitet og problemløsning:**
 - [Påvirket KI deres egen kreativitet?]
-  - Cons: at Gemini rote med kodene, skriver ikke en utfyllende kode. Be den gjentakende ganger fylle ut koden.
-  - Ja, fordi den gav oss valg og muligheter som vi ikke hadde tenkt på. Og igjen den stimulerer kreativitet, med at det gir forslag og ser at det er mulig, som igjen åpner døren for noe mer.
-  - KI forespeilet en stor applikasjon med mange muligheter og funksjoner, men vi så oss nødt holdt oss til scopet for at prosjektet ikke skulle bli for stort og omfattende.
+  Cons: at Gemini rote med kodene, skriver ikke en utfyllende kode. Be den gjentakende ganger fylle ut koden.
+  Ja, fordi den gav oss valg og muligheter som vi ikke hadde tenkt på. Og igjen den stimulerer kreativitet, med at det gir forslag og ser at det er mulig, som igjen åpner døren for noe mer.
+  KI forespeilet en stor applikasjon med mange muligheter og funksjoner, men vi så oss nødt holdt oss til scopet for at prosjektet ikke skulle bli for stort og omfattende.
 - [Eksempler på situasjoner hvor KI begrenset kreativ tenkning]
-  - Ved push til github, laget ikke Backend-mappen, den sende alle filene utordnet. Mer aggresive med KI for å få den til å gjøre det vi ville.
-  - Pga. lite erfaring ingen forventninger til applikasjonen og for oss når det kom KI som et nyttig verktøy og møter ikke på så mange begrensninger.
+  Ved push til github, laget ikke Backend-mappen, den sende alle filene utordnet. Mer aggresive med KI for å få den til å gjøre det vi ville.
+  Pga. lite erfaring ingen forventninger til applikasjonen og for oss når det kom KI som et nyttig verktøy og møter ikke på så mange begrensninger.
 
 ### (FERNANDO) 4.3 Sammenligning: Med og uten KI
 [Reflekter over hvordan prosjektet ville vært uten KI]
@@ -175,59 +170,50 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 
 ### (MARITA) 5.1 Ansvar og eierskap
 - Hvem er ansvarlig for koden når KI har bidratt?
-  - KI er en verktøy/hjelpemiddel som kan brukes, men ansavret og eieskaper til koden er personen(e) som sitter bak prompting av prosjektet. I dette tilfellet så har vi brukt BMAD-rammeverket som har stilt spørsmål til oss og vi har diskurtet og kommet fram til et svar, som KI igjen har brukt til å generere de nødvendige dokumentene.
+  KI er et verktøy og hjelpemiddel som kan brukes, men ansvaret og eieskapet til koden ligger hos personene som sitter bak prompting av prosjektet. I dette tilfellet så har vi brukt BMAD-rammeverket som har stilt spørsmål til oss og vi har diskurtet og kommet fram til et svar, som KI igjen har brukt til å generere de nødvendige dokumentene.
 - Hvordan sikrer man kvalitet når KI genererer kode?
-  - Sikrer kvalitet ved god research av hva som har blitt gjort tidligere. Det vi har gjort er å sende dokumentene gjennom en validering/checkliste for å sikre at dokumentene har med det som trengs for at det skal være minst mulig misforståelser når KI skal generere koden.
+  Man sikrer kvalitet ved god research av hva som har blitt gjort tidligere. Det vi har gjort er å sende dokumentene gjennom en validering og en form for checkliste for å sikre at dokumentene har med det som trengs for at det skal være minst mulig misforståelser når KI skal generere koden.
 - Diskuter spørsmål om opphavsrett og intellektuell eiendom
-  - Det er vanskelig å vite hvor KI har hentet informasjonen fra. Det er derfor vansklig å referere til eller gi kreditt til den/de.
-  - Er koden vår eller skolen? ref. til at KI snakker til "BIP".
-  - Ideen og planleggings delen er informasjon hentet og diskuert med oss gruppen.
-
+  Det er vanskelig å vite hvor KIen har hentet informasjonen den kommer med fra. Det er derfor vanskelig å referere til eller gi kreditt til den eller de det gjelder.
+  Er koden vår eller skolen? ref. til at KI snakker til læreren til emntet IBE160.
+  Ideen og planleggingsdelen er informasjon hentet og diskuert med oss gruppen.
+ 
 ### (MARITA) 5.2 Transparens
 - Bør det være transparent at KI er brukt?
-  - Egen prosjekt: Prosjektet er å bruke KI til å produsere applikasjonen, så blir "dumt" å hele tiden refere til Gemini, men ved eventuell publiseringen hadde det gått ant å legge til et vannmerke/informasjon ("om oss") nederst i applikasjonen med beskjed om at "KI er brukt i produksjonen".
-  - Generelt: ja, det skal referes til KI for å kunne kvalitetsikre hvor informasjonen er hentet fra. 
+  Egen prosjekt: Vårt skole-prosjekt har gått ut på å bruke KI til å produsere applikasjonen, og av den grun har vi valgt å ikke referere til Gemini, men ved eventuell publiseringen hadde det gått ant å legge til et vannmerke/informasjon ("om oss") nederst i applikasjonen med beskjed om at "KI er brukt i produksjonen".
+  Generelt: ja, det skal referes til KI for å kunne kvalitetsikre hvor informasjonen er hentet fra.
 - Hvordan dokumenterer man KI sin bidrag?
-  - Kilde henvisning og loggføring av promptingen og dialogen med KI.
+  Å dokumentere KI sitt bidrag er ved kilde henvisning og loggføring av promptingen og dialogen med KI.
 - Hva er konsekvensene av å ikke være åpen om KI-bruk?
-  - Konsekvens av å ikke være åpen om KI-bruk kan føre til plagiat. Det er mye som er lov, men det skal ikke være samme kode. En kode er som regel patent til eieren.
-  - https://appitventures.com/blog/software-copyrights-vs-software-patents-protecting-the-intellectual-property-of-your-software?utm_source=chatgpt.com
-
+  Konsekvens av å ikke være åpen om KI-bruk kan føre til plagiat. Det er mye som er lov, men det skal ikke være samme kode. En kode er som regel patent til eieren: https://appitventures.com/blog/software-copyrights-vs-software-patents-protecting-the-intellectual-property-of-your-software?utm_source=chatgpt.com
+ 
 ### (MARITA) 5.3 Påvirkning på læring og kompetanse
 - Hvordan påvirker KI-avhengighet fremtidig kompetanse?
-  - Mulighet til å lære og forstå kodens oppbygging. 
-  - Det er veldig lett å stole blindt KI, uten å gjøre egne research. Kan være lurt å alltid være litt kritisk til svar fra KI.
-  - Ulike avhengigheter, hvordan ting (ulike programmer) henger sammen.
-  - Mangler kontekst i koden med å bruke KI, eks. ved en feil så er man usikker på hvordan det sakl løses eller hvor den finnes.
-  - Dårlig logisk tenking, blir vant med å KI tenker for deg. Bortskjemt med å få koden ferdig generert.
-  - Større sannsynlighet for å få en feil kode.
-  - Kan føre til dårlig kodekvalitet.
+  KI-avnhengighet trosser mulighet til å lære og forstå kodens oppbygging. Det er veldig lett å stole blindt KI, uten å gjøre egen research. Det kan derfor være lurt å alltid ha et kritisk blikk til svarene KIen gir.
+  Ulike avhengigheter, hvordan ting (ulike programmer) henger sammen.
+  Det er også lett å miste kontekst til koden ved å bruke KI, samt at det er større sannsynlighet for å få feil i koden. Eksempelvis ved en feil så er man usikker på hvordan feilen skal løses eller hvor den finnes. I tillegg risikerer brukeren å utvikler dårlig logisk tenkning, fordi man blir vant med at KIen tenker for deg. Brukeren blir bortskjemt med å få koden ferdig generert og servert. Kan føre til dårlig kodekvalitet.
 - Hvilke ferdigheter risikerer man å ikke utvikle?
-  - Dårlig logisk tenking, lite kreavtiv tenking. kritisk tenking og mister evnen til å kvalitetssikre koden.
+  Man risikerer ikke å utvikle logisk tenkning, samt at det blir lite av kreativ tenkning. I tillegg kan man svekke evnen til å kvalitetssikre koden.
 - Balanse mellom effektivitet og læring
-  - BIP brukte mye yolo-mode ved Gemini. 
-  - Vi valgte å utgå yolo-mode for å verifisere alle endringene, ved å lese igjennom, samt ha bedre oversikt over hva som skjer i de ulike prosessene. "yes, allow once"
-
+  Vår lærer benyttet seg mye Vav yolo modus ved Gemini. Vi har derimot valgt under hele prosessen å unngå yolo modus for å verifisere alle endringene, ved å lese igjennom, samt ha bedre oversikt over hva som skjer i de ulike prosessene. I de aller fleste tilfelles har vi valgt å gå velge "yes, allow once", evt. "allow always".
+ 
 ### (MARITA) 5.4 Arbeidsmarkedet
 - Hvordan kan utbredt KI-bruk påvirke fremtidige jobber i IT?
-  - Primært påvikre kunnskapen til folk innen IT-feltet for at terskelen blir mindre. Jobber som går ut på automtisering og drift kan bli påvirket av KI-bruk.
-  - https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss
+  Primært kan KI påvikre kunnskapen til folk innen IT-bransjen for at terskelen blir mindre. Spesielt er jobber som går ut på automtisering og generell drift bli påvirket av KI-bruk. Ipsos viser til statistikk på hvilke bransjer og jobber som ugir seg for å være mest utsatt ved at KI kan ta over: https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss
 - Hvilke roller vil bli viktigere/mindre viktige?
-  - mindre viktig: språk og oversettelse, alle roller som kan automatiseres. grafisk design, filmskaping. Logistikk og transport, lager.
-  - viktigere: data scientist (sitter å validerer og sikrer koder, og tester ut hvilke modeller som passer best til hvilke bruk). Generelt KI utviklere, selskaper som utvikler KI-modeller vi bruker pr dags dato openAI.
+  Roller som i dette prosjektet er mindre viktig befinner seg, mener vi, i jobbene innenfor språk og oversettelse, samt alle roller som kan automatiseres  som nevnt tidligere. I tillegg lister vi opp roller som innenfor grafisk design, filmskaping, logistikk, transport og lager, som også Ipsos referer til. Viktigere roller som direkte kan berøre prosjektet er rollen som data scientist. De validerer og sikrer koder, og tester ut hvilke modeller som passer best til hvilke bruk. I tillegg er det KI-utviklere og selskaper som utvikler KI-modeller vi bruker pr dags dato som for eksempel OpenAI.
 - Deres refleksjoner om fremtidig karriere i en KI-drevet verden
-  - Lettere for generasjonene under oss, fordi de er vokst opp i denne verden.
-  - Viktig med kritisk tenking, fordi det er blitt vanskligere å skille mellom hva som er ekte og hva som er KI-generert.
-  - KI har en begrensning på å eksistere, KI lærer opp KI. Pga. hvor mye data som er allerede KI-generert pr d.d. betyr dette at KI lærer av KI-data, som gjør at KI-modeller blir dårligere slik at KI i seg sel har en begrensning. Kommer dette til å være en egen arbeidsrolle, som sitter å validerer hva som er ekte og ikke ekte data?
-
-### (MARITA) 5.5 Datasikkerhet og personvern 
+  Vi ser for oss at det kan bli lettere for generasjonene under oss, fordi de er vokst opp i en digitalisert verden. I den grad blir det enda viktigere med kritisk tenkning, fordi det er blitt vanskeligere å skille mellom hva som er ekte og hva som er KI-generert og falskt.
+  Mye data som eksisterer er basert på og generert av KI, som betyr at KI lærer av egen KI-data. Det kan være med på å gjøre KI-modeller dårligere slik at KI i seg selv har en begrensning. Vår refleksjon er at KI potensielt kan bidra til å bli en egen arbeidsrolle, som sitter å validerer hva som er ekte og hva som er falsk data.
+ 
+### (MARITA) 5.5 Datasikkerhet og personvern
 - Hvilke data delte dere med KI-verktøy?
-  - Det eneste egen generert vi delt med KI (Gemini CLI) var proposal (prosjektbeskrivelsen) vår. De andre dokumentene er generet sammen med KI, etter en dialog.
+  Det eneste vi delte av data til KIen (Gemini CLI) har vært prosjektbeskrivelsen (proposal). De andre dokumentene er generert sammen med KI etter dialog med oss.
 - Potensielle risikoer ved å dele kode og data med KI
-  - Koden og data kan bli delt videre. Det er vnasklig å vite hvor informasjon du får fra KI er hentet fra.
+  Koden vår og dataen kan potensielt bli delt videre med andre som benytter seg av KI-verktøyet. Det er vanskelig å vite hvor informasjonen du får fra KI er hentet fra.
 - Hvordan skal man tenke på sikkerhet når man bruker KI?
-  - Aldri dele personlig informasjon, og heller ikke entiteter som telefonnummer, adresse, bilskilt etc.
-  - Ikke del generell sensitiv informasjon, som f.eks. kan finnes i e-poster, meldinger og tilbakemeldinger fra leger. Som potensielt kan være skadelig for en person eller et selskap senere.
+  Man skal aldri dele personlig informasjon, og heller ikke entiteter som telefonnummer, adresse, navn, personnummer osv.
+  Tommelfingerregel er å aldri dele generell sensitiv informasjon, som f.eks. kan finnes i e-poster, meldinger og i andre form for dialog og meldingsutveksling. Personinformasjon blir fort potensielt skadelig for en person eller et selskap, enten i nåtid eller på et langt senere tidspunkt.
 
 ---
 
