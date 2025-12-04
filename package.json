@@ -1,11 +1,17 @@
 {
   "name": "sg-oslo-best",
+  "private": true,
   "version": "1.0.0",
   "description": "Repository for SG-Oslo-Best - IBE160 Programmering med KI.",
   "main": "backend/app/index.js",
   "directories": {
     "doc": "docs"
   },
+  "workspaces": [
+    "frontend",
+    "backend",
+    "packages/*"
+  ],
   "scripts": {
     "test": "node backend/app/index.js",
     "test:e2e": "playwright test",

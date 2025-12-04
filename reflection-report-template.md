@@ -75,7 +75,7 @@ Løsningen bestod i å starte Gemini på nytt, formulere promptene mer presist o
 KI hadde både en positiv og negativ innvirkning når denne utfordringen oppsto. Den skapte tidvis utfordringer ved å gå inn i «loops», men på den andre siden sparte den gruppen for betydelig tid ved å forslå ulike løsninger. Uten KI ville vi vært nødt til å hente tilsvarende informasjon gjennom omfattende research på plattformer som Reddit, GitHub og Stack Overflow.
 
 ### [v] 3.2 Samarbeidsutfordringer
-Prosjektgruppen har under hele prosessen delt skjerm på Teams under ukentlig møter. Derimot har vi hatt et utfordrendende tidskjema hvorav noen har fulltidsjobb mens andre er fulltidsstudenter med deltidsjobb. Derfor har det til tider vært vanskelig å få finne tidspunkt for møte som passet for alle. Måten vi har løst det på, er at vi har satt opp tidspunkter langt fran i tid, så har de som har hatt mulighet for å stille, vært med i møte. Vi har som gruppe lagt til rette for hverandre tilnærminger til hverdagen, samt tatt hensyn til hveradres jobb og studie. Jo nærmere tidfristen, jo flere møter har vi planlagt. Alle på gruppen hadde forskjellig erfaringer og kunnskap fra før av før emnet ble inntatt, og noen har hatt mer behov for stegvis prosess, mens andre har ønsket å kjøre en raskere vei mot mål, da de har vært igjennom dette før.
+Prosjektgruppen har under hele prosessen delt skjerm på Teams under ukentlig møter. Derimot har vi hatt et utfordrende tidskjema hvorav noen har fulltidsjobb mens andre er fulltidsstudenter med deltidsjobb. Derfor har det til tider vært vanskelig å få finne tidspunkt for møte som passet for alle. Måten vi har løst det på, er at vi har satt opp tidspunkter langt fram i tid, så har de som har hatt mulighet for å stille, vært med på møtet. Vi har som gruppe lagt til rette for hverandres tilnærminger til hverdagen, samt tatt hensyn til hverandres jobb og studie. Jo nærmere tidsfristen, jo flere møter har vi planlagt. Alle på gruppen hadde forskjellig erfaringer og kunnskap fra før dette emnet ble inntatt, og noen har hatt mer behov for stegvis prosess, mens andre har ønsket å kjøre en raskere vei mot mål, da de har vært igjennom dette før.
  
 ### [v] 3.3 KI-spesifikke utfordringer
 I prosjektet oppstod flere KI-spesifikke utfordringer, knyttet til feil kodegenerering, misforståelser i dialogen og varierende kvalitet på svarene. Mange av disse problemene var de samme som tidligere beskrevet i utfordring 1 og 2, der både gratisversjonen av Gemini og «loops» i dialogen skapte hindringer for en effektiv arbeidsflyt. Disse utfordringene ble håndtert på samme måte som beskrevet under «Løsningen...» over.
@@ -106,7 +106,7 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 * React Query will also help us manage errors specifically from our API calls.
 * Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
 
-### (MARITA) 4.2 Begrensninger og ulemper
+### 4.2 Begrensninger og ulemper
 
 **[v] Kvalitet og pålitelighet:**
 Det er vanskelig å vurdere hva som er en dårlig løsning siden 3 av 4 på gruppen ikke har så mye kunnskap om utvikling fra før av. Vi synes det har vært vanskelig å avgjøre hva som er en dårlig eller mindre dårlig kode og løsning siden erfaringen ikke strekker til. Dermed har flesteparten av oss stolt på KIen for hva som er best for prosjektet. Vanligvis ville kanskje lærdommen vært å funnet kode ut ifra hva som finnes i  ulike kanaler, kommentarer og erfaring knyttet koden som er tilgjengelig. Gjentattte ganger fortalte vi KIen at vi kun skal implementere CVAI som en nettside designet for pc. KIen spurte derimot ofte om applikasjonen også skal utvikles til mobil og tablet.
@@ -148,52 +148,41 @@ Prosjektgruppa hadde en visjon om hvordan applikasjonen skulle se ut. Et konkret
 
 ## 5. Etiske implikasjoner
 
-### (MARITA) 5.1 Ansvar og eierskap
-- Hvem er ansvarlig for koden når KI har bidratt?
-  KI er et verktøy og hjelpemiddel som kan brukes, men ansvaret og eieskapet til koden ligger hos personene som sitter bak prompting av prosjektet. I dette tilfellet så har vi brukt BMAD-rammeverket som har stilt spørsmål til oss og vi har diskurtet og kommet fram til et svar, som KI igjen har brukt til å generere de nødvendige dokumentene.
-- Hvordan sikrer man kvalitet når KI genererer kode?
-  Man sikrer kvalitet ved god research av hva som har blitt gjort tidligere. Det vi har gjort er å sende dokumentene gjennom en validering og en form for checkliste for å sikre at dokumentene har med det som trengs for at det skal være minst mulig misforståelser når KI skal generere koden.
-- Diskuter spørsmål om opphavsrett og intellektuell eiendom
-  Det er vanskelig å vite hvor KIen har hentet informasjonen den kommer med fra. Det er derfor vanskelig å referere til eller gi kreditt til den eller de det gjelder.
-  Er koden vår eller skolen? ref. til at KI snakker til læreren til emntet IBE160.
-  Ideen og planleggingsdelen er informasjon hentet og diskuert med oss gruppen.
+### [v] 5.1 Ansvar og eierskap
+KI er et verktøy og hjelpemiddel som kan brukes, men ansvaret og eieskapet til koden ligger hos personene som sitter bak prompting av prosjektet. I dette tilfellet så har vi brukt BMAD-rammeverket som har stilt spørsmål til oss og vi har diskurtet og kommet fram til et svar, som KI igjen har brukt til å generere de nødvendige dokumentene.
+
+Når KI generer kode sikrer man kvalitet ved god research av hva som har blitt gjort tidligere. Det vi har gjort er å sende dokumentene gjennom en validering og en form for checkliste for å sikre at dokumentene har med det som trengs for at det skal være minst mulig misforståelser når KI skal generere koden.
+
+Når det gjelder opphavsrett og intellektuell eiendom er det vanskelig å vite hvor KIen har hentet informasjonen fra. Det er derfor vanskelig å referere til eller gi kreditt til den eller de det gjelder.
  
 ### (MARITA) 5.2 Transparens
 - Bør det være transparent at KI er brukt?
-  Egen prosjekt: Vårt skole-prosjekt har gått ut på å bruke KI til å produsere applikasjonen, og av den grun har vi valgt å ikke referere til Gemini, men ved eventuell publiseringen hadde det gått ant å legge til et vannmerke/informasjon ("om oss") nederst i applikasjonen med beskjed om at "KI er brukt i produksjonen".
+   Vårt skole-prosjekt har gått ut på å bruke KI til å produsere applikasjonen, og av den grunn har vi valgt å ikke referere til Gemini, men ved eventuell publiseringen hadde det gått ant å legge til et vannmerke/informasjon ("om oss") nederst i applikasjonen med beskjed om at "KI er brukt i produksjonen".
   Generelt: ja, det skal referes til KI for å kunne kvalitetsikre hvor informasjonen er hentet fra.
 - Hvordan dokumenterer man KI sin bidrag?
   Å dokumentere KI sitt bidrag er ved kilde henvisning og loggføring av promptingen og dialogen med KI.
 - Hva er konsekvensene av å ikke være åpen om KI-bruk?
   Konsekvens av å ikke være åpen om KI-bruk kan føre til plagiat. Det er mye som er lov, men det skal ikke være samme kode. En kode er som regel patent til eieren: https://appitventures.com/blog/software-copyrights-vs-software-patents-protecting-the-intellectual-property-of-your-software?utm_source=chatgpt.com
  
-### (MARITA) 5.3 Påvirkning på læring og kompetanse
-- Hvordan påvirker KI-avhengighet fremtidig kompetanse?
-  KI-avnhengighet trosser mulighet til å lære og forstå kodens oppbygging. Det er veldig lett å stole blindt KI, uten å gjøre egen research. Det kan derfor være lurt å alltid ha et kritisk blikk til svarene KIen gir.
-  Ulike avhengigheter, hvordan ting (ulike programmer) henger sammen.
-  Det er også lett å miste kontekst til koden ved å bruke KI, samt at det er større sannsynlighet for å få feil i koden. Eksempelvis ved en feil så er man usikker på hvordan feilen skal løses eller hvor den finnes. I tillegg risikerer brukeren å utvikler dårlig logisk tenkning, fordi man blir vant med at KIen tenker for deg. Brukeren blir bortskjemt med å få koden ferdig generert og servert. Kan føre til dårlig kodekvalitet.
-- Hvilke ferdigheter risikerer man å ikke utvikle?
-  Man risikerer ikke å utvikle logisk tenkning, samt at det blir lite av kreativ tenkning. I tillegg kan man svekke evnen til å kvalitetssikre koden.
-- Balanse mellom effektivitet og læring
-  Vår lærer benyttet seg mye Vav yolo modus ved Gemini. Vi har derimot valgt under hele prosessen å unngå yolo modus for å verifisere alle endringene, ved å lese igjennom, samt ha bedre oversikt over hva som skjer i de ulike prosessene. I de aller fleste tilfelles har vi valgt å gå velge "yes, allow once", evt. "allow always".
+### [v] 5.3 Påvirkning på læring og kompetanse
+KI-avhengighet trosser mulighet til å lære og forstå kodens oppbygging. Det er veldig lett å stole blindt på KI, uten å gjøre egen research. Det kan derfor være lurt å alltid ha et kritisk blikk til svarene KIen gir. Det er også lett å miste kontekst til koden ved å bruke KI, samt at det er større sannsynlighet for å få feil i koden. Eksempelvis ved en feil så er man usikker på hvordan feilen skal løses eller hvor den finnes. I tillegg risikerer brukeren å utvikle dårlig logisk tenkning, fordi man blir vant med at KIen tenker for deg. Brukeren blir bortskjemt med å få koden ferdig generert og servert. Det kan føre til dårlig kodekvalitet.
+
+Man risikerer ikke å utvikle logisk tenkning, samt at det blir lite av kreativ tenkning. I tillegg kan man svekke evnen til å kvalitetssikre koden.
+
+Vår lærer benyttet seg mye av yolo-modus ved Gemini. Vi har derimot valgt under hele prosessen å unngå yolo-modus for å verifisere alle endringene, ved å lese igjennom, samt ha bedre oversikt over hva som skjer i de ulike prosessene. I de aller fleste tilfeller har vi valgt "yes, allow once", evt. "allow always".
  
-### (MARITA) 5.4 Arbeidsmarkedet
-- Hvordan kan utbredt KI-bruk påvirke fremtidige jobber i IT?
-  Primært kan KI påvikre kunnskapen til folk innen IT-bransjen for at terskelen blir mindre. Spesielt er jobber som går ut på automtisering og generell drift bli påvirket av KI-bruk. Ipsos viser til statistikk på hvilke bransjer og jobber som ugir seg for å være mest utsatt ved at KI kan ta over: https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss
-- Hvilke roller vil bli viktigere/mindre viktige?
-  Roller som i dette prosjektet er mindre viktig befinner seg, mener vi, i jobbene innenfor språk og oversettelse, samt alle roller som kan automatiseres  som nevnt tidligere. I tillegg lister vi opp roller som innenfor grafisk design, filmskaping, logistikk, transport og lager, som også Ipsos referer til. Viktigere roller som direkte kan berøre prosjektet er rollen som data scientist. De validerer og sikrer koder, og tester ut hvilke modeller som passer best til hvilke bruk. I tillegg er det KI-utviklere og selskaper som utvikler KI-modeller vi bruker pr dags dato som for eksempel OpenAI.
-- Deres refleksjoner om fremtidig karriere i en KI-drevet verden
-  Vi ser for oss at det kan bli lettere for generasjonene under oss, fordi de er vokst opp i en digitalisert verden. I den grad blir det enda viktigere med kritisk tenkning, fordi det er blitt vanskeligere å skille mellom hva som er ekte og hva som er KI-generert og falskt.
-  Mye data som eksisterer er basert på og generert av KI, som betyr at KI lærer av egen KI-data. Det kan være med på å gjøre KI-modeller dårligere slik at KI i seg selv har en begrensning. Vår refleksjon er at KI potensielt kan bidra til å bli en egen arbeidsrolle, som sitter å validerer hva som er ekte og hva som er falsk data.
+### [v] 5.4 Arbeidsmarkedet
+Primært kan KI påvikre kunnskapen til folk innen IT-bransjen for at terskelen blir mindre. Særlig jobber som går ut på automtisering og generell drift blir påvirket av KI-bruk Artikkelen Kunstig intelligens: hvordan vil det påvirke oss? publisert av Ipsos (2023) viser til statistikk på hvilke bransjer og jobber som ugir seg for å være mest utsatt ved at KI kan ta over. 
+Hentet fra: https://www.ipsos.com/nb-no/kunstig-intelligens-hvordan-vil-det-pavirke-oss.
+
+Roller som i dette prosjektet er mindre viktig befinner seg, mener vi, i jobbene innenfor språk og oversettelse, samt alle roller som kan automatiseres som nevnt tidligere. I tillegg lister vi opp roller som innenfor grafisk design, filmskaping, logistikk, transport og lager, som også Ipsos sin artikkel referer til. Viktigere roller som direkte kan berøre prosjektet er rollen som data scientist. De validerer og sikrer koder, og tester ut hvilke modeller som passer best til hvilke bruk. I tillegg er det KI-utviklere og selskaper som utvikler KI-modeller vi bruker pr dags dato som for eksempel OpenAI.
+
+Vår refleksjon er at det kan bli lettere for generasjonene under oss, fordi de er vokst opp i en digitalisert verden. I den grad blir det enda viktigere med kritisk tenkning, fordi det er blitt vanskeligere å skille mellom hva som er ekte og hva som er KI-generert og falskt. Mye data som eksisterer er basert på og generert av KI, som betyr at KI lærer av egen KI-data. Det kan være med på å gjøre KI-modeller dårligere slik at KI i seg selv har en begrensning.
  
-### (MARITA) 5.5 Datasikkerhet og personvern
-- Hvilke data delte dere med KI-verktøy?
-  Det eneste vi delte av data til KIen (Gemini CLI) har vært prosjektbeskrivelsen (proposal). De andre dokumentene er generert sammen med KI etter dialog med oss.
-- Potensielle risikoer ved å dele kode og data med KI
-  Koden vår og dataen kan potensielt bli delt videre med andre som benytter seg av KI-verktøyet. Det er vanskelig å vite hvor informasjonen du får fra KI er hentet fra.
-- Hvordan skal man tenke på sikkerhet når man bruker KI?
-  Man skal aldri dele personlig informasjon, og heller ikke entiteter som telefonnummer, adresse, navn, personnummer osv.
-  Tommelfingerregel er å aldri dele generell sensitiv informasjon, som f.eks. kan finnes i e-poster, meldinger og i andre form for dialog og meldingsutveksling. Personinformasjon blir fort potensielt skadelig for en person eller et selskap, enten i nåtid eller på et langt senere tidspunkt.
+### [v] 5.5 Datasikkerhet og personvern
+Det eneste vi delte av data til KI-verktøyet Gemini CLI var prosjektbeskrivelsen/proposalen vår. De andre dokumentene er generert sammen med KI etter dialog med oss. Koden vår og dataen kan potensielt bli delt videre med andre som benytter seg av KI-verktøyet. Det er vanskelig å vite hvor informasjonen du får fra KI er hentet fra.
+
+Av sikkerhetsmessige årsaker er det viktig å aldri dele personlig informasjon med KI-verktøyet, og heller ikke entiteter som telefonnummer, adresse, navn, personnummer osv. Tommelfingerregel er å aldri dele generell sensitiv informasjon, som for eksempel kan finnes i e-poster, meldinger og i andre form for dialog og meldingsutveksling. Personinformasjon blir fort potensielt skadelig for en person eller et selskap, enten i nåtid eller på et langt senere tidspunkt.
 
 ---
 
