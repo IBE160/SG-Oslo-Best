@@ -217,19 +217,11 @@ Prosjektgruppa hadde en visjon om hvordan applikasjonen skulle se ut. Et konkret
 
 ### (FERNANDO) 6.3 Fremtidig utvikling
 - Hvordan tror dere KI vil påvirke programvareutvikling fremover?
-  - Viktig med kvlitetssikring.
-  - Vil påvirke programvareutvikling med oppdateringer.
-  - Terskelen for å utvikle løsninger og tjenester for hvem som helst er mye lavere om man trenger noe umiddelbart, men da vil også problemer på sikt oppstå fordi kvaliteten ikke er validert. Eksempelvis når covid utformet seg, og vaksine ble innen et halvt år utviklet - men alvorlige bivirkninger kan først finne sted i lang tid i etterkant.
-  - for mye folk som vil gjerne drive med programvareutvikling, som betyr at markedet blir hardere å komme inn samtidig som det blir vanskelig å finne kandidater med den nødvendige kunnskapen.
+  - Vi tror KI kommer til å ha en stadig større rolle i programvareutvikling. Allerede i dag ser vi hvordan KI kan generere kode raskt, foreslå løsninger og forklare komplekse konsepter på en måte som gjør utvikling mer tilgjengelig for flere. Dette kan senke terskelen for å komme i gang, noe som er positivt for læring og innovasjon, og derfor mener vi at KI vil ikke nødvendigvis erstatte utviklere, men det vil påvirke hvilke ferdigheter som blir viktigst i fremtiden.
 - Hvilke ferdigheter blir viktigere for utviklere?
-  - God bakgrunnskunnskap
-  - Et godt øye for detaljer
-  - Nøysomhet, kvalitetssikring og validering
-  - oppdatert på den nyeste teknologiene.
+  - Etter våre diskusjoner mener gruppen at ferdigheter som debugging, kritisk tenking og forståelse for grunnleggende programmeringsprinsipper bli enda viktigere. Når KI genererer store deler av koden, blir utviklerens oppgave å vurdere om koden er riktig, trygg og hensiktsmessig. I tillegg tror vi at prompt engineering vil bli en essensiell ferdighet. Det å kunne formulere gode, presise og målrettede forespørsler til KI kan være avgjørende for kvaliteten på resultatet.
 - Deres anbefalinger for hvordan man bør bruke KI i utviklingsprosesser
-  - Være kritisk, gjør også egen research.
-  - Gå igjennom det KI genrerer for å vite hva som finnes og er blitt generert.
-  - Komme med egne forslag til hvordan utvikle, istedenfor å hele tiden spørre KI om den kan komme med en kode.
+  - Gruppen mener at vi bør bruke KI som et verktøy og ikke en erstatning for faglig utvikling. Det er viktig å kombinere KI-assistanse med egen refleksjon, faglig innsats og et bevisst forhold til kvalitet. Utviklere bør være kritiske til forslagene som kommer, og ikke anta at KI har automatisk rett. Dette gjelder både valg og teknologi, kodekvalitet og arkitektur beslutninger. Samtidig mener vi at KI er svært nyttig når man står fast, trenger inspirasjon eller ønsker å utforske alternative løsninger. Gruppen sin anbefaling om bruk av KI er å bruke den som en støtte for kreativitet og læring, men sørge for at man har en stor del av kontroll og forståelse av det som blir gjort.
 
 ---
 
