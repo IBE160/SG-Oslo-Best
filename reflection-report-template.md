@@ -235,23 +235,19 @@ KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomg
 
 ### (FERNANDO) 6.1 Kodekvalitet og vedlikehold
 - Hvordan påvirker KI-generert kode langsiktig vedlikehold?
-  - Blir KI-avhengig. Avhengig av at KI ikke endrer seg siden KI ble laget.
-  - KI-avhengig fordi KI har konteksten til hvordan koden ble laget, vanskeligere å finne seksjoner som et. er feil. Enklere å få KI til å gå inn i koden for å rette på feilen.
+  - Vi erfarte at KI-generert kode både kan hjelpe og komplisere vedlikehold. På den ene siden gir KI raske og ferdige løsninger som gjør det enkelt å komme i gang. På den andre siden kan det være utfordrende å forstå strukturen og tankegangen bak koden, nettopp fordi vi ikke skrev den selv. Dette svekker eierskapsfølelsen og gjør vedlikehold mer krevende over tid, spesielt for utviklere som fortsatt bygger grunnleggende kompetanse. KI genererer ofte kode som ser profesjonell og kompleks ut, men det kan være vanskelig å vurdere om den faktisk følger en god logikk eller bare virker overbevisende. Dette skaper en situasjon hvor langsiktig vedlikehold avhenger mer av vår evne til å analysere og forstå valg enn tradisjonell erfaring med å bygge koden fra bunnen av.
 - Er KI-kode like forståelig som menneskeskrevet kode?
-  - Ja, det kan det være.
+  - I noen tilfeller ja. KI kan produsere ryddig og strukturert kode med god konsistens. Men i praksis opplevde vi at forståeligheten var stekt knyttet av hvor godt vi hadde planet i tidligere faser og hvor godt vi forsto teknologiene. For oss med begrenset erfaring med større prosjekter så føltes KI-koden ofte vanskeligere å tolke.
 - Utfordringer med å debugge KI-generert kode
-  - Vanskligere å finne feilen om det oppstår feil, fordi en ikke har generet koden selv.
-  - KI har ikke alltid kapasitet til å se hva som er feil, for den mener at alt den gjør er rett. Mangler kritisk tenking. Opp til personen å påpeke at noe er feil og rette koden.
+  - Debugging var en de mest krevende delene av prosjektet. Et konkret eksempel var da vi brukte flere timer på å forstå hvorfor playwright-testene og lint-skriptet feilet i CI-pipelinen etter en merge til main, noe som skapte uro gjennom gruppen og vi trodde først at vi hadde gjort noe galt i merge-prosessen, men etter mye googling og samarbeid fant vi ut at problemet var at applikasjonen vår hadde ikke kommet til utviklingsfasen ennå. Det betyr at testene fra playwright-rammeverket hadde ingenting å teste. Dette viste oss hvor lett er det å bli forvirret når KI har satt opp verktøy, strukturer og filer som man har ikke kunnskap eller kjennskap til.
 
 ### (FERNANDO) 6.2 Standarder og beste praksis
 - Følger KI alltid beste praksis og industristandarder?
-  - Nei, f.eks. KI kan ikke lage noe av kvalitet. Den kan, med det er sjelden at koden bare fungerer ved første utkast, fordi det finnes flere måter å gjøre den samme tingen på, men det ikke det som er spørsmålet, her er det om å gjøre beste praksis og standarder, kvalitet. 
+  - Vi opplever at KI kan produsere løsninger som ligner beste praksis, men vi kan ikke anta at den alltid følger industristandarder. KI kan generere kode som ser ryddig og moderne ut, men uten en dyp forståelse av kontekst eller prosjektets egne begrensninger på grunn av mangel av omfattende planlegging eller god «prompt engineering». Siden KI er ofte trent ved å kombinere mønstrer fra forskjellige kilder, kan det alltid oppstå blandinger av gamle og nye praksiser som er vanskelige å oppdage, spesielt for utviklere med begrenset erfaring. 
 - Eksempler på hvor KI foreslo utdaterte eller dårlige løsninger
-  - Konkret eksempel var da vi fikk tilbakemelding på proposalen vår. Proposalen vår ble validert av en KI ved å følge en checkliste laget av Bård Inge. Der fikk vi tilbakemelding om at ChatGPT-5 ikke finnes og at vi heller ble anbefalt å bruke chatGPT-4. Dette stemmer ikke da chatGPT-5 er ute på markedet og KI ga oss derfor en utdatert og dårligere løsning.
-  - Et eksemepl til i forhold til validering.
+  - Selv om vi ikke identifiserte direkte utdaterte teknologier i vårt prosjekt, har vi erfart hvordan KI kan komme med forslag som virker for komplekse, unødvendige eller passer ikke til oppgaven. Dette er en kjent svakhet ved KI siden modellen kan basere seg på utdatert treningsdata og, dermed gir råd som ikke lenger representerer dagens beste praksis. Tidligere i prosjektet så opplevde vi at Gemini ga utdaterte påstander om hvilke modeller som eksisterte på markedet. Etter dette ble gruppen klar over at forslagene fra KI måtte tas imot med en viss del skepsis.
 - Viktigheten av å validere KI sine forslag
-  - Viktig å finne evenutelle feil som kan komme av KI-generete dokumenter eller kode.
-  - En fin måte å sjekke at alt et dokument skal inneholde er med.
+  - Gjennom den omfattende bruk av KI i dette prosjektet ble det tydelig at menneskelig skjønn og kritisk tenking er helt nødvendig. Validering handler ikke bare om å finne feil, men også om å sikre at løsninger samsvarer med prosjektets mål, nivå og rammer. KI kan foreslå avanserte og elegante løsninger som er unødvendig til prosjektet. Det gjorde at vi måtte ofte stoppe opp og diskutere internt og vurder hva som faktisk var realistisk og hensiktsmessig. Denne prosessen ble like mye en del av læringen som selve utviklingen.
 
 ### (FERNANDO) 6.3 Fremtidig utvikling
 - Hvordan tror dere KI vil påvirke programvareutvikling fremover?
