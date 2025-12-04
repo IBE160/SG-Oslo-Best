@@ -17,40 +17,37 @@
 ## 2. Utviklingsprosessen
 
 ### (JENNY) 2.1 Oversikt over prosjektet
-[Kort beskrivelse av hva dere har utviklet. Hva var hovedmålet med applikasjonen? ]
-Se proposal
+Dette prosjektet handler om å utvikle en applikasjon som skal bistå studenter ved Høgskoler og Universiteter. Applikasjonen tar inn CV, stillingsannonse og eventuelle instruksjoner som input, og genererer deretter et tilpasset søknadsbrev basert på denne informasjonen.
 
 ### (JENNY) 2.2 Arbeidsmetodikk
-[Beskriv hvordan dere organiserte arbeidet]
 - Hvordan fordelte dere oppgaver?
-  - Ukentlig møter 
-  - Vi i gruppa på 4 personer tok en tidlig vurdering på å holde tett samarbeid, selv om vi er plassert ulike steder i Norge. 2 personer i Molde og 2 personer i Oslo. Vi to hensyn til hva gruppemedlemmer er god og glad i å jobbbe med, og siden vi har vært så heldige å ha en utvikler i gruppa, fikk han som ønsket ansvar for backend-delen. 
-  - Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte? (f.eks. Git, og Teams)
-- Vi bestemte oss tidlig i prosjektet for å ha ukentlige møter og benyttet oss av kommunikasjonskanalen Teams. Vi var innom Discord også, men Teams hadde flere kjennskap til, så derfor gikk vi for det.
+Arbeidet i prosjektet ble organisert gjennom ansvarsområder og faste rutiner. Gruppen på fire personer, med to medlemmer i Molde og to i Oslo, bestemte tidlig at det å holde jevnlige ukentlige møter ville sikre tett samarbeid til tross for geografisk avstand. Siden gruppen har en erfaren utvikler, fikk vedkommende hovedansvaret for utviklings-delen av prosjektet, mens øvrige oppgaver ble fordelt slik at alle kunne bidra der de hadde mest kompetanse og engasjement.
+- Hvilke verktøy brukte dere for samarbeid og hvordan det fungerte?
+For samarbeid og kommunikasjon i de ukentlige møtene benyttet vi oss av Teams som primær kommunikasjonsplattform. Discord ble vurdert, men Teams ble valgt fordi flere hadde kjennskap til det. Gjennom Teams kunne vi enkelt dele dataskjerm, noe som gjorde det mulig for alle å følge arbeidet i sanntid og komme med innspill underveis. I tillegg ble Git brukt til versjonskontroll og koordinert utvikling, noe som sikret god oversikt og kontroll på endringer gjennom hele prosjektet.
 - Hvordan brukte dere KI-verktøy i prosessen?
-- Gemini integrert i VS Code
-- ChatGPT
+KI-verktøy hadde en viktig funksjon i prosessen, blant annet gjennom bruk av Gemini integrert i VS Code og Chat GPT som støtte til idéutvikling, feilsøking og gjennomføring av utviklingsoppgaver gjennom hele prosjektet.
 
 ### (JENNY) 2.3 Teknologi og verktøy
-[Liste over de viktigste teknologiene og verktøyene dere brukte]
-- Frontend: [f.eks. NextJS, HTML/CSS]
-- Backend: [f.eks. Python/FastAPI]
-- Database: [f.eks. Supabase, MongoDB, PostgreSQL]
-- KI-verktøy: [f.eks. Claude Code, Gemini CLI, GPT-5 Codex]
-- Andre verktøy: [f.eks. VS Code, BMAD etc]
+- Frontend: Next.js, React, Tailwind CSS
+- Backend: Python, FastAPI
+- Database: Supabase (PostgreSQL)
+- KI-verktøy: Gemini CLI, GPT-5 Codex
+- Andre verktøy: VS Code, BMAD, Teams
 
-### 2.4 Utviklingsfaser
-[Beskriv de ulike fasene i utviklingen]
 
-**(JENNY) Fase 1: Planlegging**
-- [Hva gjorde dere i denne fasen?]
-    - I denne fasen startet vi med å bruke agenten «analyse» til å brainstorming, og gjennomførte tre separate brainstorming-sesjoner. Da vi var fornøyde med resultatene, brukte vi både idéene fra brainstormingen og proposal-dokumentet for å få analyse-agenten til å produsere product-brief.md dokumentet. Deretter, i planleggingsfasen, tok vi i bruk agenten «product master» for å utvikle et Product Requirement Document (PRD.md).
-    - UX-design, bestemme utseende på applikasjonen, bestemme hvordan frontenden skal kodes (estetikk)
-    - Arcitecture, vi bestemte hvilke (core) teknologier vi skal bruke i applikasjonen vår.
-      - valideringen gikk overraskende bra, med 95% pass på første forsøk. Vi lot det bli på 95% pga. vi mener det holder med en version av applikasjonen, selv om feilmelingen viste det motsatte. Dette fordi det er skole projekt.
-- [Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
-    - Til å brainstorming brukte vi KI for å avdekke om det var aspekter ved proposalen vår vi hadde oversett, og erfarte raskt at det var veldig enkelt å diskutere og utvide prosjektet til noe langt større enn opprinnelig planlagt. I brainstroming-prosessen benyttet vi de tekniske og strategiske metodene «five whys», «six hats» og «what if». Alle promptene som ble brukt i sesjonene her, er lagret i mappen `SG-Oslo-Best\prompt\project-brief\brainstorming`.
-    - UX-design og arkitektur sesjonene ble logget under mappen .logging
+### (JENNY) 2.4 Utviklingsfaser
+
+**Fase 1: Analyse**
+I fase 1, analysefasen, begynte arbeidet med å utforme prosjektets proposal, der rammene og målene for prosjektet ble definert. Etter å ha lastet ned VS Code og integrert Gemini CLI og fått tilgang til BMAD-rammeverket, benyttet vi KI-agenten «analyse» ved brainstorming-øktene. Da resultatene fra disse øktene var gode nok, ble ideene kombinert med proposal-dokumentet, og analyse-agenten genererte deretter dokumentet product-brief.md. KI-verktøyet Gemini CLI, ble brukt til å identifisere aspekter ved proposalen som ellers kunne ha blitt oversett, og vi erfarte raskt at det var veldig enkelt å diskutere og utvide prosjektet til noe langt større enn opprinnelig planlagt. Brainstorming-delen ble strukturert ved hjelp av metodene «five whys», «six hats» og «what if». Alle promptene som ble brukt i disse sesjonene, er lagret i mappen `SG-Oslo-Best\prompt\project-brief\brainstorming`.
+
+**Fase 2: Planlegging**
+I fase 2, planleggingsfasen, utviklet vi PRD.md (Product Requirement Document), som deretter fungerte som grunnlag for arbeidet med UX-design. I denne delen av prosessen ble struktur, visuell stil og ønsket brukeropplevelse definert, og det ble laget mockups for å konkretisere konseptet og teste hvordan applikasjonen skulle se ut i praksis. Arbeidet ble gjennomført ved bruk av Gemini og med agentene «product master» og «ux-designer». Alle tilhørende prompter og KI-dialoger ble loggført i mappen `SG-Oslo-Best\.logging\requests`.
+
+**Fase 3: Solutioning**
+I fase 3, solutioningfasen, ble prosjektets arkitektur utarbeidet ved å definere hvilke kjerneteknologier applikasjonen skulle bygges på. Valideringen av dette tekniske oppsettet gikk overraskende bra, med 95% godkjenning på første forsøk. Dette valgte vi å beholde, selv om enkelte feilmeldinger antydet behov for ytterligere justeringer. I denne fasen utviklet vi epics og user stories og etablerte et oppsett for tesing ved hjelp av Playwright-rammeverket, GitHub Actions og et tilhørende CI-oppsett. Målet er å sikre at kodeendringer kan integreres regelmessig og testes automatisk for å avdekke feil tidlig. Arbeidet inkluderte også utforming av testscenarier, dokumentert i `SG-Oslo-Best\docs\test-design-high-value-stories.md`. Til slutt gjennomførte vi en «implementation readiness»-vurdering, der dokumentene PRD, UX-design, arkitektur og epics ble validert som klare for neste fase. Hele solutioningfasen ble gjennomført med aktiv bruk av Gemini CLI og agentene «architect», «product master» og «tea», og alle tilhørende KI-dialoger og prompter ble loggført i mappen`SG-Oslo-Best\.logging\requests`.
+
+**Fase 4: implementation, utvikling**
+I fase 4, implementasjonsfasen, bruker vi agenten «scrum master» (sm) for å lage til sprint plan. 
 
 **(MICHEAL) Fase 2: Utvikling**
 - [Hva gjorde dere i denne fasen?]
@@ -63,24 +60,22 @@ Se proposal
 ## 3. Utfordringer og løsninger
 
 ### 3.1 Tekniske utfordringer
-[Beskriv 2-3 konkrete tekniske problemer dere møtte]
 
 **[v] Utfordring 1: Gratis version av Gemini**
 - Problem:
-    - I prosjektarbeidet vårt oppstod det utfordringer ved å bruke gratisversjon av Gemini CLI. Spesielt knyttet til det å navigere i dialogen og manglende evne for Gemini å huske tidligere samtaler, prompt-strukturer og spørsmål. Dette førte til at kommunikasjonen med KI til tider ble tungvint og tidkrevende. Det ble også tydelig at gratisversjonen av Gemini CLI ikke alltid klarte å håndtere den nødvendige kompleksiteten og mengden forespørsler. 
+  I prosjektarbeidet vårt oppstod det utfordringer ved å bruke gratisversjon av Gemini CLI. Spesielt knyttet til det å navigere i dialogen og manglende evne for Gemini å huske tidligere samtaler, prompt-strukturer og spørsmål. Dette førte til at kommunikasjonen med KI til tider ble tungvint og tidkrevende. Det ble også tydelig at gratisversjonen av Gemini CLI ikke alltid klarte å håndtere den nødvendige kompleksiteten og mengden forespørsler. 
 - Løsning:
-    - Løsningen ble en kombinasjon av å «smøre seg» med god tålmodighet og at enkelte i gruppen valgte å oppgradere til den betalte versjonen av Gemini CLI, som tilbyr bedre kapasitet. Denne oppgraderingen ble en sentral teknisk beslutning for å sikre en stabil og funksjonell dataflyt, særlig i fullstack- og utviklingsfasen av prosjektet. 
+  Løsningen ble en kombinasjon av å «smøre seg» med god tålmodighet og at enkelte i gruppen valgte å oppgradere til den betalte versjonen av Gemini CLI, som tilbyr bedre kapasitet. Denne oppgraderingen ble en sentral teknisk beslutning for å sikre en stabil og funksjonell dataflyt, særlig i fullstack- og utviklingsfasen av prosjektet. 
 - KI sin rolle:
-    - KI spilte både en problemløsende og en utfordrende rolle. Den kunne skape rot i prosjektet ved å genere kode som ikke samsvarte med øvrige filer, noe som resulterte i feil. Samtidig gjorde den omfattende dialogen det mulig å identifisere årsaken til problemene, og ved å sende detaljerte feilmeldinger tilbake til KI, kunne den rette feilene på en effektiv måte.
+  KI spilte både en problemløsende og en utfordrende rolle. Den kunne skape rot i prosjektet ved å genere kode som ikke samsvarte med øvrige filer, noe som resulterte i feil. Samtidig gjorde den omfattende dialogen det mulig å identifisere årsaken til problemene, og ved å sende detaljerte feilmeldinger tilbake til KI, kunne den rette feilene på en effektiv måte.
 
 **(JENNY) Utfordring 2: Loop med Gemini**
-- Problem: [Beskriv problemet]
-  - Samtaler/sesjoner kunne føre til looping, der vi fikk gjentakende tilbakemeldinger, og en dialog som ikke fikk oss videre. Vi opplevde ofte da konteskt vinduet var en del brukt. 
-- Løsning: [Hvordan løste dere det?]
-  - Starte Gemini på nytt. Igjen tålmodighet og refinering av promptene for å bryte loopen.
-  - Kontekst vinduet: hjalp å bytte på hvem som jobbet med Gemini. Byttet på å jobbe på den som promptet. Eks. da vi jobbet med validering av Ux-design, fikk vi med det først ikke gode resultater. Her gikk Gemini i loop og med de samme feilene, selv om vi hadde rettet på feilene, men problemet var at Gemini laget helt ny valideringsprosess hver gang. Men da vi fikk byttet fra Fernando sin Gemini til Jenny sin Gemini gikk det nesten uten problemer, siden konteskt vinduet til Jenny var mindre brukt.
-- KI sin rolle: [Hvordan hjalp eller hindret KI dere?]
-  - Som i fleste tilfeller var KI til både hinder og til hjelp gjennom hele prosjektet. Det vi benyttet KI mest til var å komme med forslag til hvordan vi skulle utføre deler av prosjektet, eks. react. Der KI kom med mange gode forslag, og dermed sparte oss masse tid. Vi ser for at om vi ikke hadde hatt KI, måtte vi selv ha gjort research i kanaler som reddit, github og stack overflow.
+- Problem:
+  I arbeidet med prosjektet oppstod det flere situasjoner der Gemini CLI havnet i såkalt «loops», der KI gjentok de samme tilbakemeldingene og feilene uten å føre prosessen videre. Dette skjedde oftest i lengre dialoger der kontekstvinduet allerede var tungt belastet og førte til at KI mistet oversikt og begynte å repetere fremfor å bygge videre.
+- Løsning:
+  Løsningen bestod i å starte Gemini på nytt, formulere promptene mer presist og være tålmodige for å bryte «loops». I tillegg viste det seg effektivt å bytte på hvem som jobbet med Gemini, ettersom et mindre belastet kontekstvindu og mindre bruk av «free tier» ga bedre resultater. Et eksempel, vi opplevde under valideringen av UX-design at Gemini gjentok de samme feilene, selv etter at vi hadde rettet dem og restartet systemet. Problemet viste seg å være at Gemini genererte en helt ny valideringsprosess for hver forespørsel. Da vi byttet til en annen bruker med et mindre belastet kontekstvindu, gjennomførte Gemini valideringen uten problemer. 
+- KI sin rolle:
+  KI hadde både en positiv og negativ innvirkning når denne utfordringen oppsto. Den skapte tidvis utfordringer ved å gå inn i «loops», men på den andre siden sparte den gruppen for betydelig tid ved å forslå ulike løsninger. Uten KI ville vi vært nødt til å hente tilsvarende informasjon gjennom omfattende research på plattformer som Reddit, GitHub og Stack Overflow.
 
 ### (MARITA) 3.2 Samarbeidsutfordringer
 [Utfordringer knyttet til teamarbeid og kommunikasjon]
@@ -93,67 +88,36 @@ Se proposal
 - Alle på gruppen hadde forskjellig erfaringer og kunnskap fra før. Noen har hatt mer behov for stegvis prosess, mens andre har ønsket å kjøre en raskere vei mot mål, da de har vært igjennom dette før.
 
 ### (JENNY) 3.3 KI-spesifikke utfordringer
-[Problemer spesifikt knyttet til bruk av KI]
-- [f.eks. Feil kode fra KI, misforståelser, inkonsistent kvalitet]
-  - Med fare for å gjenta oss selv, ref. utfordring 1 og 2 over.
+I prosjektet oppstod flere KI-spesifikke utfordringer, knyttet til feil kodegenerering, misforståelser i dialogen og varierende kvalitet på svarene. Mange av disse problemene var de samme som tidligere beskrevet i utfordring 1 og 2, der både gratisversjonen av Gemini og «loops» i dialogen skapte hindringer for en effektiv arbeidsflyt. Disse utfordringene ble håndtert på samme måte som beskrevet under punktet «Løsning» over. 
+
 - [Hvordan håndterte dere disse?]
-  - Se løsning ved utfordring 1 og 2.
+Det innebar å starte KI-sesjoner på nytt, forbedre og presisere promptene, samt bytte bruker når kontekstvinduet var for belastet. I noen tilfeller var det også nødvendig å oppgradere til en betalt versjon av Gemini for å oppnå mer stabil ytelse. Disse tiltakene var avgjørende for å sikre fremdrift i arbeidet når KI enten låste seg i repetisjoner eller leverte inkonsistente resultater.
 
 ---
 
 ## 4. Kritisk vurdering av KI sin påvirkning
 
-### 4.1 Fordeler med KI-assistanse
-[Reflekter over de positive aspektene]
+### (JENNY) 4.1 Fordeler med KI-assistanse
 
 **Effektivitet og produktivitet:**
-- [Hvordan påvirket KI arbeidshastigheten?]
-  - Men tanke på gratis version og veldig mange forsøk på Ai riktig vei. Mer arbeid enn om man hadde kodet selv.
-  - For oss som ikke er så flinke til å kode, gav AI en lettere sti/veiledning til veien videre på projektet.
-  - Ikke så mye koding og viktig vektøy. Mer effektiv, veldig validering
-  - God veileding.
-  - Gikk god læring i github
-- [Eksempler på oppgaver som gikk raskere]
-  - Lagt selv UX-designet, fordi det hadde tatt mye mer tid å diskutere farge og layout
-  - Den kommer med forslag og alternativer på farge og layout. Lettere for oss som gruppe å ta en avjørelse på hvilken av alternativene vi likte best.
-  - Til tross for disse utfordringene, var selve PDD-prosessen (Prompt Driven Development, utviklingemetode: I stedet for å skrive kode linje for linje (som i tradisjonell utvikling), skriver utvikleren detaljerte, strukturerte instruksjoner (prompter) som gis til en stor språkmodell (LLM, som Gemini eller GPT). LLM-en genererer deretter den faktiske kodebasen basert på disse instruksjonen) utrolig effektiv: Min Rolle: Jeg fungerte som Arkitekt og Prompt Engineer. Jeg fikk KI-en til å generere de mest komplekse integrasjonene, som SQLAlchemy ORM-tilkobling og strukturert JSON-respons (llm_service.py), som er det vanskeligste for en utvikler å skrive manuelt.
+KI hadde en tydelig, men todelt innvirkning på arbeidshastigheten i prosjektet. På den ene siden førte utfordringene beskrevet i «3.1 Tekniske utfordringer» til at enkelte oppgaver tok lengre tid enn om de hadde blitt løst manuelt. På den andre siden ga KI en betydelig fordel, spesielt for gruppemedlemmer med mindre erfaring innen prosjektarbeid og utvikling. KI bidro med veiledning, forslag til løsninger og tydelig fremgangsmåte som gjorde det enklere å komme videre i prosjektet. Den økte også effektiviteten ved å håndtere validering av dokumenter, genererte alternativer og løste oppgaver som vanligvis krever mer tid og teknisk innsikt. I tillegg førte samarbeidet med KI til økt læring rundt bruken av GitHub, noe som igjen ga en bedre forståelse i en ryddig og effektiv arbeidsflyt gjennom prosjektet.
+
+Flere oppgaver ble betydelig mer effektive med KI, som for eksempel utarbeidelsen av UX-design. Her kom KI med forslag til farge, layout og alternative visuelle løsninger, som gjorde det langt enklere for gruppen å ta beslutninger uten lange diskusjoner. I tillegg viste PDD-prosessen (Prompt Driven Development) seg å være svært effektiv. Ved å formulere presise og detaljerte prompter kunne KI generere avanserte komponenter som ellers ville krevd omfattende og tidkrevende manuelt arbeid. Dette inkluderte blant annet komplekse integrasjoner som SQLAlchemy ORM-tilkobling og strukturert JSON-resons (llm_service.py). Dette viste hvordan KI kunne akselerere tekniske utviklingen når promptene var tydelige og godt utformet.
 
 **Læring og forståelse:**
-- [Hva lærte dere ved å bruke KI?]
-  - Har lært hvordan integerer gemini i visual studio code lokalt på pc'en og bruke dette til ulike prosjekter fremover.
-  - Viktig å være tydlig med promptene til KI for å få den til å gjøre det vi vil. 
-  - Har lært å bruke agenter til ulike deler/faser av prosjektet og hvilke kapasitet hver agent har og hvilke faser under utvilking vi bruker de til. Generell kunnskap om BMAD-metode gjennom praksis gjennomføring.
-- [Bidro KI til bedre forståelse av konsepter?]
-  - Ja, valideringen av de ulike filene. Hjalp oss å tenke lengre
-  - generell prosessen, eks. UX-design kom KI med forslag til utseende der vi måtte se for oss selve applikasjonen i ulike design og spesielt når vi referer til funksjonalitet og hvilke elementer vi velger å bruke/representerer.
-  - ved å forslag til design, motiverte det oss og ga oss en forståelse av hvordan applikasjonen vår faktisk skal se ut.
+Gjennom prosjektet lærte vi hvordan man integrerer Gemini i Visual Studio Code lokalt på egen pc, og erfarte hvor viktig det er å formulere tydelige og presise prompter for å få KI til å levere ønskede resultater. En arbeidsform som ofte omtales som «vibe coding». Vi fikk også god innsikt i hvordan ulike KI-agenter innenfor rammeverket BMAD-metoden fungerer, hvordan de kan brukes i ulike deler og faser av prosjektet, hvilke oppgaver de behersker, og når de er mest hensiktsmessige å bruke. Samlet ga dette oss en praktisk erfaring med BMAD-metoden og bedre forståelse av hvordan den kan brukes i fremtidige prosjekter.
+
+KI bidro til økt forståelse av sentrale konsepter gjennom prosjektet. Valideringen av de ulike filene gjorde at vi måtte reflektere grundigere over egne valg og tenke flere steg frem i utviklingen. Innen UX-design ble dette veldig tydelig, der KI kom med visuelle forslag og strukturelle løsninger, noe som gjorde at vi måtte klargjøre hvordan applikasjonen faktisk skulle se ut og hvilke funksjonelle elementer den skulle inneholde. Ved å presentere ulike design hjalp KI oss med å se for oss applikasjonen i praksis, noe som både motivert gruppen og ga en klarere forståelse av hvordan sluttproduktet burde utformes.
 
 **Kvalitet på koden:**
 - [Hvordan påvirket KI kodekvaliteten?]
-  - Pros med Gemini, skrive utdypentende svar og gode scripts.
-- [Eksempler på forbedringer KI foreslo]
-  - Vi hadde et eksamepel fil til backende, gjorde koden mer enkelere og lettere å forslå, hvis andre utviklere skulle lest koden.
-  - "Alright, let's tackle our first Important Decision: How Our Application Deals with Problems (Error Handling Strategy).
- 
-  No software is perfect, and things will inevitably go wrong—a user enters invalid data, the internet connection drops, the backend server is temporarily       
-  unavailable. An error handling strategy defines how our application reacts to these problems, communicates them to the user, and recovers gracefully. A good   
-  strategy prevents crashes, provides helpful feedback, and makes it easier for developers to fix issues.
- 
-  Think of it like driving a car. If a tire goes flat, a good car (system) doesn't just stop and leave you stranded. It has a warning light (communication),     
-  maybe even run-flat tires (graceful degradation), and a spare tire (recovery mechanism). A poor system might just break down without warning.
- 
-  My suggestion is a full-stack consistent approach focusing on the user experience:
-   * Backend (FastAPI): We'll use FastAPI's built-in exception handling to ensure that any errors from the server always return a predictable, standardized      
-     message in JSON format.
-   * Frontend (Next.js/React):
-       * We'll use React Error Boundaries to gracefully catch errors that happen during UI display, preventing the entire app from crashing.
-       * For errors coming from the backend (like invalid input), we'll use a global notification or "toast" system (Shadcn/UI has a great one) to show
-         user-friendly messages.
-       * React Query will also help us manage errors specifically from our API calls.
-   * Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
- 
-  This consistent strategy across the entire application will ensure a smooth experience for both users and developers.
-  What are your thoughts on this approach? (or 'explain more' for details)"
+KI hadde en innflytelse på kodekvaliteten i prosjektet. Gemini leverte gjennomgående detaljerte forklaringer og velskrevne skript, noe som bidro til ryddigere og mer forståelig kode. Et eksempel fra backend-utviklingen viste hvordan KI kunne forenkle og forbedre eksisterende kode slik at den ble lettere å lese og vedlikeholde for andre utviklere. KI foreslo også en helhetlig strategi for feilhåndtering på tvers av backend og frontend, inkludert bruk av FastAPIs innebygde exception-system, React Error Boundaries, globale varslingssystemer og strukturert logging. Denne tilnærmingen bidro til en kraftigere applikasjon og ga gruppen bedre innsikt i god programvarepraksis.
+* Backend (FastAPI): We'll use FastAPI's built-in exception handling to ensure that any errors from the server always return a predictable, standardized message in JSON format.
+* Frontend (Next.js/React):
+* We'll use React Error Boundaries to gracefully catch errors that happen during UI display, preventing the entire app from crashing.
+* For errors coming from the backend (like invalid input), we'll use a global notification or "toast" system (Shadcn/UI has a great one) to show user-friendly messages.
+* React Query will also help us manage errors specifically from our API calls.
+* Logging: All significant errors will be recorded so developers can investigate them later (we'll pick a specific logging service soon).
 
 ### 4.2 Begrensninger og ulemper
 [Reflekter over de negative aspektene]
