@@ -41,15 +41,51 @@ jobs:
 
   # Test stage - Parallel execution with sharding
   test:
-    name: Test (No tests yet)
+    name: Test (Shard ${{ matrix.shard }})
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 30
     needs: lint
 
-    steps:
-    - name: Skip tests placeholder
-      run: echo "No Playwright tests implemented yet."
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run tests (shard ${{ matrix.shard }}/4)
+        run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.shard }}
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 30
 
   # Burn-in stage - Flaky test detection
   burn-in:

@@ -126,3 +126,6 @@ The primary test for this epic is a manual end-to-end (E2E) test of the CI/CD pi
 -   **[Low]** Remove the unused `express` dependency from the root `package.json`.
 -   **[Medium]** Update all completed tasks in story 1.1 markdown.
 -   **[Info]** Provide evidence for Vercel deployment (AC #6, #7).
+-   **[Low]** Add explicit null checks for `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `frontend/src/lib/supabase-client.ts` (Story 1.2).
+-   **[Low]** Consider improving error logging for Supabase connection failure in `backend/app/main.py` (Story 1.2).
+-   **[Info]** While currently handled by `main.py`'s startup event, consider adding explicit `ValueError` checks for `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` in `backend/app/db/supabase_client.py` for earlier and clearer error reporting (Story 1.2).

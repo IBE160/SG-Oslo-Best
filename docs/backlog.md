@@ -15,3 +15,5 @@ Routing guidance:
 | 2025-12-05 | 1.1 | 1 | TechDebt | Low | TBD | Open | Remove unused 'express' dependency from root package.json |
 | 2025-12-05 | 1.1 | 1 | Process | Medium | TBD | Open | Update all completed tasks in story 1.1 markdown |
 | 2025-12-05 | 1.1 | 1 | Info | Info | TBD | Open | Provide evidence for Vercel deployment (AC #6, #7) |
+| 2025-12-05 | 1.2 | 1 | Bug | Low | TBD | Open | Add explicit null checks for `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `frontend/src/lib/supabase-client.ts`. |
+| 2025-12-05 | 1.2 | 1 | TechDebt | Low | TBD | Open | Improve error logging for Supabase connection failure in `backend/app/main.py`. |
