@@ -118,3 +118,11 @@ The primary workflow established is the **CI/CD Workflow**:
 ## Test Strategy Summary
 
 The primary test for this epic is a manual end-to-end (E2E) test of the CI/CD pipeline. The developer will push a change to the `main` branch and verify that the deployment completes successfully on Vercel and that the application is accessible. Automated testing frameworks (Jest, Playwright) will be installed as part of the project setup, but no tests will be written in this epic.
+
+## Post-Review Follow-ups (from Story 1.1)
+
+-   **[High]** Create `frontend/.env.example` with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+-   **[High]** Create `backend/.env.example` with `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`.
+-   **[Low]** Remove the unused `express` dependency from the root `package.json`.
+-   **[Medium]** Update all completed tasks in story 1.1 markdown.
+-   **[Info]** Provide evidence for Vercel deployment (AC #6, #7).

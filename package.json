@@ -28,9 +28,7 @@
     "url": "https://github.com/IBE160/SG-Oslo-Best/issues"
   },
   "homepage": "https://github.com/IBE160/SG-Oslo-Best#readme",
-  "dependencies": {
-    "express": "^5.2.1"
-  },
+  "dependencies": {}
   "devDependencies": {
     "@faker-js/faker": "^8.0.0",
     "@playwright/test": "^1.40.0"
