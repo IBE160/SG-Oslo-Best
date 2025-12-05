@@ -1,6 +1,6 @@
 # Story 1.3: Implement Basic CI/CD Pipeline
 
-Status: ready-for-dev
+Status: blocked
 
 ## Story
 
@@ -90,6 +90,8 @@ As a developer, I want to implement a basic CI/CD pipeline to Vercel so that cha
 - [Source: docs/sprint-artifacts/1-2-configure-supabase-integration.md#Learnings-from-Previous-Story-(1.1)]
 
 ## Change Log
+- [fredag 5. desember 2025] - Story halted (blocked) due to lack of repository ownership for Vercel deployment. Decision made to bypass Supabase integration for backend and prioritize 100% local functionality for the project as it's a school project. This story will be resumed only when deployment to Vercel is required and repository ownership issues are resolved.
+
 
 ## Dev Agent Record
 
@@ -104,5 +106,12 @@ As a developer, I want to implement a basic CI/CD pipeline to Vercel so that cha
 ### Debug Log References
 
 ### Completion Notes List
+- [fredag 5. desember 2025] - Story implementation halted. During the "Test CI/CD Pipeline" task, the user indicated lack of repository ownership for the Vercel deployment. It was clarified that the project is a school project requiring only 100% local functionality. Therefore, the decision was made to:
+    - Set Story 1.3 to `blocked` status.
+    - Bypass Supabase integration in the backend by commenting out related code in `backend/app/main.py` and `backend/app/db/supabase_client.py` to resolve `ModuleNotFoundError`.
+    - Postpone Vercel deployment and related tasks until repository ownership is established or deployment is required for submission.
+    - The `vercel.json` file was created, but its full functionality is dependent on Vercel project configuration outside of agent control.
+    - All tasks related to Vercel deployment and Supabase environment variables were cancelled from the todo list.
+
 
 ### File List
