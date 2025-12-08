@@ -37,14 +37,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // This effect will run when the session state changes
-  useEffect(() => {
-    // Redirect to dashboard only if a session is newly set
-    if (session?.access_token) {
-      router.push('/dashboard');
-    }
-  }, [session]);
-
   const login = (sessionData: Session) => {
     setSession(sessionData);
     try {

@@ -1,28 +1,11 @@
+# backend/app/db/supabase_client.py
+
 import os
-from pathlib import Path
-from dotenv import load_dotenv
 from supabase import create_client, Client
+from ..core.config import settings # Changed to relative import
 
-# Load environment variables from .env
-ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
-load_dotenv(dotenv_path=ENV_PATH)
-
-
-print("DEBUG SUPABASE_URL:", repr(os.environ.get("SUPABASE_URL")))
-print("DEBUG SUPABASE_SERVICE_KEY set:", bool(os.environ.get("SUPABASE_SERVICE_KEY")))
-
-# Get Supabase credentials
-supabase_url = os.environ.get("SUPABASE_URL")
-supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
-
-supabase: Client | None = None
-
-# Initialize Supabase only if credentials exist
-if supabase_url and supabase_key:
-    try:
-        supabase = create_client(supabase_url, supabase_key)
-        print("✅ Supabase client initialized")
-    except Exception as e:
-        print("❌ Failed to initialize Supabase client:", e)
-else:
-    print("⚠️ Supabase is disabled (missing SUPABASE_URL or SUPABASE_SERVICE_KEY)") 
+def get_supabase_client() -> Client:
+    """Returns a Supabase client instance."""
+    if not settings.SUPABASE_URL or not settings.SUPABASE_SERVICE_KEY:
+        raise ValueError("Supabase URL and Key must be set in environment variables.")
+    return create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_KEY)

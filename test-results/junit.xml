@@ -1,112 +1,102 @@
-<testsuites id="" name="" tests="6" failures="2" skipped="0" errors="0" time="38.137182">
-<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="chromium" tests="2" failures="0" skipped="0" time="8.157" errors="0">
-<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="4.095">
-</testcase>
-<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="4.062">
-</testcase>
-</testsuite>
-<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="firefox" tests="2" failures="0" skipped="0" time="12.376" errors="0">
-<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="6.677">
-</testcase>
-<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="5.699">
-</testcase>
-</testsuite>
-<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="webkit" tests="2" failures="2" skipped="0" time="70.395" errors="0">
-<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="35.181">
-<failure message="login.spec.ts:6:7 should log in a verified user and redirect to dashboard" type="FAILURE">
-<![CDATA[  [webkit] › login.spec.ts:6:7 › Story 2.2: User Login & Session Management › should log in a verified user and redirect to dashboard 
+<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="31.099418999999997">
+<testsuite name="profile-cv.spec.ts" timestamp="2025-12-08T17:30:32.673Z" hostname="chromium" tests="2" failures="2" skipped="0" time="38.564" errors="0">
+<testcase name="Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard" classname="profile-cv.spec.ts" time="19.347">
+<failure message="profile-cv.spec.ts:40:9 should allow a new user to create profile and CV, then redirect to dashboard" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:40:9 › Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard 
 
-    TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
-    =========================== logs ===========================
-    waiting for navigation until "load"
-    ============================================================
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('login-link')
 
-      28 |     // Wait for network to be idle and then for the dashboard header to appear
-      29 |     await page.waitForLoadState('networkidle');
-    > 30 |     await page.waitForURL(/.*\/dashboard/);
-         |                ^
-      31 |     await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
-      32 |     await expect(page).toHaveURL(/.*\/dashboard/);
-      33 |   });
-        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\login.spec.ts:30:16
+
+      25 |     // Ensure login view is active
+      26 |     if (!await page.getByRole('heading', { name: 'Login' }).isVisible()) {
+    > 27 |         await page.getByTestId('login-link').click(); // Switch to login form if not already
+         |                                              ^
+      28 |     }
+      29 |
+      30 |     await page.getByTestId('email-input').fill(email);
+        at loginUser (C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:27:46)
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:48:9
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\test-failed-1.png
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\video.webm
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\error-context.md
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md
 
     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
     Usage:
 
-        npx playwright show-trace ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
 <![CDATA[
-[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\test-failed-1.png]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\video.webm]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\error-context.md]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="35.214">
-<failure message="login.spec.ts:35:7 should show a pop-up asking to update CV information after login" type="FAILURE">
-<![CDATA[  [webkit] › login.spec.ts:35:7 › Story 2.2: User Login & Session Management › should show a pop-up asking to update CV information after login 
+<testcase name="Profile and CV Creation › should display validation errors for mandatory fields" classname="profile-cv.spec.ts" time="19.217">
+<failure message="profile-cv.spec.ts:72:9 should display validation errors for mandatory fields" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:72:9 › Profile and CV Creation › should display validation errors for mandatory fields 
 
-    TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
-    =========================== logs ===========================
-    waiting for navigation until "load"
-    ============================================================
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('login-link')
 
-      55 |     
-      56 |     await page.waitForLoadState('networkidle');
-    > 57 |     await page.waitForURL(/.*\/dashboard/);
-         |                ^
-      58 |     await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
-      59 |
-      60 |     const popup = page.locator('[data-testid="update-cv-popup"]');
-        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\login.spec.ts:57:16
+
+      25 |     // Ensure login view is active
+      26 |     if (!await page.getByRole('heading', { name: 'Login' }).isVisible()) {
+    > 27 |         await page.getByTestId('login-link').click(); // Switch to login form if not already
+         |                                              ^
+      28 |     }
+      29 |
+      30 |     await page.getByTestId('email-input').fill(email);
+        at loginUser (C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:27:46)
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:80:9
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\test-failed-1.png
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\test-failed-1.png
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\video.webm
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\video.webm
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
-    Error Context: ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\error-context.md
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\error-context.md
 
     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip
     Usage:
 
-        npx playwright show-trace ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
 <![CDATA[
-[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\test-failed-1.png]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\test-failed-1.png]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\video.webm]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\video.webm]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\error-context.md]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\error-context.md]]
 
-[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>

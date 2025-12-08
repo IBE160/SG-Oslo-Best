@@ -1,3 +1,4 @@
+// frontend/app/(auth)/page.tsx
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
@@ -21,10 +22,12 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState(""); // New state for messages
   const router = useRouter();
 
   const handleRegistration = async () => {
     setError("");
+    setMessage("");
 
     // --- Start Validation ---
     if (!email || !password || !confirmPassword) {
@@ -62,8 +65,12 @@ export default function AuthPage() {
         throw new Error(data.detail || "Registration failed.");
       }
 
-      // On successful registration (201 Created)
-      router.push("/cv-creation");
+      // On successful registration, prompt user to verify email
+      setMessage("Registration successful! Please check your email to verify your account and then log in.");
+      setIsLoginView(true); // Switch to login view after registration
+      setEmail(""); // Clear email/password fields
+      setPassword("");
+      setConfirmPassword("");
 
     } catch (err: any) {
       setError(err.message);
@@ -74,6 +81,7 @@ export default function AuthPage() {
 
   const handleLogin = async () => {
     setError("");
+    setMessage("");
 
     if (!email || !password) {
       setError("Email and password are required.");
@@ -93,8 +101,29 @@ export default function AuthPage() {
         throw new Error(result.detail || "Login failed.");
       }
 
-      // The login function from context handles storing the session and redirecting
+      // The login function from context handles storing the session
       login(result.data);
+
+      // --- Check if user has a profile ---
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+      const profileCheckResponse = await fetch(`${backendUrl}/api/v1/users/me/cv`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${result.data.access_token}`, // Use the access token from the fresh login
+        },
+      });
+
+      if (profileCheckResponse.ok) {
+        // Profile exists, redirect to dashboard
+        router.push("/dashboard");
+      } else if (profileCheckResponse.status === 404) {
+        // Profile does not exist, redirect to CV creation
+        router.push("/cv-creation");
+      } else {
+        // Other error during profile check, log and redirect to dashboard as a fallback
+        console.error("Error checking user profile:", await profileCheckResponse.json());
+        router.push("/dashboard");
+      }
 
     } catch (err: any) {
       setError(err.message);
@@ -114,6 +143,7 @@ export default function AuthPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {error && <p className="text-red-500 text-sm">{error}</p>}
+          {message && <p className="text-green-500 text-sm">{message}</p>} {/* Display messages */}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -165,6 +195,7 @@ export default function AuthPage() {
               onClick={() => {
                 setIsLoginView(!isLoginView);
                 setError(""); // Clear errors on view switch
+                setMessage(""); // Clear messages on view switch
               }}
               className="ml-1 underline"
               data-testid={isLoginView ? "signup-link" : "login-link"}
