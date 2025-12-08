@@ -1,45 +1,47 @@
-import { test, expect } from '../support/fixtures';
+import { test, expect } from "@playwright/test";
 
-test.describe('Story 2.1: User Registration', () => {
-  test('should expand the registration form on Sign Up click', async ({ page }) => {
-    // GIVEN: User is on the landing page
-    await page.goto('/'); // Assuming the login/signup form is on the landing page
+test.describe("User Registration", () => {
+  test("should expand the form for registration", async ({ page }) => {
+    await page.goto("/");
 
-    // WHEN: User clicks the "Sign Up" link
-    await page.click('[data-testid="signup-link"]');
+    // Initially, the confirm password input should not be visible
+    await expect(page.getByTestId("confirm-password-input")).toBeHidden();
 
-    // THEN: Registration-specific fields become visible
-    await expect(page.locator('[data-testid="confirm-password-input"]')).toBeVisible();
-    await expect(page.locator('[data-testid="registration-submit-button"]')).toBeVisible();
+    // Click the sign up link
+    await page.getByTestId("signup-link").click();
+
+    // Now, the confirm password input should be visible
+    await expect(page.getByTestId("confirm-password-input")).toBeVisible();
   });
 
-  test('should create an account and redirect on valid submission', async ({ page }) => {
-    // GIVEN: The user is on the registration form
-    await page.goto('/');
-    await page.click('[data-testid="signup-link"]');
+  test("should create an account and redirect to cv-creation", async ({ page }) => {
+    await page.goto("/");
 
-    // Mock the backend registration endpoint to return success
-    await page.route('**/api/v1/auth/register', (route) => {
-      return route.fulfill({
-        status: 201, // Created
-        contentType: 'application/json',
-        body: JSON.stringify({ message: 'User created successfully' }),
-      });
+    // Go to the sign up view
+    await page.getByTestId("signup-link").click();
+
+    // Mock the API response
+    await page.route("/api/v1/auth/register", async (route) => {
+      const json = {
+        data: {
+          user_id: "some-fake-uuid",
+          email: "student@example.com",
+        },
+      };
+      await route.fulfill({ json, status: 201 });
     });
 
-    // Mock the email service call (assuming it's a separate API call)
-    await page.route('**/api/v1/resend/verify-email', (route) => {
-        return route.fulfill({ status: 200, body: JSON.stringify({ message: 'Email sent' }) });
-    });
+    // Fill out the form
+    const email = `testuser-${Date.now()}@example.com`;
+    await page.getByTestId("email-input").fill(email);
+    await page.getByTestId("password-input").fill("password123");
+    await page.getByTestId("confirm-password-input").fill("password123");
 
+    // Submit the form
+    await page.getByTestId("registration-submit-button").click();
 
-    // WHEN: The user enters valid details and submits
-    await page.fill('[data-testid="email-input"]', 'new.student@university.com');
-    await page.fill('[data-testid="password-input"]', 'ValidPassword123!');
-    await page.fill('[data-testid="confirm-password-input"]', 'ValidPassword123!');
-    await page.click('[data-testid="registration-submit-button"]');
-
-    // THEN: The user is redirected to the CV creation page
-    await expect(page).toHaveURL(/.*\/cv-creation/);
+    // Expect to be redirected to the CV creation page
+    await expect(page).toHaveURL("/cv-creation");
+    await expect(page.getByText("CV Creation Page")).toBeVisible();
   });
 });

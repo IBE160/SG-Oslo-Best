@@ -2,12 +2,15 @@ import logging
 from fastapi import FastAPI, HTTPException
 from .db.supabase_client import supabase
 from pydantic import BaseModel
+from .api.v1 import auth as auth_router
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+app.include_router(auth_router.router, prefix="/api/v1/auth", tags=["auth"])
 
 @app.on_event("startup")
 async def startup_event():
