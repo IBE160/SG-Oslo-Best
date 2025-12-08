@@ -1,0 +1,393 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>4</storyId>
+    <title>Update User Profile &amp; CV with Hybrid Save</title>
+    <status>drafted</status>
+    <generatedAt>mandag 8. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-4-update-user-profile-cv-with-hybrid-save.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>As a logged-in student user,</asA>
+    <iWant>to update my CV information using a form that auto-saves my work,</iWant>
+    <soThat>so that I feel confident my changes are securely persisted with minimal effort.</soThat>
+    \
+
+    <task id='1' title='Implement/Enhance Profile/CV Editing Form UI' ac-refs='All'>
+      <subtask>Frontend: Extend the ProfileCVForm.tsx to handle existing profile and CV data.</subtask>
+      <subtask>Frontend: Integrate the StatefulTextbox component (from Story 2.5) for all editable fields in the form.</subtask>
+      <subtask>Frontend: Implement logic to manage the master &quot;Save&quot; button&apos;s enabled/disabled state based on isDirty status from React Hook Form.</subtask>
+      <subtask>Frontend: Display an &quot;Unsaved changes...&quot; indicator (using React Context) when changes are pending.</subtask>
+    </task>
+    <task id='2' title='Implement Frontend Logic for Hybrid Save Model' ac-refs='All'>
+      <subtask>Frontend: Implement onBlur event handlers for all StatefulTextbox fields to trigger auto-save.</subtask>
+      <subtask>Frontend: Use React Query&apos;s useMutation hook for sending PATCH requests to pi/v1/users/me/cv for auto-saves.</subtask>
+      <subtask>Frontend: Implement the manual &quot;Save&quot; button&apos;s click handler to send a single PATCH request for all currently modified fields.</subtask>
+      <subtask>Frontend: Update the visual state of StatefulTextbox components (yellow to green) based on the success/failure of auto-save and manual save mutations.</subtask>
+      <subtask>Frontend: Implement a confirmation modal for navigating away with unsaved changes, offering &quot;Save&quot;, &quot;Discard Changes&quot;, or &quot;Cancel&quot; options (UX Spec 7.1.7).</subtask>
+    </task>
+    <task id='3' title='Implement Backend API for Profile/CV Update' ac-refs='All'>
+      <subtask>Backend: Implement/enhance the PATCH /api/v1/users/me/cv endpoint in ackend/app/api/v1/users.py to handle partial updates of profile and CV data.</subtask>
+      <subtask>Backend: Ensure data is stored in profiles and cv_documents tables.</subtask>
+      <subtask>Backend: Implement server-side validation for mandatory fields being updated.</subtask>
+      <subtask>Backend: **CRITICAL:** Verify and Document Supabase RLS Policies for profiles and cv_documents tables to ensure user data isolation. (From Story 2.3 review action item).</subtask>
+      <subtask>Backend: Ensure updated_at timestamps are recorded using datetime.now(timezone.utc).isoformat() (From Story 2.3 review action item).</subtask>
+    </task>
+    <task id='4' title='Implement Validation for Updates' ac-refs='Derived'>
+      <subtask>Frontend: Integrate React Hook Form validation for required fields on onBlur and onSubmit.</subtask>
+      <subtask>Frontend: Display inline validation errors for mandatory fields left empty during an update.</subtask>
+      <subtask>Backend: Return appropriate validation error responses from the PATCH endpoint for invalid data.</subtask>
+    </task>
+    <task id='5' title='Verification' ac-refs='All'>
+      <subtask>Testing: Create/Extend E2E tests (	ests/e2e/profile-cv.spec.ts) to cover: User navigating to profile editing page, modifying fields, verifying yellow borders. Verifying auto-save on blur: field turns green, data persisted. Verifying manual save: multiple fields modified, &quot;Save&quot; button clicked, all turn green, data persisted. Verifying validation errors for mandatory fields left empty after modification. Verifying confirmation modal when navigating away with unsaved changes.</subtask>
+      <subtask>Testing: API tests for the PATCH /api/v1/users/me/cv endpoint: Ensure it accepts partial updates. Ensure server-side validation works. Ensure RLS policies are enforced (can be tested by attempting to update another user&apos;s data).</subtask>
+      <subtask>Testing: Run Playwright tests and ensure they pass.</subtask>
+      <subtask>Testing: **CRITICAL:** Manually verify Supabase RLS policies are correctly configured and enforced for read/write operations on profiles and cv_documents tables.</subtask>
+      <subtask>Testing: **Advisory:** Review and update AuthContext unit tests if any changes are made to session management.</subtask>
+    </task>
+\
+
+  </story>
+
+  \
+
+    <acceptance-criterion id='1'>Given I am on my profile editing page, When I modify a field, Then the field&apos;s border indicates an &quot;unsaved&quot; state (e.g., turns yellow).</acceptance-criterion>
+    <acceptance-criterion id='2'>And a master &quot;Save&quot; button becomes enabled.</acceptance-criterion>
+    <acceptance-criterion id='3'>When I move focus away from the modified field (onBlur), Then the change is automatically saved in the background via a PATCH request.</acceptance-criterion>
+    <acceptance-criterion id='4'>And the field&apos;s border indicates a &quot;saved&quot; state (e.g., turns green).</acceptance-criterion>
+    <acceptance-criterion id='5'>When I click the manual &quot;Save&quot; button, Then all pending changes are sent in a single PATCH request, and all modified fields show a &quot;saved&quot; state.</acceptance-criterion>
+    <acceptance-criterion id='6'>When mandatory fields are modified and then left empty, then the system displays an inline validation error.</acceptance-criterion>
+    <acceptance-criterion id='7'>When the user attempts to navigate away from the profile editing page with unsaved changes, then a confirmation modal appears prompting to save, discard, or cancel.</acceptance-criterion>
+\
+
+
+  <artifacts>
+    \
+
+    <doc>
+      <path>docs/PRD.md</path>
+      <title>CVAI Turbo - Product Requirements Document</title>
+      <section>Functional Requirements, 1. User Authentication &amp; Profile Management</section>
+      <snippet>The system shall allow users to create and manage their personal profile information (e.g., name, date of birth, gender, phone number, address). The system shall allow users to create and manage their CV details (e.g., education, work experience, qualifications, language). The system shall validate required fields during profile and CV creation/update, preventing saving until all mandatory information is provided.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Objectives and Scope</section>
+      <snippet>A page for creating and updating a user&apos;s profile and CV data. Implementation of a &apos;Hybrid Save Model&apos; on the frontend, featuring both auto-save on blur and a manual save button. Creation of a reusable &apos;Stateful Textbox&apos; component to provide visual feedback on the save status of form fields.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Data Models and Contracts</section>
+      <snippet>cvs table with id, user_id, cv_text, updated_at.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>APIs and Interfaces</section>
+      <snippet>PATCH /api/v1/users/me/cv: Updates the CV for the logged-in user. Request Body: &lbrace; &quot;cv_text&quot;: &quot;...&quot; &rbrace;. Response: &lbrace; &quot;data&quot;: &lbrace; &quot;id&quot;: &quot;...&quot;, &quot;cv_text&quot;: &quot;...&quot; &rbrace; &rbrace;.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Workflows and Sequencing</section>
+      <snippet>User modifies a field, border turns yellow, onBlur triggers auto-save (PATCH), border turns green. Manual save triggers manual PATCH.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Non-Functional Requirements (Performance)</section>
+      <snippet>The auto-save PATCH request should be lightweight and respond quickly.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Non-Functional Requirements (Security)</section>
+      <snippet>Row Level Security (RLS) policies must be enabled on the users and cvs tables in Supabase.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Dependencies and Integrations</section>
+      <snippet>React Hook Form for forms, React Query for API, React Context for session.</snippet>
+    </doc>
+    <doc>
+      <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+      <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+      <section>Acceptance Criteria (Authoritative)</section>
+      <snippet>A logged-in user can update their CV information. When updating the CV, changes are auto-saved when a user leaves a field. The &apos;Stateful Textbox&apos; component correctly shows &apos;unsaved&apos; and &apos;saved&apos; states.</snippet>
+    </doc>
+    <doc>
+      <path>docs/architecture.md</path>
+      <title>Architecture</title>
+      <section>Epic to Architecture Mapping</section>
+      <snippet>Epic 2: User Onboarding &amp; Profile - Primary Code Location(s): frontend/app/(auth)/, frontend/components/, backend/app/api/v1/auth.py, backend/app/api/v1/users.py</snippet>
+    </doc>
+    <doc>
+      <path>docs/architecture.md</path>
+      <title>Architecture</title>
+      <section>Cross-Cutting Concerns (Date/Time Handling)</section>
+      <snippet>date-fns for frontend (Next.js) ... Python datetime ... storing UTC.</snippet>
+    </doc>
+    <doc>
+      <path>docs/architecture.md</path>
+      <title>Architecture</title>
+      <section>Implementation Patterns (Naming Conventions)</section>
+      <snippet>Frontend Components (React): PascalCase, Database (PostgreSQL) Tables: lowercase, plural, snake_case, Database (PostgreSQL) Columns: lowercase, snake_case.</snippet>
+    </doc>
+    <doc>
+      <path>docs/ux-design-specification.md</path>
+      <title>ibe160 UX Design Specification</title>
+      <section>CV Management (Section 5.1.2)</section>
+      <snippet>Hybrid Save Model on a Single Scrolling Form. ... system automatically saves changes when a user moves from one field to another, providing immediate feedback, while the manual &apos;Save&apos; button gives users a sense of finality and control.</snippet>
+    </doc>
+    <doc>
+      <path>docs/ux-design-specification.md</path>
+      <title>ibe160 UX Design Specification</title>
+      <section>Component Library (Custom Components - Stateful Textbox) (Section 6.1.2)</section>
+      <snippet>Purpose: To provide clear, immediate feedback on the auto-save status of a field... States &amp; Appearance: Default, Typing/Unsaved (yellow), Saved (green).</snippet>
+    </doc>
+    <doc>
+      <path>docs/ux-design-specification.md</path>
+      <title>ibe160 UX Design Specification</title>
+      <section>UX Pattern Decisions (Form Patterns) (Section 7.1.3)</section>
+      <snippet>Validation Timing: On blur for individual field validation, and On submit for overall form validation. Error Display: Inline error messages below the field.</snippet>
+    </doc>
+    <doc>
+      <path>docs/ux-design-specification.md</path>
+      <title>ibe160 UX Design Specification</title>
+      <section>UX Pattern Decisions (Confirmation Patterns) (Section 7.1.7)</section>
+      <snippet>Leave Unsaved Changes: Warn with a custom modal if the user attempts to navigate away from a form with unsaved changes. This modal will offer &apos;Save,&apos; &apos;Discard Changes,&apos; or &apos;Cancel&apos; options.</snippet>
+    </doc>
+    <doc>
+      <path>docs/epics.md</path>
+      <title>CVAI Turbo - Epics &amp; Stories</title>
+      <section>Epic 2: User Onboarding &amp; Profile Management, Story 2.4: Update User Profile &amp; CV with Hybrid Save</section>
+      <snippet>As a logged-in student user, I want to update my CV information using a form that auto-saves my work, so that I feel confident my changes are securely persisted with minimal effort.</snippet>
+    </doc>
+    \
+
+    \
+
+        <file>
+          <path>frontend/components/ProfileCVForm.tsx</path>
+          <kind>component</kind>
+          <reason>Form for user profile and CV data management.</reason>
+        </file>
+        <file>
+          <path>frontend/context/AuthContext.tsx</path>
+          <kind>context</kind>
+          <reason>Manages user authentication sessions, reusable for state.</reason>
+        </file>
+        <file>
+          <path>frontend/app/cv-creation/page.tsx</path>
+          <kind>page</kind>
+          <reason>Page for initial CV creation, likely to be modified or re-used for updating.</reason>
+        </file>
+        <file>
+          <path>frontend/app/(auth)/page.tsx</path>
+          <kind>page</kind>
+          <reason>Authentication page handling login/registration, relevant for session management.</reason>
+        </file>
+        <file>
+          <path>backend/app/main.py</path>
+          <kind>main application</kind>
+          <reason>Main FastAPI app, includes user router relevant for API endpoints.</reason>
+        </file>
+        <file>
+          <path>backend/app/core/dependencies.py</path>
+          <kind>dependency</kind>
+          <symbol>get_current_user_id</symbol>
+          <reason>Retrieves authenticated user ID, critical for securing user-specific data.</reason>
+        </file>
+        <file>
+          <path>backend/app/api/v1/users.py</path>
+          <kind>API endpoint</kind>
+          <reason>Contains API endpoints for user profile and CV management (create, get, will need patch).</reason>
+        </file>
+        <file>
+          <path>backend/app/api/v1/schemas.py</path>
+          <kind>Pydantic schemas</kind>
+          <reason>Defines data models for user profiles and CVs (e.g., UserProfileCreate, UserProfileResponse).</reason>
+        </file>
+        <file>
+          <path>backend/app/api/v1/auth.py</path>
+          <kind>API endpoint</kind>
+          <reason>Authentication endpoints, relevant for user session context.</reason>
+        </file>
+\
+
+    \
+
+        <nodejs>
+            <package name='@faker-js/faker' version='^8.0.0' />
+            <package name='@playwright/test' version='^1.40.0' />
+            <package name='@radix-ui/react-alert-dialog' version='^1.1.15' />
+            <package name='@radix-ui/react-label' version='^2.1.8' />
+            <package name='@radix-ui/react-slot' version='^1.2.4' />
+            <package name='@supabase/supabase-js' version='^2.39.0' />
+            <package name='class-variance-authority' version='^0.7.1' />
+            <package name='clsx' version='^2.1.1' />
+            <package name='lucide-react' version='^0.555.0' />
+            <package name='next' version='16.0.7' />
+            <package name='react' version='19.2.0' />
+            <package name='react-dom' version='19.2.0' />
+            <package name='@tailwindcss/postcss' version='^4' dev='true' />
+            <package name='@types/node' version='^20' dev='true' />
+            <package name='@types/react' version='^19' dev='true' />
+            <package name='@types/react-dom' version='^19' dev='true' />
+            <package name='babel-plugin-react-compiler' version='1.0.0' dev='true' />
+            <package name='eslint' version='^9' dev='true' />
+            <package name='eslint-config-next' version='16.0.7' dev='true' />
+            <package name='tailwindcss' version='^4' dev='true' />
+            <package name='typescript' version='^5' dev='true' />
+        </nodejs>
+        <python>
+            <package name='annotated-doc' version='0.0.4' />
+            <package name='annotated-types' version='0.7.0' />
+            <package name='anyio' version='4.12.0' />
+            <package name='click' version='8.3.1' />
+            <package name='colorama' version='0.4.6' />
+            <package name='fastapi' version='0.123.8' />
+            <package name='h11' version='0.16.0' />
+            <package name='idna' version='3.11' />
+            <package name='pydantic' version='2.12.5' />
+            <package name='pydantic_core' version='2.41.5' />
+            <package name='starlette' version='0.50.0' />
+            <package name='typing-inspection' version='0.4.2' />
+            <package name='typing_extensions' version='4.15.0' />
+            <package name='uvicorn' version='0.38.0' />
+            <package name='supabase' version='(not specified)' />
+        </python>
+\
+
+  </artifacts>
+
+  \
+
+    <constraint>
+        <type>Frontend Framework</type>
+        <description>All forms must use React Hook Form for management and validation.</description>
+        <source>docs/architecture.md, docs/sprint-artifacts/tech-spec-epic-2.md</source>
+    </constraint>
+    <constraint>
+        <type>API Communication</type>
+        <description>Frontend API communication must use React Query for data fetching, caching, and state management.</description>
+        <source>docs/architecture.md, docs/sprint-artifacts/tech-spec-epic-2.md</source>
+    </constraint>
+    <constraint>
+        <type>State Management</type>
+        <description>Client-side session state management must use React Context (AuthContext).</description>
+        <source>docs/architecture.md, docs/sprint-artifacts/tech-spec-epic-2.md</source>
+    </constraint>
+    <constraint>
+        <type>Styling &amp; Components</type>
+        <description>UI components must follow Shadcn/UI styling and naming conventions (PascalCase for components, kebab-case for files).</description>
+        <source>docs/architecture.md, docs/ux-design-specification.md</source>
+    </constraint>
+    <constraint>
+        <type>Backend API Versioning</type>
+        <description>API endpoints must be versioned at /api/v1/.</description>
+        <source>docs/architecture.md</source>
+    </constraint>
+    <constraint>
+        <type>Database Storage</type>
+        <description>User profile data must be stored in Supabase &apos;profiles&apos; table and CV data in &apos;cv_documents&apos; table.</description>
+        <source>docs/sprint-artifacts/tech-spec-epic-2.md</source>
+    </constraint>
+    <constraint>
+        <type>Security - RLS</type>
+        <description>Row Level Security (RLS) must be enabled and verified for &apos;profiles&apos; and &apos;cv_documents&apos; tables to ensure user data isolation.</description>
+        <source>docs/sprint-artifacts/tech-spec-epic-2.md, docs/sprint-artifacts/2-3-create-user-profile-cv-initial.md (review findings)</source>
+    </constraint>
+    <constraint>
+        <type>Timestamp Precision</type>
+        <description>&apos;updated_at&apos; timestamps in the backend must use UTC (datetime.now(timezone.utc).isoformat()).</description>
+        <source>docs/architecture.md, docs/sprint-artifacts/2-3-create-user-profile-cv-initial.md (review findings)</source>
+    </constraint>
+    <constraint>
+        <type>Monorepo Structure</type>
+        <description>Project follows a monorepo structure with &apos;frontend&apos;, &apos;backend&apos;, and &apos;packages/shared-types&apos;.</description>
+        <source>docs/architecture.md</source>
+    </constraint>
+    <constraint>
+        <type>Testing Frameworks</type>
+        <description>E2E tests must use Playwright, unit/component tests must use Jest.</description>
+        <source>docs/architecture.md</source>
+    </constraint>
+\
+
+  \
+
+        <interface>
+          <name>Update User CV</name>
+          <kind>REST endpoint</kind>
+          <signature>PATCH /api/v1/users/me/cv</signature>
+          <path>backend/app/api/v1/users.py</path>
+          <description>Updates the full text content of the user&apos;s CV.</description>
+        </interface>
+        <interface>
+          <name>UserProfileCreate</name>
+          <kind>Pydantic model</kind>
+          <signature>class UserProfileCreate(BaseModel): ... cv_content: str</signature>
+          <path>backend/app/api/v1/schemas.py</path>
+          <description>Schema for creating/updating user profile and CV content.</description>
+        </interface>
+        <interface>
+          <name>UserProfileResponse</name>
+          <kind>Pydantic model</kind>
+          <signature>class UserProfileResponse(BaseModel): ... cv_content: str</signature>
+          <path>backend/app/api/v1/schemas.py</path>
+          <description>Schema for returning user profile and CV content.</description>
+        </interface>
+        <interface>
+          <name>AuthContextType</name>
+          <kind>React Context Interface</kind>
+          <signature>{ session: Session | null; login: (session: Session) => void; logout: () => void; isLoading: boolean; }</signature>
+          <path>frontend/context/AuthContext.tsx</path>
+          <description>Interface for the authentication context in the frontend.</description>
+        </interface>
+\
+
+  <tests>
+    \
+
+            Jest for unit/component tests and Playwright for end-to-end (E2E) tests are the primary testing frameworks. API tests are crucial for backend endpoints, and manual verification is required for security-sensitive configurations like Supabase RLS. E2E tests should cover complete user journeys, including visual feedback and data persistence.
+\
+
+    \
+
+            <location>frontend/__tests__/</location>
+            <location>frontend/playwright/</location>
+            <location>backend/tests/</location>
+            <location>tests/e2e/profile-cv.spec.ts</location>
+\
+
+    \
+
+            <idea ac-id='1,2,3,4,5'>
+                <description>E2E: User navigates to profile editing page, modifies fields, verifies yellow borders, auto-save on blur (field turns green, data persisted), and manual save (multiple modified fields, 'Save' button clicked, all turn green, data persisted).</description>
+            </idea>
+            <idea ac-id='6'>
+                <description>E2E: Verifies inline validation errors for mandatory fields left empty after modification.</description>
+            </idea>
+            <idea ac-id='7'>
+                <description>E2E: Verifies confirmation modal appears when navigating away with unsaved changes.</description>
+            </idea>
+            <idea type='API'>
+                <description>API: PATCH /api/v1/users/me/cv accepts partial updates and server-side validation works.</description>
+            </idea>
+            <idea type='Security'>
+                <description>Manual Verification: Supabase RLS policies are correctly configured and enforced for read/write operations on 'profiles' and 'cv_documents' tables.</description>
+            </idea>
+\
+
+  </tests>
+</story-context>
+
+
+
+

@@ -43,7 +43,7 @@ development_status:
   2-1-user-registration: done
   2-2-user-login-session-management: done
   2-3-create-user-profile-cv-initial: done
-  2-4-update-user-profile-cv-with-hybrid-save: backlog
+  2-4-update-user-profile-cv-with-hybrid-save: review
   2-5-implement-stateful-textbox-component: backlog
   epic-2-retrospective: optional
   epic-3: contexted

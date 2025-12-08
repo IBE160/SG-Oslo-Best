@@ -1,0 +1,7 @@
+I've added extensive `print()` statements throughout the `create_user_profile_cv` (POST) endpoint in `backend/app/api/v1/users.py`. These are debugging messages designed to help us trace the execution flow and identify where the error might be occurring.
+
+Please restart your `uvicorn` server (making sure it's run from the project root `C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best` and with `--log-level debug`).
+
+Then, try to reproduce the scenario: register a new account, log in, go to the `/cv-creation` page, fill in the details, and submit the form.
+
+Carefully observe the `uvicorn` console output for any `DEBUG:` messages or any new error messages/tracebacks. Please provide the complete output from the `uvicorn` terminal after you reproduce the 500 error. This should help us pinpoint the exact line that's causing the problem.

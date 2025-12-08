@@ -36,7 +36,7 @@ export default function DashboardPage() {
     // Logic to navigate to the CV update page
     // For now, we'll just close the popup
     setShowPopup(false);
-    // router.push('/cv-management'); // This would be the actual navigation
+    router.push('/cv-creation');
   };
 
   if (isLoading || !session) {
