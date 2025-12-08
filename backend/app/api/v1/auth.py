@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 import resend
 
-from ....db.supabase_client import supabase
-from ....core.config import settings
+from app.db.supabase_client import supabase
+from app.core.config import settings
 
 router = APIRouter()
 
@@ -41,13 +41,13 @@ async def create_user(user: UserRegistration):
         #         params = {
         #             "from": "onboarding@example.com", # TODO: Use a proper domain
         #             "to": [user.email],
-        -        #             "subject": "Welcome to CVAI Turbo!",
-        -        #             "html": "<strong>Welcome!</strong> Please verify your email.",
-        -        #         }
-        -        #         email = resend.Emails.send(params)
-        -        #     except Exception as e:
-        -        #         # Log the email sending failure but don't block registration
-        -        #         print(f"Failed to send verification email: {e}")
+        #             "subject": "Welcome to CVAI Turbo!",
+        #             "html": "<strong>Welcome!</strong> Please verify your email.",
+        #         }
+                #         email = resend.Emails.send(params)
+                #     except Exception as e:
+                #         # Log the email sending failure but don't block registration
+                #         print(f"Failed to send verification email: {e}")
 
 
         # As per tech spec, we just need to return a success message with user info.
@@ -67,3 +67,40 @@ async def create_user(user: UserRegistration):
         if "User already registered" in error_message:
              raise HTTPException(status_code=400, detail="User with this email already exists.")
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {error_message}")
+
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+@router.post("/login")
+async def sign_in_user(credentials: UserLogin):
+    """
+    Authenticates a user and returns a JWT.
+    """
+    if not supabase:
+        raise HTTPException(status_code=503, detail="Supabase client not initialized")
+
+    try:
+        # Sign in user with Supabase
+        auth_response = supabase.auth.sign_in_with_password({
+            "email": credentials.email,
+            "password": credentials.password
+        })
+
+        # The session object contains the access token
+        if auth_response.session:
+            return {
+                "data": {
+                    "access_token": auth_response.session.access_token,
+                    "refresh_token": auth_response.session.refresh_token
+                }
+            }
+        else:
+            # Handle cases where sign-in fails without raising an exception
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+
+    except Exception as e:
+        # Supabase client might raise an exception for auth errors
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
+

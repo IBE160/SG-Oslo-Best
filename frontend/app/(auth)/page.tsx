@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -69,10 +70,35 @@ export default function AuthPage() {
     }
   };
 
-  // A simple handler for login (for now)
-  const handleLogin = () => {
-      // Login logic will be implemented in story 2.2
-      setError("Login functionality not implemented yet.");
+  const { login } = useAuth();
+
+  const handleLogin = async () => {
+    setError("");
+
+    if (!email || !password) {
+      setError("Email and password are required.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.detail || "Login failed.");
+      }
+
+      // The login function from context handles storing the session and redirecting
+      login(result.data);
+
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -127,7 +153,7 @@ export default function AuthPage() {
         </CardContent>
         <CardFooter className="flex flex-col">
           {isLoginView ? (
-            <Button className="w-full" onClick={handleLogin}>Login</Button>
+            <Button className="w-full" data-testid="login-submit-button" onClick={handleLogin}>Login</Button>
           ) : (
             <Button className="w-full" data-testid="registration-submit-button" onClick={handleRegistration}>
               Create Account

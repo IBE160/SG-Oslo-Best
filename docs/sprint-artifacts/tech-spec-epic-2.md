@@ -168,3 +168,11 @@ This epic heavily leverages the architecture defined in the `architecture.md` do
 -   **Unit/Component:** The "Stateful Textbox" component will be unit tested with Jest to ensure it correctly reflects its state props.
 -   **API:** Backend API endpoints will be tested to ensure they correctly handle valid and invalid requests, and that authentication is enforced.
 -   **E2E:** A full Playwright E2E test will cover the user journey: registration -> login -> create CV -> update CV. This will be the primary validation for the epic.
+
+---
+
+### Post-Review Follow-ups
+
+**From Story 2.2: User Login & Session Management Review:**
+- Note: Consider adding unit tests for `AuthContext` to ensure robust session management logic.
+- Note: Review Supabase Row Level Security (RLS) for user sessions to ensure data isolation beyond basic authentication.

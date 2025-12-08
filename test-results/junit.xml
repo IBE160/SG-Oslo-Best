@@ -1,20 +1,114 @@
-<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="19.706872999999998">
-<testsuite name="registration.spec.ts" timestamp="2025-12-08T13:27:07.344Z" hostname="chromium" tests="2" failures="0" skipped="0" time="6.579" errors="0">
-<testcase name="User Registration › should expand the form for registration" classname="registration.spec.ts" time="2.112">
+<testsuites id="" name="" tests="6" failures="2" skipped="0" errors="0" time="38.137182">
+<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="chromium" tests="2" failures="0" skipped="0" time="8.157" errors="0">
+<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="4.095">
 </testcase>
-<testcase name="User Registration › should create an account and redirect to cv-creation" classname="registration.spec.ts" time="4.467">
-</testcase>
-</testsuite>
-<testsuite name="registration.spec.ts" timestamp="2025-12-08T13:27:07.344Z" hostname="firefox" tests="2" failures="0" skipped="0" time="10.66" errors="0">
-<testcase name="User Registration › should expand the form for registration" classname="registration.spec.ts" time="4.573">
-</testcase>
-<testcase name="User Registration › should create an account and redirect to cv-creation" classname="registration.spec.ts" time="6.087">
+<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="4.062">
 </testcase>
 </testsuite>
-<testsuite name="registration.spec.ts" timestamp="2025-12-08T13:27:07.344Z" hostname="webkit" tests="2" failures="0" skipped="0" time="8.944" errors="0">
-<testcase name="User Registration › should expand the form for registration" classname="registration.spec.ts" time="3.89">
+<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="firefox" tests="2" failures="0" skipped="0" time="12.376" errors="0">
+<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="6.677">
 </testcase>
-<testcase name="User Registration › should create an account and redirect to cv-creation" classname="registration.spec.ts" time="5.054">
+<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="5.699">
+</testcase>
+</testsuite>
+<testsuite name="login.spec.ts" timestamp="2025-12-08T14:30:36.252Z" hostname="webkit" tests="2" failures="2" skipped="0" time="70.395" errors="0">
+<testcase name="Story 2.2: User Login &amp; Session Management › should log in a verified user and redirect to dashboard" classname="login.spec.ts" time="35.181">
+<failure message="login.spec.ts:6:7 should log in a verified user and redirect to dashboard" type="FAILURE">
+<![CDATA[  [webkit] › login.spec.ts:6:7 › Story 2.2: User Login & Session Management › should log in a verified user and redirect to dashboard 
+
+    TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+      28 |     // Wait for network to be idle and then for the dashboard header to appear
+      29 |     await page.waitForLoadState('networkidle');
+    > 30 |     await page.waitForURL(/.*\/dashboard/);
+         |                ^
+      31 |     await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
+      32 |     await expect(page).toHaveURL(/.*\/dashboard/);
+      33 |   });
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\login.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\video.webm]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\error-context.md]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-aaf24-r-and-redirect-to-dashboard-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Story 2.2: User Login &amp; Session Management › should show a pop-up asking to update CV information after login" classname="login.spec.ts" time="35.214">
+<failure message="login.spec.ts:35:7 should show a pop-up asking to update CV information after login" type="FAILURE">
+<![CDATA[  [webkit] › login.spec.ts:35:7 › Story 2.2: User Login & Session Management › should show a pop-up asking to update CV information after login 
+
+    TimeoutError: page.waitForURL: Timeout 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+      55 |     
+      56 |     await page.waitForLoadState('networkidle');
+    > 57 |     await page.waitForURL(/.*\/dashboard/);
+         |                ^
+      58 |     await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
+      59 |
+      60 |     const popup = page.locator('[data-testid="update-cv-popup"]');
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\login.spec.ts:57:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\video.webm]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\error-context.md]]
+
+[[ATTACHMENT|login-Story-2-2-User-Login-1d20c--CV-information-after-login-webkit\trace.zip]]
+]]>
+</system-out>
 </testcase>
 </testsuite>
 </testsuites>
