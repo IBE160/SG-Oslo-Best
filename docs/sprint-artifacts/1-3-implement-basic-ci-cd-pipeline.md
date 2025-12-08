@@ -112,6 +112,7 @@ As a developer, I want to implement a basic CI/CD pipeline to Vercel so that cha
     - Postpone Vercel deployment and related tasks until repository ownership is established or deployment is required for submission.
     - The `vercel.json` file was created, but its full functionality is dependent on Vercel project configuration outside of agent control.
     - All tasks related to Vercel deployment and Supabase environment variables were cancelled from the todo list.
+- [mandag 8. desember 2025] - Story development re-attempted to remove the Supabase bypass for local development. However, user confirmed Vercel deployment remains blocked due to repository ownership issues. The story's objective is therefore unachievable. Status has been reverted to `blocked` and development on this story is halted to focus on 100% local functionality, as per user directive. The Supabase connection check in `backend/app/main.py` was re-enabled to support local development.
 
 
 ### File List
