@@ -1,14 +1,22 @@
-# import os
-# from supabase import create_client, Client
+import os
+from dotenv import load_dotenv
+from supabase import create_client, Client
 
-# # Get Supabase credentials from environment variables
-# supabase_url = os.environ.get("SUPABASE_URL")
-# supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
+# Load environment variables from .env
+load_dotenv()
 
-# if not supabase_url:
-#     raise ValueError("Missing environment variable: SUPABASE_URL")
-# if not supabase_key:
-#     raise ValueError("Missing environment variable: SUPABASE_SERVICE_KEY")
+# Get Supabase credentials
+supabase_url = os.environ.get("SUPABASE_URL")
+supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
 
-# # Initialize the Supabase client
-# supabase: Client = create_client(supabase_url, supabase_key)
+supabase: Client | None = None
+
+# Initialize Supabase only if credentials exist
+if supabase_url and supabase_key:
+    try:
+        supabase = create_client(supabase_url, supabase_key)
+        print("✅ Supabase client initialized")
+    except Exception as e:
+        print("❌ Failed to initialize Supabase client:", e)
+else:
+    print("⚠️ Supabase is disabled (missing SUPABASE_URL or SUPABASE_SERVICE_KEY)") 

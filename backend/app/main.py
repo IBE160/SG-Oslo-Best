@@ -1,6 +1,6 @@
 import logging
 from fastapi import FastAPI
-# from .db.supabase_client import supabase
+from .db.supabase_client import supabase
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
