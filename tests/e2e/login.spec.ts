@@ -1,59 +1,62 @@
-import { test, expect } from '../support/fixtures';
+// tests/e2e/login.spec.ts
+
+import { test, expect } from '@playwright/test';
 
 test.describe('Story 2.2: User Login & Session Management', () => {
-  test('should log in a verified user and redirect to dashboard', async ({ page }) => {
-    // GIVEN: A verified user exists and the user is on the login form
-    const userEmail = 'verified.user@university.com';
-    const userPassword = 'StrongPassword123!';
-    await page.goto('/'); // Assuming login form is on the landing page
-
-    // Mock the backend login endpoint to return success with a JWT
-    await page.route('**/api/v1/auth/login', (route) => {
-      // Check if the request body matches our user
-      const body = route.request().postDataJSON();
-      if (body.email === userEmail && body.password === userPassword) {
-        return route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({
-            access_token: 'fake-jwt-for-testing',
-            token_type: 'bearer',
-          }),
-        });
-      }
-      // Fail the request for any other credentials
-      return route.fulfill({ status: 401, body: JSON.stringify({ detail: 'Incorrect email or password' }) });
-    });
-
-    // WHEN: The user enters their valid credentials and submits
-    await page.fill('[data-testid="email-input"]', userEmail);
-    await page.fill('[data-testid="password-input"]', userPassword);
-    await page.click('[data-testid="login-submit-button"]');
-
-    // THEN: The user is redirected to their main application page (dashboard)
-    await expect(page).toHaveURL(/.*\/dashboard/);
-  });
-
-  test('should show a pop-up asking to update CV information after login', async ({ page }) => {
-    // GIVEN: A user has just successfully logged in
-    const userEmail = 'verified.user@university.com';
-    const userPassword = 'StrongPassword123!';
+  test('should log in a verified user and redirect to dashboard', async ({ page, context }) => {
+    // Corresponds to AC1
     await page.goto('/');
-
-    await page.route('**/api/v1/auth/login', (route) => {
-      return route.fulfill({
+    
+    // Mock successful login
+    await context.route('**/api/v1/auth/login', (route) => {
+      route.fulfill({
         status: 200,
-        body: JSON.stringify({ access_token: 'fake-jwt-for-testing' }),
+        contentType: 'application/json',
+        body: JSON.stringify({
+          data: {
+            access_token: 'fake-jwt-for-testing',
+            refresh_token: 'fake-refresh-token'
+          }
+        }),
       });
     });
 
-    await page.fill('[data-testid="email-input"]', userEmail);
-    await page.fill('[data-testid="password-input"]', userPassword);
+    await page.fill('[data-testid="email-input"]', 'verified.user@university.com');
+    await page.fill('[data-testid="password-input"]', 'StrongPassword123!');
     await page.click('[data-testid="login-submit-button"]');
+    
+    // Wait for network to be idle and then for the dashboard header to appear
+    await page.waitForLoadState('networkidle');
     await page.waitForURL(/.*\/dashboard/);
+    await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
+    await expect(page).toHaveURL(/.*\/dashboard/);
+  });
 
-    // WHEN: The dashboard page loads
-    // THEN: A pop-up appears asking if they would like to update their CV information
+  test('should show a pop-up asking to update CV information after login', async ({ page, context }) => {
+    // Corresponds to AC2
+    await page.goto('/');
+    
+    await context.route('**/api/v1/auth/login', (route) => {
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          data: {
+            access_token: 'fake-jwt-for-testing',
+            refresh_token: 'fake-refresh-token'
+          }
+        }),
+      });
+    });
+
+    await page.fill('[data-testid="email-input"]', 'verified.user@university.com');
+    await page.fill('[data-testid="password-input"]', 'StrongPassword123!');
+    await page.click('[data-testid="login-submit-button"]');
+    
+    await page.waitForLoadState('networkidle');
+    await page.waitForURL(/.*\/dashboard/);
+    await expect(page.locator('h1:has-text("Dashboard")')).toBeVisible();
+
     const popup = page.locator('[data-testid="update-cv-popup"]');
     await expect(popup).toBeVisible();
     await expect(popup).toContainText(/update your CV information/i);

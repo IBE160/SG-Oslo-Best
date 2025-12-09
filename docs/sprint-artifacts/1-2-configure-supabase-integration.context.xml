@@ -1,0 +1,198 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>2</storyId>
+    <title>Configure Supabase Integration</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-05</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-2-configure-supabase-integration.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a developer</asA>
+    <iWant>to configure the Supabase project and securely integrate it with both the frontend and backend</iWant>
+    <soThat>the application can utilize Supabase for database and authentication services</soThat>
+    <tasks>
+      <task id="1">
+        <description>Configure Backend (AC: #1, #3, #4)</description>
+        <subtask>- Add `supabase` to `backend/requirements.txt`.</subtask>
+        <subtask>- Create `backend/app/db/supabase_client.py` to initialize and export the Supabase client using environment variables.</subtask>
+        <subtask>- Implement a startup event in `backend/app/main.py` that uses the client to perform a test query to confirm a valid connection.</subtask>
+      </task>
+      <task id="2">
+        <description>Configure Frontend (AC: #2, #4, #5)</description>
+        <subtask>- Run `pnpm --filter frontend add @supabase/supabase-js` to add the dependency.</subtask>
+        <subtask>- Create `frontend/src/lib/supabase-client.ts` to initialize and export a singleton Supabase client using public environment variables.</subtask>
+      </task>
+      <task id="3">
+        <description>Documentation & Verification (AC: #1, #2, #3, #4, #5)</description>
+        <subtask>- Verify that the `.env.example` files in both `frontend` and `backend` are clear about the required Supabase variables.</subtask>
+        <subtask>- [Test] After creating `.env` files locally with real Supabase credentials, run both the frontend and backend development servers and confirm no connection errors appear.</subtask>
+        <subtask>- [Test] Check the backend server logs for the "Supabase connection successful" message from the startup event.</subtask>
+        <subtask>- [Test] Verify the `supabase-js` dependency is present in `frontend/package.json` and `supabase` is in `backend/requirements.txt`.</subtask>
+        <subtask>- [Test] Manually inspect the code to confirm that reusable Supabase clients have been created in `frontend/src/lib/supabase-client.ts` and `backend/app/db/supabase_client.py`.</subtask>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <ac id="1">Given a new Supabase project has been created, when the backend application starts, then it successfully initializes a connection to Supabase using the `SUPABASE_URL` and `SUPABASE_SERVICE_KEY` environment variables.</ac>
+    <ac id="2">Given the same Supabase project, when the frontend application loads, then it successfully initializes a client connection to Supabase using `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` environment variables.</ac>
+    <ac id="3">The backend's Supabase connection is validated on application startup (e.g., via a test query or health check).</ac>
+    <ac id="4">The `supabase-js` library is added as a dependency to the `frontend` package and `supabase` for python is added to the `backend` package.</ac>
+    <ac id="5">A basic Supabase client is implemented in both the `frontend` (`/lib`) and `backend` (`/app/db`) to provide a reusable, centralized connection.</ac>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics & Stories</title>
+        <section>Story 1.2: Configure Supabase Integration</section>
+        <snippet>
+          As a developer, I want to configure the Supabase project and securely integrate it with both the frontend and backend, so that the application can utilize Supabase for database and authentication services.
+          Technical Notes: Database tables, functions, and Row Level Security (RLS) policies will be defined directly within the Supabase project dashboard or via SQL migrations.
+          AC: ...it securely stores and uses the Supabase URL and service_role key... it uses the Supabase URL and anon key for client-side...
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Security Architecture</section>
+        <snippet>
+          Authentication: Supabase Auth (email/password registration, JWT-based sessions).
+          Authorization: Supabase Row Level Security (RLS) for fine-grained, user-specific data access control.
+          API Keys: Securely managed using environment variables (e.g., Vercel secrets) for third-party services (Gemini API, Resend API).
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Development Environment</section>
+        <snippet>
+          Set up environment variables (.env file) for Supabase URL/keys, Gemini API keys etc.
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation & Setup</title>
+        <section>Security</section>
+        <snippet>
+          Credential Management: Supabase URL, anon key, and service_role key must be stored securely as environment variables in Vercel and not exposed in the frontend code.
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Authentication & Authorization</section>
+        <snippet>
+          Authentication: User authentication will be handled by Supabase Auth, utilizing email/password registration and JWT-based session management.
+          Authorization: Authorization will be enforced using Supabase's Row Level Security (RLS) policies to ensure that users can only access and manage their own data.
+        </snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>frontend/.env.example</path>
+        <kind>configuration</kind>
+        <symbol>NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY</symbol>
+        <line_hint>Lines 1-2</line_hint>
+        <reason>Defines required public environment variables for frontend Supabase integration.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/.env.example</path>
+        <kind>configuration</kind>
+        <symbol>SUPABASE_URL, SUPABASE_SERVICE_KEY</symbol>
+        <line_hint>Lines 1-2</line_hint>
+        <reason>Defines required private environment variables for backend Supabase integration.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/package.json</path>
+        <kind>dependency_manifest</kind>
+        <symbol>@supabase/supabase-js</symbol>
+        <line_hint>To be added in "dependencies"</line_hint>
+        <reason>Dependency to be added for frontend Supabase client.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/requirements.txt</path>
+        <kind>dependency_manifest</kind>
+        <symbol>supabase</symbol>
+        <line_hint>To be added to the file</line_hint>
+        <reason>Dependency to be added for backend Supabase client.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/app/main.py</path>
+        <kind>entry_point</kind>
+        <symbol>@app.on_event("startup")</symbol>
+        <line_hint>To be added to the file</line_hint>
+        <reason>Will be modified to include Supabase connection validation on startup.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/app/db/supabase_client.py</path>
+        <kind>new_file</kind>
+        <symbol>SupabaseClient</symbol>
+        <line_hint>New file</line_hint>
+        <reason>New file to be created for the Python Supabase client.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/src/lib/supabase-client.ts</path>
+        <kind>new_file</kind>
+        <symbol>SupabaseClient</symbol>
+        <line_hint>New file</line_hint>
+        <reason>New file to be created for the TypeScript Supabase client.</reason>
+      </artifact>
+    </code>
+        <dependencies>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@supabase/supabase-js</package>
+        <purpose>Supabase client library for the frontend.</purpose>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>supabase</package>
+        <purpose>Supabase client library for the backend.</purpose>
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>
+      <type>Security</type>
+      <description>All keys and secrets must be managed via environment variables and not committed to source control.</description>
+    </constraint>
+    <constraint>
+      <type>Security</type>
+      <description>Backend must use the `service_role` key for elevated actions.</description>
+    </constraint>
+    <constraint>
+      <type>Security</type>
+      <description>Frontend must use the public `anon` key for client-side authentication and data access.</description>
+    </constraint>
+    <constraint>
+      <type>Architecture</type>
+      <description>Reusable, centralized Supabase client must be implemented in both frontend (frontend/src/lib) and backend (backend/app/db).</description>
+    </constraint>
+    <constraint>
+      <type>Testing</type>
+      <description>Manual verification is critical to confirm each Acceptance Criterion is met, including running dev servers, checking logs, and code inspection.</description>
+    </constraint>
+  </constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>
+      No automated tests are required for this story. Manual verification is critical to confirm each Acceptance Criterion is met.
+      The project's general testing strategy involves Jest for unit/component tests and Playwright for E2E tests, though not directly applied to this story's implementation.
+    </standards>
+    <locations>
+      Manual testing; verification through development server logs and code inspection.
+    </locations>
+    <ideas>
+      <idea ac_id="1,2,3">Run both frontend and backend development servers with populated `.env` files and confirm no connection errors appear in the console/logs.</idea>
+      <idea ac_id="3">Check the backend server logs for the "Supabase connection successful" message from the startup event.</idea>
+      <idea ac_id="4">Verify the `supabase-js` dependency is present in `frontend/package.json` and `supabase` is in `backend/requirements.txt`.</idea>
+      <idea ac_id="5">Manually inspect the code to confirm that reusable Supabase clients have been created in `frontend/src/lib/supabase-client.ts` and `backend/app/db/supabase_client.py`.</idea>
+    </ideas>
+  </tests>
+</story-context>

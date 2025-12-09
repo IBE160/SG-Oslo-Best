@@ -1,0 +1,347 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1</storyId>
+    <title>Initialize Project Repositories &amp; Structure</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-04</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>As a developer,</asA>
+    <iWant>I want to set up a monorepo with initialized frontend and backend projects using specific toolchains,</iWant>
+    <soThat>so that development can begin on a clean, standardized, and well-organized codebase.</soThat>
+    <tasks>
+- [ ] **Initialize Monorepo Structure (AC: #1)**
+  - [ ] Set up `package.json` at the root to define workspaces for `frontend`, `backend`, and `packages/shared-types`.
+  - [ ] Create `frontend/`, `backend/`, and `packages/shared-types/` directories.
+- [ ] **Initialize Frontend Project (AC: #2, #3)**
+  - [ ] Execute `npx create-next-app@latest frontend --typescript --eslint --app --tailwind --src-dir --import-alias "@/*"`.
+  - [ ] Navigate to the `frontend` directory and run `npx shadcn-ui@latest init`.
+- [ ] **Initialize Backend Project (AC: #4)**
+  - [ ] Create a Python virtual environment in the `backend` directory.
+  - [ ] Install FastAPI and Uvicorn.
+  - [ ] Create a basic `main.py` with a health check endpoint and a `requirements.txt` file.
+- [ ] **Create Shared Types Package (AC: #1)**
+  - [ ] Create `packages/shared-types/package.json` and a placeholder `index.ts`.
+- [ ] **Configure Environment Variables (AC: #5)**
+  - [ ] Create a `.env.example` file in the `frontend` directory with `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+  - [ ] Create a `.env.example` file in the `backend` directory with `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`.
+- [ ] **Set up Vercel Deployment (AC: #6, #7)**
+  - [ ] Configure the Vercel project to correctly build the monorepo, identifying the frontend and backend components.
+  - [ ] Add the Supabase environment variables to the Vercel project settings for both Production and Preview deployments.
+- [ ] **Verification and Testing (AC: #1, #2, #3, #4, #7)**
+  - [ ] [Test] Run `pnpm install` at the root and verify that all workspace dependencies are linked without errors.
+  - [ ] [Test] Run the Next.js development server and confirm the default application page loads correctly in a browser.
+  - [ ] [Test] Run the FastAPI development server and confirm the health check endpoint is accessible and returns a success status.
+  - [ ] [Test] After merging to the `main` branch, verify that the Vercel deployment completes successfully and the live application URL loads the default frontend and is accessible.
+</tasks>
+  </story>
+
+  <acceptanceCriteria>
+*Note: The following are the authoritative Acceptance Criteria for the initial project setup, sourced from the Epic 1 Technical Specification.*
+
+1.  A monorepo exists with `frontend`, `backend`, and `packages/shared-types` directories.
+2.  The `frontend` directory contains a functional, default Next.js application.
+3.  Shadcn/UI is initialized in the frontend project.
+4.  The `backend` directory contains a functional, default FastAPI application.
+5.  The frontend and backend applications have separate `.env.example` files documenting the required Supabase environment variables.
+6.  A push to the `main` branch successfully triggers a deployment on Vercel.
+7.  The deployed Vercel application is accessible via its URL and both the frontend and backend default pages load correctly.
+</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students overcome the difficulty of writing tailored cover letters... Our solution provides an AI-powered tool that takes a user's CV information and a job description, and automatically generates a relevant, high-quality cover letter.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Project Classification</section>
+        <snippet>This is a web application project in the EdTech domain... The technical complexity is managed by focusing on a minimal viable product (MVP) with a decoupled architecture.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Product Scope (MVP)</section>
+        <snippet>The MVP will focus on delivering the core functionality to generate customized cover letters. Key features include: User Profile &amp; CV Input, Job Application Input, Instructions Input, Cover Letter Generation, Output Display, Basic Management.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Non-Functional Requirements (Performance, Security, Scalability)</section>
+        <snippet>Performance: Responsive app, low API latency, SSR. Security: Data Privacy (RLS), Auth (Supabase Auth), HTTPS, API Keys. Scalability: Decoupled architecture, managed DB, stateless backend.</snippet>
+      </doc>
+      <doc>
+        <path>docs/product-brief-ibe160-2025-11-03.md</path>
+        <title>Product Brief: CVAI Turbo</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students overcome the difficulty of writing tailored cover letters... Our solution provides an AI-powered tool that takes a user's CV information and a job description, and automatically generates a relevant, high-quality cover letter.</snippet>
+      </doc>
+      <doc>
+        <path>docs/product-brief-ibe160-2025-11-03.md</path>
+        <title>Product Brief: CVAI Turbo</title>
+        <section>MVP Scope (Core Features)</section>
+        <snippet>User can create a simple profile. User can input their CV information... User can paste a job advertisement... A "Generate" button triggers the AI process. The generated cover letter is displayed...</snippet>
+      </doc>
+      <doc>
+        <path>docs/product-brief-ibe160-2025-11-03.md</path>
+        <title>Product Brief: CVAI Turbo</title>
+        <section>Technical Considerations</section>
+        <snippet>Technology Preferences: Next.js 14+ (TS, Tailwind), FastAPI (Python), Supabase (PostgreSQL), Supabase Auth, Gemini model. Architecture: Decoupled, RLS, Vercel deployment.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students generate tailored cover letters using an AI (Gemini). The technical foundation will be a decoupled architecture comprising a Next.js frontend, a FastAPI backend, and Supabase for database and authentication, deployed on Vercel.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Initialization</section>
+        <snippet>The first implementation story should execute these commands to set up the frontend: npx create-next-app@latest my-app; cd my-app; npx shadcn-ui@latest init.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Core Technologies</section>
+        <snippet>Frontend Framework: Next.js (with React). Language: TypeScript (Frontend), Python (Backend). UI Framework: Shadcn/UI... Backend Framework: FastAPI. Database &amp; Authentication: Supabase... Monorepo Tooling: NPM/PNPM Workspaces.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Decision Summary (Monorepo Strategy)</section>
+        <snippet>NPM/PNPM Workspaces for managing separate `frontend` and `backend` packages within a single repository. Offers a simple, integrated solution... facilitating code sharing (e.g., TypeScript types).</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Structure</section>
+        <snippet>Monorepo will be organized in a single repository with distinct packages for the frontend, backend, and shared code: `/`, `packages/shared-types/`, `frontend/`, `backend/`, `.gitignore`, `package.json`, `README.md`.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Epic to Architecture Mapping</section>
+        <snippet>Epic 1: Foundation &amp; Setup | Primary Code Location(s): Entire root structure, `frontend/`, `backend/` setup.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Deployment Architecture</section>
+        <snippet>Frontend (Next.js): Deployed on Vercel. Backend (FastAPI): Deployed on Vercel as Serverless Functions... Database &amp; Authentication: Managed by Supabase.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Development Environment</section>
+        <snippet>Prerequisites: Node.js, pnpm, Python, Git, Docker Desktop. Setup Commands: `git clone`, `pnpm install`, `cd frontend; npx shadcn-ui@latest init`, `cd backend; python -m venv .venv; pip install -r requirements.txt`.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; Setup</title>
+        <section>Overview</section>
+        <snippet>This document provides the technical specification for Epic 1... establish the complete technical foundation for the CVAI Turbo project. This includes initializing the monorepo, setting up the frontend (Next.js) and backend (FastAPI) applications...</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; Setup</title>
+        <section>Objectives and Scope (In-Scope)</section>
+        <snippet>- Setting up a PNPM workspaces monorepo. - Initializing a Next.js frontend application with TypeScript, ESLint, and Shadcn/UI. - Initializing a FastAPI backend application. - Creating a shared TypeScript types package...</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; Setup</title>
+        <section>Acceptance Criteria (Authoritative)</section>
+        <snippet>1. A monorepo exists with `frontend`, `backend`, and `packages/shared-types` directories. 2. The `frontend` directory contains a functional, default Next.js application. 3. Shadcn/UI is initialized...</snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Epic 1: Foundation &amp; Setup</section>
+        <snippet>Goal: Establish the core technical foundation... to enable all future development. Scope: Set up the frontend (Next.js) and backend (FastAPI) projects, configure the Supabase database and authentication, and establish a basic deployment pipeline on Vercel.</snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Story 1.1: Initialize Project Repositories &amp; Structure</section>
+        <snippet>As a developer, I want to set up a monorepo with initialized frontend and backend projects using specific toolchains, so that development can begin on a clean, standardized, and well-organized codebase. Technical Notes: The monorepo will be managed using NPM/PNPM Workspaces... The project structure should follow the diagram outlined in the Architecture Spec.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>1.1 Design System Choice</section>
+        <snippet>The chosen design system is Shadcn/UI... seamless integration with Tailwind CSS and Next.js.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>3.1 Color System</section>
+        <snippet>The user selected "The Innovator" theme. This dark mode theme was chosen because it feels modern, engaging, and tech-forward...</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>4.1 Chosen Design Approach</section>
+        <snippet>The user selected a refined version of Minimalist Preview (Direction #3), now designated as Refined Minimalist (Direction #5). This direction emphasizes a clean, uncluttered interface...</snippet>
+      </doc>
+    </docs>
+    <code>
+      <code-artifact>
+        <path>frontend/</path>
+        <kind>project-root</kind>
+        <symbol>Next.js application</symbol>
+        <lines>N/A</lines>
+        <reason>Root directory for the frontend application</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>backend/</path>
+        <kind>project-root</kind>
+        <symbol>FastAPI application</symbol>
+        <lines>N/A</lines>
+        <reason>Root directory for the backend application</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>packages/shared-types/</path>
+        <kind>module-root</kind>
+        <symbol>Shared TypeScript types</symbol>
+        <lines>N/A</lines>
+        <reason>Directory for shared TypeScript interfaces between frontend and backend</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>packages/shared-types/index.ts</path>
+        <kind>file</kind>
+        <symbol>index.ts</symbol>
+        <lines>N/A</lines>
+        <reason>Placeholder for shared TypeScript types</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>package.json</path>
+        <kind>config</kind>
+        <symbol>Root package.json</symbol>
+        <lines>N/A</lines>
+        <reason>Monorepo configuration file for PNPM Workspaces</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>backend/app/main.py</path>
+        <kind>file</kind>
+        <symbol>main.py</symbol>
+        <lines>N/A</lines>
+        <reason>Basic FastAPI application entry point with health check</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>backend/requirements.txt</path>
+        <kind>config</kind>
+        <symbol>requirements.txt</symbol>
+        <lines>N/A</lines>
+        <reason>Python dependency list for the FastAPI backend</reason>
+      </code-artifact>
+    </code>
+    <dependencies>
+      <ecosystem type="Node.js/PNPM">
+        <package name="Next.js" version="~14.x" source="architecture.md"/>
+        <package name="React" version="~18.x" source="architecture.md"/>
+        <package name="Shadcn/UI" version="latest" source="architecture.md" note="UI Framework, not direct npm package dependency"/>
+        <package name="express" version="^5.2.1" source="package.json" note="Discrepancy: this is in root package.json but not intended for final architecture"/>
+        <package name="@faker-js/faker" version="^8.0.0" source="package.json" note="Dev dependency in root package.json"/>
+        <package name="@playwright/test" version="^1.40.0" source="package.json" note="Dev dependency in root package.json"/>
+      </ecosystem>
+      <ecosystem type="Python">
+        <package name="FastAPI" version="~0.104.x" source="architecture.md"/>
+        <package name="Uvicorn" version="latest" source="tech-spec-epic-1.md" note="Implied by FastAPI usage"/>
+      </ecosystem>
+      <ecosystem type="External Services">
+        <service name="Supabase" version="N/A" source="architecture.md"/>
+        <service name="Vercel" version="N/A" source="architecture.md"/>
+      </ecosystem>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>
+      <type>Architecture</type>
+      <description>Monorepo structure using PNPM Workspaces.</description>
+      <source>docs/architecture.md#Decision-Summary</source>
+    </constraint>
+    <constraint>
+      <type>Technology</type>
+      <description>Frontend: Next.js with TypeScript and Shadcn/UI.</description>
+      <source>docs/architecture.md#Core-Technologies</source>
+    </constraint>
+    <constraint>
+      <type>Technology</type>
+      <description>Backend: FastAPI with Python.</description>
+      <source>docs/architecture.md#Core-Technologies</source>
+    </constraint>
+    <constraint>
+      <type>Naming Convention</type>
+      <description>PascalCase for React components, kebab-case for most frontend files, snake_case for Python.</description>
+      <source>docs/architecture.md#Implementation-Patterns</source>
+    </constraint>
+    <constraint>
+      <type>Deployment</type>
+      <description>Frontend and Backend deployed on Vercel.</description>
+      <source>docs/architecture.md#Deployment-Architecture</source>
+    </constraint>
+  </constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>
+      <standard>
+        <type>Unit/Component Testing</type>
+        <framework>Jest</framework>
+        <source>docs/architecture.md#Testing-Strategy</source>
+      </standard>
+      <standard>
+        <type>End-to-End Testing</type>
+        <framework>Playwright</framework>
+        <source>docs/architecture.md#Testing-Strategy</source>
+      </standard>
+      <standard>
+        <type>Manual Verification</type>
+        <framework>N/A</framework>
+        <source>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md#Verification-and-Testing</source>
+        <note>Primary testing approach for this initial setup story.</note>
+      </standard>
+    </standards>
+    <locations>
+      <location>
+        <type>Unit/Component Tests</type>
+        <path>__tests__/</path>
+        <description>Jest tests: directory alongside the file being tested.</description>
+        <source>docs/architecture.md#Test-File-Location</source>
+      </location>
+      <location>
+        <type>End-to-End Tests</type>
+        <path>frontend/playwright/</path>
+        <description>Playwright tests: Centralized directory for frontend E2E.</description>
+        <source>docs/architecture.md#Test-File-Location</source>
+      </location>
+    </locations>
+    <ideas>
+      <idea>
+        <description>Verify `pnpm install` at root links all workspace dependencies without errors.</description>
+        <source>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md#Verification-and-Testing</source>
+      </idea>
+      <idea>
+        <description>Run Next.js dev server and confirm default application page loads correctly.</description>
+        <source>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md#Verification-and-Testing</source>
+      </idea>
+      <idea>
+        <description>Run FastAPI dev server and confirm health check endpoint is accessible and returns success.</description>
+        <source>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md#Verification-and-Testing</source>
+      </idea>
+      <idea>
+        <description>After merge to `main`, verify Vercel deployment completes successfully and live URL loads default frontend and is accessible.</description>
+        <source>docs/sprint-artifacts/1-1-initialize-project-repositories-structure.md#Verification-and-Testing</source>
+      </idea>
+    </ideas>
+  </tests>
+</story-context>

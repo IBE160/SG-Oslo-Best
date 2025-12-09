@@ -1,0 +1,37 @@
+Story 2-4: Update User Profile & CV with Hybrid Save is complete and ready for review, BIP.
+
+Key Accomplishments:
+- Implemented a hybrid save model for user profile and CV editing, allowing auto-save on blur and manual save for all fields.
+- Integrated React Query for efficient data fetching and mutation handling.
+- Added an "Unsaved changes..." indicator using React Context.
+- Implemented a navigation blocker with a confirmation modal for unsaved changes.
+- Enhanced the backend PATCH /api/v1/users/me/cv endpoint to handle partial updates of all user profile and CV fields.
+- Ensured correct updated_at timestamping with UTC timezone in the backend.
+- Implemented server-side validation for empty fields in the PATCH endpoint.
+
+Tests:
+- New comprehensive API tests for the PATCH /api/v1/users/me/cv endpoint.
+- Extended E2E tests for profile-cv.spec.ts to cover hybrid save functionality, validation, and navigation blocker.
+
+Files Modified:
+- frontend/components/ProfileCVForm.tsx
+- frontend/app/layout.tsx
+- backend/app/api/v1/schemas.py
+- backend/app/api/v1/users.py
+- tests/e2e/profile-cv.spec.ts
+- docs/sprint-artifacts/2-4-update-user-profile-cv-with-hybrid-save.md
+- docs/sprint-artifacts/sprint-status.yaml
+
+Files Created:
+- frontend/context/UnsavedChangesContext.tsx
+- frontend/components/UnsavedChangesIndicator.tsx
+- frontend/lib/query-client.ts
+- frontend/hooks/useNavigationBlocker.tsx
+- backend/tests/api/v1/test_users.py
+
+Instructions for verification and testing:
+- Manual RLS Verification: Follow the instructions in the "Completion Notes" section of the story file: docs/sprint-artifacts/2-4-update-user-profile-cv-with-hybrid-save.md.
+- Run API Tests: Navigate to the backend directory and run `pytest backend/tests`.
+- Run E2E Tests: Navigate to the project root directory and run `npx playwright test`.
+
+Please let me know if you need any explanations about what was implemented and how it works, why certain technical decisions were made, how to test or verify the changes, any patterns, libraries, or approaches used, or anything else you'd like clarified.
