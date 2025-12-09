@@ -53,12 +53,28 @@ Se proposal
     - UX-design og arkitektur sesjonene ble logget under mappen .logging
 
 **(MICHEAL) Fase 2: Utvikling**
-- [Hva gjorde dere i denne fasen?]
-  - 
-- [Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
-  - 
+(MICHEAL) Fase 2: Utvikling
 
----
+[Hva gjorde dere i denne fasen?]
+
+Vi realiserte planene fra fase 1 ved å utvikle en fullstack-løsning med FastAPI (Backend) og Next.js (Frontend). En av de viktigste tekniske beslutningene vi tok underveis, var å restrukturere prosjektet fra en flat filstruktur til en streng Monorepo-struktur med separate mapper for backend/ og frontend/. Dette var helt nødvendig for å holde orden på avhengighetene og unngå konflikter mellom Python- og Node-miljøene.
+
+Vi implementerte kjernefunksjonaliteten gjennom tre hovedflyter: 1) Brukerautentisering og profil-lagring mot Supabase, 2) Selve AI-analysen der backend kommuniserer med Gemini for å generere strukturerte data, og 3) En historikk-modul for å vise tidligere søknader. En betydelig del av denne fasen gikk med til å løse lokale miljøproblemer på Windows (som path-feil, uvicorn not found og import-problemer i Python), noe som krevde at vi måtte konfigurere virtuelle miljøer og systemstier manuelt.
+
+[Hvordan brukte dere KI her? Husk å lagre promptene deres! Inkluder ALLE stegene dere gjorde.]
+
+Vi brukte Prompt-Driven Development (PDD) som hovedmetode. I stedet for å skrive koden manuelt, fungerte jeg som en teknisk arkitekt som skrev detaljerte instruksjonsfiler til KI-en.
+
+Konkret fremgangsmåte:
+
+Vi opprettet dedikerte markdown-filer for hver komponent, som for eksempel backend_guidelines.md for arkitekturen, main_api_prompt.md for API-logikken, og frontend_history_prompt.md for historikkvisningen.
+
+Disse promptene inneholdt spesifikke tekniske krav (f.eks. "Bruk Pydantic for validering", "Implementer RLS i Supabase").
+
+KI-en genererte den ferdige koden basert på disse instruksene, som vi deretter validerte og implementerte.
+
+Alle prompt-filene vi brukte er lagret i prosjektets mappestruktur (under prompts/ eller roten) som dokumentasjon på utviklingsprosessen. Vi brukte også KI aktivt til feilsøking, men lærte at vi måtte være kritiske til svarene når KI-en manglet kontekst om vårt lokale filsystem.
+
 
 ## 3. Utfordringer og løsninger
 
@@ -340,6 +356,41 @@ Se proposal
 
 **[Abdullah Michael Moulay]:**
 [Personlig refleksjon over egen læring og utvikling]
+Min rolle i prosjektgruppen var å fungere som backend-arkitekt og teknisk ansvarlig for infrastrukturen. Mitt hovedmandat var å sy sammen server-side logikken (FastAPI), databasen (Supabase) og selve AI-integrasjonen (Gemini). Premisset for dette faget var å utforske grensene for Prompt-Driven Development (PDD) – en metode der vi overlater selve kodeskrivingen til kunstig intelligens for å effektivisere prosessen. Jeg gikk inn i prosjektet med en hypotese om at KI ville fjerne de tekniske barrierene, demokratisere koding og gjøre utvikling til en friksjonsfri prosess. Denne hypotesen ble ikke bare motbevist; den ble knust i møte med realiteten. Prosjektet utviklet seg raskt fra å være en øvelse i å generere kode, til å bli en brutal realitetsorientering om forskjellen på å produsere tekst som ligner på kode, og det å faktisk drifte et kjørende produksjonsmiljø på en lokal maskin.
+
+Illusjonen om hastighet og miljøets forbannelse Den desidert største og mest kritiske lærdommen jeg tar med meg fra dette prosjektet, er at kodekvalitet er fullstendig irrelevant dersom utviklingsmiljøet ikke er under streng kontroll. Mens KI-verktøyene genererte tusenvis av linjer med syntaktisk korrekt Python-kode på sekunder, brukte jeg timer og dager på å kjempe mot mitt eget operativsystem. Jeg opplevde en dyp frustrasjon knyttet til konflikten mellom Windows, Git Bash og Python sine virtuelle miljøer. Feilmeldinger som at uvicorn ikke ble funnet, at pip ikke eksisterte, eller at moduler som app ikke kunne lastes (ModuleNotFoundError), ble dagligdagse hindringer som KI-en paradoksalt nok ikke evnet å løse for meg.
+
+KI-en foreslo gang på gang standardløsninger som fungerer i teorien eller på rene Linux-systemer, men som feilet totalt i min spesifikke lokale konfigurasjon. Dette lærte meg at KI mangler kontekst om den fysiske maskinen koden kjører på. Den antar en perfekt verden som sjelden finnes. Jeg ble tvunget til å slutte å være en utvikler som bare skriver forretningslogikk, og måtte i stedet bli en systemadministrator som forsto hvordan operativsystemet håndterer stier (PATH), prosesser og rettigheter. Min viktigste kompetanseheving i dette prosjektet var faktisk ikke innen programmering av funksjoner, men innen feilsøking av fundamentale systemfeil som KI-en var blind for. Jeg lærte at uten denne dybdekunnskapen om miljøet, er KI-generert kode verdiløs.
+
+Arkitektonisk opprydding som nødvendighet Midtveis i prosjektet sto vi i fare for å miste kontrollen over kildekoden. Vi hadde innledningsvis stolt blindt på at KI-en skulle strukturere filene for oss. Dette resulterte i en flat og uoversiktlig struktur der frontend-filer og backend-filer lå blandet i samme rotmappe. Dette skapte konstante konflikter, import-feil i Python, og gjorde det nesten umulig å vite hvilken server som kjørte hva. Det var her jeg måtte ta ansvar og overstyre verktøyet. Min viktigste avgjørelse i prosjektet var ikke en teknisk kodeløsning, men det ledelsesmessige grepet å stoppe opp all utvikling, slette alt av virtuelle miljøer som var korrupte, og tvinge gjennom en streng monorepo-struktur med separate mapper for backend og frontend.
+
+Dette var et definerende øyeblikk hvor jeg innså at menneskelig overblikk er uerstattelig. KI er en utmerket taktiker som kan løse isolerte problemer (som å skrive en funksjon), men en elendig strateg som ikke ser konsekvensene av en rotete filstruktur over tid. Hadde jeg ikke grepet inn og restrukturert prosjektet manuelt, ville vi aldri ha kommet i mål med en fungerende applikasjon. Det lærte meg at ansvaret for arkitektur og struktur alltid må ligge hos mennesket, uansett hvor smart verktøyet er. Jeg måtte manuelt flytte filer, oppdatere imports og konfigurere prosjektet på nytt – en jobb KI-en ikke klarte å gjøre korrekt fordi den mistet oversikten over helheten.
+Et endret syn på KI: Fra magi til risikosport Gjennom dette prosjektet har jeg utviklet en langt mer kynisk og skeptisk holdning til påstanden om at "KI demokratiserer koding" og gjør det enkelt for nybegynnere. I starten lot jeg meg blende av hastigheten; vi fikk implementert kompleks funksjonalitet som sikkerhet på radnivå (RLS) i Supabase og tvunget Gemini til å levere strukturert JSON-data på rekordtid. Dette var avanserte konsepter jeg kanskje ville brukt dager på å forstå og skrive manuelt. Men denne hastigheten kom med en høy pris: En snikende følelse av å miste eierskapet til systemet jeg selv bygde.
+
+Det gikk opp for meg at KI gir en falsk trygghet. Den leverer kode som ser riktig ut, og som ofte kjører ved første forsøk. Men når den først feiler – og det gjør den, spesielt i samspillet mellom ulike systemer som Docker, Windows og Python – så står man igjen helt alene. Jeg opplevde at terskelen for å fikse feil ble høyere, ikke lavere, fordi jeg ikke hadde skrevet logikken selv. Jeg måtte bruke tid på å "reverse-engineere" koden KI-en hadde skrevet for å forstå hvorfor den krasjet. Det føltes ofte som å rydde opp etter en utrolig rask, men slurvete juniorutvikler som aldri leste dokumentasjonen nøye nok.
+
+Kompetanse-paradokset: Hvorfor du må kunne mer, ikke mindre Den viktigste erkjennelsen jeg sitter igjen med, er det jeg vil kalle "kompetanse-paradokset". For å bruke KI effektivt til systemutvikling, må man faktisk ha dypere teknisk innsikt enn tidligere. Man kan ikke lenger være en passiv mottaker av kode. Når KI-en genererer 50 linjer med backend-logikk på tre sekunder, kreves det et trent øye for umiddelbart å spotte om den importerer biblioteker som er utdaterte, om den glemmer feilhåndtering, eller om den introduserer sikkerhetshull ved å eksponere API-nøkler.
+
+Jeg gikk fra rollen som "skaper" til rollen som "sjefsredaktør" og kvalitetskontrollør. Det krever en helt annen type mental tilstedeværelse. Jeg kunne ikke lene meg tilbake; jeg måtte være konstant skeptisk. De gangene jeg slappet av og stolte blindt på forslagene, ble jeg straffet med timer med feilsøking senere. Jeg lærte at KI ikke erstatter kunnskap om hvordan operativsystemet, nettverket og databasen fungerer; den forutsetter at du allerede kan det, slik at du kan styre den unna de verste fellene. Uten denne grunnleggende forståelsen er KI bare en maskin som produserer teknisk gjeld i lysets hastighet.
+
+Loopen av dårlige forslag og "hallusinasjoner" En annen betydelig friksjon var KI-ens tendens til å være ekstremt påståelig, selv når den tok feil. Jeg opplevde flere ganger å havne i en frustrerende loop der jeg spurte om hjelp til en miljøfeil (f.eks. med virtuelle miljøer i Windows), og KI-en svarte med stor selvsikkerhet. Når løsningen ikke virket, beklaget den, og ga meg samme løsning på nytt, bare formulert annerledes. I verste fall begynte den å "hallusinere" – den diktet opp filbaner som ikke eksisterte i prosjektet mitt, eller refererte til funksjoner i biblioteker som var fjernet for flere år siden.
+
+Dette var spesielt tydelig fordi vi i starten lente oss på gratisversjoner av modellene. Den begrensede "hukommelsen" (context window) gjorde at KI-en glemte koden vi skrev for to timer siden. Plutselig foreslo den endringer i main.py som brøt fullstendig med logikken vi hadde bygget i auth.js tidligere på dagen. Det tvang meg til å innse at menneskets rolle som "bæreren av kontekst" er uerstattelig. Det er kun jeg som har oversikten over hele arkitekturen; KI-en ser bare bruddstykker gjennom et nøkkelhull.
+
+Konklusjon: Verktøy, ikke erstatning Alt i alt har prosjektet lært meg at KI er et utrolig kraftig verktøy for de som allerede vet hva de driver med. Det er en akselerator for den kompetente, men en potensiell felle for den uvitende. Jeg kommer definitivt til å fortsette å bruke KI til å generere "boilerplate"-kode og tester, men jeg kommer aldri igjen til å la den ta styringen over arkitekturen eller mappestrukturen. Den jobben tilhører meg.
+Konklusjon: Den nye realiteten for en utvikler i 2025
+
+Min reise gjennom utviklingen av CVAI Turbo har fundamentalt endret min forståelse av hva det vil si å levere programvare. Jeg gikk inn i dette prosjektet med en litt naiv forventning om at kunstig intelligens skulle fungere som en slags "super-koder" som ville fjerne alle barrierer og produsere funksjoner på løpende bånd. Jeg så for meg en prosess der jeg var en bestiller, og KI-en var utføreren. Jeg går ut av prosjektet med erkjennelsen av at KI snarere har tvunget meg ut av rollen som ren kodeskriver, og inn i en langt mer krevende rolle som teknisk leder, systemarkitekt og feilsøker.
+
+Det usynlige isfjellet Jeg er stolt over at jeg klarte å sy sammen en kompleks fullstack-løsning som faktisk virker, men jeg har fått en nyvunnet og dyp respekt for det "usynlige arbeidet" som ligger bak koden. Jeg har lært at selve skrivingen av syntaks – altså det å faktisk skrive funksjoner og klasser – kanskje bare utgjør ti prosent av jobben i et moderne KI-drevet prosjekt. De resterende nitti prosentene handler om alt det KI-en ikke kunne gjøre for meg: Å sette opp et stabilt lokalt miljø, designe en logisk mappestruktur som tåler skalering, sikre at portene er åpne, og validere at dataflyten er sikker på tvers av frontend og backend.
+
+Dette prosjektet beviste at en applikasjon er mer enn summen av sine filer. KI kan generere filene, men den kan ikke generere samspillet mellom dem på min maskin. Den frustrasjonen jeg følte da serveren nektet å starte på grunn av miljøfeil, lærte meg at systemforståelse er den mest verdifulle valutaen en utvikler har. Uten evnen til å forstå hvorfor en modul ikke lastes, er selv den beste KI-genererte koden verdiløs.
+
+Kompetanse-paradokset En av de viktigste refleksjonene jeg sitter igjen med, er det jeg vil kalle "kompetanse-paradokset". Man skulle tro at KI gjør det lettere for nybegynnere å lage avanserte systemer. Min erfaring er det motsatte: KI gjør det lettere å lage rot raskt. For å bruke verktøyet forsvarlig, må man faktisk ha dypere teknisk innsikt enn før. Man må kunne se på koden som genereres i sanntid og umiddelbart vurdere: "Er dette sikkert?", "Er dette effektivt?", "Passer dette med arkitekturen jeg valgte i går?". Jeg ble tvunget til å være en senior som reviderte arbeidet til en ekstremt rask, men ofte uoppmerksom juniorutvikler.
+
+Eierskap og Ansvar Den viktigste lærdommen er at man aldri må abdisere ansvaret til verktøyet. Evnen til å forstå hva som skjer "under panseret" – hvordan Python finner moduler, hvordan Git sporer filer, og hvordan servere snakker sammen – er den eneste ferdigheten som redder prosjektet når KI-en feiler.
+
+Jeg ser ikke lenger på KI som en magisk løsning som skal ta over jobben min. Jeg ser på det som en kraftig motor – kanskje som en Ferrari-motor. Men en Ferrari-motor er livsfarlig hvis du setter den i et karosseri som ikke tåler farten, eller hvis sjåføren ikke vet hvordan man styrer unna grøfta. Jeg går ut av dette prosjektet som en mer kritisk teknolog, men også langt mer robust. Jeg vet nå at det er jeg som er arkitekten, jeg som er feilsøkeren, og jeg som eier systemet. KI-en er bare et verktøy i beltet mitt, ikke en erstatning for hodet mitt.
 
 **[Fernando Miguel Valle Prado]:**
 [Personlig refleksjon over egen læring og utvikling]
