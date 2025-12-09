@@ -1,18 +1,17 @@
 "use client";
 
-import CreateCVForm from "@/components/CreateCVForm";
+import EditCVForm from "@/components/EditCVForm";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function CvCreationPage() {
+export default function CvEditPage() {
   const { session, isLoading } = useAuth();
   const router = useRouter();
 
-  // Redirect to dashboard if already logged in and not on cv-creation page
   useEffect(() => {
     if (!isLoading && !session) {
-      router.push("/"); // Redirect to login if not authenticated
+      router.push("/");
     }
   }, [session, isLoading, router]);
 
@@ -27,7 +26,7 @@ export default function CvCreationPage() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-lg">
-        <CreateCVForm />
+        <EditCVForm />
       </div>
     </div>
   );
