@@ -1,0 +1,131 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>3</storyId>
+    <title>Implement Basic CI/CD Pipeline</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-05</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-3-implement-basic-ci-cd-pipeline.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>As a developer,</asA>
+    <iWant>I want a basic CI/CD pipeline that automatically builds and deploys the entire monorepo to Vercel,</iWant>
+    <soThat>so that changes pushed to the main branch are always reflected in a live, integrated environment.</soThat>
+    <tasks>
+      <task>
+        <description>Configure Vercel Project (AC: #1)</description>
+        <subtask>Link Vercel project to the Git monorepo.</subtask>
+        <subtask>Configure Vercel build settings for Next.js frontend.</subtask>
+        <subtask>Configure Vercel build settings for FastAPI backend as serverless functions.</subtask>
+        <subtask>Add Supabase environment variables as Vercel secrets (public keys for frontend, service role key for backend).</subtask>
+      </task>
+      <task>
+        <description>Test CI/CD Pipeline (AC: #1, #2)</description>
+        <subtask>Push a change to the `main` branch to trigger a deployment.</subtask>
+        <subtask>Verify the Vercel build logs for successful frontend and backend deployment.</subtask>
+        <subtask>Access the deployed Vercel URL and verify the frontend loads correctly.</subtask>
+        <subtask>Access a backend default/health endpoint to verify the backend loads correctly.</subtask>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <ac id="1">A push to the `main` branch successfully triggers a deployment on Vercel for both frontend and backend.</ac>
+    <ac id="2">The deployed Vercel application is accessible via its URL and both the frontend and backend default pages load correctly.</ac>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="docs/PRD.md" title="Product Requirements Document" section="Executive Summary" snippet="CVAI Turbo is a web application designed to help university and college students generate tailored cover letters using an AI (Gemini). The technical foundation will be a decoupled architecture comprising a Next.js frontend, a FastAPI backend, and Supabase for database and authentication, deployed on Vercel."/>
+      <doc path="docs/PRD.md" title="Product Requirements Document" section="Non-Functional Requirements - Security" snippet="API Keys: API keys for third-party services (like Gemini) will be securely stored and managed, separated from public-facing code. This is relevant for Vercel secrets in CI/CD."/>
+      <doc path="docs/PRD.md" title="Product Requirements Document" section="Implementation Planning - Epic 1: Foundation & Setup" snippet="The scope for Epic 1 includes establishing a basic deployment pipeline on Vercel, directly related to CI/CD setup."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Overview" snippet="This epic establishes the technical foundation for the CVAI Turbo project, including configuring the CI/CD pipeline for automated deployment to Vercel."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Objectives and Scope - In-Scope" snippet="Establishing a basic CI/CD pipeline using Vercel that automatically deploys the monorepo on pushes to the main branch is a key objective."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Workflows and Sequencing - CI/CD Workflow" snippet="The primary workflow established is the CI/CD Workflow: automatically building and deploying the Next.js frontend and FastAPI backend on Vercel upon pushes to the `main` branch."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Non-Functional Requirements - Performance" snippet="The CI/CD pipeline build and deployment should complete in a reasonable time (e.g., under 5 minutes) to ensure a fast feedback loop for developers."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Non-Functional Requirements - Security" snippet="Supabase URL, `anon` key, and `service_role` key must be stored securely as environment variables in Vercel for the CI/CD process."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Non-Functional Requirements - Reliability/Availability" snippet="The Vercel deployment pipeline should be reliable, ensuring a failed deployment does not take down the last known good version."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Acceptance Criteria (Authoritative)" snippet="AC 6 & 7 state that a push to `main` successfully triggers deployment on Vercel and the deployed application is accessible and functional."/>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-1.md" title="Epic Technical Specification: Foundation & Setup" section="Test Strategy Summary" snippet="The primary test for this epic is a manual end-to-end (E2E) test of the CI/CD pipeline to verify successful deployment and application accessibility."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Executive Summary" snippet="The technical foundation will be a decoupled architecture comprising a Next.js frontend, a FastAPI backend, and Supabase for database and authentication, deployed on Vercel."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Core Technologies" snippet="Lists Next.js, FastAPI, Supabase, Vercel, and PNPM Workspaces as core technologies, all relevant for setting up the CI/CD pipeline."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Decision Summary - Logging Strategy" snippet="A Cloud Logging Service via Vercel Log Drains will be used for logging, which is relevant for CI/CD observability."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Decision Summary - Monorepo Strategy" snippet="NPM/PNPM Workspaces are used for managing the monorepo, requiring the CI/CD pipeline to be compatible with this structure."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Project Structure" snippet="Details the monorepo structure with `frontend/`, `backend/`, and `packages/shared-types/`, guiding how the CI/CD should handle builds for these subdirectories."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Deployment Architecture" snippet="Specifies that the Frontend (Next.js) and Backend (FastAPI) will be deployed on Vercel, with FastAPI as Serverless Functions, defining the target environment for the CI/CD."/>
+      <doc path="docs/architecture.md" title="Architecture" section="Development Environment - Setup Commands" snippet="Outlines the commands to set up the development environment, providing context for what the CI/CD pipeline needs to replicate for builds."/>
+    </docs>
+    <code>
+      <entry path=".github/workflows/test.yml" kind="GitHub Actions Workflow" symbol="Test Pipeline" reason="Demonstrates existing CI/CD patterns (linting, testing, parallel execution) within the monorepo, which can inform the new deployment pipeline. It uses `npm ci` and `npm run lint/test:e2e` for frontend testing."/>
+      <entry path="package.json" kind="npm configuration" symbol="workspaces" reason="Defines the monorepo structure with `frontend`, `backend`, and `packages/*` as workspaces. Essential for configuring CI/CD to build sub-projects correctly."/>
+      <entry path="frontend/package.json" kind="npm configuration" symbol="scripts.build" reason="Defines the build command for the Next.js frontend: `next build`. The CI/CD pipeline will need to execute this."/>
+      <entry path="backend/requirements.txt" kind="Python dependency list" reason="Lists Python dependencies for the FastAPI backend. The CI/CD pipeline will need to install these using `pip install -r requirements.txt`."/>
+    </code>
+    <dependencies>
+      <nodejs>
+        <package name="@faker-js/faker" version="^8.0.0" type="dev"/>
+        <package name="@playwright/test" version="^1.40.0" type="dev"/>
+        <package name="next" version="16.0.7" type="prod"/>
+        <package name="react" version="19.2.0" type="prod"/>
+        <package name="react-dom" version="19.2.0" type="prod"/>
+        <package name="@supabase/supabase-js" version="^2.39.0" type="prod"/>
+        <package name="class-variance-authority" version="^0.7.1" type="prod"/>
+        <package name="clsx" version="^2.1.1" type="prod"/>
+        <package name="lucide-react" version="^0.555.0" type="prod"/>
+        <package name="tailwind-merge" version="^3.4.0" type="prod"/>
+        <package name="tailwindcss-animate" version="^1.0.7" type="prod"/>
+        <package name="@tailwindcss/postcss" version="^4" type="dev"/>
+        <package name="@types/node" version="^20" type="dev"/>
+        <package name="@types/react" version="^19" type="dev"/>
+        <package name="@types/react-dom" version="^19" type="dev"/>
+        <package name="babel-plugin-react-compiler" version="1.0.0" type="dev"/>
+        <package name="eslint" version="^9" type="dev"/>
+        <package name="eslint-config-next" version="16.0.7" type="dev"/>
+        <package name="tailwindcss" version="^4" type="dev"/>
+        <package name="typescript" version="^5" type="dev"/>
+      </nodejs>
+      <python>
+        <package name="fastapi" version="0.123.8"/>
+        <package name="uvicorn" version="0.38.0"/>
+        <package name="supabase" version="N/A"/>
+        <package name="annotated-doc" version="0.0.4"/>
+        <package name="annotated-types" version="0.7.0"/>
+        <package name="anyio" version="4.12.0"/>
+        <package name="click" version="8.3.1"/>
+        <package name="colorama" version="0.4.6"/>
+        <package name="h11" version="0.16.0"/>
+        <package name="idna" version="3.11"/>
+        <package name="pydantic" version="2.12.5"/>
+        <package name="pydantic_core" version="2.41.5"/>
+        <package name="starlette" version="0.50.0"/>
+        <package name="typing-inspection" version="0.4.2"/>
+        <package name="typing_extensions" version="4.15.0"/>
+      </python>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Monorepo Tooling: CI/CD must be compatible with PNPM/NPM Workspaces.</constraint>
+    <constraint>Security: Environment variables for sensitive information must be securely managed as Vercel secrets.</constraint>
+    <constraint>Deployment Architecture: Frontend (Next.js) on Vercel, Backend (FastAPI) on Vercel as Serverless Functions.</constraint>
+    <constraint>Frontend Build Command: `next build`</constraint>
+    <constraint>Backend Dependency Installation: `pip install -r requirements.txt`</constraint>
+  </constraints>
+  <interfaces>
+    <interface name="Vercel API" kind="Deployment API" signature="Vercel CLI / API for deploying frontend and backend" path="N/A"/>
+  </interfaces>
+  <tests>
+    <standards>The primary testing for this story involves manual end-to-end (E2E) verification of the CI/CD pipeline. Project-wide, Jest is used for unit/component tests and Playwright for E2E tests as per the architectural decisions.</standards>
+    <locations>
+      <location>frontend/__tests__/</location>
+      <location>frontend/playwright/</location>
+      <location>tests/e2e/</location>
+    </locations>
+    <ideas>
+      <idea ac-id="1">Push a change to the `main` branch and observe the Vercel deployment logs to ensure successful triggering and completion for both frontend and backend.</idea>
+      <idea ac-id="2">Access the deployed Vercel URL, and verify that the frontend loads correctly. Also, access a backend default/health endpoint to verify the backend loads correctly.</idea>
+    </ideas>
+  </tests>
+</story-context>

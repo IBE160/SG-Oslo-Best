@@ -1,0 +1,128 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.2</storyId>
+    <title>User Login &amp; Session Management</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-08</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-2-user-login-session-management.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>registered student user</asA>
+    <iWant>to log in to my account from the same page as registration</iWant>
+    <soThat>I can access my profile and application features</soThat>
+    <tasks>
+      - [ ] **Task 1: Implement Backend Login Logic (AC: #1)**
+      - [ ] **Backend:** Create the `POST /api/v1/auth/login` endpoint in FastAPI. This endpoint should be in the existing `backend/app/api/v1/auth.py` file.
+      - [ ] **Backend:** The endpoint must validate the provided credentials against the Supabase Auth service.
+      - [ ] **Backend:** On successful validation, the endpoint should return the JWT provided by Supabase.
+      - [ ] **Task 2: Implement Frontend Login Logic (AC: #1)**
+      - [ ] **Frontend:** In the existing `frontend/app/(auth)/page.tsx` component, implement the client-side logic to call the `/api/v1/auth/login` endpoint on submit.
+      - [ ] **Frontend:** Ensure the form fields have the `data-testid` attributes `email-input`, `password-input`, and the submit button has `login-submit-button`.
+      - [ ] **Frontend:** Upon receiving a successful (200) response, establish a client-side session (e.g., store the token, update React Context state).
+      - [ ] **Frontend:** Programmatically redirect the user to the `/dashboard` page after the session is established.
+      - [ ] **Task 3: Implement Post-Login CV Pop-up (AC: #2)**
+      - [ ] **Frontend:** On the `/dashboard` page, implement logic to display a pop-up or modal.
+      - [ ] **Frontend:** Ensure the pop-up component has the `data-testid="update-cv-popup"`.
+      - [ ] **Frontend:** The pop-up must contain the text "update your CV information".
+      - [ ] **Task 4: Verification (AC: #1, #2)**
+      - [ ] **Testing:** Create the test file `tests/e2e/login.spec.ts`.
+      - [ ] **Testing:** Add the two tests from `atdd-checklist-story-2.2.md` to the test file.
+      - [ ] **Testing:** Run `npx playwright test tests/e2e/login.spec.ts` and ensure both tests pass.
+    </tasks>
+  </story>
+  <acceptanceCriteria>
+    1.  Given I have a verified account and am on the landing page, when I enter my email and password on the login form and submit, then I am successfully authenticated via Supabase Auth, a secure session is established on the client, and I am redirected to my main application page (`/dashboard`).
+    2.  Given I have successfully logged in, a pop-up appears asking if I would like to update my CV information.
+  </acceptanceCriteria>
+  <artifacts>
+    <docs>
+        <doc>
+            <path>docs/epics.md</path>
+            <title>CVAI Turbo - Epics &amp; Stories</title>
+            <section>Story 2.2: User Login &amp; Session Management</section>
+            <snippet>As a registered student user, I want to log in to my account from the same page as registration, so that I can access my profile and application features.</snippet>
+        </doc>
+        <doc>
+            <path>docs/architecture.md</path>
+            <title>Architecture</title>
+            <section>Authentication Pattern &amp; Token Handling</section>
+            <snippet>Supabase JWTs will be passed from the frontend to the backend using the standard `Authorization: Bearer <token>` header for all authenticated requests.</snippet>
+        </doc>
+        <doc>
+            <path>docs/ux-design-specification.md</path>
+            <title>ibe160 UX Design Specification</title>
+            <section>5.1.1 User Onboarding (Registration &amp; Login)</section>
+            <snippet>The landing page displays a clean form with fields for "Email" and "Password", a primary "Login" button... On Success: The system authenticates the user and redirects them to the main application dashboard. A pop-up appears with the message "Welcome back! Would you like to update your CV information?"</snippet>
+        </doc>
+        <doc>
+            <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+            <title>Epic Technical Specification: User Onboarding &amp; Profile Management</title>
+            <section>APIs and Interfaces</section>
+            <snippet>`POST /api/v1/auth/login`: Authenticates a user and returns a JWT. Request Body: `{ "email": "...", "password": "..." }`. Response: `{ "data": { "access_token": "...", "refresh_token": "..." } }`</snippet>
+        </doc>
+    </docs>
+    <code>
+        <file>
+            <path>frontend/app/(auth)/page.tsx</path>
+            <kind>component</kind>
+            <symbol>AuthPage</symbol>
+            <reason>This is the main component for the login/registration UI. The `handleLogin` function needs to be implemented here.</reason>
+        </file>
+        <file>
+            <path>backend/app/api/v1/auth.py</path>
+            <kind>api</kind>
+            <symbol>router</symbol>
+            <reason>This file contains the existing `/register` endpoint. The new `/login` endpoint should be added to this router.</reason>
+        </file>
+        <file>
+            <path>playwright.config.ts</path>
+            <kind>config</kind>
+            <symbol>webServer</symbol>
+            <reason>This file configures the test environment, including the web server command needed to run E2E tests against the application.</reason>
+        </file>
+    </code>
+    <dependencies>
+      <npm root="true">
+        <package name="@faker-js/faker" version="^8.0.0"/>
+        <package name="@playwright/test" version="^1.40.0"/>
+      </npm>
+      <npm root="frontend">
+        <package name="next" version="16.0.7"/>
+        <package name="react" version="19.2.0"/>
+        <package name="@supabase/supabase-js" version="^2.39.0"/>
+      </npm>
+      <pip root="backend">
+          <package name="fastapi"/>
+          <package name="uvicorn"/>
+          <package name="supabase"/>
+          <package name="pydantic"/>
+      </pip>
+    </dependencies>
+  </artifacts>
+  <constraints>
+    <constraint>The backend will expose a `POST /api/v1/auth/login` endpoint.</constraint>
+    <constraint>Supabase Auth will validate credentials and issue a JWT.</constraint>
+    <constraint>The JWT and session state will be managed on the frontend using React Context.</constraint>
+    <constraint>The login form is part of a dynamic toggle UI on a single page with registration.</constraint>
+  </constraints>
+  <interfaces>
+      <interface>
+          <name>Login API Endpoint</name>
+          <kind>REST</kind>
+          <signature>POST /api/v1/auth/login</signature>
+          <path>backend/app/api/v1/auth.py</path>
+      </interface>
+  </interfaces>
+  <tests>
+    <standards>Use Playwright for end-to-end (E2E) tests. Tests should be created in the `tests/e2e` directory and follow the patterns established in `registration.spec.ts`. Fixtures are used for setting up test data.</standards>
+    <locations>
+        <location>tests/e2e/</location>
+    </locations>
+    <ideas>
+      <idea for="AC1">Create a test file `tests/e2e/login.spec.ts` that navigates to the auth page, mocks a successful API response for the login endpoint, fills the email and password fields, clicks the login button, and asserts that the user is redirected to the `/dashboard` URL.</idea>
+      <idea for="AC2">In the same test file, after a successful login and redirection, assert that a pop-up element with `data-testid="update-cv-popup"` is visible and contains the required text.</idea>
+    </ideas>
+  </tests>
+</story-context>

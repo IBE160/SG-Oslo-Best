@@ -1,0 +1,132 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.1</storyId>
+    <title>User Registration</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-08</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-1-user-registration.md</sourceStoryPath>
+  </metadata>
+  <story>
+    <asA>a new student user</asA>
+    <iWant>to register for an account using a single, dynamic form</iWant>
+    <soThat>I can access the CVAI Turbo platform seamlessly</soThat>
+    <tasks>
+- [ ] **Task 1: Implement Dynamic Form UI (AC: #1)**
+  - [ ] **Frontend:** Implement the dynamic toggle on the landing page as described in UX Spec 5.1.1.
+  - [ ] **Frontend:** Ensure a "Sign Up" element with `data-testid="signup-link"` exists.
+  - [ ] **Frontend:** Clicking the "Sign Up" link should reveal the registration-specific fields without a full page reload.
+  - [ ] **Frontend:** Add `data-testid="confirm-password-input"` to the confirm password field.
+  - [ ] **Frontend:** Add `data-testid="registration-submit-button"` to the submit button in the registration view.
+- [ ] **Task 2: Implement Backend Registration Logic (AC: #2)**
+  - [ ] **Backend:** Create the `POST /api/v1/auth/register` endpoint in FastAPI.
+  - [ ] **Backend:** This endpoint should call Supabase Auth to create a new user.
+  - [ ] **Backend:** After successful user creation, trigger the Resend service to send a verification email.
+- [ ] **Task 3: Implement Frontend Registration Logic (AC: #2)**
+  - [ ] **Frontend:** Implement the client-side logic in the registration form to call the `/api/v1/auth/register` endpoint on submit.
+  - [ ] **Frontend:** Upon receiving a successful (201) response, programmatically redirect the user to the `/cv-creation` page.
+  - [ ] **Frontend:** Ensure the form fields have the required `data-testid` attributes.
+- [ ] **Task 4: Verification (AC: #1, #2)**
+  - [ ] **Testing:** Run `npx playwright test --grep "should expand"` to confirm the first test passes. (Covers AC #1)
+  - [ ] **Testing:** Run `npx playwright test --grep "should create an account"` to confirm the second test passes. (Covers AC #2)
+    </tasks>
+  </story>
+  <acceptanceCriteria>
+*Source: Derived from `tech-spec-epic-2.md`*
+
+1.  Given I am on the landing page, when I click the "Sign Up" link, then the form expands to include registration fields without a page reload.
+2.  Given I am on the registration form, when I enter valid details and submit, then my account is created in Supabase Auth, I receive a verification email, and I am redirected to the CV creation page.
+  </acceptanceCriteria>
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: User Onboarding & Profile Management</title>
+        <section>APIs and Interfaces</section>
+        <snippet>POST /api/v1/auth/register: Creates a new user in Supabase Auth.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Authentication Pattern &amp; Token Handling</section>
+        <snippet>Supabase JWTs will be passed from the frontend to the backend using the standard `Authorization: Bearer &lt;token&gt;` header for all authenticated requests.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>User Onboarding (Registration &amp; Login)</section>
+        <snippet>Dynamic Toggle. A single page presents the login form by default, with a link to expand the form for registration.</snippet>
+      </doc>
+      <doc>
+        <path>docs/stories/atdd-checklist-story-2.1.md</path>
+        <title>ATDD Implementation Checklist: Story 2.1 - User Registration</title>
+        <section>Required `data-testid` Attributes</section>
+        <snippet>To ensure tests are stable and decoupled from CSS or text changes, specific `data-testid` attributes must be added to the frontend components.</snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Story 2.1: User Registration</section>
+        <snippet>As a new student user, I want to register for an account using a single, dynamic form, so that I can access the CVAI Turbo platform seamlessly.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>FR-1.1 [MVP] The system shall allow new users to register with an email and password.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <!-- No existing code artifacts identified. This is a greenfield implementation. -->
+    </code>
+    <dependencies>
+        <npm_root>
+            <package name="@faker-js/faker" version="^8.0.0" />
+            <package name="@playwright/test" version="^1.40.0" />
+        </npm_root>
+        <npm_frontend>
+            <package name="class-variance-authority" version="^0.7.1" />
+            <package name="clsx" version="^2.1.1" />
+            <package name="lucide-react" version="^0.555.0" />
+            <package name="next" version="16.0.7" />
+            <package name="react" version="19.2.0" />
+            <package name="react-dom" version="19.2.0" />
+            <package name="@supabase/supabase-js" version="^2.39.0" />
+            <package name="tailwind-merge" version="^3.4.0" />
+            <package name="tailwindcss-animate" version="^1.0.7" />
+        </npm_frontend>
+        <pip_backend>
+            <package name="fastapi" version="0.123.8" />
+            <package name="uvicorn" version="0.38.0" />
+            <package name="supabase" version="" />
+            <package name="pydantic" version="2.12.5" />
+        </pip_backend>
+    </dependencies>
+  </artifacts>
+  <constraints>
+    <constraint>Before starting implementation, ensure the action items from the Epic 1 retrospective are complete (Supabase integration finalized, local env setup, base E2E test passing).</constraint>
+    <constraint>All functionality must be verified locally due to the external CI/CD blocker.</constraint>
+    <constraint>Frontend components must use PascalCase (e.g., UserCard).</constraint>
+    <constraint>Backend API endpoints must use kebab-case for paths (e.g., /api/v1/users).</constraint>
+    <constraint>Database tables and columns must use snake_case (e.g., users, cover_letters, user_id).</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>User Registration</name>
+      <kind>REST endpoint</kind>
+      <signature>POST /api/v1/auth/register</signature>
+      <path>backend/app/api/v1/auth.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Jest for unit/component tests; Playwright for end-to-end (E2E) tests.</standards>
+    <locations>tests/e2e/registration.spec.ts</locations>
+    <ideas>
+      <idea for="AC1">Test that clicking the 'Sign Up' link expands the form to show registration-specific fields without a page reload.</idea>
+      <idea for="AC2">Test that submitting the registration form with valid data creates a user, triggers a verification email (mocked), and redirects to the CV creation page.</idea>
+      <idea for="AC2">Test that submitting with an existing email returns an error.</idea>
+      <idea for="AC2">Test that submitting with a password mismatch returns an error.</idea>
+    </ideas>
+  </tests>
+</story-context>

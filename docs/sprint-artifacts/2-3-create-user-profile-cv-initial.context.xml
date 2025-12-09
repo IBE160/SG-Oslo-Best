@@ -1,0 +1,266 @@
+<story-context id="{bmad_folder}/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>3</storyId>
+    <title>create-user-profile-cv-initial</title>
+    <status>drafted</status>
+    <generatedAt>mandag 8. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\docs\sprint-artifacts\2-3-create-user-profile-cv-initial.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to create my initial profile and input my CV information into a single text area</iWant>
+    <soThat>the system has my basic data for cover letter generation.</soThat>
+    <tasks>
+      <task>
+        <description>Implement Profile/CV Form UI</description>
+        <subtasks>
+          <subtask>Frontend: Create a new React component for the user profile and CV input form (e.g., `ProfileCVForm.tsx`).</subtask>
+          <subtask>Frontend: Design the form with fields for personal details (e.g., name, date of birth, gender, phone number, address) and a large text area for CV content.</subtask>
+          <subtask>Frontend: Integrate `React Hook Form` for form management.</subtask>
+          <subtask>Frontend: Ensure input fields and the text area have appropriate `data-testid` attributes for E2E testing.</subtask>
+        </subtasks>
+      </task>
+      <task>
+        <description>Implement Backend API for Profile/CV Creation</description>
+        <subtasks>
+          <subtask>Backend: Create a `POST /api/v1/users/me/cv` endpoint in `backend/app/api/v1/users.py`.</subtask>
+          <subtask>Backend: The endpoint must accept user profile and CV data.</subtask>
+          <subtask>Backend: Implement logic to store the data in Supabase tables (`users`, `cvs`) linked to the authenticated user's ID.</subtask>
+          <subtask>Backend: Ensure RLS policies are applied to prevent unauthorized access.</subtask>
+        </subtasks>
+      </task>
+      <task>
+        <description>Connect Frontend Form to Backend API</description>
+        <subtasks>
+          <subtask>Frontend: Implement client-side logic to call the `POST /api/v1/users/me/cv` endpoint on form submission.</subtask>
+          <subtask>Frontend: Handle successful responses by redirecting the user to the main application dashboard (`/dashboard`).</subtask>
+          <subtask>Frontend: Handle error responses by displaying inline error messages (AC: #2).</subtask>
+        </subtasks>
+      </task>
+      <task>
+        <description>Implement Form Validation</description>
+        <subtasks>
+          <subtask>Frontend: Add client-side validation using `React Hook Form` for mandatory fields in the profile/CV form.</subtask>
+          <subtask>Frontend: Display inline error messages when mandatory fields are empty on submission.</subtask>
+        </subtasks>
+      </task>
+      <task>
+        <description>Verification</description>
+        <subtasks>
+          <subtask>Testing: Create an E2E test file (`tests/e2e/profile-cv.spec.ts`).</subtask>
+          <subtask>Testing: Write tests to cover the user journey: registration -> login -> redirect to CV page -> fill in form -> save -> redirect to dashboard (AC: #1, #3, #4).</subtask>
+          <subtask>Testing: Write a test to ensure mandatory field validation prevents saving (AC: #2).</subtask>
+          <subtask>Testing: Run Playwright tests and ensure they pass.</subtask>
+        </subtasks>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="1">Given I am logged in for the first time, when I am redirected to the profile creation page, then I see fields for personal details and a large text area for CV content.</criterion>
+    <criterion id="2">When I attempt to save with a mandatory field empty, then the system displays an inline error and prevents saving.</criterion>
+    <criterion id="3">When I fill in all required fields and save, then my profile and CV data are successfully stored.</criterion>
+    <criterion id="4">And I am redirected to the main application dashboard.</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+  <artifacts>
+    <docs>
+      <entry>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students... Our solution provides an AI-powered tool that takes a user's CV information and a job description... The project's success will be measured by its ability to produce application-ready cover letters efficiently...</snippet>
+      </entry>
+      <entry>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>MVP - Minimum Viable Product</section>
+        <snippet>The MVP will focus on delivering the core functionality to generate customized cover letters. Key features include: User Profile & CV Input: Users can create a simple profile and input their CV information into a single text area.</snippet>
+      </entry>
+      <entry>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>`FR-1.3 [MVP]` The system shall allow users to create and manage their personal profile information... `FR-1.4 [MVP]` The system shall allow users to create and manage their CV details... `FR-1.5 [MVP]` The system shall validate required fields during profile and CV creation/update...</snippet>
+      </entry>
+      <entry>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: User Onboarding & Profile Management</title>
+        <section>Overview</section>
+        <snippet>This document provides the technical specification for Epic 2... to implement the full user lifecycle, including registration, login, and the management of their profile and CV data.</snippet>
+      </entry>
+      <entry>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: User Onboarding & Profile Management</title>
+        <section>In-Scope</section>
+        <snippet>A page for creating and updating a user's profile and CV data. Backend endpoints to create (`POST /api/v1/users/me/cv`) and update (`PATCH /api/v1/users/me/cv`) the user's CV.</snippet>
+      </entry>
+      <entry>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: User Onboarding & Profile Management</title>
+        <section>System Architecture Alignment</section>
+        <snippet>The `users` and `cvs` tables will be created in Supabase, and access will be protected by Row Level Security (RLS) policies. `React Hook Form` will be used for all forms.</snippet>
+      </entry>
+      <entry>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Epic to Architecture Mapping</section>
+        <snippet>Epic 2: User Onboarding & Profile. Primary Code Location(s): `frontend/app/(auth)/`, `frontend/components/`, `backend/app/api/v1/users.py`.</snippet>
+      </entry>
+      <entry>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns</section>
+        <snippet>Naming Conventions: Database (PostgreSQL) Tables: Use lowercase, plural, snake_case (e.g., `users`, `cvs`). Database (PostgreSQL) Columns: Use lowercase, snake_case (e.g., `user_id`). Foreign Keys (Database): Use `referenced_table_singular_id` format (e.g., `user_id`).</snippet>
+      </entry>
+      <entry>
+        <path>docs/ux-design-specification.md</path>
+        <title>UX Design Specification</title>
+        <section>User Journey Flows: CV Management</section>
+        <snippet>User Goal: To create, update, or view their CV information. Chosen Approach: Hybrid Save Model on a Single Scrolling Form.</snippet>
+      </entry>
+      <entry>
+        <path>docs/ux-design-specification.md</path>
+        <title>UX Design Specification</title>
+        <section>UX Pattern Decisions: Form Patterns</section>
+        <snippet>Label Position: Above input field. Required Field Indicator: Asterisk (`*`) next to the label. Validation Timing: On blur... and On submit... Error Display: Inline error messages.</snippet>
+      </entry>
+      <entry>
+        <path>docs/epics.md</path>
+        <title>Epics & Stories</title>
+        <section>Epic 2: User Onboarding & Profile Management</section>
+        <snippet>Goal: Allow students to create an account, log in, and manage their personal and CV information, which is the foundation for generating cover letters.</snippet>
+      </entry>
+      <entry>
+        <path>docs/epics.md</path>
+        <title>Epics & Stories</title>
+        <section>Story 2.3: Create User Profile & CV (Initial)</section>
+        <snippet>As a logged-in student user, I want to create my initial profile and input my CV information into a single text area, so that the system has my basic data for cover letter generation. Covers: FR-1.3, FR-1.4, FR-1.5.</snippet>
+      </entry>
+    </docs>
+    <code>
+      <entry>
+        <path>backend/app/api/v1/auth.py</path>
+        <kind>API endpoint</kind>
+        <symbol>login</symbol>
+        <reason>Existing authentication endpoint for user login.</reason>
+      </entry>
+      <entry>
+        <path>backend/app/db/supabase_client.py</path>
+        <kind>database client</kind>
+        <reason>Supabase client for database interactions.</reason>
+      </entry>
+      <entry>
+        <path>frontend/context/AuthContext.tsx</path>
+        <kind>React Context</kind>
+        <reason>Manages user authentication state and JWT.</reason>
+      </entry>
+      <entry>
+        <path>frontend/app/dashboard/page.tsx</path>
+        <kind>React Page</kind>
+        <reason>User dashboard, target for redirection after profile/CV creation.</reason>
+      </entry>
+      <entry>
+        <path>packages/shared-types/index.ts</path>
+        <kind>TypeScript interfaces</kind>
+        <reason>Shared types for API request/response contracts.</reason>
+      </entry>
+    </code>
+    <dependencies>
+      <npm>
+        <package name="@faker-js/faker" version="^8.0.0" type="dev" />
+        <package name="@playwright/test" version="^1.40.0" type="dev" />
+        <package name="@radix-ui/react-alert-dialog" version="^1.1.15" type="prod" />
+        <package name="@radix-ui/react-label" version="^2.1.8" type="prod" />
+        <package name="@radix-ui/react-slot" version="^1.2.4" type="prod" />
+        <package name="@supabase/supabase-js" version="^2.39.0" type="prod" />
+        <package name="class-variance-authority" version="^0.7.1" type="prod" />
+        <package name="clsx" version="^2.1.1" type="prod" />
+        <package name="lucide-react" version="^0.555.0" type="prod" />
+        <package name="next" version="16.0.7" type="prod" />
+        <package name="react" version="19.2.0" type="prod" />
+        <package name="react-dom" version="19.2.0" type="prod" />
+        <package name="tailwind-merge" version="^3.4.0" type="prod" />
+        <package name="tailwindcss-animate" version="^1.0.7" type="prod" />
+        <package name="@tailwindcss/postcss" version="^4" type="dev" />
+        <package name="@types/node" version="^20" type="dev" />
+        <package name="@types/react" version="^19" type="dev" />
+        <package name="@types/react-dom" version="^19" type="dev" />
+        <package name="babel-plugin-react-compiler" version="1.0.0" type="dev" />
+        <package name="eslint" version="^9" type="dev" />
+        <package name="eslint-config-next" version="16.0.7" type="dev" />
+        <package name="tailwindcss" version="^4" type="dev" />
+        <package name="typescript" version="^5" type="dev" />
+      </npm>
+      <python>
+        <package name="annotated-doc" version="0.0.4" />
+        <package name="annotated-types" version="0.7.0" />
+        <package name="anyio" version="4.12.0" />
+        <package name="click" version="8.3.1" />
+        <package name="colorama" version="0.4.6" />
+        <package name="fastapi" version="0.123.8" />
+        <package name="h11" version="0.16.0" />
+        <package name="idna" version="3.11" />
+        <package name="pydantic" version="2.12.5" />
+        <package name="pydantic_core" version="2.41.5" />
+        <package name="starlette" version="0.50.0" />
+        <package name="typing-inspection" version="0.4.2" />
+        <package name="typing_extensions" version="4.15.0" />
+        <package name="uvicorn" version="0.38.0" />
+        <package name="supabase" />
+      </python>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <rule>Frontend forms should use React Hook Form for management.</rule>
+    <rule>Backend endpoints for creating and updating user CVs will be in `backend/app/api/v1/users.py`.</rule>
+    <rule>Supabase tables (`users`, `cvs`) will store the profile and CV data, protected by RLS.</rule>
+    <rule>Frontend UI components and pages will be in `frontend` project, with shared types in `packages/shared-types`.</rule>
+    <rule>Naming conventions should follow PascalCase for components, kebab-case for files, and lowercase/plural/snake_case for DB tables.</rule>
+    <rule>E2E tests using Playwright should cover the user journey.</rule>
+    <rule>Backend API endpoints should be tested for valid/invalid requests and authentication enforcement.</rule>
+    <rule>Consider adding unit tests for `AuthContext`.</rule>
+    <rule>Review Supabase Row Level Security (RLS) for user sessions to ensure data isolation.</rule>
+  </constraints>
+  <interfaces>
+    <entry>
+      <name>POST /api/v1/users/me/cv</name>
+      <kind>REST endpoint</kind>
+      <signature>POST /api/v1/users/me/cv (expects profile/CV data)</signature>
+      <path>backend/app/api/v1/users.py</path>
+    </entry>
+    <entry>
+      <name>PATCH /api/v1/users/me/cv</name>
+      <kind>REST endpoint</kind>
+      <signature>PATCH /api/v1/users/me/cv (expects profile/CV data for update)</signature>
+      <path>backend/app/api/v1/users.py</path>
+    </entry>
+    <entry>
+      <name>AuthContext</name>
+      <kind>React Context</kind>
+      <signature>{ user: User | null; login: (token: string) => void; logout: () => void; }</signature>
+      <path>frontend/context/AuthContext.tsx</path>
+    </entry>
+  </interfaces>
+  <tests>
+    <standards>
+      E2E tests using Playwright should cover the user journey of creating and saving CV information.
+      Backend API endpoints should be tested for valid/invalid requests and authentication enforcement.
+    </standards>
+    <locations>
+      <location>tests/e2e/profile-cv.spec.ts</location>
+      <location>backend/app/api/v1/users.py (for API tests)</location>
+    </locations>
+    <ideas>
+      <idea ac_id="1,3,4">E2E Test: registration -> login -> redirect to CV page -> fill in form -> save -> redirect to dashboard.</idea>
+      <idea ac_id="2">E2E Test: mandatory field validation prevents saving.</idea>
+      <idea ac_id="3">API Test: `POST /api/v1/users/me/cv` with valid data should store data in Supabase.</idea>
+      <idea ac_id="3">API Test: `POST /api/v1/users/me/cv` without authentication should return 401.</idea>
+    </ideas>
+  </tests>
+</story-context>

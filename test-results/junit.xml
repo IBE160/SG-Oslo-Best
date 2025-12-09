@@ -1,180 +1,102 @@
-<testsuites id="" name="" tests="6" failures="6" skipped="0" errors="0" time="12.300252">
-<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="chromium" tests="2" failures="2" skipped="0" time="0.034" errors="0">
-<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.017">
-<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
-<![CDATA[  [chromium] › example.spec.ts:4:7 › Example Test Suite › should load homepage ─────────────────────
+<testsuites id="" name="" tests="2" failures="2" skipped="0" errors="0" time="31.099418999999997">
+<testsuite name="profile-cv.spec.ts" timestamp="2025-12-08T17:30:32.673Z" hostname="chromium" tests="2" failures="2" skipped="0" time="38.564" errors="0">
+<testcase name="Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard" classname="profile-cv.spec.ts" time="19.347">
+<failure message="profile-cv.spec.ts:40:9 should allow a new user to create profile and CV, then redirect to dashboard" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:40:9 › Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard 
 
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\chromium_headless_shell-1200\chrome-headless-shell-win64\chrome-headless-shell.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('login-link')
 
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-chromium\trace.zip
+
+      25 |     // Ensure login view is active
+      26 |     if (!await page.getByRole('heading', { name: 'Login' }).isVisible()) {
+    > 27 |         await page.getByTestId('login-link').click(); // Switch to login form if not already
+         |                                              ^
+      28 |     }
+      29 |
+      30 |     await page.getByTestId('email-input').fill(email);
+        at loginUser (C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:27:46)
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:48:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
     Usage:
 
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-chromium\trace.zip
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
 <![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-chromium\trace.zip]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.017">
-<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
-<![CDATA[  [chromium] › example.spec.ts:9:7 › Example Test Suite › should create user and login ─────────────
+<testcase name="Profile and CV Creation › should display validation errors for mandatory fields" classname="profile-cv.spec.ts" time="19.217">
+<failure message="profile-cv.spec.ts:72:9 should display validation errors for mandatory fields" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:72:9 › Profile and CV Creation › should display validation errors for mandatory fields 
 
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\chromium_headless_shell-1200\chrome-headless-shell-win64\chrome-headless-shell.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('login-link')
 
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip
+
+      25 |     // Ensure login view is active
+      26 |     if (!await page.getByRole('heading', { name: 'Login' }).isVisible()) {
+    > 27 |         await page.getByTestId('login-link').click(); // Switch to login form if not already
+         |                                              ^
+      28 |     }
+      29 |
+      30 |     await page.getByTestId('email-input').fill(email);
+        at loginUser (C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:27:46)
+        at C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\tests\e2e\profile-cv.spec.ts:80:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip
     Usage:
 
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip
 
     ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
 </failure>
 <system-out>
 <![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-chromium\trace.zip]]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="firefox" tests="2" failures="2" skipped="0" time="0.038" errors="0">
-<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.018">
-<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
-<![CDATA[  [firefox] › example.spec.ts:4:7 › Example Test Suite › should load homepage ──────────────────────
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\test-failed-1.png]]
 
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\firefox-1497\firefox\firefox.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\video.webm]]
 
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-firefox\trace.zip
-    Usage:
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\error-context.md]]
 
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-firefox\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-firefox\trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.02">
-<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
-<![CDATA[  [firefox] › example.spec.ts:9:7 › Example Test Suite › should create user and login ──────────────
-
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\firefox-1497\firefox\firefox.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip
-    Usage:
-
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-firefox\trace.zip]]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="example.spec.ts" timestamp="2025-12-02T11:47:02.903Z" hostname="webkit" tests="2" failures="2" skipped="0" time="0.035" errors="0">
-<testcase name="Example Test Suite › should load homepage" classname="example.spec.ts" time="0.016">
-<failure message="example.spec.ts:4:7 should load homepage" type="FAILURE">
-<![CDATA[  [webkit] › example.spec.ts:4:7 › Example Test Suite › should load homepage ───────────────────────
-
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\webkit-2227\Playwright.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-load-homepage-webkit\trace.zip
-    Usage:
-
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-load-homepage-webkit\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-load-homepage-webkit\trace.zip]]
-]]>
-</system-out>
-</testcase>
-<testcase name="Example Test Suite › should create user and login" classname="example.spec.ts" time="0.019">
-<failure message="example.spec.ts:9:7 should create user and login" type="FAILURE">
-<![CDATA[  [webkit] › example.spec.ts:9:7 › Example Test Suite › should create user and login ───────────────
-
-    Error: browserType.launch: Executable doesn't exist at C:\Users\Administrator\AppData\Local\ms-playwright\webkit-2227\Playwright.exe
-    ╔═════════════════════════════════════════════════════════════════════════╗
-    ║ Looks like Playwright Test or Playwright was just installed or updated. ║
-    ║ Please run the following command to download new browsers:              ║
-    ║                                                                         ║
-    ║     npx playwright install                                              ║
-    ║                                                                         ║
-    ║ <3 Playwright Team                                                      ║
-    ╚═════════════════════════════════════════════════════════════════════════╝
-
-    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
-    ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip
-    Usage:
-
-        npx playwright show-trace ..\..\test-results\example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip
-
-    ────────────────────────────────────────────────────────────────────────────────────────────────
-]]>
-</failure>
-<system-out>
-<![CDATA[
-[[ATTACHMENT|example-Example-Test-Suite-should-create-user-and-login-webkit\trace.zip]]
+[[ATTACHMENT|profile-cv-Profile-and-CV--df1af-errors-for-mandatory-fields-chromium\trace.zip]]
 ]]>
 </system-out>
 </testcase>

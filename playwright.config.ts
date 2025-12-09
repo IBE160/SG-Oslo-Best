@@ -21,7 +21,15 @@ export default defineConfig({
     navigationTimeout: 30 * 1000, // Navigation timeout: 30s
   },
 
-  reporter: [['html', { outputFolder: 'test-results/html' }], ['junit', { outputFile: 'test-results/junit.xml' }], ['list']],
+  reporter: [['html'], ['junit', { outputFile: 'test-results/junit.xml' }], ['list']],
+
+  // Run your local dev server before starting the tests
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://127.0.0.1:3000',
+    cwd: './frontend',
+    reuseExistingServer: !process.env.CI,
+  },
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
