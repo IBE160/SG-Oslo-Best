@@ -82,9 +82,24 @@ so that I feel confident my changes are securely persisted with minimal effort.
     -   **Testing:** **CRITICAL:** Manually verify Supabase RLS policies are correctly configured and enforced for read/write operations on `profiles` and `cv_documents` tables.
     -   **Testing:** **Advisory:** Review and update `AuthContext` unit tests if any changes are made to session management.
 
+### Review Follow-ups (AI)
+
+**Code Changes Required:**
+-   [ ] **[High] Implement Auto-Save on Blur (AC3, AC4):** Uncomment and implement the auto-save logic within `handleBlur` in `frontend/components/EditCVForm.tsx`. This should trigger a `PATCH` request for the changed field(s).
+-   [ ] **[High] Integrate StatefulTextbox Component (AC1, AC4):** Replace standard HTML input elements (e.g., `input`, `textarea`, `select`) in `frontend/components/EditCVForm.tsx` with the `StatefulTextbox` component. Ensure `StatefulTextbox` receives appropriate props (`isDirty`, `isSaved`, `isSaving`) to render the correct border colors.
+-   [ ] **[High] Update E2E Tests for StatefulTextbox Visuals (AC1, AC4):** Add Playwright assertions to `tests/e2e/profile-cv.spec.ts` to verify the yellow border on field modification and the green border on blur/save for the relevant fields once `StatefulTextbox` is integrated.
+-   [ ] **[Medium] Standardize CV Field Naming:** Align the naming for the CV content field (`cv_content` vs `cv_full_text`) across frontend components, backend schemas (`schemas.py`), and the database model in `backend/app/api/v1/users.py`. Recommend using `cv_content` for consistency.
+-   [ ] **[Medium] Add Backend Tests for `POST /users/me/cv`:** Add comprehensive unit tests for the `create_user_profile_cv` endpoint in `backend/tests/api/v1/test_users.py`, covering successful creation, conflict (profile already exists), and validation error scenarios.
+-   [ ] **[Low] Replace `print` statements with Python `logging`:** In `backend/app/api/v1/users.py`, replace `print` statements with a structured logging solution (e.g., Python's `logging` module).
+
+**Documentation/Advisory Notes:**
+-   Note: Document the `CreateCVForm.tsx`'s error handling for existing profiles and redirection to `/cv-edit` in the `Dev Agent Record -> Completion Notes` or `Change Log` section of Story 2.4.
+-   Note: Consider integrating `StatefulTextbox` into `frontend/components/CreateCVForm.tsx` as well for architectural consistency across all form fields, or explicitly document why it's not used there if the design intent changed.
+
 ## File List
 
--   `frontend/components/ProfileCVForm.tsx` (Modified)
+-   `frontend/components/CreateCVForm.tsx` (New/Modified from split)
+-   `frontend/components/EditCVForm.tsx` (New/Modified from split)
 -   `frontend/context/UnsavedChangesContext.tsx` (New)
 -   `frontend/components/UnsavedChangesIndicator.tsx` (New)
 -   `frontend/lib/query-client.ts` (New)
@@ -103,7 +118,98 @@ so that I feel confident my changes are securely persisted with minimal effort.
     -   Implemented Validation for Updates (Task 4).
     -   Implemented Verification (Task 5).
 
-Status: review
+Status: blocked
+
+## Senior Developer Review (AI)
+
+**Reviewer:** BIP
+**Date:** tirsdag 9. desember 2025
+**Outcome:** BLOCKED
+
+**Summary:**
+This review of Story 2.4 "Update User Profile & CV with Hybrid Save" identifies critical discrepancies between the implemented code and the defined Acceptance Criteria and Tasks, primarily concerning the core "hybrid save" functionality and the integration of the `StatefulTextbox` component.
+
+**Key Findings:**
+
+   **HIGH Severity:**
+   -   **AC3 & AC4 Not Implemented (Auto-save on blur):** The `handleBlur` function in `frontend/components/EditCVForm.tsx` has the auto-save logic commented out, directly violating AC3 ("change is automatically saved in the background via a PATCH request") and AC4 ("field's border indicates a 'saved' state").
+   -   **StatefulTextbox Not Integrated (Visual Feedback):** The `StatefulTextbox` component (from Story 2.5), designed to provide visual feedback (yellow for unsaved, green for saved) for AC1 and AC4, is not integrated into `frontend/components/EditCVForm.tsx`. Standard HTML inputs are used, meaning the visual feedback is entirely missing.
+   -   **E2E Test Incomplete (StatefulTextbox Visuals):** `tests/e2e/profile-cv.spec.ts` lacks assertions to verify the visual changes (yellow/green borders) on fields, as this functionality is missing from `EditCVForm.tsx`. These tests cannot pass until the `StatefulTextbox` is correctly integrated and implemented.
+
+   **MEDIUM Severity:**
+   -   **Inconsistent CV Field Naming (`cv_content` vs `cv_full_text`):** There's an inconsistency in field naming: frontend (`EditCVForm.tsx`) sends `cv_content`, while backend schemas (`CVUpdate`, `UserProfileUpdate`) use `cv_full_text` for updating CV data, and the database likely uses `cv_full_text`. This mismatch is a potential source of bugs and confusion.
+   -   **Missing Backend Tests for `POST /users/me/cv`:** `backend/tests/api/v1/test_users.py` lacks dedicated tests for the `POST /users/me/cv` endpoint (`create_user_profile_cv`), particularly for conflict scenarios (profile already exists, 409 status code), which is a critical part of the frontend's (`CreateCVForm.tsx`) error handling and redirection logic.
+   -   **`CreateCVForm.tsx` "Course Correct" Documentation:** The intelligent redirect from `CreateCVForm.tsx` to `/cv-edit` when a profile already exists is a valuable "on-the-fly" correction. This change needs explicit documentation in the story's `Dev Agent Record` or `Change Log`.
+
+**Acceptance Criteria Coverage:**
+
+| AC# | Description | Status | Evidence |
+| :-- | :--------------------------------------------------------------------------------------------------------------------------------------- | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 | When I modify a field, then the field's border indicates an "unsaved" state (e.g., turns yellow). | **MISSING** | Expected via `StatefulTextbox` integration (Task 1). `EditCVForm.tsx` currently uses standard inputs, lacking this visual feedback. |
+| 2 | And a master "Save" button becomes enabled. | IMPLEMENTED | `EditCVForm.tsx` uses `isDirty` from `React Hook Form` to manage button state (Task 1). E2E tests confirm enablement. |
+| 3 | When I move focus away from the modified field (onBlur), then the change is automatically saved in the background via a PATCH request. | **MISSING** | `EditCVForm.tsx`'s `handleBlur` explicitly comments out auto-save logic. This core AC is not implemented. |
+| 4 | And the field's border indicates a "saved" state (e.g., turns green). | **MISSING** | Expected via `StatefulTextbox` integration after successful auto-save (Task 2). `EditCVForm.tsx` lacks `StatefulTextbox` integration. |
+| 5 | When I click the manual "Save" button, then all pending changes are sent in a single PATCH request, and all modified fields show a "saved" state. | IMPLEMENTED | `EditCVForm.tsx` uses `handleSubmit` and `updateMutation` for manual save (Task 2). E2E tests confirm manual save. Visual feedback is missing as per AC4. |
+| 6 | When mandatory fields are modified and then left empty, then the system displays an inline validation error. | IMPLEMENTED | `EditCVForm.tsx` uses `React Hook Form` validation with inline error messages (Task 4). `backend/app/api/v1/users.py` includes server-side validation. E2E and API tests cover this. |
+| 7 | When the user attempts to navigate away from the profile editing page with unsaved changes, then a confirmation modal appears prompting to save, discard, or cancel. | IMPLEMENTED | `EditCVForm.tsx` integrates `useNavigationBlocker` and `UnsavedChangesContext` (Task 2). `UnsavedChangesIndicator.tsx` and `UnsavedChangesContext.tsx` support this. E2E tests confirm modal behavior. |
+
+**Summary: 3 of 7 acceptance criteria are MISSING.**
+
+**Task Completion Validation:**
+
+| Task | Marked As | Verified As | Evidence |
+| :----------------------------------------------- | :---------- | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Task 1: Implement/Enhance Profile/CV Editing Form UI** | [x] | **QUESTIONABLE** | `Extend ProfileCVForm.tsx` and `Implement logic for Save button` are done. However, `Integrate StatefulTextbox` and `Display "Unsaved changes..." indicator` are not fully implemented. `UnsavedChangesContext` and `UnsavedChangesIndicator` are present, but the core visual feedback through `StatefulTextbox` is missing. |
+| **Task 2: Implement Frontend Logic for Hybrid Save Model** | [x] | **QUESTIONABLE** | `onBlur handlers` are present but auto-save logic commented out. `Manual Save` implemented. `Update visual state of StatefulTextbox` cannot be done without its integration. `Confirmation modal` implemented. |
+| **Task 3: Implement Backend API for Profile/CV Update** | [x] | VERIFIED COMPLETE | `PATCH /api/v1/users/me/cv` implemented. `Data stored in profiles/cv_documents`. `Server-side validation` implemented. `RLS verification documented`. `updated_at timestamps` handled. |
+| **Task 4: Implement Validation for Updates** | [x] | VERIFIED COMPLETE | `React Hook Form` validation for required fields on `onBlur`/`onSubmit`. `Inline validation errors` displayed. `Backend returns validation errors`. |
+| **Task 5: Verification** | [x] | VERIFIED COMPLETE | E2E tests outlined for all ACs (but some cannot pass due to missing functionality). API tests for `PATCH` endpoint outlined. `Playwright tests run`. `Manual RLS verification documented`. `AuthContext review advisory`. |
+
+**Summary: 2 of 5 tasks are QUESTIONABLE due to incomplete implementation of key subtasks.**
+
+**Test Coverage and Gaps:**
+-   **API Tests (`backend/tests/api/v1/test_users.py`):** Good coverage for `GET` and `PATCH` endpoints.
+    -   **Gap:** Missing tests for `POST /users/me/cv` (create endpoint), which is critical for the full profile flow and `CreateCVForm.tsx`.
+-   **E2E Tests (`tests/e2e/profile-cv.spec.ts`):** Well-structured and cover most interaction flows.
+    -   **Gap:** Cannot verify visual feedback (yellow/green borders) from `StatefulTextbox` because it's not integrated. This test will fail until the component is correctly implemented.
+
+**Architectural Alignment:**
+-   **Positive:** Uses specified frameworks (`Next.js`, `React Query`, `React Hook Form`, `FastAPI`, `Supabase`).
+-   **Positive:** Follows architectural decisions for API communication, authentication, data handling, and project structure.
+-   **Violation:** The non-integration of `StatefulTextbox` (a custom component from UX Spec Section 6.1.2) is an architectural mismatch against the agreed-upon component strategy.
+
+**Security Notes:**
+-   **Positive:** Correct use of JWT for authentication, reliance on Supabase RLS (though manual verification is required), and `user_id` scoping in API queries.
+-   **Positive:** Server-side validation helps mitigate some injection risks.
+
+**Best-Practices and References:**
+-   **Positive:** Adheres to many best practices (e.g., `React Query` for data fetching, Pydantic for schemas, FastAPI dependency injection).
+-   **Suggestion:** Implement proper Python logging instead of `print` statements in `backend/app/api/v1/users.py`.
+
+**Action Items:**
+
+**Code Changes Required:**
+-   [ ] **[High] Implement Auto-Save on Blur (AC3, AC4):** Uncomment and implement the auto-save logic within `handleBlur` in `frontend/components/EditCVForm.tsx`. This should trigger a `PATCH` request for the changed field(s).
+-   [ ] **[High] Integrate StatefulTextbox Component (AC1, AC4):** Replace standard HTML input elements (e.g., `input`, `textarea`, `select`) in `frontend/components/EditCVForm.tsx` with the `StatefulTextbox` component. Ensure `StatefulTextbox` receives appropriate props (`isDirty`, `isSaved`, `isSaving`) to render the correct border colors.
+-   [ ] **[High] Update E2E Tests for StatefulTextbox Visuals (AC1, AC4):** Add Playwright assertions to `tests/e2e/profile-cv.spec.ts` to verify the yellow border on field modification and the green border on blur/save for the relevant fields once `StatefulTextbox` is integrated.
+-   [ ] **[Medium] Standardize CV Field Naming:** Align the naming for the CV content field (`cv_content` vs `cv_full_text`) across frontend components, backend schemas (`schemas.py`), and the database model in `backend/app/api/v1/users.py`. Recommend using `cv_content` for consistency.
+-   [ ] **[Medium] Add Backend Tests for `POST /users/me/cv`:** Add comprehensive unit tests for the `create_user_profile_cv` endpoint in `backend/tests/api/v1/test_users.py`, covering successful creation, conflict (profile already exists), and validation error scenarios.
+-   [ ] **[Low] Replace `print` statements with Python `logging`:** In `backend/app/api/v1/users.py`, replace `print` statements with a structured logging solution (e.g., Python's `logging` module).
+
+**Documentation/Advisory Notes:**
+-   Note: Document the `CreateCVForm.tsx`'s error handling for existing profiles and redirection to `/cv-edit` in the `Dev Agent Record -> Completion Notes` or `Change Log` section of Story 2.4.
+-   Note: Consider integrating `StatefulTextbox` into `frontend/components/CreateCVForm.tsx` as well for architectural consistency across all form fields, or explicitly document why it's not used there if the design intent changed.
+
+## Change Log
+
+-   **2025-12-08**:
+    -   Implemented/Enhanced Profile/CV Editing Form UI (Task 1).
+    -   Implemented Frontend Logic for Hybrid Save Model (Task 2).
+    -   Implemented Backend API for Profile/CV Update (Task 3).
+    -   Implemented Validation for Updates (Task 4).
+    -   Implemented Verification (Task 5).
+-   **tirsdag 9. desember 2025**:
+    -   Senior Developer Review conducted, story status updated to BLOCKED. Detailed findings and action items appended.
 
 ### Context Reference
 - [Context: docs/sprint-artifacts/2-4-update-user-profile-cv-with-hybrid-save.context.xml]
