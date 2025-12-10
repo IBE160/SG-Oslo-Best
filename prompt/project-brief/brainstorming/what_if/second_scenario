@@ -1,0 +1,10 @@
+**What if the "CVAI Turbo" tool could suggest specific skills from the student's CV to highlight or de-emphasize based on the job application, without generating a full "report"?**
+- Having several template integrated in the solution or in the cover letter feedback.
+- Giving examples on how to write cover letters.
+- But we want to keep it easy to generate a cover letter.
+
+**What if the LLM could analyze more than just the CV and the job ad? What other data sources could it use to make the cover letter even more effective and personalized?**
+- It could ask the person personal questions to better know the person and to use in the cover letter.
+- It could ask about what tone and style the person wants in its cover letter.
+- BUT there is important to secure all the information that connects to the student.
+- Use ONLY a local LLM/AI-chatbox.

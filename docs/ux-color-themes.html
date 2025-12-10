@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVAI Turbo - Color Theme Visualizer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1600px;
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #343a40;
+        }
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .theme-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .theme-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .theme-header h3 {
+            margin: 0 0 0.5rem 0;
+        }
+        .theme-header p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .theme-body {
+            padding: 1.5rem;
+        }
+        .palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .swatch span {
+            background-color: rgba(0,0,0,0.3);
+            width: 100%;
+            padding: 2px 0;
+        }
+        .components h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #495057;
+        }
+        .component-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .input {
+            padding: 0.5rem;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .card {
+            padding: 1rem;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Theme 1: The Professional */
+        .theme-1 .palette .primary { background-color: #0052CC; }
+        .theme-1 .palette .secondary { background-color: #5E6C84; }
+        .theme-1 .palette .accent { background-color: #403294; }
+        .theme-1 .palette .success { background-color: #00875A; }
+        .theme-1 .palette .error { background-color: #DE350B; }
+        .theme-1 .palette .bg { background-color: #F4F5F7; color: #172B4D; }
+        .theme-1 .palette .text { background-color: #172B4D; }
+        .theme-1 .btn-primary { background-color: #0052CC; color: white; }
+        .theme-1 .btn-secondary { background-color: #F4F5F7; color: #172B4D; border: 1px solid #DFE1E6; }
+        .theme-1 .input { border-color: #DFE1E6; background-color: #FAFBFC; color: #172B4D; }
+        .theme-1 .input:focus { border-color: #0052CC; outline: none; box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.2); }
+        .theme-1 .card { background-color: #FFFFFF; border: 1px solid #DFE1E6; }
+        .theme-1 .alert-success { background-color: #E3FCEF; color: #006644; }
+        .theme-1 .alert-error { background-color: #FFEBE6; color: #BF2600; }
+
+        /* Theme 2: The Innovator */
+        .theme-2 .palette .primary { background-color: #6A44E5; }
+        .theme-2 .palette .secondary { background-color: #4B5563; }
+        .theme-2 .palette .accent { background-color: #EC4899; }
+        .theme-2 .palette .success { background-color: #10B981; }
+        .theme-2 .palette .error { background-color: #EF4444; }
+        .theme-2 .palette .bg { background-color: #111827; color: #F9FAFB; }
+        .theme-2 .palette .text { background-color: #F9FAFB; }
+        .theme-2 .btn-primary { background-color: #6A44E5; color: white; }
+        .theme-2 .btn-secondary { background-color: #374151; color: #F9FAFB; border: 1px solid #4B5563; }
+        .theme-2 .input { border-color: #4B5563; background-color: #1F2937; color: #F9FAFB; }
+        .theme-2 .input:focus { border-color: #6A44E5; outline: none; box-shadow: 0 0 0 2px rgba(106, 68, 229, 0.3); }
+        .theme-2 .card { background-color: #1F2937; border: 1px solid #374151; }
+        .theme-2 .alert-success { background-color: #10B98130; color: #A7F3D0; }
+        .theme-2 .alert-error { background-color: #EF444430; color: #FCA5A5; }
+        .theme-2.theme-card, .theme-2 .theme-header, .theme-2 .theme-body { background-color: #111827; color: #F9FAFB; border-color: #374151;}
+        .theme-2 h3, .theme-2 h4, .theme-2 p { color: #F9FAFB; }
+
+        /* Theme 3: The Mentor */
+        .theme-3 .palette .primary { background-color: #287D3C; }
+        .theme-3 .palette .secondary { background-color: #7A7A7A; }
+        .theme-3 .palette .accent { background-color: #D97706; }
+        .theme-3 .palette .success { background-color: #287D3C; }
+        .theme-3 .palette .error { background-color: #B91C1C; }
+        .theme-3 .palette .bg { background-color: #FDFBF7; color: #3D3D3D; }
+        .theme-3 .palette .text { background-color: #3D3D3D; }
+        .theme-3 .btn-primary { background-color: #287D3C; color: white; }
+        .theme-3 .btn-secondary { background-color: #F3F4F6; color: #3D3D3D; border: 1px solid #E5E7EB; }
+        .theme-3 .input { border-color: #D1D5DB; background-color: #FFFFFF; color: #3D3D3D; }
+        .theme-3 .input:focus { border-color: #287D3C; outline: none; box-shadow: 0 0 0 2px rgba(40, 125, 60, 0.2); }
+        .theme-3 .card { background-color: #FFFFFF; border: 1px solid #E5E7EB; }
+        .theme-3 .alert-success { background-color: #D1FAE5; color: #065F46; }
+        .theme-3 .alert-error { background-color: #FEE2E2; color: #991B1B; }
+
+        /* Theme 4: The Minimalist */
+        .theme-4 .palette .primary { background-color: #171717; }
+        .theme-4 .palette .secondary { background-color: #A1A1AA; }
+        .theme-4 .palette .accent { background-color: #4f46e5; }
+        .theme-4 .palette .success { background-color: #16A34A; }
+        .theme-4 .palette .error { background-color: #DC2626; }
+        .theme-4 .palette .bg { background-color: #FFFFFF; color: #171717; }
+        .theme-4 .palette .text { background-color: #171717; }
+        .theme-4 .btn-primary { background-color: #171717; color: white; }
+        .theme-4 .btn-secondary { background-color: #F1F1F1; color: #171717; border: 1px solid #E5E5E5; }
+        .theme-4 .input { border-color: #E5E5E5; background-color: #FFFFFF; color: #171717; }
+        .theme-4 .input:focus { border-color: #171717; outline: none; box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.2); }
+        .theme-4 .card { background-color: #FFFFFF; border: 1px solid #E5E5E5; }
+        .theme-4 .alert-success { background-color: #F0FDF4; color: #15803D; }
+        .theme-4 .alert-error { background-color: #FEF2F2; color: #B91C1C; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Color Theme Visualizer</h1>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">I've created 4 theme options based on your project's personality. Explore the palettes and live components below. Which theme FEELS right for your vision of making users feel **efficient, productive, connected, and engaged**?</p>
+
+        <div class="theme-grid">
+            <!-- Theme 1: The Professional -->
+            <div class="theme-card theme-1">
+                <div class="theme-header">
+                    <h3>1. The Professional</h3>
+                    <p>Builds trust and feels reliable. A classic, clean choice for a productive tool.</p>
+                </div>
+                <div class="theme-body">
+                    <div class="palette">
+                        <div class="swatch primary"><span>#0052CC</span></div>
+                        <div class="swatch secondary"><span>#5E6C84</span></div>
+                        <div class="swatch accent"><span>#403294</span></div>
+                        <div class="swatch success"><span>#00875A</span></div>
+                        <div class="swatch error"><span>#DE350B</span></div>
+                        <div class="swatch bg"><span>#F4F5F7</span></div>
+                        <div class="swatch text"><span>#172B4D</span></div>
+                    </div>
+                    <div class="components">
+                        <h4>Components</h4>
+                        <div class="component-group">
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-primary btn-disabled">Disabled</button>
+                        </div>
+                        <div class="component-group">
+                            <input type="text" class="input" placeholder="Form input...">
+                        </div>
+                        <div class="component-group">
+                            <div class="card">Card with content</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-success">Success message!</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-error">Error message!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theme 2: The Innovator -->
+            <div class="theme-card theme-2">
+                <div class="theme-header">
+                    <h3>2. The Innovator</h3>
+                    <p>Modern, engaging, and tech-forward. A dark mode theme that feels innovative.</p>
+                </div>
+                <div class="theme-body">
+                    <div class="palette">
+                        <div class="swatch primary"><span>#6A44E5</span></div>
+                        <div class="swatch secondary"><span>#4B5563</span></div>
+                        <div class="swatch accent"><span>#EC4899</span></div>
+                        <div class="swatch success"><span>#10B981</span></div>
+                        <div class="swatch error"><span>#EF4444</span></div>
+                        <div class="swatch bg"><span>#111827</span></div>
+                        <div class="swatch text"><span>#F9FAFB</span></div>
+                    </div>
+                    <div class="components">
+                        <h4>Components</h4>
+                        <div class="component-group">
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-primary btn-disabled">Disabled</button>
+                        </div>
+                        <div class="component-group">
+                            <input type="text" class="input" placeholder="Form input...">
+                        </div>
+                        <div class="component-group">
+                            <div class="card">Card with content</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-success">Success message!</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-error">Error message!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theme 3: The Mentor -->
+            <div class="theme-card theme-3">
+                <div class="theme-header">
+                    <h3>3. The Mentor</h3>
+                    <p>Calm, supportive, and encouraging. Uses natural tones to create a friendly vibe.</p>
+                </div>
+                <div class="theme-body">
+                    <div class="palette">
+                        <div class="swatch primary"><span>#287D3C</span></div>
+                        <div class="swatch secondary"><span>#7A7A7A</span></div>
+                        <div class="swatch accent"><span>#D97706</span></div>
+                        <div class="swatch success"><span>#287D3C</span></div>
+                        <div class="swatch error"><span>#B91C1C</span></div>
+                        <div class="swatch bg"><span>#FDFBF7</span></div>
+                        <div class="swatch text"><span>#3D3D3D</span></div>
+                    </div>
+                    <div classs="components">
+                        <h4>Components</h4>
+                        <div class="component-group">
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-primary btn-disabled">Disabled</button>
+                        </div>
+                        <div class="component-group">
+                            <input type="text" class="input" placeholder="Form input...">
+                        </div>
+                        <div class="component-group">
+                            <div class="card">Card with content</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-success">Success message!</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-error">Error message!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theme 4: The Minimalist -->
+            <div class="theme-card theme-4">
+                <div class="theme-header">
+                    <h3>4. The Minimalist</h3>
+                    <p>Clean, focused, and simple. Relies on typography and spacing for a modern feel.</p>
+                </div>
+                <div class="theme-body">
+                    <div class="palette">
+                        <div class="swatch primary"><span>#171717</span></div>
+                        <div class="swatch secondary"><span>#A1A1AA</span></div>
+                        <div class="swatch accent"><span>#4f46e5</span></div>
+                        <div class="swatch success"><span>#16A34A</span></div>
+                        <div class="swatch error"><span>#DC2626</span></div>
+                        <div class="swatch bg"><span>#FFFFFF</span></div>
+                        <div class="swatch text"><span>#171717</span></div>
+                    </div>
+                    <div class="components">
+                        <h4>Components</h4>
+                        <div class="component-group">
+                            <button class="btn btn-primary">Primary</button>
+                            <button class="btn btn-secondary">Secondary</button>
+                            <button class="btn btn-primary btn-disabled">Disabled</button>
+                        </div>
+                        <div class="component-group">
+                            <input type="text" class="input" placeholder="Form input...">
+                        </div>
+                        <div class="component-group">
+                            <div class="card">Card with content</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-success">Success message!</div>
+                        </div>
+                        <div class="component-group">
+                            <div class="alert alert-error">Error message!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

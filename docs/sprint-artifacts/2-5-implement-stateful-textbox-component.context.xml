@@ -1,0 +1,106 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>5</storyId>
+    <title>Implement Stateful Textbox Component</title>
+    <status>drafted</status>
+    <generatedAt>tirsdag 9. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-5-implement-stateful-textbox-component.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>As a developer</asA>
+    <iWant>I want to create a "Stateful Textbox" component</iWant>
+    <soThat>so that users receive immediate visual feedback (e.g., colored borders) on the auto-save status of their CV information.</soThat>
+    <tasks>
+- [ ] **Task 1: Create the StatefulTextbox Component** (AC: #1, #2, #3, #4, #5)
+    - [ ] **Frontend:** Create a new reusable component file at `frontend/components/ui/StatefulTextbox.tsx`.
+    - [ ] **Frontend:** Implement the component to wrap a standard Shadcn/UI `Input` or `Textarea`.
+    - [ ] **Frontend:** Use Tailwind CSS classes to dynamically change the border color based on the props (`isDirty`, `isSaved`).
+    - [ ] **Frontend:** Ensure the component forwards all standard input props (like `onChange`, `onBlur`, `value`, `name`) to the underlying input element.
+
+- [ ] **Task 2: Create a Storybook Story for the Component** (AC: #1, #6)
+    - [ ] **Frontend:** Create a new Storybook file `frontend/components/ui/StatefulTextbox.stories.tsx`.
+    - [ ] **Frontend:** Create stories to demonstrate the component in its various states (default, unsaved, saved).
+    - [ ] **Frontend:** Create a story demonstrating the integration with `React Hook Form` to show how its state can be driven by the form's state.
+
+- [ ] **Task 3: Verification**
+    - [ ] **Testing:** Write unit tests for the `StatefulTextbox` component to verify that the correct classes are applied for each state.
+    - [ ] **Testing:** Manually verify the Storybook stories to ensure the component behaves as expected visually and with `React Hook Form`.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1. Given a standard textarea or input field, when it is wrapped in the Stateful Textbox component, then it visually changes its appearance based on its state (default, unsaved, saved).
+2. The component must accept props to control its visual state (e.g., `isDirty`, `isSaved`, `isSaving`).
+3. The border color of the component must be neutral by default.
+4. The border color must turn yellow when the state is "unsaved" (`isDirty`).
+5. The border color must turn green when the state is "saved" (`isSaved`).
+6. The component correctly reflects the field's state as managed by the parent form (React Hook Form).
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="docs/sprint-artifacts/2-4-update-user-profile-cv-with-hybrid-save.md" title="Previous Story (Blocker)" section="Senior Developer Review (AI)">
+        <snippet>
+          [High] Integrate StatefulTextbox Component (AC1, AC4): Replace standard HTML input elements...with the StatefulTextbox component. Ensure StatefulTextbox receives appropriate props (isDirty, isSaved, isSaving) to render the correct border colors.
+        </snippet>
+      </doc>
+      <doc path="docs/ux-design-specification.md" title="UX Design Specification" section="6.1.2 Custom Components">
+        <snippet>
+          **1. Stateful Textbox:** To provide clear, immediate feedback on the auto-save status of a field... When the user types or modifies text, the component's border will turn yellow. After the user clicks the manual "Save" button, the border of all modified textboxes will turn green.
+        </snippet>
+      </doc>
+      <doc path="docs/architecture.md" title="Architecture" section="Project Structure">
+        <snippet>
+          /frontend/components/ui/ # Unstyled components from Shadcn
+        </snippet>
+      </doc>
+      <doc path="docs/epics.md" title="Epics &amp; Stories" section="New Story 2.5: Implement Stateful Textbox Component">
+        <snippet>
+          As a developer, I want to create a "Stateful Textbox" component, so that users receive immediate visual feedback (e.g., colored borders) on the auto-save status of their CV information.
+        </snippet>
+      </doc>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-2.md" title="Epic 2 Technical Specification" section="Objectives and Scope">
+        <snippet>
+          Creation of a reusable "Stateful Textbox" component to provide visual feedback on the save status of form fields.
+        </snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact path="frontend/components/ui/StatefulTextbox.tsx" kind="component" symbol="StatefulTextbox" lines="TBD" reason="Primary file to be created for the component implementation."/>
+      <artifact path="frontend/components/ui/StatefulTextbox.stories.tsx" kind="storybook" symbol="StatefulTextboxStories" lines="TBD" reason="Storybook file to visually test the component's states."/>
+    </code>
+    <dependencies>
+      <dependency name="react" version="19.2.0" reason="Core frontend library."/>
+      <dependency name="tailwindcss" version="^4" reason="For styling the component."/>
+      <dependency name="shadcn-ui" version="N/A" reason="The component will wrap a standard Shadcn/UI Input or Textarea."/>
+      <dependency name="react-hook-form" version="^7.68.0" reason="The component's state (isDirty, isSaved) will be driven by this form library."/>
+      <dependency name="storybook" version="N/A" reason="Required for Task 2, but not currently in package.json. Will need to be installed."/>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Component must be designed to be controlled by a parent form, specifically React Hook Form.</constraint>
+    <constraint>Must accept props like `isDirty`, `isSaved`, `isSaving` to control its visual state.</constraint>
+    <constraint>The implementation must be sufficient to unblock Story 2.4, as detailed in its Senior Developer Review.</constraint>
+  </constraints>
+  <interfaces>
+    <interface name="StatefulTextboxProps" kind="React Props" signature="interface StatefulTextboxProps extends React.InputHTMLAttributes<HTMLInputElement> { isDirty?: boolean; isSaved?: boolean; isSaving?: boolean; }" path="frontend/components/ui/StatefulTextbox.tsx"/>
+  </interfaces>
+  <tests>
+    <standards>
+      Unit tests should be created with Jest/RTL. Component stories should be created in Storybook for visual regression and interactive testing.
+    </standards>
+    <locations>
+      <location>Unit tests: `frontend/components/ui/__tests__/StatefulTextbox.test.tsx`</location>
+      <location>Storybook: `frontend/components/ui/StatefulTextbox.stories.tsx`</location>
+    </locations>
+    <ideas>
+      <idea for="AC: #1, #3, #4, #5">Unit test: Write tests that pass state props (`isDirty`, `isSaved`) and assert that the component renders with the correct Tailwind CSS classes for border colors.</idea>
+      <idea for="AC: #1, #6">Storybook: Create stories for each visual state (default, unsaved, saved).</idea>
+      <idea for="AC: #6">Storybook: Create a story that demonstrates integration with React Hook Form, showing how the component's appearance changes as the form's state changes.</idea>
+    </ideas>
+  </tests>
+</story-context>

@@ -1,0 +1,884 @@
+<testsuites id="" name="" tests="18" failures="18" skipped="0" errors="0" time="127.07308400000001">
+<testsuite name="profile-cv.spec.ts" timestamp="2025-12-10T12:07:25.445Z" hostname="chromium" tests="6" failures="6" skipped="0" time="171.694" errors="0">
+<testcase name="Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard" classname="profile-cv.spec.ts" time="24.73">
+<failure message="profile-cv.spec.ts:100:9 should allow a new user to create profile and CV, then redirect to dashboard" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:100:9 › Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('registration-submit-button')
+        - locator resolved to <button data-slot="button" data-testid="registration-submit-button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border…>Create Account</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <nextjs-portal></nextjs-portal> from <script data-nextjs-dev-overlay="true">…</script> subtree intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <nextjs-portal></nextjs-portal> from <script data-nextjs-dev-overlay="true">…</script> subtree intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        20 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <nextjs-portal></nextjs-portal> from <script data-nextjs-dev-overlay="true">…</script> subtree intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      113 |         await page.getByTestId('password-input').fill('Password123!');
+      114 |         await page.getByTestId('confirm-password-input').fill('Password123!');
+    > 115 |         await page.getByTestId('registration-submit-button').click();
+          |                                                              ^
+      116 |         
+      117 |         // Expect success message
+      118 |         await expect(page.getByText('Registration successful')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:115:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Creation › should display validation errors for mandatory fields during creation" classname="profile-cv.spec.ts" time="32.88">
+<failure message="profile-cv.spec.ts:138:9 should display validation errors for mandatory fields during creation" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:138:9 › Profile and CV Creation › should display validation errors for mandatory fields during creation 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('submit-button')
+
+
+      138 |     test('should display validation errors for mandatory fields during creation', async ({ page }) => {
+      139 |         await page.goto('/cv-creation'); 
+    > 140 |         await page.getByTestId('submit-button').click(); 
+          |                                                 ^
+      141 |
+      142 |         await expect(page.getByText('Full Name is required')).toBeVisible();
+      143 |         await expect(page.getByText('Date of Birth is required')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:140:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show unsaved changes indicator and enable save button on modification" classname="profile-cv.spec.ts" time="30.739">
+<failure message="profile-cv.spec.ts:157:9 should show unsaved changes indicator and enable save button on modification" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:157:9 › Profile and CV Update › should show unsaved changes indicator and enable save button on modification 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByTestId('fullName-input')
+    Expected: "Existing User"
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 15000ms
+      - waiting for getByTestId('fullName-input')
+
+
+      156 |
+      157 |     test('should show unsaved changes indicator and enable save button on modification', async ({ page }) => {
+    > 158 |         await expect(page.getByTestId('fullName-input')).toHaveValue('Existing User');
+          |                                                          ^
+      159 |
+      160 |         await expect(page.getByTestId('submit-button')).toBeDisabled();
+      161 |         
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:158:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should auto-save changes on blur" classname="profile-cv.spec.ts" time="28.118">
+<failure message="profile-cv.spec.ts:169:9 should auto-save changes on blur" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:169:9 › Profile and CV Update › should auto-save changes on blur ─
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      168 |
+      169 |     test('should auto-save changes on blur', async ({ page }) => {
+    > 170 |         await page.getByTestId('fullName-input').fill('Auto Save Name');
+          |                                                  ^
+      171 |         
+      172 |         // Click body to blur
+      173 |         await page.locator('body').click(); 
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:170:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should display validation errors for mandatory fields during update" classname="profile-cv.spec.ts" time="28.205">
+<failure message="profile-cv.spec.ts:179:9 should display validation errors for mandatory fields during update" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:179:9 › Profile and CV Update › should display validation errors for mandatory fields during update 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      178 |
+      179 |     test('should display validation errors for mandatory fields during update', async ({ page }) => {
+    > 180 |         await page.getByTestId('fullName-input').fill('');
+          |                                                  ^
+      181 |         await page.getByTestId('fullName-input').blur();
+      182 |
+      183 |         await expect(page.getByText('Full Name is required')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:180:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show confirmation modal when navigating away with unsaved changes" classname="profile-cv.spec.ts" time="27.022">
+<failure message="profile-cv.spec.ts:187:9 should show confirmation modal when navigating away with unsaved changes" type="FAILURE">
+<![CDATA[  [chromium] › profile-cv.spec.ts:187:9 › Profile and CV Update › should show confirmation modal when navigating away with unsaved changes 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      186 |
+      187 |     test('should show confirmation modal when navigating away with unsaved changes', async ({ page }) => {
+    > 188 |         await page.getByTestId('fullName-input').fill('Changed Name');
+          |                                                  ^
+      189 |         await expect(page.getByText('Unsaved changes...')).toBeVisible();
+      190 |
+      191 |         // Try to go to dashboard
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:188:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-chromium\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="profile-cv.spec.ts" timestamp="2025-12-10T12:07:25.445Z" hostname="firefox" tests="6" failures="6" skipped="0" time="276.565" errors="0">
+<testcase name="Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard" classname="profile-cv.spec.ts" time="58.583">
+<failure message="profile-cv.spec.ts:100:9 should allow a new user to create profile and CV, then redirect to dashboard" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:100:9 › Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('signup-link')
+
+
+      108 |         // If the app redirects to login immediately, we might need to be careful
+      109 |         // but typically 'signup-link' is on the login page.
+    > 110 |         await page.getByTestId('signup-link').click();
+          |                                               ^
+      111 |         
+      112 |         await page.getByTestId('email-input').fill(faker.internet.email());
+      113 |         await page.getByTestId('password-input').fill('Password123!');
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:110:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Creation › should display validation errors for mandatory fields during creation" classname="profile-cv.spec.ts" time="60.16">
+<failure message="profile-cv.spec.ts:138:9 should display validation errors for mandatory fields during creation" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:138:9 › Profile and CV Creation › should display validation errors for mandatory fields during creation 
+
+    Test timeout of 60000ms exceeded while setting up "page".
+
+    Error: browserContext.newPage: Test timeout of 60000ms exceeded.
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show unsaved changes indicator and enable save button on modification" classname="profile-cv.spec.ts" time="60.133">
+<failure message="profile-cv.spec.ts:157:9 should show unsaved changes indicator and enable save button on modification" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:157:9 › Profile and CV Update › should show unsaved changes indicator and enable save button on modification 
+
+    Test timeout of 60000ms exceeded while running "beforeEach" hook.
+
+      147 | test.describe('Profile and CV Update', () => {
+      148 |     
+    > 149 |     test.beforeEach(async ({ page }) => {
+          |          ^
+      150 |         await mockAuth(page);
+      151 |         await mockExistingProfile(page); 
+      152 |
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:149:10
+
+    Error: browserContext.newPage: Test timeout of 60000ms exceeded.
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should auto-save changes on blur" classname="profile-cv.spec.ts" time="36.934">
+<failure message="profile-cv.spec.ts:169:9 should auto-save changes on blur" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:169:9 › Profile and CV Update › should auto-save changes on blur ──
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      168 |
+      169 |     test('should auto-save changes on blur', async ({ page }) => {
+    > 170 |         await page.getByTestId('fullName-input').fill('Auto Save Name');
+          |                                                  ^
+      171 |         
+      172 |         // Click body to blur
+      173 |         await page.locator('body').click(); 
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:170:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should display validation errors for mandatory fields during update" classname="profile-cv.spec.ts" time="24.411">
+<failure message="profile-cv.spec.ts:179:9 should display validation errors for mandatory fields during update" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:179:9 › Profile and CV Update › should display validation errors for mandatory fields during update 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      178 |
+      179 |     test('should display validation errors for mandatory fields during update', async ({ page }) => {
+    > 180 |         await page.getByTestId('fullName-input').fill('');
+          |                                                  ^
+      181 |         await page.getByTestId('fullName-input').blur();
+      182 |
+      183 |         await expect(page.getByText('Full Name is required')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:180:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show confirmation modal when navigating away with unsaved changes" classname="profile-cv.spec.ts" time="36.344">
+<failure message="profile-cv.spec.ts:187:9 should show confirmation modal when navigating away with unsaved changes" type="FAILURE">
+<![CDATA[  [firefox] › profile-cv.spec.ts:187:9 › Profile and CV Update › should show confirmation modal when navigating away with unsaved changes 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      186 |
+      187 |     test('should show confirmation modal when navigating away with unsaved changes', async ({ page }) => {
+    > 188 |         await page.getByTestId('fullName-input').fill('Changed Name');
+          |                                                  ^
+      189 |         await expect(page.getByText('Unsaved changes...')).toBeVisible();
+      190 |
+      191 |         // Try to go to dashboard
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:188:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-firefox\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="profile-cv.spec.ts" timestamp="2025-12-10T12:07:25.445Z" hostname="webkit" tests="6" failures="6" skipped="0" time="107.277" errors="0">
+<testcase name="Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard" classname="profile-cv.spec.ts" time="18.016">
+<failure message="profile-cv.spec.ts:100:9 should allow a new user to create profile and CV, then redirect to dashboard" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:100:9 › Profile and CV Creation › should allow a new user to create profile and CV, then redirect to dashboard 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('signup-link')
+
+
+      108 |         // If the app redirects to login immediately, we might need to be careful
+      109 |         // but typically 'signup-link' is on the login page.
+    > 110 |         await page.getByTestId('signup-link').click();
+          |                                               ^
+      111 |         
+      112 |         await page.getByTestId('email-input').fill(faker.internet.email());
+      113 |         await page.getByTestId('password-input').fill('Password123!');
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:110:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--b2628--then-redirect-to-dashboard-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Creation › should display validation errors for mandatory fields during creation" classname="profile-cv.spec.ts" time="18.209">
+<failure message="profile-cv.spec.ts:138:9 should display validation errors for mandatory fields during creation" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:138:9 › Profile and CV Creation › should display validation errors for mandatory fields during creation 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('submit-button')
+
+
+      138 |     test('should display validation errors for mandatory fields during creation', async ({ page }) => {
+      139 |         await page.goto('/cv-creation'); 
+    > 140 |         await page.getByTestId('submit-button').click(); 
+          |                                                 ^
+      141 |
+      142 |         await expect(page.getByText('Full Name is required')).toBeVisible();
+      143 |         await expect(page.getByText('Date of Birth is required')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:140:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--bada4-tory-fields-during-creation-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show unsaved changes indicator and enable save button on modification" classname="profile-cv.spec.ts" time="19.231">
+<failure message="profile-cv.spec.ts:157:9 should show unsaved changes indicator and enable save button on modification" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:157:9 › Profile and CV Update › should show unsaved changes indicator and enable save button on modification 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByTestId('fullName-input')
+    Expected: "Existing User"
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 15000ms
+      - waiting for getByTestId('fullName-input')
+
+
+      156 |
+      157 |     test('should show unsaved changes indicator and enable save button on modification', async ({ page }) => {
+    > 158 |         await expect(page.getByTestId('fullName-input')).toHaveValue('Existing User');
+          |                                                          ^
+      159 |
+      160 |         await expect(page.getByTestId('submit-button')).toBeDisabled();
+      161 |         
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:158:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--23f30-save-button-on-modification-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should auto-save changes on blur" classname="profile-cv.spec.ts" time="17.675">
+<failure message="profile-cv.spec.ts:169:9 should auto-save changes on blur" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:169:9 › Profile and CV Update › should auto-save changes on blur ───
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      168 |
+      169 |     test('should auto-save changes on blur', async ({ page }) => {
+    > 170 |         await page.getByTestId('fullName-input').fill('Auto Save Name');
+          |                                                  ^
+      171 |         
+      172 |         // Click body to blur
+      173 |         await page.locator('body').click(); 
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:170:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--33ad0-d-auto-save-changes-on-blur-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should display validation errors for mandatory fields during update" classname="profile-cv.spec.ts" time="17.137">
+<failure message="profile-cv.spec.ts:179:9 should display validation errors for mandatory fields during update" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:179:9 › Profile and CV Update › should display validation errors for mandatory fields during update 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      178 |
+      179 |     test('should display validation errors for mandatory fields during update', async ({ page }) => {
+    > 180 |         await page.getByTestId('fullName-input').fill('');
+          |                                                  ^
+      181 |         await page.getByTestId('fullName-input').blur();
+      182 |
+      183 |         await expect(page.getByText('Full Name is required')).toBeVisible();
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:180:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--5a238-datory-fields-during-update-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Profile and CV Update › should show confirmation modal when navigating away with unsaved changes" classname="profile-cv.spec.ts" time="17.009">
+<failure message="profile-cv.spec.ts:187:9 should show confirmation modal when navigating away with unsaved changes" type="FAILURE">
+<![CDATA[  [webkit] › profile-cv.spec.ts:187:9 › Profile and CV Update › should show confirmation modal when navigating away with unsaved changes 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByTestId('fullName-input')
+
+
+      186 |
+      187 |     test('should show confirmation modal when navigating away with unsaved changes', async ({ page }) => {
+    > 188 |         await page.getByTestId('fullName-input').fill('Changed Name');
+          |                                                  ^
+      189 |         await expect(page.getByText('Unsaved changes...')).toBeVisible();
+      190 |
+      191 |         // Try to go to dashboard
+        at C:\Users\AbdullahM\Downloads\SG-Oslo-Best-fase-4-continue\tests\e2e\profile-cv.spec.ts:188:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\test-failed-1.png]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\video.webm]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\error-context.md]]
+
+[[ATTACHMENT|profile-cv-Profile-and-CV--4bca1-g-away-with-unsaved-changes-webkit\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
