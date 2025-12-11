@@ -1,11 +1,12 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useUnsavedChanges } from '@/context/UnsavedChangesContext';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigationBlocker } from '@/hooks/useNavigationBlocker';
-import { StatefulTextbox } from './ui/StatefulTextbox';
+// FIKSET HER: La til krøllparenteser { } for named import
+import { StatefulTextbox } from './ui/StatefulTextbox'; 
 
 interface UserProfile {
   id: string;
@@ -169,8 +170,6 @@ const EditCVForm: React.FC = () => {
 
   const [fieldStatus, setFieldStatus] = useState<Record<string, 'dirty' | 'saving' | 'saved'>>({});
 
-  // ... inside the component ...
-
   const autoSaveMutation = useMutation({
     mutationFn: (fieldData: { fieldName: keyof ProfileCVFormInputs; value: any }) => {
       const payload = { [fieldData.fieldName]: fieldData.value };
@@ -184,7 +183,6 @@ const EditCVForm: React.FC = () => {
       setFieldStatus(prev => ({ ...prev, [variables.fieldName]: 'saved' }));
     },
     onError: (error, variables) => {
-      // Revert to dirty on error, or handle more gracefully
       setFieldStatus(prev => ({ ...prev, [variables.fieldName]: 'dirty' }));
     },
   });
@@ -221,10 +219,6 @@ const EditCVForm: React.FC = () => {
         </div>
       )}
 
-import { StatefulTextbox } from './ui/StatefulTextbox';
-
-// ... inside the EditCVForm component ...
-
       {/* Profile Fields */}
       <div>
         <label htmlFor="full_name" className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -256,11 +250,9 @@ import { StatefulTextbox } from './ui/StatefulTextbox';
 
       <div>
         <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
-        <StatefulTextbox
-          as="select"
+        <select
           id="gender"
           {...register('gender', { required: 'Gender is required' })}
-          status={fieldStatus.gender}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           data-testid="gender-select"
           disabled={updateMutation.isPending}
@@ -270,7 +262,7 @@ import { StatefulTextbox } from './ui/StatefulTextbox';
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
-        </StatefulTextbox>
+        </select>
         {errors.gender && <p className="mt-1 text-sm text-red-600">{errors.gender.message}</p>}
       </div>
 
@@ -305,12 +297,12 @@ import { StatefulTextbox } from './ui/StatefulTextbox';
         {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>}
       </div>
 
-      <div>
+<div>
         <label htmlFor="cv_content" className="block text-sm font-medium text-gray-700">CV Content</label>
         <StatefulTextbox
           as="textarea"
           id="cv_content"
-          
+          className="min-h-[250px]"
           {...register('cv_content', { required: 'CV Content is required' })}
           status={fieldStatus.cv_content}
           data-testid="cvContent-textarea"
