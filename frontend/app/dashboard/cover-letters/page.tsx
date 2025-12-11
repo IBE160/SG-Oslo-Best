@@ -1,41 +1,26 @@
 "use client";
 
 import { useState } from 'react';
-export const metadata = {
-  title: "Saved Cover Letters",
-};
-
 import { useQuery } from '@tanstack/react-query';
-export const metadata = {
-  title: "Saved Cover Letters",
-};
+import styles from './CoverLettersPage.module.css';
 
-import { supabase } from '@/lib/supabase-client';
 export const metadata = {
   title: "Saved Cover Letters",
 };
- // keep this – correct
 
 type CoverLetter = {
   id: string;
+  title: string;
+  saved_at: string;
   content: string;
-  created_at: string;
-  job_application_id: string;
 };
 
-// ❌ REMOVE THIS:
-// const supabase = createClient();
-
 async function fetchCoverLetters(): Promise<CoverLetter[]> {
-  const { data, error } = await supabase
-    .from('cover_letters')
-    .select('*');
-
-  if (error) {
-    throw new Error(error.message);
+  const response = await fetch('/api/v1/cover-letters');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
   }
-
-  return data ?? [];
+  return response.json();
 }
 
 export default function CoverLettersPage() {
@@ -58,30 +43,25 @@ export default function CoverLettersPage() {
     <div>
       <h1>My Cover Letters</h1>
 
-      <div data-testid="cover-letter-list">
+      <div data-testid="cover-letter-list" className={styles.coverLetterList}>
         {coverLetters?.map((letter) => (
           <div
             key={letter.id}
             data-testid="cover-letter-item"
             onClick={() => setSelectedLetter(letter)}
-            style={{
-              cursor: 'pointer',
-              border: '1px solid #ccc',
-              margin: '8px',
-              padding: '8px'
-            }}
+            className={styles.coverLetterItem}
           >
-            <p><strong>Job Application ID:</strong> {letter.job_application_id}</p>
-            <p><strong>Saved:</strong> {new Date(letter.created_at).toLocaleDateString()}</p>
+            <p><strong>{letter.title}</strong></p>
+            <p><strong>Saved:</strong> {new Date(letter.saved_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
             <p>{letter.content.substring(0, 100)}...</p>
           </div>
         ))}
       </div>
 
       {selectedLetter && (
-        <div style={{ marginTop: '16px', border: '1px solid #333', padding: '16px' }}>
-          <h2>Selected Cover Letter</h2>
-          <div data-testid="cover-letter-content">
+        <div className={styles.selectedLetter}>
+          <h2>{selectedLetter.title}</h2>
+          <div data-testid="cover-letter-content" className={styles.coverLetterContent}>
             <p>{selectedLetter.content}</p>
           </div>
         </div>
@@ -89,4 +69,3 @@ export default function CoverLettersPage() {
     </div>
   );
 }
-

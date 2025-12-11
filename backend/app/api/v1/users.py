@@ -11,7 +11,6 @@ from supabase import Client
 from .schemas import (
     UserProfileCreate,
     UserProfileResponse,
-    CVUpdate,
     UserProfileUpdate,
 )
 from ...core.dependencies import get_current_user_id, get_db

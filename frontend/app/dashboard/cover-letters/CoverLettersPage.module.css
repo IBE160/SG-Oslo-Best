@@ -1,0 +1,27 @@
+.coverLetterList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.coverLetterItem {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.coverLetterItem:hover {
+  background-color: #f0f0f0;
+}
+
+.selectedLetter {
+  margin-top: 1rem;
+  border: 1px solid #333;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.coverLetterContent {
+  white-space: pre-wrap;
+}

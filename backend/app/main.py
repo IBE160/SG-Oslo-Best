@@ -9,6 +9,7 @@ from .api.v1 import job_applications as job_applications_router
 from .api.v1 import generation as generation_router
 from .api.v1 import cover_letters as cover_letters_router
 from .core.dependencies import get_db
+from .core.config import settings
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -56,7 +57,7 @@ async def startup_event():
         supabase.table("job_applications").select("id").limit(1).execute()
         logger.info("Supabase connection successful.")
     except Exception as e:
-        logger.error("Supabase connection failed: %s", e, exc_info=True)
+        logger.error(f"Supabase connection failed for URL: {settings.SUPABASE_URL}. Error: {e}", exc_info=True)
 
 
 @app.get("/")

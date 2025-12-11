@@ -1,72 +1,70 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
-interface Session {
+// 🔑 Dette er akkurat det vi lagrer fra /auth/v1/token
+export interface SessionData {
   access_token: string;
   refresh_token: string;
 }
 
 interface AuthContextType {
-  session: Session | null;
-  login: (sessionData: Session) => void;
-  logout: () => void;
+  session: SessionData | null;
   isLoading: boolean;
+  login: (session: SessionData) => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<SessionData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
+  // ⬇️ Henter session fra localStorage når appen starter
   useEffect(() => {
-    // Try to load session from local storage on initial load
     try {
-      const storedSession = localStorage.getItem('session');
-      if (storedSession) {
-        setSession(JSON.parse(storedSession));
+      const stored = localStorage.getItem("session");
+      if (stored) {
+        const parsed = JSON.parse(stored) as SessionData;
+        if (parsed.access_token) {
+          setSession(parsed);
+        }
       }
-    } catch (error) {
-      console.error("Failed to parse session from localStorage", error);
-      localStorage.removeItem('session');
+    } catch (e) {
+      console.error("Failed to read session from localStorage", e);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  const login = (sessionData: Session) => {
-    setSession(sessionData);
-    try {
-      localStorage.setItem('session', JSON.stringify(sessionData));
-    } catch (error) {
-      console.error("Failed to save session to localStorage", error);
-    }
+  const login = (s: SessionData) => {
+    setSession(s);
+    localStorage.setItem("session", JSON.stringify(s));
   };
 
   const logout = () => {
     setSession(null);
-    try {
-      localStorage.removeItem('session');
-      router.push('/login'); // Or your auth page
-    } catch (error) {
-      console.error("Failed to remove session from localStorage", error);
-    }
+    localStorage.removeItem("session");
   };
 
   return (
-    <AuthContext.Provider value={{ session, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ session, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("useAuth must be used inside <AuthProvider>");
   }
-  return context;
+  return ctx;
 }

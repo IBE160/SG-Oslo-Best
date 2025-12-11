@@ -1,48 +1,36 @@
-import React, { forwardRef } from 'react';
+// frontend/components/ui/StatefulTextbox.tsx
+import React from 'react';
+import { cn } from '@/lib/utils';
 
-interface StatefulTextboxProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-  label?: string;
-  status?: 'dirty' | 'saving' | 'saved' | 'clean';
-  as?: 'input' | 'textarea'; // Lar oss bruke den som textarea også
+type SaveState = 'default' | 'unsaved' | 'saving' | 'saved';
+
+interface StatefulTextboxProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  saveState: SaveState;
 }
 
-export const StatefulTextbox = forwardRef<HTMLInputElement | HTMLTextAreaElement, StatefulTextboxProps>(
-  ({ label, status, className = '', as = 'input', ...rest }, ref) => {
-    
-    // Bestem kantfarge basert på status
-    let borderColor = 'border-gray-300';
-    if (status === 'dirty') borderColor = 'border-yellow-500';
-    if (status === 'saving') borderColor = 'border-blue-500';
-    if (status === 'saved') borderColor = 'border-green-500';
-
-    const baseClasses = "block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm";
-    const combinedClasses = `${baseClasses} ${borderColor}`;
+const StatefulTextbox = React.forwardRef<HTMLTextAreaElement, StatefulTextboxProps>(
+  ({ className, saveState, ...props }, ref) => {
+    const stateClasses = {
+      default: 'border-gray-300 focus:border-blue-500',
+      unsaved: 'border-yellow-500 focus:border-yellow-600',
+      saving: 'border-blue-500 focus:border-blue-600 animate-pulse',
+      saved: 'border-green-500 focus:border-green-600',
+    };
 
     return (
-      <div className="w-full">
-        {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
-        
-        {as === 'textarea' ? (
-          <textarea
-            ref={ref as any}
-            className={combinedClasses}
-            {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          />
-        ) : (
-          <input
-            ref={ref as any}
-            className={combinedClasses}
-            {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
-          />
+      <textarea
+        className={cn(
+          'border p-3 rounded-md transition-colors duration-300',
+          stateClasses[saveState],
+          className
         )}
-        
-        {/* Valgfri: Vis status-tekst eller ikon */}
-        {status === 'saving' && <span className="text-xs text-blue-500">Saving...</span>}
-        {status === 'saved' && <span className="text-xs text-green-500">Saved</span>}
-        {status === 'dirty' && <span className="text-xs text-yellow-500">Unsaved changes</span>}
-      </div>
+        ref={ref}
+        {...props}
+      />
     );
   }
 );
 
 StatefulTextbox.displayName = 'StatefulTextbox';
+
+export { StatefulTextbox };

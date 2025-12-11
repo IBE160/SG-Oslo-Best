@@ -1,25 +1,9 @@
 "use client";
 
 import EditCVForm from "@/components/EditCVForm";
-export const metadata = {
-  title: "Edit CV",
-};
-
 import { useAuth } from "@/context/AuthContext";
-export const metadata = {
-  title: "Edit CV",
-};
-
 import { useRouter } from "next/navigation";
-export const metadata = {
-  title: "Edit CV",
-};
-
 import { useEffect } from "react";
-export const metadata = {
-  title: "Edit CV",
-};
-
 
 export default function CvEditPage() {
   const { session, isLoading } = useAuth();
@@ -47,4 +31,3 @@ export default function CvEditPage() {
     </div>
   );
 }
-
