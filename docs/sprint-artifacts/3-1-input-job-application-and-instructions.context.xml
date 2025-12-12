@@ -41,6 +41,8 @@
         <doc path="docs/epics.md" title="CVAI Turbo - Epics & Stories" section="Story 3.1: Input Job Application and Instructions" snippet="As a logged-in student user, I want to input a job advertisement and provide optional instructions, so that I can prepare the context for generating a tailored cover letter."/>
         <doc path="docs/architecture.md" title="Architecture" section="API Contracts" snippet="Shared TypeScript interfaces defined in packages/shared-types for type safety between frontend and backend."/>
         <doc path="docs/architecture.md" title="Architecture" section="Project Structure" snippet="New components for the generation page should be located in frontend/app/dashboard/ or a subdirectory... The new endpoint logic should be added in backend/app/api/v1/."/>
+        <doc path="docs/PRD.md" title="Product Requirements Document" section="Functional Requirements" snippet="The system must provide a user-friendly interface for uploading or pasting job advertisement text."/>
+        <doc path="docs/ux-design-specification.md" title="UX Design Specification" section="Key Screens & UI Components" snippet="The main generation screen will feature a large, resizable text area for the job ad, an optional text input for instructions, and a prominent 'Generate' button."/>
     </docs>
     <code>
         <file path="frontend/app/dashboard/page.tsx" kind="component" symbol="DashboardPage" lines="" reason="This is the main page where the new UI for inputting job application will be added."/>
