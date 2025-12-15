@@ -53,4 +53,4 @@ so that {{benefit}}.
 ## Change Log
 | Date | Version | Changes | Author |
 |---|---|---|---|
-| {{date}} | 1.0 | Initial draft creation | {{user_name}} |
+| YYYY-MM-DD | 1.0 | Initial draft creation | Agent |

@@ -1,0 +1,157 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>6</storyId>
+    <title>Update Job Application</title>
+    <status>drafted</status>
+    <generatedAt>søndag 14. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-6-update-job-application.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to update the text of a job application I previously created</iWant>
+    <soThat>I can correct mistakes or add new information</soThat>
+    <tasks>- [ ] **Frontend:** Implement the UI for updating a job application. (AC: #1, #2)
+    - [ ] Create a form (managed by React Hook Form) that fetches and displays the existing job application text.
+    - [ ] Implement the `PATCH /api/v1/job-applications/{job_application_id}` request on form submission.
+    - [ ] Use React Query to manage the API request state (loading, error, success).
+- [ ] **Backend:** Implement the API endpoint for updating a job application. (AC: #2)
+    - [ ] Create the `PATCH /api/v1/job-applications/{job_application_id}` endpoint in FastAPI.
+    - [ ] Implement the logic to update the specified job application in the Supabase database.
+    - [ ] Ensure the endpoint is protected and the user can only update their own applications (RLS).
+- [ ] **Testing:** Add E2E tests for the update functionality. (AC: #1, #2)
+    - [ ] Write a Playwright test that navigates to an existing job application.
+    - [ ] Mocks the API call for fetching the application data.
+    - [ ] Verifies the text area is pre-filled.
+    - [ ] Simulates editing the text and saving.
+    - [ ] Verifies the `PATCH` request is sent with the correct payload.</tasks>
+  </story>
+
+  <acceptanceCriteria>1.  Given I have an existing job application, when I navigate to the application's edit page, then I see the current job advertisement text pre-filled.
+2.  When I modify the text and save, then the updated text is persisted in the database.</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>FR-2.2 [MVP] The system shall allow users to update an existing job application.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>API Contracts</section>
+        <snippet>API Type: RESTful API exposed by FastAPI. Versioning: Versioned at /api/v1/. Data Formats: JSON request/response format for all communication.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns</section>
+        <snippet>These patterns ensure consistent implementation across all AI agents and human developers, preventing conflicts and promoting a cohesive codebase.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics & Stories</title>
+        <section>Story 3.6: Update Job Application</section>
+        <snippet>As a logged-in student user, I want to update the text of a job application I previously created, so that I can correct mistakes or add new information.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>backend/app/api/v1/job_applications.py</path>
+        <kind>API Router</kind>
+        <symbol>@router.patch("/job-applications/{job_application_id}")</symbol>
+        <lines>100</lines>
+        <reason>This is the backend endpoint for updating a specific job application.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/services/jobApplications.ts</path>
+        <kind>Frontend Service</kind>
+        <symbol>fetch</symbol>
+        <reason>This service will likely contain the function to call the backend API for updating job applications.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>next</package>
+        <version>^16.0.10</version>
+        <reason>Frontend framework for building the user interface.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react</package>
+        <version>^19.2.1</version>
+        <reason>Core library for building UI components.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react-hook-form</package>
+        <version>^7.68.0</version>
+        <reason>For managing form state and validation on the frontend.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@tanstack/react-query</package>
+        <version>^5.90.12</version>
+        <reason>For efficient data fetching, caching, and state management of API calls.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@supabase/supabase-js</package>
+        <version>^2.87.1</version>
+        <reason>Frontend client library for interacting with Supabase services.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>fastapi</package>
+        <version>0.123.8</version>
+        <reason>Backend web framework for building the API.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>supabase</package>
+        <version>2.25.0</version>
+        <reason>Python client library for interacting with Supabase services on the backend.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>pydantic</package>
+        <version>2.12.5</version>
+        <reason>Data validation and settings management for Python, used by FastAPI.</reason>
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use React Hook Form for frontend form management.</constraint>
+    <constraint>Use React Query for managing API request states (loading, error, success).</constraint>
+    <constraint>Backend API endpoints must be versioned (e.g., /api/v1/).</constraint>
+    <constraint>Data persistence for job applications is handled by Supabase, with authorization enforced by Row Level Security (RLS).</constraint>
+    <constraint>E2E tests should be located in `tests/e2e/` and use `data-testid` for element selection and Playwright for mocking API responses.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>Update Job Application API</name>
+      <kind>REST endpoint</kind>
+      <signature>PATCH /api/v1/job-applications/{job_application_id}</signature>
+      <path>backend/app/api/v1/job_applications.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>E2E tests should be located in `tests/e2e/`. Use `data-testid` attributes for reliable element selection and mock API responses using Playwright's `page.route()` functionality. The project also uses Jest for unit/component tests as per the Architecture document.</standards>
+    <locations>
+      <location>tests/e2e/</location>
+      <location>frontend/__tests__/</location>
+      <location>backend/tests/</location>
+    </locations>
+    <ideas>
+      <idea id="1">Verify pre-filling of existing job application text in the UI after navigation to edit page. (AC: #1)</idea>
+      <idea id="2">Simulate modifying the job application text and saving it. Verify that a `PATCH` request is sent with the updated payload and the change is persisted. (AC: #2)</idea>
+      <idea id="3">Test error handling for invalid input during update (e.g., empty job application text). (AC: #2)</idea>
+    </ideas>
+  </tests>
+</story-context>

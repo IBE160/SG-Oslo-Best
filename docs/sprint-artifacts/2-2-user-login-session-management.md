@@ -1,6 +1,6 @@
 # Story 2.2: User Login & Session Management
 
-Status: review
+Status: done
 
 ## Story
 

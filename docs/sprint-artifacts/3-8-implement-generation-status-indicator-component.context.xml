@@ -1,0 +1,138 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>8</storyId>
+    <title>Implement Generation Status Indicator Component</title>
+    <status>ready-for-dev</status>
+    <generatedAt>søndag 14. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-8-implement-generation-status-indicator-component.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>developer</asA>
+    <iWant>to create the "Generation Status Indicator" component</iWant>
+    <soThat>users are kept engaged and informed during the AI generation process with a loading spinner and specified text</soThat>
+    <tasks>- [ ] **Frontend:** Implement the "Generation Status Indicator" component. (AC: #1, #2, #3, #4)
+    - [ ] Create a new React/TypeScript component, `GenerationStatusIndicator.tsx`, styled with Tailwind CSS.
+    - [ ] Implement a loading spinner animation.
+    - [ ] Implement logic to display the message "Please give us an A" periodically.
+    - [ ] Implement logic to disable/enable user input fields based on the component's active state.
+    - [ ] Ensure accessibility considerations, such as `aria-live="polite"` for the content area and visually hidden text for screen readers, are included as per UX Spec Section 8.2.1.
+- [ ] **Frontend:** Integrate the component into the Cover Letter Generation UI. (AC: #1, #4)
+    - [ ] Conditionally render the `GenerationStatusIndicator` during the AI generation process.
+    - [ ] Hide the component when generation is complete.
+- [ ] **Testing:** Add Jest unit/component tests for `GenerationStatusIndicator.tsx`. (AC: #1, #2, #3, #4)
+    - [ ] Test that the loading spinner is displayed when the component is active.
+    - [ ] Test that the message "Please give us an A" appears periodically.
+    - [ ] Test that user input fields are disabled/enabled correctly.
+    - [ ] Test that the component is hidden when inactive.
+    - [ ] Test accessibility features (e.g., presence of `aria-live` regions, `sr-only` text).</tasks>
+  </story>
+
+  <acceptanceCriteria>1.  Given the AI generation process is initiated, when the component is displayed, then it shows an active loading spinner.
+2.  And it periodically displays the message "Please give us an A".
+3.  And user input fields are disabled while it is active.
+4.  When generation is complete, the component is hidden.</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Custom Components</section>
+        <snippet>Two custom components will be developed to provide specific feedback and enhance the user experience in key flows. ... Generation Status Indicator</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Generation Status Indicator</section>
+        <snippet>Purpose: To act as a responsive progress indicator during the AI generation process. ... Content: The component will display a loading spinner. Periodically, the text message "Please give us an A" will appear alongside it for comedic effect. ... States: Idle, Generating, Complete.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>ARIA Requirements for Custom Components</section>
+        <snippet>For the "Generation Status Indicator": The region where the cover letter appears must have `aria-live="polite"`. ... While the loading spinner is active, it should be accompanied by visually hidden text that is read by screen readers.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics & Stories</title>
+        <section>New Story 3.8: Implement Generation Status Indicator Component</section>
+        <snippet>As a developer, I want to create the "Generation Status Indicator" component, so that users are kept engaged and informed during the AI generation process with a loading spinner and specified text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns</section>
+        <snippet>These patterns ensure consistent implementation across all AI agents and human developers, preventing conflicts and promoting a cohesive codebase.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Testing Strategy</section>
+        <snippet>Jest for unit/component tests; Playwright for end-to-end (E2E) tests.</snippet>
+      </artifact>
+    </docs>
+    <dependencies>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>next</package>
+        <version>^16.0.10</version>
+        <reason>Frontend framework for building the user interface.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react</package>
+        <version>^19.2.1</version>
+        <reason>Core library for building UI components.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react-dom</package>
+        <version>^19.2.1</version>
+        <reason>Entry point for rendering React applications to the DOM.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>tailwindcss</package>
+        <version>^4</version>
+        <reason>CSS framework for styling the component.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@radix-ui/react-alert-dialog</package>
+        <version>^1.1.15</version>
+        <reason>Potentially used for alert dialogs within the component or its parent.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@radix-ui/react-toast</package>
+        <version>^1.2.15</version>
+        <reason>Potentially used for toast notifications within the component or its parent.</reason>
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>This is a reusable UI component that should be built with React/TypeScript and styled with Tailwind CSS, adhering to the project's Component Strategy (UX Spec Section 6.1.2 "Custom Components").</constraint>
+    <constraint>State management for the component's active state will likely be handled by the parent component (Cover Letter Generation page) via props, or potentially React Context if its state needs to be shared more broadly.</constraint>
+    <constraint>The component's design and behavior must strictly adhere to UX Spec Section 6.1.2 "Custom Components" for the "Generation Status Indicator", including the specific message and its intermittent display.</constraint>
+    <constraint>Accessibility requirements from UX Spec Section 8.2.1 for custom components are critical, including `aria-live="polite"` for the content area and visually hidden text for screen readers.</constraint>
+  </constraints>
+  <interfaces></interfaces>
+  <tests>
+    <standards>Unit/component tests (Jest) should be created for the new component, focusing on its visual states, message display, and accessibility features. E2E tests for the Cover Letter Generation flow should include assertions for the presence and behavior of this indicator. Refer to Architecture document for general testing strategy, including Playwright for E2E tests.</standards>
+    <locations>
+      <location>frontend/__tests__/</location>
+      <location>tests/e2e/</location>
+    </locations>
+    <ideas>
+      <idea id="1">Test that the loading spinner is displayed when the component is active. (AC: #1)</idea>
+      <idea id="2">Test that the message "Please give us an A" appears periodically when the component is active. (AC: #2)</idea>
+      <idea id="3">Test that user input fields are disabled while the component is active. (AC: #3)</idea>
+      <idea id="4">Test that the component is hidden when inactive. (AC: #4)</idea>
+      <idea id="5">Test accessibility features, such as the presence of `aria-live` regions and visually hidden text for screen readers. (AC: #1, #2)</idea>
+    </ideas>
+  </tests>
+</story-context>

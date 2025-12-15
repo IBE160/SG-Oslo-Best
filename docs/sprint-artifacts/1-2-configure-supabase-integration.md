@@ -1,6 +1,6 @@
 # Story 1.2: Configure Supabase Integration
 
-Status: review
+Status: done
 
 ## Story
 

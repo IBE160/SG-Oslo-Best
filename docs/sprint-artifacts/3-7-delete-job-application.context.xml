@@ -1,0 +1,175 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>7</storyId>
+    <title>Delete Job Application</title>
+    <status>ready-for-dev</status>
+    <generatedAt>søndag 14. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-7-delete-job-application.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to delete a job application I no longer need</iWant>
+    <soThat>I can keep my workspace clean</soThat>
+    <tasks>- [ ] **Frontend:** Implement the UI for deleting a job application. (AC: #1)
+    - [ ] Create a confirmation modal for deletion as per UX Spec Section 7.1.7 "Confirmation Patterns".
+    - [ ] Implement the `DELETE /api/v1/job-applications/{job_application_id}` request on confirmation.
+    - [ ] Use React Query to manage the API request state (loading, error, success).
+- [ ] **Backend:** Implement the API endpoint for deleting a job application. (AC: #1)
+    - [ ] Create the `DELETE /api/v1/job-applications/{job_application_id}` endpoint in FastAPI.
+    - [ ] Implement the logic to delete the specified job application and associated cover letters from the Supabase database (e.g., via cascading delete or explicit service logic).
+    - [ ] Ensure the endpoint is protected and the user can only delete their own applications (RLS).
+- [ ] **Testing:** Add E2E tests for the delete functionality. (AC: #1)
+    - [ ] Write a Playwright test that navigates to an existing job application.
+    - [ ] Mocks the API call for deleting the application data.
+    - [ ] Simulates choosing the delete option and confirming.
+    - [ ] Verifies the `DELETE` request is sent.
+    - [ ] Verifies that the application is no longer listed after deletion.</tasks>
+  </story>
+
+  <acceptanceCriteria>1.  Given I have an existing job application, when I choose the delete option and confirm the deletion, then the job application and all associated saved cover letters are permanently removed from the database.</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>FR-2.3 [MVP] The system shall allow users to delete a job application.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>API Contracts</section>
+        <snippet>API Type: RESTful API exposed by FastAPI. Versioning: Versioned at /api/v1/. Data Formats: JSON request/response format for all communication.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns</section>
+        <snippet>These patterns ensure consistent implementation across all AI agents and human developers, preventing conflicts and promoting a cohesive codebase.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Confirmation Patterns</section>
+        <snippet>Delete Confirmation: Always confirm with a modal, offering an "Undo" option via a Toast notification.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics & Stories</title>
+        <section>Story 3.7: Delete Job Application</section>
+        <snippet>As a logged-in student user, I want to delete a job application I no longer need, so that I can keep my workspace clean.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>backend/app/api/v1/job_applications.py</path>
+        <kind>API Router</kind>
+        <symbol>@router.delete("/job-applications/{job_application_id}")</symbol>
+        <lines>195</lines>
+        <reason>This is the backend endpoint for deleting a specific job application.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/services/jobApplications.ts</path>
+        <kind>Frontend Service</kind>
+        <symbol>fetch</symbol>
+        <reason>This service will likely contain the function to call the backend API for deleting job applications.</reason>
+      </artifact>
+    </code>
+        <dependencies>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>next</package>
+        <version>^16.0.10</version>
+        <reason>Frontend framework for building the user interface.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react</package>
+        <version>^19.2.1</version>
+        <reason>Core library for building UI components.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>react-hook-form</package>
+        <version>^7.68.0</version>
+        <reason>For managing form state and validation on the frontend (potentially used in confirmation modal).</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@tanstack/react-query</package>
+        <version>^5.90.12</version>
+        <reason>For efficient data fetching, caching, and state management of API calls.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@supabase/supabase-js</package>
+        <version>^2.87.1</version>
+        <reason>Frontend client library for interacting with Supabase services.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@radix-ui/react-alert-dialog</package>
+        <version>^1.1.15</version>
+        <reason>Shadcn/UI component for building the confirmation modal.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>npm</ecosystem>
+        <package>@radix-ui/react-toast</package>
+        <version>^1.2.15</version>
+        <reason>Shadcn/UI component for displaying toast notifications (e.g., for undo action).</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>fastapi</package>
+        <version>0.123.8</version>
+        <reason>Backend web framework for building the API.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>supabase</package>
+        <version>2.25.0</version>
+        <reason>Python client library for interacting with Supabase services on the backend.</reason>
+      </dependency>
+      <dependency>
+        <ecosystem>pip</ecosystem>
+        <package>pydantic</package>
+        <version>2.12.5</version>
+        <reason>Data validation and settings management for Python, used by FastAPI.</reason>
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Frontend implementation must include a confirmation modal for deletion as per UX Spec Section 7.1.7 "Confirmation Patterns".</constraint>
+    <constraint>Use React Query for managing API request states (loading, error, success) on the frontend.</constraint>
+    <constraint>Backend API endpoints must be versioned (e.g., /api/v1/).</constraint>
+    <constraint>Data persistence for job applications and associated cover letters is handled by Supabase, with authorization enforced by Row Level Security (RLS).</constraint>
+    <constraint>E2E tests should be located in `tests/e2e/` and use `data-testid` for element selection and Playwright for mocking API responses.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>Delete Job Application API</name>
+      <kind>REST endpoint</kind>
+      <signature>DELETE /api/v1/job-applications/{job_application_id}</signature>
+      <path>backend/app/api/v1/job_applications.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>E2E tests should be located in `tests/e2e/`. Use `data-testid` attributes for reliable element selection and mock API responses using Playwright's `page.route()` functionality. Frontend implementation of the delete action should include a confirmation step (e.g., a modal) as per UX Spec Section 7.1.7 "Confirmation Patterns" to prevent accidental deletion.</standards>
+    <locations>
+      <location>tests/e2e/</location>
+      <location>frontend/__tests__/</location>
+      <location>backend/tests/</location>
+    </locations>
+    <ideas>
+      <idea id="1">Verify that a confirmation modal appears when the delete option is chosen. (AC: #1)</idea>
+      <idea id="2">Simulate confirming the deletion and verify that a `DELETE` request is sent to the backend. (AC: #1)</idea>
+      <idea id="3">Verify that the deleted job application is no longer listed in the UI after successful deletion. (AC: #1)</idea>
+      <idea id="4">Test that associated cover letters are also deleted from the database. (AC: #1)</idea>
+    </ideas>
+  </tests>
+</story-context>
