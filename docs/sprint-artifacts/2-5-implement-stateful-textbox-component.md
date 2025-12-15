@@ -1,6 +1,6 @@
 # Story 2.5: Implement Stateful Textbox Component
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

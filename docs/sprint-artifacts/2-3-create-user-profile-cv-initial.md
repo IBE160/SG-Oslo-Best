@@ -1,6 +1,6 @@
 # Story 2.3: create-user-profile-cv-initial
 
-Status: review
+Status: done
 
 ## Story
 

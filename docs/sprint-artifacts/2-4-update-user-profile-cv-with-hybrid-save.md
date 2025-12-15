@@ -1,6 +1,6 @@
 # Story 2.4: Update User Profile & CV with Hybrid Save
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 

@@ -1,0 +1,265 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>2</storyId>
+    <title>Generate Cover Letter</title>
+    <status>drafted</status>
+    <generatedAt>lørdag 13. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>C:\Users\jenny\Documents\SG-Oslo-Best\docs\sprint-artifacts\3-2-generate-cover-letter.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to click a "Generate" button to create a cover letter</iWant>
+    <soThat>I can receive an AI-drafted letter tailored to the job</soThat>
+    <tasks>- [ ] **Backend:** Create `POST /api/v1/generation` endpoint. (AC: #3)
+    - [ ] Endpoint should accept user's CV data, job advertisement, and optional instructions.
+    - [ ] Service layer should call the Gemini API with the provided data.
+    - [ ] Endpoint should return the generated cover letter text.
+- [ ] **Frontend:** Implement the "Generate" button logic. (AC: #1, #2, #4)
+    - [ ] On click, disable the input fields.
+    - [ ] Display the "Generation Status Indicator" component.
+    - [ ] Call the `POST /api/v1/generation` endpoint using React Query.
+    - [ ] On success, hide the status indicator and display the returned text.
+    - [ ] On error, hide the status indicator and show an error message.
+- [ ] **Testing:** Add Playwright E2E test for the generation flow. (AC: #1, #2, #4)
+    - [ ] Test that input fields are disabled during generation.
+    - [ ] Test that the loading indicator is displayed.
+    - [ ] Mock the API response and test that the generated text is displayed correctly.</tasks>
+  </story>
+
+  <acceptanceCriteria>1.  Given I have provided a job advertisement and clicked "Generate", when the generation process begins, then all input fields are temporarily disabled.
+2.  And the UI shows the "Generation Status Indicator" (Story 3.8).
+3.  And the backend receives the necessary data, integrates with the Gemini API, and returns the generated text.
+4.  When the generation is complete, the generated cover letter text is returned to the frontend.</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students generate tailored cover letters using an AI (Gemini). The core functionality involves users providing their CV information and a job description, upon which the AI generates a customized cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Product Scope - MVP - Cover Letter Generation</section>
+        <snippet>The MVP will focus on delivering the core functionality to generate customized cover letters. Key features include: Cover Letter Generation: A "Generate" button triggers the AI (third-party LLM) to produce a customized cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements - Cover Letter Generation</section>
+        <snippet>FR-3.3 [MVP] The system shall generate a customized cover letter based on the user's CV, job advertisement, and instructions. FR-3.4 [MVP] The system shall display the generated cover letter to the user in plain text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Non-Functional Requirements - Integration</section>
+        <snippet>The application will integrate with a Gemini family Large Language Model (LLM) via its API for the core cover letter generation functionality.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students generate tailored cover letters using an AI (Gemini). The core functionality involves users providing their CV information and a job description, upon which the AI generates a customized cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Core Technologies</section>
+        <snippet>Frontend Framework: Next.js (with React), Backend Framework: FastAPI, Database & Authentication: Supabase, API Communication (Frontend): React Query (TanStack Query).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Decision Summary</section>
+        <snippet>API Communication (Frontend): React Query (TanStack Query) for data fetching and caching. Testing Strategy: Jest for unit/component tests; Playwright for end-to-end (E2E) tests.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Structure</section>
+        <snippet>backend/app/api/v1/generation.py, backend/services/</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Epic to Architecture Mapping</section>
+        <snippet>Epic 3: Core Cover Letter Generation. Primary Code Location(s): frontend/app/dashboard/, backend/app/api/v1/generation.py, backend/services/.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Integration Points</section>
+        <snippet>The primary integration point between the frontend and backend is a versioned REST API. The Next.js frontend will use React Query to communicate with the FastAPI backend.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Security Architecture</section>
+        <snippet>API Keys: Securely managed using environment variables (e.g., Vercel secrets) for third-party services (Gemini API, Resend API).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Performance Considerations</section>
+        <snippet>Backend (FastAPI): High-performance Python web framework, designed for speed. Stateless design of API endpoints to facilitate horizontal scaling and load balancing.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students overcome the difficulty of writing tailored cover letters. Our solution provides an AI-powered tool that takes a user's CV information and a job description, and automatically generates a relevant, high-quality cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>User Journey Flows - Cover Letter Generation</section>
+        <snippet>The flow incorporates guiding button states, versioned regeneration for comparison, and clear, multi-layered feedback on save actions. The right column is replaced by a loading indicator and then the generated cover letter text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Component Library - Custom Components - Generation Status Indicator</section>
+        <snippet>Purpose: To act as a responsive progress indicator during the AI generation process. Content: loading spinner. Periodically, the text message "Please give us an A" will appear alongside it.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>UX Pattern Decisions - Feedback Patterns - Loading Feedback</section>
+        <snippet>Spinner for short waits, and Skeleton loaders for longer waits or content areas. Usage: Spinner for actions like "Generate Cover Letter" (using custom "Generation Status Indicator").</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Responsive Design &amp; Accessibility - Accessibility Strategy - ARIA Requirements for Custom Components</section>
+        <snippet>For the "Generation Status Indicator": The region where the cover letter appears must have `aria-live="polite"`. While the loading spinner is active, it should be accompanied by visually hidden text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Epic 3: Core Cover Letter Generation</section>
+        <snippet>Goal: Deliver the primary value of the application by enabling students to generate a customized cover letter based on their CV and a job description. Scope: Implement the UI for inputting a job ad and instructions, the backend logic to integrate with the Gemini API, and the display of the generated cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Story 3.2: Generate Cover Letter</section>
+        <snippet>As a logged-in student user, I want to click a "Generate" button to create a cover letter, so that I can receive an AI-drafted letter tailored to the job. Technical Notes: The frontend will send the user's CV data, job advertisement, and optional instructions to a POST /api/v1/generation endpoint. The backend service will then interact with the Gemini API to generate the cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>New Story 3.8: Implement Generation Status Indicator Component</section>
+        <snippet>As a developer, I want to create the "Generation Status Indicator" component, so that users are kept engaged and informed during the AI generation process with a loading spinner and specified text. Technical Notes: This is a reusable UI component to be built with React/TypeScript and styled with Tailwind CSS.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>frontend/app/dashboard/</path>
+        <kind>directory</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>Location for frontend UI components related to the cover letter generation page.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/lib/</path>
+        <kind>directory</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>Location for frontend API call logic, including React Query setup.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/app/api/v1/generation.py</path>
+        <kind>file</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>New file for the FastAPI endpoint that handles cover letter generation.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/app/services/</path>
+        <kind>directory</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>Location for backend service logic that integrates with the Gemini API.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <nodejs>
+        <package>next: ^16.0.10</package>
+        <package>react: ^19.2.1</package>
+        <package>react-dom: ^19.2.1</package>
+        <package>@hookform/resolvers: ^5.2.2</package>
+        <package>@radix-ui/react-alert-dialog: ^1.1.15</package>
+        <package>@radix-ui/react-label: ^2.1.8</package>
+        <package>@radix-ui/react-slot: ^1.2.4</package>
+        <package>@radix-ui/react-tabs: ^1.1.13</package>
+        <package>@radix-ui/react-toast: ^1.2.15</package>
+        <package>@supabase/supabase-js: ^2.87.1</package>
+        <package>@tanstack/react-query: ^5.90.12</package>
+        <package>class-variance-authority: ^0.7.1</package>
+        <package>clsx: ^2.1.1</package>
+        <package>lucide-react: ^0.555.0</package>
+        <package>react-hook-form: ^7.68.0</package>
+        <package>tailwind-merge: ^3.4.0</package>
+        <package>tailwindcss-animate: ^1.0.7</package>
+        <devPackage>typescript: ^5.9.3</devPackage>
+        <devPackage>eslint: ^9</devPackage>
+        <devPackage>jest: ^29.7.0</devPackage>
+        <devPackage>playwright: (via package.json, typically devDependency in Next.js)</devPackage>
+        <devPackage>tailwindcss: ^4</devPackage>
+      </nodejs>
+      <python>
+        <package>fastapi==0.123.8</package>
+        <package>supabase==2.25.0</package>
+        <package>google-generativeai==0.8.5</package>
+        <package>uvicorn==0.38.0</package>
+        <package>python-dotenv==1.2.1</package>
+        <package>pydantic==2.12.5</package>
+        <package>httpx==0.28.1</package>
+        <package>resend==2.19.0</package>
+      </python>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use React Query for managing the API call's loading, error, and success states on the frontend.</constraint>
+    <constraint>Backend API endpoint (POST /api/v1/generation) must follow defined API contract standards (versioning, response formats, wrapped data for success).</constraint>
+    <constraint>Backend service needs to handle Gemini API integration, including secure management of API keys (via environment variables).</constraint>
+    <constraint>Row Level Security (RLS) must be enabled on any new database tables created to store generated cover letters.</constraint>
+    <constraint>E2E tests should use `data-testid` attributes for robust element selection and `page.route()` for mocking API responses (Playwright).</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>Generate Cover Letter API</name>
+      <kind>REST endpoint</kind>
+      <signature>POST /api/v1/generation</signature>
+      <path>backend/app/api/v1/generation.py</path>
+    </interface>
+    <interface>
+      <name>Gemini API</name>
+      <kind>Third-party API</kind>
+      <signature>N/A (external service)</signature>
+      <path>N/A</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>
+      <p>Unit/Component Tests: Jest (Frontend). End-to-End Tests: Playwright (Frontend). E2E tests should use `data-testid` attributes for robust element selection and `page.route()` for mocking API responses. Backend tests are expected to use Pytest.</p>
+    </standards>
+    <locations>
+      <location>frontend/__tests__/</location>
+      <location>frontend/playwright/</location>
+      <location>backend/tests/</location>
+    </locations>
+    <ideas>
+      <idea ac_id="1">Verify input fields are disabled when the "Generate" button is clicked.</idea>
+      <idea ac_id="2">Verify the "Generation Status Indicator" component is displayed during the generation process.</idea>
+      <idea ac_id="3">Backend unit/integration test: Mock Gemini API call and verify `POST /api/v1/generation` successfully calls it and returns the result.</idea>
+      <idea ac_id="4">Frontend E2E test: Mock `POST /api/v1/generation` response and verify generated cover letter text is displayed correctly on the UI.</idea>
+    </ideas>
+  </tests>
+</story-context>
