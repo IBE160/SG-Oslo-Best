@@ -24,12 +24,20 @@ export default defineConfig({
   reporter: [['html'], ['junit', { outputFile: 'test-results/junit.xml' }], ['list']],
 
   // Run your local dev server before starting the tests
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://127.0.0.1:3000',
-    cwd: './frontend',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'npm run dev',
+      url: 'http://127.0.0.1:3000',
+      cwd: './frontend',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: '.\\.venv\\Scripts\\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 8000',
+      url: 'http://127.0.0.1:8000',
+      cwd: './backend',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },

@@ -8,44 +8,21 @@
 
 ## Fase 0
 
-- [x] /run-agent-task analyst *workflow-init
-  - [x] File: bmm-workflow-status.yaml
 - [x] Brainstorming
-  - [x] /run-agent-task analyst *brainstorm "Root Cause Analysis and Solution Design for Player Inactivity"
-    - [x] File: brainstorming-session-results-date.md
-  - [x] /run-agent-task analyst *brainstorm "User Flow Deviations & Edge Cases"
-    - [x] File: brainstorming-session-results-date.md
-  - [x] /run-agent-task analyst *brainstorm "Brainstorm what it means to have a paid user"
-    - [x] File: brainstorming-session-results-date.md
-- [ ] Research
-  - [x] /run-agent-task analyst *research "Which AI library should we use for orchestrating LLM interactions?"
-    - [x] File: research-technical-date.md
-- [x] Product Brief
-  - [x] /run-agent-task analyst *product-brief "Read the two brainstorming sessions the research session and the @proposal.md file, and create a product brief for the project."
-    - [x] File: product-brief.md
-- [x] Brainstorming
-  - [x] /analyst *brainstorm
+  - [x] /run-agent-task analyst *brainstorm 
     - [x] File: brainstorming-session-results-2025-10-26.md
     - [x] File: brainstorming-session-results-2025-10-27.md
     - [x] File: brainstorming-session-results-2025-10-29.md
 - [x] Product Brief
-  - [x] /analyst *product-brief
+  - [x] /run-agent-task analyst *product-brief
     - [x] File: product-brief-ibe160-2025-11-03.md
 
 
 ## Fase 1
 
-- [ ] Planning
+- [x] Planning
   - [x] /run-agent-task pm *prd
-    - [x] File: PRD.md
-  - [x] /run-agent-task pm *validate-prd
-    - [x] File: validation-report-date.md
-  - [ ] /run-agent-task ux-designer *create-ux-design {prompt / user-input-file}
-    - [ ] File: ux-design-specification.md
-    - [ ] File: ux-color-themes.html
-    - [ ] File: ux-design-directions.html
-  - [x] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
-    - [x] File: epics.md
+    - [x] File: PRD.md 
   - [x] /run-agent-task pm *validate-prd
     - [x] File: validation-report-2025-11-12-prd-epics.md
   - [x] /run-agent-task ux-designer *create-ux-design
@@ -59,16 +36,19 @@
 ## Fase 2
 
 - [x] Solutioning
-  - [x] /run-agent-task architect *architecture {prompt / user-input-file}
-  - [x] /run-agent-task architect *validate-architecture {prompt / user-input-file}
-  - [x] /run-agent-task tea *framework {prompt / user-input-file}
-  - [x] /run-agent-task tea *ci {prompt / user-input-file}
-  - [x] /run-agent-task tea *test-design {prompt / user-input-file}
+  - [x] /run-agent-task architect *architecture
+    - [x] File: architecture.md
+  - [x] /run-agent-task pm *epics
+    - [x] File: epics.md
+  - [x] /run-agent-task architect *validate-architecture
+  - [x] /run-agent-task tea *framework
+  - [x] /run-agent-task tea *ci
+  - [x] /run-agent-task tea *test-design
 
 
 ## Fase 3
 
-- [ ] Implementation
+- [x] Implementation
   - [x] /run-agent-task sm *sprint-planning {prompt / user-input-file}
     - [x] File: sprint-artifacts/sprint-status.yaml
   - foreach epic in sprint planning:
@@ -76,19 +56,19 @@
       - [x] File: sprint-artifacts/tech-spec-epic-{{epic_id}}.md
     - [x] /run-agent-task sm validate-epic-tech-context {prompt / user-input-file}
     - foreach story in epic:
-      - [ ] /run-agent-task sm *create-story {prompt / user-input-file}
-        - [ ] File: sprint-artifacts/{{story_key}}.md
-      - [ ] /run-agent-task sm *validate-create-story {prompt / user-input-file}
-      - [ ] /run-agent-task sm *create-story-context {prompt / user-input-file}
-        - [ ] File: sprint-artifacts/{{story_key}}.context.xml
-      - [ ] /run-agent-task sm *validate-story-context {prompt / user-input-file}
-      - [ ] /run-agent-task sm *story-ready-for-dev {prompt / user-input-file}
+      - [x] /run-agent-task sm *create-story 
+        - [x] File: sprint-artifacts/{{story_key}}.md
+      - [x] /run-agent-task sm *validate-create-story
+      - [x] /run-agent-task sm *create-story-context
+        - [x] File: sprint-artifacts/{{story_key}}.context.xml
+      - [x] /run-agent-task sm *validate-story-context
+      - [x] /run-agent-task sm *story-ready-for-dev
       while code-review != approved:
-        - [ ] /run-agent-task dev *develop-story {prompt / user-input-file}
-        - [ ] /run-agent-task dev *code-review {prompt / user-input-file}
-      - [ ] /run-agent-task dev *story-done {prompt / user-input-file}
-      - [ ] /run-agent-task sm *test-review {prompt / user-input-file}
-    - [ ] /run-agent-task sm *epic-retrospective {prompt / user-input-file}
+        - [x] /run-agent-task dev *develop-story
+        - [x] /run-agent-task dev *code-review
+      - [x] /run-agent-task dev *story-done
+      - [x] /run-agent-task sm *test-review
+    - [x] /run-agent-task sm *epic-retrospective
 
 
 

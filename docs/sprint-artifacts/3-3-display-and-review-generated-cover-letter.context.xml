@@ -1,0 +1,300 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>3</storyId>
+    <title>Display and Review Generated Cover Letter</title>
+    <status>drafted</status>
+    <generatedAt>lørdag 13. desember 2025</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>C:\Users\jenny\Documents\SG-Oslo-Best\docs\sprint-artifacts\3-3-display-and-review-generated-cover-letter.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>the generated cover letter to be displayed clearly on the screen</iWant>
+    <soThat>I can review its content and decide on the next action</soThat>
+    <tasks>- [ ] **Frontend:** Implement display of generated cover letter. (AC: #1)
+    - [ ] Use a readable, non-editable component (e.g., Shadcn/UI `Textarea` or `div`).
+    - [ ] Ensure proper styling for clear readability.
+- [ ] **Frontend:** Conditionally render "Regenerate" and "Save" buttons. (AC: #2)
+    - [ ] Buttons should only be visible and enabled after successful cover letter generation.
+- [ ] **Testing:** Add Playwright E2E tests for displaying the cover letter and buttons. (AC: #1, #2)
+    - [ ] Mock API response for generation and verify the generated text is visible.
+    - [ ] Verify "Regenerate" and "Save" buttons are visible and enabled.</tasks>
+  </story>
+
+  <acceptanceCriteria>1.  Given the cover letter has been generated successfully, when the frontend receives the letter text, then the text is displayed in a clear, readable format within the output panel.
+2.  And the "Regenerate" and "Save" buttons become visible and enabled.</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Executive Summary</section>
+        <snippet>CVAI Turbo is a web application designed to help university and college students generate tailored cover letters using an AI (Gemini). The core functionality involves users providing their CV information and a job description, upon which the AI generates a customized cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Product Scope - MVP - Output Display</section>
+        <snippet>The generated cover letter is displayed to the user as plain text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements - Cover Letter Generation - FR-3.4 [MVP]</section>
+        <snippet>The system shall display the generated cover letter to the user in plain text.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements - Cover Letter Generation - FR-3.5 [MVP]</section>
+        <snippet>The system shall provide an option for the user to regenerate the cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Non-Functional Requirements - Integration</section>
+        <snippet>The application will integrate with a Gemini family Large Language Model (LLM) via its API for the core cover letter generation functionality.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Executive Summary</section>
+        <snippet>The project emphasizes a "Refined Minimalist" UX with key interactive patterns like a "Hybrid Save Model" for CV management and a tabbed interface for comparing regenerated cover letters.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Core Technologies</section>
+        <snippet>Frontend Framework: Next.js (with React), UI Framework: Shadcn/UI, API Communication (Frontend): React Query (TanStack Query).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Decision Summary</section>
+        <snippet>API Communication (Frontend): React Query (TanStack Query) for data fetching and caching. State Management (Frontend): React Context for managing client-side UI state.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Epic to Architecture Mapping</section>
+        <snippet>Epic 3: Core Cover Letter Generation. Primary Code Location(s): frontend/app/dashboard/, backend/app/api/v1/generation.py, backend/services/.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Integration Points</section>
+        <snippet>The Next.js frontend will use React Query to communicate with the FastAPI backend. Data Contracts: Shared TypeScript types will be defined in `/packages/shared-types`.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns - Naming Conventions - Frontend Components (React)</section>
+        <snippet>Use PascalCase (e.g., `UserCard`, `StatefulTextbox`).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns - Structure Patterns - Component Organization (Frontend)</section>
+        <snippet>Feature-sliced (components specific to a page/feature live within that feature's directory). Truly shared reusable components go in `frontend/components/`.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns - Structure Patterns - Test File Location</section>
+        <snippet>Unit/Component Tests (Jest): `__tests__` directory. End-to-End Tests (Playwright): Central `frontend/playwright/` directory.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Implementation Patterns - Format and Consistency Patterns - API Data Formats</section>
+        <snippet>All data exchanged via our REST API will be in JSON format.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Executive Summary</section>
+        <snippet>Our solution provides an AI-powered tool that takes a user's CV information and a job description, and automatically generates a relevant, high-quality cover letter.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>User Journey Flows - Cover Letter Generation - Reviewing Output</section>
+        <snippet>The loading indicator vanishes and is replaced by the generated cover letter text in the right column. In the left column, a "Regenerate" button appears. A "Save" button also appears.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>User Journey Flows - Cover Letter Generation - Step-by-Step Flow</section>
+        <snippet>4. Reviewing Output: User Sees: The loading indicator vanishes and is replaced by the generated cover letter text in the right column. In the left column, a "Regenerate" button appears. A "Save" button also appears.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Component Library - Standard Components (from Shadcn/UI) - Textarea</section>
+        <snippet>For larger, multi-line text entry (e.g., "Job Description", "Optional instructions...").</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Component Library - Custom Components - Generation Status Indicator</section>
+        <snippet>Purpose: To act as a responsive progress indicator during the AI generation process. Content: The component will display a loading spinner. Periodically, the text message "Please give us an A" will appear alongside it for comedic effect.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>UX Pattern Decisions - Feedback Patterns - Loading Feedback</section>
+        <snippet>Spinner for actions like "Generate Cover Letter" (using custom "Generation Status Indicator").</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Accessibility Strategy - ARIA Requirements for Custom Components</section>
+        <snippet>For the "Generation Status Indicator": The region where the cover letter appears must have `aria-live="polite"`. This tells screen readers to announce the new content (the generated letter) when it appears, without interrupting the user.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Epic 3: Core Cover Letter Generation - Goal</section>
+        <snippet>Deliver the primary value of the application by enabling students to generate a customized cover letter based on their CV and a job description.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Story 3.3: Display and Review Generated Cover Letter</section>
+        <snippet>As a logged-in student user, I want the generated cover letter to be displayed clearly on the screen, so that I can review its content and decide on the next action. Covers: FR-3.4. UX Spec: Section 5.1.3 "Cover Letter Generation".</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Overview</section>
+        <snippet>This document provides the technical specification for Epic 3: Core Cover Letter Generation. It encompasses the entire workflow for a logged-in user to input a job application, provide instructions, generate a cover letter using the Gemini API, and then review, regenerate, and save the output.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Objectives and Scope - In-Scope</section>
+        <snippet>A UI to display the generated cover letter. A "Regenerate" feature that allows users to get a new version of the cover letter, with a tabbed interface to compare versions. A "Save" feature that persists a chosen cover letter to the database.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>System Architecture Alignment</section>
+        <snippet>The frontend will manage the entire user-facing experience. API Communication: The frontend will use `React Query`. State Management: `React Context` will be crucial on the frontend.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Detailed Design - Services and Modules</section>
+        <snippet>Frontend: Generation Page: Render the main UI for job ad input, instructions, generation, and displaying results. Frontend: Generation Status Indicator: Reusable UI component to show a loading state during AI generation.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Detailed Design - Workflows and Sequencing - Cover Letter Generation Workflow</section>
+        <snippet>5. The backend retrieves the user's CV, calls the Gemini API with all the context. 6. The backend returns the generated text. 7. The frontend displays the text in the output panel.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Acceptance Criteria (Authoritative)</section>
+        <snippet>1. A logged-in user can input a job ad, click "Generate", and see a generated cover letter. 2. The "Generation Status Indicator" is displayed while the AI is working.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-3.md</path>
+        <title>Epic Technical Specification: Core Cover Letter Generation</title>
+        <section>Test Strategy Summary</section>
+        <snippet>Component: The "Generation Status Indicator" will be tested in isolation. E2E: A full Playwright E2E test will cover the entire flow: create job ad -> generate -> regenerate -> save -> delete. This is the ultimate validation of the epic's functionality.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>frontend/app/dashboard/</path>
+        <kind>directory</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>Location for frontend UI components related to the cover letter generation page and display of the output.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/lib/</path>
+        <kind>directory</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>Location for frontend API call logic (React Query) for fetching and managing generated cover letter data.</reason>
+      </artifact>
+      <artifact>
+        <path>backend/app/api/v1/generation.py</path>
+        <kind>file</kind>
+        <symbol>N/A</symbol>
+        <lines>N/A</lines>
+        <reason>The backend endpoint that provides the generated cover letter text.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/components/ui/textarea.tsx</path>
+        <kind>component</kind>
+        <symbol>Textarea</symbol>
+        <lines>N/A</lines>
+        <reason>Shadcn/UI Textarea component for displaying the generated cover letter in a readable, non-editable format.</reason>
+      </artifact>
+      <artifact>
+        <path>frontend/components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>N/A</lines>
+        <reason>Shadcn/UI Button component for "Regenerate" and "Save" actions.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <nodejs>
+        <package>next: ^16.0.10</package>
+        <package>react: ^19.2.1</package>
+        <package>react-dom: ^19.2.1</package>
+        <package>@tanstack/react-query: ^5.90.12</package>
+        <package>@radix-ui/react-toast: ^1.2.15</package>
+        <devPackage>jest: ^29.7.0</devPackage>
+        <devPackage>playwright: (via package.json, implicitly for E2E)</devPackage>
+        <devPackage>typescript: ^5.9.3</devPackage>
+        <devPackage>tailwindcss: ^4</devPackage>
+      </nodejs>
+      <python>
+        <package>fastapi==0.123.8</package>
+        <package>supabase==2.25.0</package>
+        <package>google-generativeai==0.8.5</package>
+        <package>uvicorn==0.38.0</package>
+        <package>python-dotenv==1.2.1</package>
+      </python>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>The generated cover letter text must be displayed in a readable, non-editable area, likely using a Shadcn/UI Textarea or div.</constraint>
+    <constraint>React Query will manage the state of the fetched cover letter data on the frontend.</constraint>
+    <constraint>"Regenerate" and "Save" buttons must be conditionally rendered (visible and enabled) only after the cover letter is successfully displayed.</constraint>
+    <constraint>Frontend API communication should use React Query for managing API call states (loading, error, success).</constraint>
+    <constraint>E2E tests in Playwright should mock API responses to verify UI display of generated text and button states.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>Generate Cover Letter API</name>
+      <kind>REST endpoint</kind>
+      <signature>POST /api/v1/generation</signature>
+      <path>backend/app/api/v1/generation.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>
+      <p>Unit/Component Tests: Jest (Frontend). End-to-End Tests: Playwright (Frontend). E2E tests should use `data-testid` attributes for robust element selection and `page.route()` for mocking API responses. Backend tests are expected to use Pytest.</p>
+    </standards>
+    <locations>
+      <location>frontend/__tests__/</location>
+      <location>frontend/playwright/</location>
+      <location>backend/tests/</location>
+    </locations>
+    <ideas>
+      <idea ac_id="1">E2E Test: Mock API response for generation and verify the generated text is visible within the output panel.</idea>
+      <idea ac_id="2">E2E Test: Verify that "Regenerate" and "Save" buttons become visible and enabled after successful cover letter generation.</idea>
+    </ideas>
+  </tests>
+</story-context>

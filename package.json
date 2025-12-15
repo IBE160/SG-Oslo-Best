@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "node backend/app/index.js",
+    "test": "npm run test:e2e",
     "test:e2e": "playwright test",
     "lint": "echo \"No lint rules yet\""
   },

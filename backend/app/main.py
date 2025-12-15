@@ -5,7 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware # Import CORSMiddleware
 
 from .api.v1 import auth as auth_router
 from .api.v1 import users as users_router
+from .api.v1 import job_applications as job_applications_router
+from .api.v1 import generation as generation_router
+from .api.v1 import cover_letters as cover_letters_router
 from .core.dependencies import get_db
+from .core.config import settings
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -30,6 +34,10 @@ app.add_middleware(
 # Routers
 app.include_router(auth_router.router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(users_router.router, prefix="/api/v1", tags=["users"])
+app.include_router(job_applications_router.router, prefix="/api/v1", tags=["job-applications"])
+app.include_router(generation_router.router, prefix="/api/v1", tags=["generation"])
+app.include_router(cover_letters_router.router, prefix="/api/v1/cover-letters", tags=["cover-letters"])
+
 
 
 @app.on_event("startup")
@@ -49,7 +57,7 @@ async def startup_event():
         supabase.table("job_applications").select("id").limit(1).execute()
         logger.info("Supabase connection successful.")
     except Exception as e:
-        logger.error("Supabase connection failed: %s", e, exc_info=True)
+        logger.error(f"Supabase connection failed for URL: {settings.SUPABASE_URL}. Error: {e}", exc_info=True)
 
 
 @app.get("/")

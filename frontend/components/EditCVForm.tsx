@@ -5,6 +5,8 @@ import { useAuth } from '@/context/AuthContext';
 import { useUnsavedChanges } from '@/context/UnsavedChangesContext';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigationBlocker } from '@/hooks/useNavigationBlocker';
+// FIKSET HER: La til krøllparenteser { } for named import
+import { StatefulTextbox } from './ui/StatefulTextbox'; 
 
 interface UserProfile {
   id: string;
@@ -166,12 +168,31 @@ const EditCVForm: React.FC = () => {
     }
   };
 
-  const handleBlur = () => {
-    if (!isUserCvLoading && isDirty) {
-      const formValues = getValues();
-      // Optional: Auto-save on blur if valid? 
-      // For now, let's rely on the main save button to avoid confusion
-      // updateMutation.mutate(formValues); 
+  const [fieldStatus, setFieldStatus] = useState<Record<string, 'dirty' | 'saving' | 'saved'>>({});
+
+  const autoSaveMutation = useMutation({
+    mutationFn: (fieldData: { fieldName: keyof ProfileCVFormInputs; value: any }) => {
+      const payload = { [fieldData.fieldName]: fieldData.value };
+      return updateUserProfileCvData(session!.access_token!, payload as ProfileCVFormInputs);
+    },
+    onMutate: (variables) => {
+      setFieldStatus(prev => ({ ...prev, [variables.fieldName]: 'saving' }));
+    },
+    onSuccess: (data, variables) => {
+      queryClient.setQueryData(['userProfileCv', session?.access_token], data);
+      setFieldStatus(prev => ({ ...prev, [variables.fieldName]: 'saved' }));
+    },
+    onError: (error, variables) => {
+      setFieldStatus(prev => ({ ...prev, [variables.fieldName]: 'dirty' }));
+    },
+  });
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const fieldName = e.target.name as keyof ProfileCVFormInputs;
+    const isFieldDirty = getValues(fieldName) !== (userData?.[fieldName] || '');
+    
+    if (isFieldDirty) {
+      autoSaveMutation.mutate({ fieldName, value: getValues(fieldName) });
     }
   };
 
@@ -201,11 +222,11 @@ const EditCVForm: React.FC = () => {
       {/* Profile Fields */}
       <div>
         <label htmlFor="full_name" className="block text-sm font-medium text-gray-700">Full Name</label>
-        <input
+        <StatefulTextbox
           id="full_name"
           type="text"
           {...register('full_name', { required: 'Full Name is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          status={fieldStatus.full_name}
           data-testid="fullName-input"
           disabled={updateMutation.isPending}
           onBlur={handleBlur}
@@ -215,11 +236,11 @@ const EditCVForm: React.FC = () => {
 
       <div>
         <label htmlFor="date_of_birth" className="block text-sm font-medium text-gray-700">Date of Birth</label>
-        <input
+        <StatefulTextbox
           id="date_of_birth"
           type="date"
           {...register('date_of_birth', { required: 'Date of Birth is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          status={fieldStatus.date_of_birth}
           data-testid="dateOfBirth-input"
           disabled={updateMutation.isPending}
           onBlur={handleBlur}
@@ -247,11 +268,11 @@ const EditCVForm: React.FC = () => {
 
       <div>
         <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
-        <input
+        <StatefulTextbox
           id="phone_number"
           type="tel"
           {...register('phone_number', { required: 'Phone Number is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          status={fieldStatus.phone_number}
           data-testid="phoneNumber-input"
           disabled={updateMutation.isPending}
           onBlur={handleBlur}
@@ -261,14 +282,14 @@ const EditCVForm: React.FC = () => {
 
       <div>
         <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
-        <input
+        <StatefulTextbox
           id="address"
           type="text"
           {...register('address', { 
             required: 'Address is required',
             validate: (value) => value.trim().length > 0 || 'Address cannot be empty or whitespace only'
           })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          status={fieldStatus.address}
           data-testid="address-input"
           disabled={updateMutation.isPending}
           onBlur={handleBlur}
@@ -276,17 +297,18 @@ const EditCVForm: React.FC = () => {
         {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>}
       </div>
 
-      <div>
+<div>
         <label htmlFor="cv_content" className="block text-sm font-medium text-gray-700">CV Content</label>
-        <textarea
+        <StatefulTextbox
+          as="textarea"
           id="cv_content"
-          rows={10}
+          className="min-h-[250px]"
           {...register('cv_content', { required: 'CV Content is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          status={fieldStatus.cv_content}
           data-testid="cvContent-textarea"
           disabled={updateMutation.isPending}
           onBlur={handleBlur}
-        ></textarea>
+        />
         {errors.cv_content && <p className="mt-1 text-sm text-red-600">{errors.cv_content.message}</p>}
       </div>
 

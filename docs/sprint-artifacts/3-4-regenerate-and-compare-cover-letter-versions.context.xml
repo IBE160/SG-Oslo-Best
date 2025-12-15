@@ -1,0 +1,217 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>4</storyId>
+    <title>Regenerate and Compare Cover Letter Versions</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-13</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-4-regenerate-and-compare-cover-letter-versions.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to regenerate a cover letter and easily compare it with previous versions</iWant>
+    <soThat>I can choose the best output</soThat>
+    <tasks>
+      <task>
+        <description>Frontend: Implement logic for regenerating cover letters.</description>
+        <acceptance_criteria_ref>1</acceptance_criteria_ref>
+        <subtask>Integrate POST /api/v1/generation request when "Regenerate" is clicked.</subtask>
+        <subtask>Manage loading, error, and success states using React Query.</subtask>
+      </task>
+      <task>
+        <description>Frontend: Implement tabbed interface for version comparison.</description>
+        <acceptance_criteria_ref>2, 3</acceptance_criteria_ref>
+        <subtask>Use Shadcn/UI Tabs component.</subtask>
+        <subtask>Manage state of multiple cover letter versions using React Context.</subtask>
+        <subtask>Display the newly generated version as the active tab.</subtask>
+        <subtask>Display previous versions as inactive tabs.</subtask>
+        <subtask>Implement switching between tabs to view different versions.</subtask>
+        <subtask>Ensure tab interface follows ARIA Tab pattern for accessibility (role="tablist", role="tab", role="tabpanel", aria-selected, aria-controls).</subtask>
+      </task>
+      <task>
+        <description>Frontend: Update "Save" button state.</description>
+        <acceptance_criteria_ref>Implicit from UX Spec, Story 5.1.3, Step 6</acceptance_criteria_ref>
+        <subtask>Ensure "Save" button is re-enabled when a new version is generated.</subtask>
+      </task>
+      <task>
+        <description>Testing: Add Playwright E2E tests.</description>
+        <acceptance_criteria_ref>1, 2, 3</acceptance_criteria_ref>
+        <subtask>Mock API response for regeneration.</subtask>
+        <subtask>Verify a new version is generated and displayed in a new active tab.</subtask>
+        <subtask>Verify the previous version is accessible via a separate tab.</subtask>
+        <subtask>Verify the "Save" button is enabled for the new version.</subtask>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="1">Given a cover letter is displayed, when I modify instructions and click "Regenerate", then a new version of the cover letter is generated via the API.</criterion>
+    <criterion id="2">And the output panel displays the new version as the active tab (e.g., "Version 2").</criterion>
+    <criterion id="3">And a tab for the previous version (e.g., "Version 1") is present, allowing for easy switching and comparison.</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>FR-3.5 [MVP] The system shall provide an option for the user to regenerate the cover letter.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>CVAI Turbo - Product Requirements Document</title>
+        <section>User Experience Principles</section>
+        <snippet>The core user interactions will revolve around the following flows: ... Cover Letter Review &amp; Action: Reviewing the generated cover letter and having options to save, regenerate, or download it (post-MVP for save/download).</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Decision Summary</section>
+        <snippet>API Communication (Frontend): React Query (TanStack Query) for data fetching and caching. ... State Management (Frontend): React Context for managing client-side UI state.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Structure</section>
+        <snippet>frontend/app/dashboard/ # Main application dashboard ... backend/app/api/v1/generation.py</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>API Contracts</section>
+        <snippet>API Type: RESTful API exposed by FastAPI. ... Versioning: Versioned at /api/v1/. ... Data Formats: JSON request/response format for all communication. ... Authentication: JWT in Authorization: Bearer &lt;token&gt; header for authenticated requests.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Cover Letter Generation Flow</section>
+        <snippet>Regenerating for a Better Version: ... When the new letter is ready, the right column transforms into a tabbed interface. "Version 2" is the active tab, showing the new content. A "Version 1" tab is also present, allowing the user to easily compare the two.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Component Library</section>
+        <snippet>Standard Components (from Shadcn/UI): ... Tabs: For switching between different versions of the generated cover letter.</snippet>
+      </doc>
+      <doc>
+        <path>docs/ux-design-specification.md</path>
+        <title>ibe160 UX Design Specification</title>
+        <section>Accessibility Strategy</section>
+        <snippet>For the Cover Letter Version Tabs: The tab interface must follow the ARIA Tab pattern, using role="tablist", role="tab", and role="tabpanel". aria-selected must be used to indicate the active tab. aria-controls must link each tab to its corresponding tab panel.</snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>CVAI Turbo - Epics &amp; Stories</title>
+        <section>Story 3.4: Regenerate and Compare Cover Letter Versions</section>
+        <snippet>As a logged-in student user, I want to regenerate a cover letter and easily compare it with previous versions, so that I can choose the best output. Covers: FR-3.5. UX Spec: Section 5.1.3, Step 6. Complexity: Significantly Higher.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <path>backend/app/api/v1/generation.py</path>
+      <kind>API Endpoint Definition</kind>
+      <symbol>GenerationRequest, GenerationResponse, POST /generation</symbol>
+      <lines>14-65</lines>
+      <reason>Defines the request and response models and the API endpoint for cover letter generation, which this story will interact with for regeneration.</reason>
+    </code>
+    <dependencies>
+      <node>
+        <package name="@faker-js/faker" version="^8.0.0" />
+        <package name="@playwright/test" version="^1.40.0" />
+        <package name="@hookform/resolvers" version="^5.2.2" />
+        <package name="@radix-ui/react-alert-dialog" version="^1.1.15" />
+        <package name="@radix-ui/react-label" version="^2.1.8" />
+        <package name="@radix-ui/react-slot" version="^1.2.4" />
+        <package name="@radix-ui/react-tabs" version="^1.1.13" />
+        <package name="@radix-ui/react-toast" version="^1.2.15" />
+        <package name="@supabase/supabase-js" version="^2.87.1" />
+        <package name="@tanstack/react-query" version="^5.90.12" />
+        <package name="class-variance-authority" version="^0.7.1" />
+        <package name="clsx" version="^2.1.1" />
+        <package name="lucide-react" version="^0.555.0" />
+        <package name="next" version="^16.0.10" />
+        <package name="react" version="^19.2.1" />
+        <package name="react-dom" version="^19.2.1" />
+        <package name="react-hook-form" version="^7.68.0" />
+        <package name="tailwind-merge" version="^3.4.0" />
+        <package name="tailwindcss-animate" version="^1.0.7" />
+      </node>
+      <python>
+        <package name="fastapi" version="0.123.8" />
+        <package name="google-ai-generativelanguage" version="0.6.15" />
+        <package name="google-generativeai" version="0.8.5" />
+        <package name="postgrest" version="2.25.0" />
+        <package name="resend" version="2.19.0" />
+        <package name="supabase" version="2.25.0" />
+        <package name="uvicorn" version="0.38.0" />
+      </python>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>
+      <type>Frontend State Management</type>
+      <description>The frontend will use React Context to manage the state of multiple generated cover letter versions.</description>
+    </constraint>
+    <constraint>
+      <type>Frontend UI Framework</type>
+      <description>The tabbed interface for comparing versions will be implemented using Shadcn/UI Tabs.</description>
+    </constraint>
+    <constraint>
+      <type>API Communication</type>
+      <description>React Query will manage the data fetching and caching for regeneration requests.</description>
+    </constraint>
+    <constraint>
+      <type>Accessibility</type>
+      <description>The tab interface for cover letter versions must follow the ARIA Tab pattern for accessibility (role="tablist", role="tab", role="tabpanel", aria-selected, aria-controls), as per UX Spec Section 8.2.1.</description>
+    </constraint>
+    <constraint>
+      <type>Testing Standard</type>
+      <description>E2E tests should use `data-testid` for robust element selection and mock API responses with Playwright's `page.route()`.</description>
+    </constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>Cover Letter Generation API</name>
+      <kind>REST endpoint</kind>
+      <signature>POST /api/v1/generation (Request: GenerationRequest, Response: GenerationResponse)</signature>
+      <path>backend/app/api/v1/generation.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Jest for unit/component tests and Playwright for end-to-end (E2E) tests. E2E tests should use `data-testid` for robust element selection and mock API responses with Playwright's `page.route()`.</standards>
+    <locations>
+      <location>frontend/__tests__/</location>
+      <location>frontend/playwright/</location>
+      <location>tests/e2e/</location>
+    </locations>
+    <ideas>
+      <idea ac_id="1">
+        <description>Verify that modifying instructions and clicking "Regenerate" triggers a new API call to `/api/v1/generation`.</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+      <idea ac_id="1">
+        <description>Mock the API response for regeneration and verify the UI shows a loading state during the API call.</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+      <idea ac_id="2,3">
+        <description>After regeneration, verify that a new tab (e.g., "Version 2") appears and is active, displaying the newly generated content.</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+      <idea ac_id="2,3">
+        <description>Verify that the previous version of the cover letter is accessible via a separate tab (e.g., "Version 1").</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+      <idea ac_id="2,3">
+        <description>Verify that clicking on the "Version 1" tab switches the displayed content to the previous cover letter version.</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+      <idea ac_id="Implicit from UX Spec, Story 5.1.3, Step 6">
+        <description>Verify that the "Save" button is enabled for the newly generated version of the cover letter.</description>
+        <tool>Playwright E2E</tool>
+      </idea>
+    </ideas>
+  </tests>
+</story-context>

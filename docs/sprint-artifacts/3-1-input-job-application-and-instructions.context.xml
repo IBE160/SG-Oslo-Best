@@ -1,0 +1,75 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.o">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>1</storyId>
+    <title>Input Job Application and Instructions</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-10</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-1-input-job-application-and-instructions.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in student user</asA>
+    <iWant>to input a job advertisement and provide optional instructions</iWant>
+    <soThat>I can prepare the context for generating a tailored cover letter</soThat>
+    <tasks>
+- [ ] **Backend:** Create `POST /api/v1/job-applications` endpoint. (AC: #3)
+    - [ ] The endpoint should accept a job advertisement text and optional instructions.
+    - [ ] The endpoint should save the data to a new `job_applications` table in Supabase, linked to the authenticated user.
+- [ ] **Frontend:** Create the main generation page UI. (AC: #1, #2)
+    - [ ] Add a large text area for the job advertisement.
+    - [ ] Add a text input or text area for optional instructions.
+    - [ ] Add a "Generate" button, which is disabled by default.
+- [ ] **Frontend:** Implement form logic using React Hook Form. (AC: #1, #2, #3)
+    - [ ] The "Generate" button should become enabled only when the job advertisement text area is not empty.
+    - [ ] On form submission (e.g., a "Save" button or as part of the "Generate" flow), the data should be sent to the `POST /api/v1/job-applications` endpoint.
+- [ ] **Testing:** Create Playwright E2E tests for the generation page. (AC: #1, #2)
+    - [ ] Write a test to verify that pasting text into the job ad field enables the "Generate" button.
+    - [ ] Write a test to verify that the form correctly captures input from both the job ad and instructions fields.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1.  Given I am on the main generation page, when I paste a job advertisement into the designated text area, then the "Generate" button becomes enabled. (AC: #1)
+2.  And I can (optionally) write instructions for style and tone. (AC: #2)
+3.  Then the application captures all inputs, ready for generation. (AC: #3)
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+        <doc path="docs/epics.md" title="CVAI Turbo - Epics & Stories" section="Story 3.1: Input Job Application and Instructions" snippet="As a logged-in student user, I want to input a job advertisement and provide optional instructions, so that I can prepare the context for generating a tailored cover letter."/>
+        <doc path="docs/architecture.md" title="Architecture" section="API Contracts" snippet="Shared TypeScript interfaces defined in packages/shared-types for type safety between frontend and backend."/>
+        <doc path="docs/architecture.md" title="Architecture" section="Project Structure" snippet="New components for the generation page should be located in frontend/app/dashboard/ or a subdirectory... The new endpoint logic should be added in backend/app/api/v1/."/>
+        <doc path="docs/PRD.md" title="Product Requirements Document" section="Functional Requirements" snippet="The system must provide a user-friendly interface for uploading or pasting job advertisement text."/>
+        <doc path="docs/ux-design-specification.md" title="UX Design Specification" section="Key Screens & UI Components" snippet="The main generation screen will feature a large, resizable text area for the job ad, an optional text input for instructions, and a prominent 'Generate' button."/>
+    </docs>
+    <code>
+        <file path="frontend/app/dashboard/page.tsx" kind="component" symbol="DashboardPage" lines="" reason="This is the main page where the new UI for inputting job application will be added."/>
+        <file path="backend/app/api/v1/" kind="directory" symbol="" lines="" reason="This is the directory where the new job_applications.py file with the API endpoint will be created."/>
+    </code>
+    <dependencies>
+        <dependency ecosystem="node" name="react-hook-form" version="~7.66.1" reason="Specified in architecture for form management"/>
+        <dependency ecosystem="node" name="@tanstack/react-query" version="~5.90.10" reason="Specified in architecture for API communication"/>
+        <dependency ecosystem="python" name="fastapi" version="" reason="Core backend framework"/>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>The input form will be managed using React Hook Form.</constraint>
+    <constraint>API communication should be handled by React Query.</constraint>
+    <constraint>The new endpoint POST /api/v1/job-applications should follow the conventions outlined in docs/architecture.md.</constraint>
+    <constraint>Row Level Security must be enabled on the new job_applications table.</constraint>
+  </constraints>
+  <interfaces>
+    <interface name="POST /api/v1/job-applications" kind="REST endpoint" signature="{ 'job_advertisement_text': string, 'instructions_text': Optional[string] } -> { 'id': int, ... }" path="backend/app/api/v1/job_applications.py"/>
+  </interfaces>
+  <tests>
+    <standards>E2E tests are created in tests/e2e/ and use a fixture-based setup. Tests rely heavily on data-testid attributes for stable element selection. Playwright's page.route() is used to mock API responses.</standards>
+    <locations>tests/e2e/</locations>
+    <ideas>
+        <idea forAC="1">Verify that the 'Generate' button is disabled initially, and becomes enabled only after text is entered into the job advertisement text area.</idea>
+        <idea forAC="2">Verify that the form correctly captures and can submit text from both the job advertisement and the optional instructions fields.</idea>
+    </ideas>
+  </tests>
+</story-context>

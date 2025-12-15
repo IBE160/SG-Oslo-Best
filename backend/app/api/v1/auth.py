@@ -33,7 +33,23 @@ async def create_user(
         })
 
         if auth_response.user:
-             return {"data": {"user_id": auth_response.user.id, "email": auth_response.user.email}}
+            # Send verification email if Resend is configured
+            if settings.RESEND_API_KEY:
+                try:
+                    resend.Emails.send({
+                        "from": "onboarding@resend.dev",
+                        "to": auth_response.user.email,
+                        "subject": "Welcome to CVAI Turbo! Please verify your email.",
+                        "html": "<p>Thanks for registering! Please click the link above to verify your email address.</p>" # Supabase handles the actual verification link
+                    })
+                except Exception as e:
+                    # Log the error but don't fail the registration
+                    print(f"Failed to send verification email: {e}")
+            
+            return {
+                "message": "User created successfully. Please check your email for a verification link.",
+                "data": {"user_id": auth_response.user.id, "email": auth_response.user.email}
+            }
         else:
             raise HTTPException(status_code=400, detail="Failed to create user. The user may already exist.")
 
