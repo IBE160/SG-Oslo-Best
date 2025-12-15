@@ -1,10 +1,16 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import type { NextConfig } from "next";
 
-export function middleware(_req: NextRequest) {
-  return NextResponse.next();
-}
-
-export const config = {
-  matcher: ["/:path*"],
+const nextConfig: NextConfig = {
+  /* config options here */
+  reactCompiler: true,
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:8000/api/:path*", // Proxy to backend
+      },
+    ];
+  },
 };
+
+export default nextConfig;

@@ -1,11 +1,27 @@
 # backend/app/api/v1/schemas.py
 
+from pydantic import BaseModel
 from datetime import date, datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
 
+# ---------------------------------------------------------
+# COVER LETTER SCHEMAS (these were correct)
+# ---------------------------------------------------------
+class CoverLetterCreate(BaseModel):
+    content: str
+    job_application_id: str
+
+
+class CoverLetter(CoverLetterCreate):
+    id: str
+
+
+# ---------------------------------------------------------
+# CREATE PROFILE + CV
+# The backend expects these exact fields.
+# ---------------------------------------------------------
 class UserProfileCreate(BaseModel):
     full_name: str
     date_of_birth: date
@@ -14,17 +30,22 @@ class UserProfileCreate(BaseModel):
     address: str
     cv_content: str
 
-class CVUpdate(BaseModel):
-    cv_full_text: Optional[str] = None # Optional for partial update
 
+# ---------------------------------------------------------
+# PARTIAL UPDATE (PATCH)
+# ---------------------------------------------------------
 class UserProfileUpdate(BaseModel):
     full_name: Optional[str] = None
     date_of_birth: Optional[date] = None
     gender: Optional[str] = None
     phone_number: Optional[str] = None
     address: Optional[str] = None
-    cv_full_text: Optional[str] = None # Renamed from cv_content to match DB
+    cv_content: Optional[str] = None
 
+
+# ---------------------------------------------------------
+# RESPONSE MODEL RETURNED BY API
+# ---------------------------------------------------------
 class UserProfileResponse(BaseModel):
     id: UUID
     full_name: str
@@ -32,6 +53,9 @@ class UserProfileResponse(BaseModel):
     gender: str
     phone_number: str
     address: str
-    cv_content: str
-    created_at: datetime # Changed to datetime
-    updated_at: datetime # Changed to datetime
+    cv_content: Optional[str]
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
