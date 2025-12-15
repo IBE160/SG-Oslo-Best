@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\backend\.venv
+set VIRTUAL_ENV=C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo V2\fase-4-finale\backend\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

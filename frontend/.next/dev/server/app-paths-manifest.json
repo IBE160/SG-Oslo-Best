@@ -1,6 +1,8 @@
 {
-  "/(auth)/page": "app/(auth)/page.js",
-  "/cv-creation/page": "app/cv-creation/page.js",
-  "/cv-edit/page": "app/cv-edit/page.js",
-  "/dashboard/page": "app/dashboard/page.js"
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/api/generate/route": "app/api/generate/route.js",
+  "/cv/page": "app/cv/page.js",
+  "/generate/page": "app/generate/page.js",
+  "/jobs/page": "app/jobs/page.js",
+  "/page": "app/page.js"
 }

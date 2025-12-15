@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo\SG-Oslo-Best\backend\.venv"
+VIRTUAL_ENV="C:\Users\Administrator\Documents\IBE 160 Programmering med KI\CVAI Turbo V2\fase-4-finale\backend\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
